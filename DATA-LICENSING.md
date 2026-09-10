@@ -9,7 +9,7 @@ UE application code is licensed under [Apache 2.0](LICENSE). That license does n
 The separate releases contain their own source manifests and attribution:
 
 - [Ontology](https://github.com/SteveHedden/universalevidence-ontology)
-- [Conditions and outcomes](https://github.com/SteveHedden/universalevidence-conditions-outcomes-thesaurus)
+- [Conditions and Outcomes thesaurus](https://github.com/SteveHedden/universalevidence-conditions-outcomes-thesaurus)
 - [Interventions](https://github.com/SteveHedden/universalevidence-interventions-thesaurus)
 
 The UE-authored regions, source-configuration and bearer-map files also use CC BY 4.0; see the [file-level vocabulary licenses](vocabularies/LICENSE.md). This does not change the licenses of the datasets described by those files.

@@ -77959,7 +77959,7 @@ state:LearningAchievement a skos:Concept,
     <http://purl.org/dc/terms/description> "States of people and systems, together with indicators used to measure those states. States can be condition topics or outcome topics in evidence records." ;
     <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
     <http://purl.org/dc/terms/modified> "2026-07-13"^^<http://www.w3.org/2001/XMLSchema#date> ;
-    <http://purl.org/dc/terms/title> "Universal Evidence — States Thesaurus" ;
+    <http://purl.org/dc/terms/title> "Universal Evidence Conditions and Outcomes Thesaurus" ;
     <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
     <http://www.w3.org/2002/07/owl#versionInfo> "0.2.0" .
 

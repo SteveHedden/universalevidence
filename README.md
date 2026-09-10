@@ -25,7 +25,7 @@ The application code is open source. The complete hosted dataset is **not includ
 The reusable ontology and thesauri are available separately:
 
 - [Ontology](https://github.com/SteveHedden/universalevidence-ontology)
-- [Conditions and outcomes](https://github.com/SteveHedden/universalevidence-conditions-outcomes-thesaurus)
+- [Conditions and Outcomes thesaurus](https://github.com/SteveHedden/universalevidence-conditions-outcomes-thesaurus)
 - [Interventions](https://github.com/SteveHedden/universalevidence-interventions-thesaurus)
 
 Application code uses [Apache 2.0](LICENSE). Bundled ontology and vocabulary content has separate [CC BY 4.0 licensing](LICENSE-DATA). Registry records and dependencies retain their own terms; see [data licensing and attribution](DATA-LICENSING.md) and [NOTICE](NOTICE).
