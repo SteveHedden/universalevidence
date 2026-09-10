@@ -10,7 +10,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "licenses": "node scripts/generate-license-notices.mjs",
-    "prebuild": "npm run licenses"
+    "prebuild": "npm run licenses && npm run discovery",
+    "discovery": "python3 ../scripts/generate_discovery.py"
   },
   "dependencies": {
     "react": "^19.0.0",

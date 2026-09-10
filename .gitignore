@@ -109,3 +109,7 @@ taxonomy-classification-guide.md
 
 # Private working reports and release archives
 /reports/
+
+# Generated crawler discovery files (refreshed by frontend prebuild)
+/site/public/robots.txt
+/site/public/sitemap.xml

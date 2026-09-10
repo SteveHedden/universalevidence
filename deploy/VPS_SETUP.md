@@ -157,3 +157,35 @@ After startup or an update, check API/Fuseki health, loader completion, expected
 For code-only rollback, recreate the API using the saved prior image. For a frontend rollback, restore the previous index while retaining its referenced assets. For a data release, preserve and restore the paired Fuseki and loader-manifest backup using the guarded reload procedure; do not mix an old database with a new manifest.
 
 The reload script assumes the existing R2-backed layout and corpus-specific validation thresholds. It is not a generic empty-database initializer for arbitrary datasets. Complete independent data provisioning is future work.
+
+## Crawler discovery files
+
+The frontend `prebuild` generates `robots.txt` and `sitemap.xml` from the current
+States, Interventions, Regions and Sources Turtle files. Install Python 3 and
+RDFLib in the build environment (for example `python3 -m venv .venv`, then
+`.venv/bin/pip install rdflib`; activate that environment before `npm run build`).
+Generation is offline and fails on missing/invalid vocabulary files or sitemap
+size limits. The sitemap lists only supported public term pages plus the home,
+ontology and tutorial pages; RDF-only listings, external term URIs, retired
+concepts and query combinations are excluded. No fabricated last-modified dates
+are emitted.
+
+Publish both generated discovery files from `site/dist/` with every frontend
+release. For vocabulary-only releases, regenerate after checking out the exact
+release with `python3 scripts/generate_discovery.py --output /tmp/ue-discovery`
+and atomically replace both files in `/var/www/universalevidence/` after the
+vocabulary release succeeds. Retain their previous versions with the release
+backup. Never generate from private construction copies of the vocabularies.
+
+Install the exact `/robots.txt` and `/sitemap.xml` nginx locations in
+`deploy/nginx.conf` (back up live configuration, run `nginx -t`, then reload).
+Absent files return 404 rather than homepage HTML. Preserve other live nginx
+settings. Do not disable Cloudflare managed robots policies: Cloudflare may
+prepend its bot-specific restrictions to the origin's normal-search allowance.
+Verify both apex and www responses through Cloudflare, check their content types,
+parse the XML, and confirm that Malaria is included. Sitemap URLs always use
+`https://universalevidence.com`, regardless of the request host.
+
+Submit `https://universalevidence.com/sitemap.xml` in the site's Google Search
+Console property, and inspect `https://universalevidence.com/vocab/states/Malaria`.
+Record whether these steps were performed or handed off; neither guarantees indexing.
