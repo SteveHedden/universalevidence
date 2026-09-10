@@ -1,0 +1,14 @@
+rdflib
+pyshacl
+packaging
+requests
+pandas
+fastapi
+uvicorn
+httpx
+anthropic
+PyYAML
+boto3
+
+# dev / test
+pytest

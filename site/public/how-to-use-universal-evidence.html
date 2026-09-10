@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to use Universal Evidence</title>
+  <meta
+    name="description"
+    content="A short guide to searching and exploring evidence with Universal Evidence."
+  />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/how-to-use-universal-evidence.css" />
+</head>
+<body>
+  <a class="skip-link" href="#tutorial">Skip to the tutorial</a>
+
+  <header class="guide-header">
+    <a class="brand-link" href="/" aria-label="Universal Evidence Search">
+      <svg class="brand-mark" viewBox="44 16 112 112" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="tutorial-logo-clip">
+            <circle cx="100" cy="72" r="56"></circle>
+          </clipPath>
+        </defs>
+        <circle cx="100" cy="72" r="56" fill="#c9a547"></circle>
+        <g clip-path="url(#tutorial-logo-clip)">
+          <rect x="43" y="72" width="114" height="6" fill="#f6f7f9"></rect>
+          <rect x="43" y="86" width="114" height="6" fill="#f6f7f9"></rect>
+          <rect x="43" y="100" width="114" height="6" fill="#f6f7f9"></rect>
+          <rect x="43" y="114" width="114" height="6" fill="#f6f7f9"></rect>
+        </g>
+      </svg>
+      <span>
+        <strong>Universal Evidence</strong>
+        <small>what was tried and what happened</small>
+      </span>
+    </a>
+    <a class="back-link" href="/">← Back to Search</a>
+  </header>
+
+  <main id="tutorial">
+    <section class="hero" aria-labelledby="tutorial-title">
+      <p class="eyebrow">A five-minute guide</p>
+      <h1 id="tutorial-title">How to use Universal Evidence</h1>
+      <p class="hero-copy">
+        Follow one Malnutrition search from a question to its studies and evidence graph.
+        No specialist vocabulary is required.
+      </p>
+      <nav class="section-nav" aria-label="Tutorial sections">
+        <a href="#choose-state">Choose a State</a>
+        <a href="#read-results">Read results</a>
+        <a href="#browse-hierarchy">Browse terms</a>
+        <a href="#use-graph">Use Graph</a>
+      </nav>
+    </section>
+
+    <ol class="walkthrough" aria-label="Malnutrition walkthrough">
+      <li class="guide-step" id="choose-state">
+        <article aria-labelledby="step-1-title">
+          <div class="step-copy">
+            <p class="step-kicker">Step 1</p>
+            <h2 id="step-1-title">Choose Malnutrition as the State</h2>
+            <p>
+              <strong>State</strong> is Universal Evidence’s name for a condition or outcome—the
+              situation you want to understand or change. Search starts with a Malaria chip. Use
+              its <strong>Remove Malaria</strong> control, type <strong>Malnutrition</strong>, and
+              choose the canonical Malnutrition suggestion. Selecting the suggestion, instead of
+              leaving typed text in the field, connects your search to the State thesaurus.
+            </p>
+          </div>
+          <figure class="ui-figure" aria-labelledby="search-figure-title">
+            <figcaption id="search-figure-title">Search set to the canonical Malnutrition State</figcaption>
+            <div class="search-demo">
+              <span class="demo-prompt">What evidence exists for addressing</span>
+              <span class="demo-axis">State</span>
+              <span class="demo-field demo-field-blue">
+                <span class="demo-chip">Malnutrition <span aria-hidden="true">×</span></span>
+                <span class="demo-add">Add another…</span>
+              </span>
+              <span class="demo-prompt">with</span>
+              <span class="demo-field">ANYTHING</span>
+              <span class="demo-prompt">in</span>
+              <span class="demo-field">ANYWHERE</span>
+              <span class="demo-action">Search</span>
+            </div>
+            <p class="annotation"><span aria-hidden="true">↑</span> Choose the named suggestion so Malnutrition becomes a chip.</p>
+          </figure>
+        </article>
+      </li>
+
+      <li class="guide-step" id="refine-search">
+        <article aria-labelledby="step-2-title">
+          <div class="step-copy">
+            <p class="step-kicker">Step 2</p>
+            <h2 id="step-2-title">Decide how much to narrow</h2>
+            <p>
+              Leave <strong>Intervention</strong> as <strong>ANYTHING</strong> to discover which
+              interventions appear in Malnutrition evidence. Or choose a canonical Intervention
+              suggestion to focus the search. Region is optional; use it only when location
+              matters.
+            </p>
+            <p>
+              Filled axes combine: Malnutrition plus an Intervention plus a Region means studies
+              must satisfy all three. When you add multiple chips within one axis, choose
+              <strong>Match any</strong> for alternatives or <strong>Match all</strong> when every
+              selected term must be present.
+            </p>
+          </div>
+          <aside class="plain-note" aria-label="Suggested first search">
+            <strong>Good first search</strong>
+            <span>State: Malnutrition</span>
+            <span>Intervention: ANYTHING</span>
+            <span>Region: ANYWHERE</span>
+          </aside>
+        </article>
+      </li>
+
+      <li class="guide-step" id="read-results">
+        <article aria-labelledby="step-3-title">
+          <div class="step-copy">
+            <p class="step-kicker">Step 3</p>
+            <h2 id="step-3-title">Search, then open an Intervention group</h2>
+            <p>
+              Press <strong>Search</strong>. With Malnutrition selected, results are grouped by
+              Intervention. Open a group to see its contributing study cards.
+            </p>
+            <p>
+              Group names are labels from the Universal Evidence Intervention thesaurus. Study
+              titles, IDs, registry badges, locations, and study details come from the source
+              registry. A shared thesaurus label organizes those source records; it does not
+              replace or rewrite them.
+            </p>
+          </div>
+          <figure class="ui-figure" aria-labelledby="results-figure-title">
+            <figcaption id="results-figure-title">Illustrative Malnutrition results grouped by Intervention</figcaption>
+            <div class="results-demo">
+              <div class="result-group">
+                <span class="chevron" aria-hidden="true">⌄</span>
+                <strong>Nutrition counselling</strong>
+                <span class="count-pill">studies</span>
+              </div>
+              <div class="study-demo">
+                <div>
+                  <strong>Contributing study title</strong>
+                  <span class="source-pill">Source registry</span>
+                </div>
+                <p><b>Registry study ID</b> · Country or region</p>
+              </div>
+            </div>
+            <p class="figure-note">Illustrative layout; exact studies and wording depend on the live sources.</p>
+          </figure>
+        </article>
+      </li>
+
+      <li class="guide-step" id="browse-hierarchy">
+        <article aria-labelledby="step-4-title">
+          <div class="step-copy">
+            <p class="step-kicker">Step 4 · Explore terms</p>
+            <h2 id="step-4-title">Browse the thesaurus when you need the right term</h2>
+            <p>
+              Click <strong>Browse</strong> beside State or Intervention. Use
+              <strong>Filter</strong>, expand or collapse branches, and select
+              <strong>+ Add</strong>. The State and Intervention thesauri show broader and
+              narrower relationships, helping you discover terms around Malnutrition that you may
+              not know to type.
+            </p>
+            <p>
+              Browse is available on desktop and phone screens. On a phone, close the thesaurus
+              drawer after choosing a term to return to your search.
+            </p>
+          </div>
+          <figure class="ui-figure hierarchy-figure" aria-labelledby="hierarchy-figure-title">
+            <figcaption id="hierarchy-figure-title">The thesaurus browser</figcaption>
+            <div class="panel-demo">
+              <div class="panel-head"><strong>States &amp; conditions</strong><span aria-hidden="true">×</span></div>
+              <span class="filter-demo">Filter terms…</span>
+              <ul class="tree-demo">
+                <li><span aria-hidden="true">▾</span> Health status</li>
+                <li class="tree-child"><span aria-hidden="true">▾</span> Nutrition status</li>
+                <li class="tree-grandchild"><strong>Malnutrition</strong><span class="add-pill">+ Add</span></li>
+              </ul>
+            </div>
+          </figure>
+        </article>
+      </li>
+
+      <li class="guide-step" id="open-graph">
+        <article aria-labelledby="step-5-title">
+          <div class="step-copy">
+            <p class="step-kicker">Step 5</p>
+            <h2 id="step-5-title">Carry the canonical selection into Graph</h2>
+            <p>
+              Once Malnutrition—or any canonical State or Intervention—is selected, choose
+              <strong>Graph</strong> above the search workspace. Graph requires at least one State
+              or Intervention. It will not hand off unresolved typed Region text or Outcome chips;
+              select a canonical Region and remove Outcome chips first.
+            </p>
+          </div>
+          <aside class="plain-note" aria-label="Graph handoff checklist">
+            <strong>Before opening Graph</strong>
+            <span>✓ Malnutrition is a selected chip</span>
+            <span>✓ Region is selected or empty</span>
+            <span>✓ No Outcome chips remain</span>
+          </aside>
+        </article>
+      </li>
+
+      <li class="guide-step" id="use-graph">
+        <article aria-labelledby="step-6-title">
+          <div class="step-copy">
+            <p class="step-kicker">Step 6</p>
+            <h2 id="step-6-title">Explore Malnutrition’s evidence connections</h2>
+            <p>
+              Blue nodes are States and green nodes are Interventions. Larger nodes have more
+              linked studies. Hover or click a node to focus its neighbors; pan, zoom, and drag
+              nodes to explore. These lines are evidence connections, not broader or narrower
+              thesaurus relationships, and do not mean that the connected concepts are equivalent.
+            </p>
+            <p>
+              Click a State–Intervention connection to open <strong>Evidence details</strong> with
+              the linked-study count, source breakdown, and contributing study links. Refine the
+              selected terms and rebuild the graph whenever you want a different Malnutrition
+              view. Use <strong>Universal Evidence search</strong> to return.
+            </p>
+          </div>
+          <figure class="ui-figure graph-figure" aria-labelledby="graph-figure-caption">
+            <figcaption id="graph-figure-caption">Simplified Malnutrition evidence graph and Evidence details panel</figcaption>
+            <svg
+              class="graph-demo"
+              viewBox="0 0 640 280"
+              role="img"
+              aria-labelledby="graph-demo-title graph-demo-description"
+            >
+              <title id="graph-demo-title">Malnutrition evidence connections</title>
+              <desc id="graph-demo-description">
+                A large blue Malnutrition State node connects to two green Intervention nodes,
+                alongside an Evidence details panel containing study and source information.
+              </desc>
+              <line x1="160" y1="140" x2="350" y2="82" class="evidence-line"></line>
+              <line x1="160" y1="140" x2="350" y2="204" class="evidence-line evidence-line-strong"></line>
+              <circle cx="160" cy="140" r="42" class="state-node"></circle>
+              <text x="160" y="145" text-anchor="middle" class="node-label node-label-light">Malnutrition</text>
+              <circle cx="350" cy="82" r="29" class="intervention-node"></circle>
+              <text x="350" y="77" text-anchor="middle" class="node-label node-label-light">Nutrition</text>
+              <text x="350" y="92" text-anchor="middle" class="node-label node-label-light">counselling</text>
+              <circle cx="350" cy="204" r="35" class="intervention-node"></circle>
+              <text x="350" y="200" text-anchor="middle" class="node-label node-label-light">Food</text>
+              <text x="350" y="215" text-anchor="middle" class="node-label node-label-light">supplementation</text>
+              <rect x="430" y="30" width="190" height="220" rx="12" class="evidence-panel"></rect>
+              <text x="448" y="58" class="panel-eyebrow">EVIDENCE DETAILS</text>
+              <text x="448" y="84" class="panel-title">Food supplementation</text>
+              <text x="448" y="104" class="panel-title">↔ Malnutrition</text>
+              <rect x="448" y="122" width="72" height="25" rx="12" class="panel-pill"></rect>
+              <text x="484" y="139" text-anchor="middle" class="panel-copy">linked studies</text>
+              <text x="448" y="174" class="panel-copy">Sources</text>
+              <text x="448" y="197" class="panel-copy panel-link">Contributing study links</text>
+              <text x="448" y="221" class="panel-copy panel-link">Open study ↗</text>
+            </svg>
+          </figure>
+        </article>
+      </li>
+
+    </ol>
+
+    <section class="final-action" aria-labelledby="try-title">
+      <p class="eyebrow">Ready to explore?</p>
+      <h2 id="try-title">Try the Malnutrition example</h2>
+      <p>Return to Search, remove Malaria, select the canonical Malnutrition suggestion, and leave Intervention open to discover the evidence.</p>
+      <a class="primary-action" href="/#search">Open Search and try Malnutrition <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Universal Evidence · what was tried and what happened</p>
+    <a href="/">Back to Search</a>
+  </footer>
+</body>
+</html>

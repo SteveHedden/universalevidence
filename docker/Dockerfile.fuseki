@@ -1,0 +1,10 @@
+FROM eclipse-temurin:21-jre-alpine
+ARG FUSEKI_VERSION=6.1.0
+RUN apk add --no-cache curl && \
+    curl -fsSL "https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-${FUSEKI_VERSION}.tar.gz" \
+    | tar -xz && \
+    mv "apache-jena-fuseki-${FUSEKI_VERSION}" /fuseki && \
+    apk del curl
+WORKDIR /fuseki
+EXPOSE 3030
+ENTRYPOINT ["java", "-Xmx2800m", "-jar", "fuseki-server.jar"]

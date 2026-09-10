@@ -1,0 +1,85 @@
+services:
+  fuseki:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.fuseki
+    command: ["--tdb2", "--loc", "/fuseki-data/ue", "--update", "/ue"]
+    ports:
+      - "127.0.0.1:3030:3030"
+    restart: unless-stopped
+    mem_limit: 3400m
+    volumes:
+      - fuseki-data:/fuseki-data/ue
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -q -O - 'http://localhost:3030/ue/query?query=ASK%7B%7D' >/dev/null 2>&1 || curl -fsS 'http://localhost:3030/ue/query?query=ASK%7B%7D' >/dev/null",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 12
+      start_period: 10s
+
+  loader:
+    build: .
+    depends_on:
+      fuseki:
+        condition: service_healthy
+    restart: "no"
+    # Safe first-upgrade migration: populated raw graphs without a loader-owned
+    # manifest are reloaded once from the exact synced snapshots; later starts
+    # skip only graphs whose datasetVersion provenance is already established.
+    command:
+      [
+        "python",
+        "scripts/load_fuseki.py",
+        "--graph-store-url",
+        "http://fuseki:3030/ue/data",
+        "--skip-existing-raw",
+      ]
+    environment:
+      R2_ENDPOINT_URL: "${R2_ENDPOINT_URL:-}"
+      R2_ACCESS_KEY_ID: "${R2_ACCESS_KEY_ID:-}"
+      R2_SECRET_ACCESS_KEY: "${R2_SECRET_ACCESS_KEY:-}"
+      R2_BUCKET: "${R2_BUCKET:-universalevidence-data}"
+      UE_GRAPH_VERSION_MANIFEST: "/manifests/graph-versions.json"
+    volumes:
+      - loader-manifests:/manifests
+
+  api:
+    build: .
+    depends_on:
+      fuseki:
+        condition: service_healthy
+      loader:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+    mem_limit: 1500m
+    environment:
+      FUSEKI_URL: "http://fuseki:3030/ue/query"
+      UE_GRAPH_VERSION_MANIFEST: "/manifests/graph-versions.json"
+      QUERY_V2_RESPONSE_TIMEOUT_SECONDS: "${QUERY_V2_RESPONSE_TIMEOUT_SECONDS:-10}"
+      LIVE_API_MAX_CONCURRENCY: "4"
+      LOCAL_QUERY_FAST_WHO_ORDER: "true"
+      GRAPH_EDGE_TOKEN_SECRET: "${GRAPH_EDGE_TOKEN_SECRET:-}"
+    volumes:
+      - loader-manifests:/manifests:ro
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+volumes:
+  fuseki-data:
+  loader-manifests:

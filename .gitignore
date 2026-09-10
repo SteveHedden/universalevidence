@@ -1,0 +1,111 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+
+# Dependency directories
+node_modules/
+.venv/
+dist/
+*.tsbuildinfo
+
+# Environment variables
+.env
+site/.env.local
+
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Generated output
+output/
+.cache/
+
+# All data — raw source files (R2), pipeline state, caches (all local only)
+data/
+!scripts/data/
+!scripts/data/federated_match_inputs.json.gz
+
+# Mirrors and crosswalks — teacher pipeline outputs, uploaded to R2 for deployment
+vocabularies/mirrors/
+vocabularies/crosswalks/
+
+# iCloud sync conflict duplicates (macOS "space 2" copies)
+*\ 2.ttl
+*\ 2.json
+*\ 2.py
+*\ 2.sh
+*\ 2.tsx
+*\ 2.ts
+*\ 2.md
+*\ 2.yaml
+*\ 2.svg
+*\ 2.png
+
+# Claude Code local settings
+.claude/
+
+# Private project management
+.taskmaster/
+
+# Teacher pipeline config (local only)
+teacher-sources.yaml
+
+# Pipeline scripts (local only — not shared)
+scripts/pipeline/
+
+# Taxonomy HTML browser generator (local tooling, not yet shared)
+scripts/generate_taxonomy_html.py
+
+# Test cache
+.pytest_cache/
+
+# Local Docker Compose overrides (machine-specific dev settings)
+docker-compose.override.yml
+.taxonomy-reload-state.json
+
+# Python
+__pycache__/
+
+# OS specific
+.DS_Store
+
+# Local ops runbook (personal notes, server/account specifics — not shared)
+ops/
+
+# Design doc — moved from the old sdkg repo, not yet reconciled with this
+# repo's current README/state; keep local until reviewed
+docs/
+
+# Local project instructions for Claude Code — points agents at ops/, kept
+# private like ops/ and docs/ (never intended to be shared/pushed)
+CLAUDE.md
+
+# Taxonomy classification guide — project-specific rules for the taxonomy
+# skills, kept local/private like ops/ and docs/ (not intended to be shared)
+taxonomy-classification-guide.md
+
+# Local graph metrics and dated snapshots (private, never shared)
+/reports/graph-metrics/
+
+# Private ontology history backup
+/reports/ontology-publication-private-20260908/
+/reports/thesauri-release-review-20260908/
+
+# Local UE architecture style preview
+/design/ue-architecture-brand-preview.png
+
+# Private application publication inventory
+/reports/application-publication-review-20260909/
+
+# Private working reports and release archives
+/reports/

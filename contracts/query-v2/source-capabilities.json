@@ -1,0 +1,77 @@
+{
+  "schema_version": "query-v2-capabilities-1",
+  "canonical_sources": ["ctgov", "aea", "isrctn", "who-ictrp"],
+  "budgets": {
+    "limit_unique_studies_per_source_branch": 100,
+    "max_requests_per_source": 8,
+    "max_pages_per_branch": 3,
+    "time_budget_seconds": 5
+  },
+  "sources": {
+    "ctgov": {
+      "display_name": "ClinicalTrials.gov",
+      "strategy": "live",
+      "axes": ["state", "condition", "intervention", "outcome", "region"],
+      "region_levels": {
+        "world": "full",
+        "group": "partial",
+        "country": "full",
+        "adm1": "partial"
+      },
+      "country_filter": "direct_source_country_label",
+      "adm1_verification": [
+        "same_location_geopoint_or_explicit_admin_evidence",
+        "contextual_city_country_crosswalk"
+      ],
+      "adm1_unmatched_behavior": "exclude",
+      "missing_optional_geo_asset_behavior": "partial_coverage"
+    },
+    "aea": {
+      "display_name": "AEA RCT Registry",
+      "strategy": "materialized",
+      "axes": ["state", "condition", "intervention", "outcome", "region"],
+      "region_levels": {
+        "world": "full",
+        "group": "full",
+        "country": "full",
+        "adm1": "none"
+      },
+      "country_filter": "structured_country",
+      "adm1_verification": [],
+      "adm1_unmatched_behavior": "exclude_with_unsupported_admin_level",
+      "missing_optional_geo_asset_behavior": "not_applicable"
+    },
+    "isrctn": {
+      "display_name": "ISRCTN Registry",
+      "strategy": "live",
+      "axes": ["state", "condition", "intervention", "outcome", "region"],
+      "region_levels": {
+        "world": "full",
+        "group": "partial",
+        "country": "full",
+        "adm1": "partial"
+      },
+      "country_filter": "recruitmentCountry",
+      "adm1_verification": [
+        "crosswalk_confirmed_studyLocation_plus_recruitmentCountry"
+      ],
+      "adm1_unmatched_behavior": "exclude",
+      "missing_optional_geo_asset_behavior": "partial_coverage"
+    },
+    "who-ictrp": {
+      "display_name": "WHO ICTRP",
+      "strategy": "materialized",
+      "axes": ["state", "condition", "intervention", "outcome", "region"],
+      "region_levels": {
+        "world": "full",
+        "group": "full",
+        "country": "full",
+        "adm1": "none"
+      },
+      "country_filter": "country_or_iso_alpha2",
+      "adm1_verification": [],
+      "adm1_unmatched_behavior": "exclude_with_unsupported_admin_level",
+      "missing_optional_geo_asset_behavior": "not_applicable"
+    }
+  }
+}

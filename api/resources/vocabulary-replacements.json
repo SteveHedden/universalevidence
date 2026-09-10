@@ -1,0 +1,8 @@
+{
+  "https://universalevidence.com/vocab/states/AdmissionsAccess": "https://universalevidence.com/vocab/states/EducationalAdmissionsAccess",
+  "https://universalevidence.com/vocab/states/OrnithineCarbamoyltransferaseDeficiencyDisease": "https://universalevidence.com/vocab/states/OrnithineCarbamoyltransferaseDeficiency",
+  "https://universalevidence.com/vocab/states/SubstanceUseBehavior": "https://universalevidence.com/vocab/states/SubstanceUsePrevalence",
+  "https://universalevidence.com/vocab/states/DeficiencyDiseases": "https://universalevidence.com/vocab/states/NutritionalDeficiencies",
+  "https://universalevidence.com/vocab/interventions/AffordableFluorideToothpaste": "https://universalevidence.com/vocab/interventions/FluorideToothpasteProvision",
+  "https://universalevidence.com/vocab/interventions/PriceSubsidyIntervention": "https://universalevidence.com/vocab/interventions/SubsidyIntervention"
+}

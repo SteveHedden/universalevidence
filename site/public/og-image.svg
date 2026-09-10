@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&amp;display=swap');
+    </style>
+    <clipPath id="logo-clip">
+      <circle cx="240" cy="248" r="88"/>
+    </clipPath>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="#f5f0e8"/>
+
+  <!-- logo mark — cy=248 centers on text block (cap top ~160, baseline ~336) -->
+  <circle cx="240" cy="248" r="88" fill="#c9a547"/>
+  <g clip-path="url(#logo-clip)">
+    <rect x="150" y="248" width="180" height="11" fill="#f5f0e8"/>
+    <rect x="150" y="270" width="180" height="11" fill="#f5f0e8"/>
+    <rect x="150" y="292" width="180" height="11" fill="#f5f0e8"/>
+    <rect x="150" y="314" width="180" height="11" fill="#f5f0e8"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="370" y="230" font-family="'Cormorant Garamond', Georgia, serif" font-size="92" font-weight="700" letter-spacing="18" fill="#1a1a1a">UNIVERSAL</text>
+  <text x="370" y="336" font-family="'Cormorant Garamond', Georgia, serif" font-size="92" font-weight="700" letter-spacing="18" fill="#1a1a1a">EVIDENCE</text>
+
+  <!-- tagline -->
+  <text x="152" y="480" font-family="'Cormorant Garamond', Georgia, serif" font-size="44" fill="#777777">Search for evidence in global development</text>
+</svg>

@@ -1,0 +1,22 @@
+.git
+.pytest_cache
+__pycache__
+*.pyc
+.DS_Store
+.env
+venv
+.venv
+
+# Private operations and agent working state
+ops/
+reports/
+output/
+.taskmaster/
+.claude/
+.codex/
+.agents/
+data/taxonomy-expansion/
+
+# Local frontend dependencies and generated builds
+**/node_modules
+site/dist/

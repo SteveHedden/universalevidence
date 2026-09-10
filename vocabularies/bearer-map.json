@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "bearer_predicate": "https://universalevidence.com/ontology/bearer",
+  "collections": [
+    {
+      "collection": "https://universalevidence.com/vocab/states/PopulationHealthState",
+      "allowed_categories": [
+        "https://universalevidence.com/vocab/subjects/Population"
+      ],
+      "include_subclasses": true
+    },
+    {
+      "collection": "https://universalevidence.com/vocab/states/DevelopmentHumanSystemState",
+      "allowed_categories": [
+        "https://universalevidence.com/vocab/subjects/HumanSystem"
+      ],
+      "include_subclasses": true
+    },
+    {
+      "collection": "https://universalevidence.com/vocab/states/NaturalSystemState",
+      "allowed_categories": [
+        "https://universalevidence.com/vocab/subjects/NaturalSystem"
+      ],
+      "include_subclasses": true
+    }
+  ]
+}

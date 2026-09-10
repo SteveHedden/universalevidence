@@ -1,0 +1,116 @@
+{
+  "schema_version": "query-v2-canary-corpus-2",
+  "cases": [
+    {
+      "id": "malnutrition_anywhere",
+      "v1_params": {
+        "state": ["https://universalevidence.com/vocab/states/Malnutrition"]
+      },
+      "v2_params": {
+        "state": ["https://universalevidence.com/vocab/states/Malnutrition"],
+        "state_logic": ["or"]
+      },
+      "compare_with_v1": true,
+      "gates": {
+        "preserve_same_run_v1_sources": true,
+        "no_expanded_row_starvation": true,
+        "postmortem_reference_unique_studies": 409,
+        "postmortem_reference_observed": "2026-08-10",
+        "postmortem_reference_is_exact_gate": false
+      }
+    },
+    {
+      "id": "malaria_anywhere",
+      "v1_params": {
+        "state": ["https://universalevidence.com/vocab/states/Malaria"]
+      },
+      "v2_params": {
+        "state": ["https://universalevidence.com/vocab/states/Malaria"],
+        "state_logic": ["or"]
+      },
+      "compare_with_v1": true,
+      "gates": {
+        "preserve_same_run_v1_sources": true,
+        "no_expanded_row_starvation": true
+      }
+    },
+    {
+      "id": "malaria_chittagong",
+      "v1_params": {
+        "state": ["https://universalevidence.com/vocab/states/Malaria"],
+        "region": ["https://sws.geonames.org/1337200/"]
+      },
+      "v2_params": {
+        "state": ["https://universalevidence.com/vocab/states/Malaria"],
+        "region": ["https://sws.geonames.org/1337200/"],
+        "state_logic": ["or"],
+        "region_logic": ["or"]
+      },
+      "compare_with_v1": true,
+      "gates": {
+        "ctgov_locations_verified_in_requested_adm1": true,
+        "forbid_parent_country_broadening": true,
+        "country_only_sources_excluded": ["aea", "who-ictrp"]
+      }
+    },
+    {
+      "id": "bangladesh_country",
+      "v1_params": {
+        "region": ["https://sws.geonames.org/1210997/"]
+      },
+      "v2_params": {
+        "region": ["https://sws.geonames.org/1210997/"],
+        "region_logic": ["or"]
+      },
+      "compare_with_v1": true,
+      "gates": {
+        "country_behavior_preserved": true
+      }
+    },
+    {
+      "id": "south_asia_group",
+      "v1_params": {
+        "region": ["https://universalevidence.com/vocab/regions/SouthAsia"]
+      },
+      "v2_params": {
+        "region": ["https://universalevidence.com/vocab/regions/SouthAsia"],
+        "region_logic": ["or"]
+      },
+      "compare_with_v1": true,
+      "gates": {
+        "descendant_expansion_preserves_predicate": true
+      }
+    },
+    {
+      "id": "kenya_or_uganda",
+      "v1_params": null,
+      "v2_params": {
+        "region": [
+          "https://sws.geonames.org/192950/",
+          "https://sws.geonames.org/226074/"
+        ],
+        "region_logic": ["or"]
+      },
+      "compare_with_v1": false,
+      "gates": {
+        "region_logic": "or"
+      }
+    },
+    {
+      "id": "kenya_and_uganda",
+      "v1_params": null,
+      "v2_params": {
+        "region": [
+          "https://sws.geonames.org/192950/",
+          "https://sws.geonames.org/226074/"
+        ],
+        "region_logic": ["and"]
+      },
+      "compare_with_v1": false,
+      "gates": {
+        "region_logic": "and",
+        "study_level_multisite": true
+      }
+    }
+  ]
+}

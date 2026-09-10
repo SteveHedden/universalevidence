@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 16 112 112">
+  <defs>
+    <clipPath id="logo-clip">
+      <circle cx="100" cy="72" r="56"/>
+    </clipPath>
+  </defs>
+  <circle cx="100" cy="72" r="56" fill="#c9a547"/>
+  <g clip-path="url(#logo-clip)">
+    <rect x="43" y="72"  width="114" height="6" fill="#f5f0e8"/>
+    <rect x="43" y="86"  width="114" height="6" fill="#f5f0e8"/>
+    <rect x="43" y="100" width="114" height="6" fill="#f5f0e8"/>
+    <rect x="43" y="114" width="114" height="6" fill="#f5f0e8"/>
+  </g>
+</svg>

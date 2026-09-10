@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://universalevidence.com/contracts/query-v2/request.schema.json",
+  "title": "Universal Evidence query-v2 normalized request",
+  "description": "Normalized representation of repeated GET /query/v2 parameters after trimming and URI de-duplication.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "state": {
+      "$ref": "#/$defs/axisValues"
+    },
+    "condition": {
+      "$ref": "#/$defs/axisValues"
+    },
+    "intervention": {
+      "$ref": "#/$defs/axisValues"
+    },
+    "outcome": {
+      "$ref": "#/$defs/axisValues"
+    },
+    "region": {
+      "$ref": "#/$defs/axisValues"
+    },
+    "state_logic": {
+      "$ref": "#/$defs/logic"
+    },
+    "condition_logic": {
+      "$ref": "#/$defs/logic"
+    },
+    "intervention_logic": {
+      "$ref": "#/$defs/logic"
+    },
+    "outcome_logic": {
+      "$ref": "#/$defs/logic"
+    },
+    "region_logic": {
+      "$ref": "#/$defs/logic"
+    }
+  },
+  "anyOf": [
+    { "required": ["state"] },
+    { "required": ["condition"] },
+    { "required": ["intervention"] },
+    { "required": ["outcome"] },
+    { "required": ["region"] }
+  ],
+  "$defs": {
+    "axisValues": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://"
+      }
+    },
+    "logic": {
+      "type": "string",
+      "enum": ["or", "and"],
+      "default": "or"
+    }
+  }
+}

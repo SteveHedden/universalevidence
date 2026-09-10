@@ -1,0 +1,284 @@
+{
+  "schema_version": "query-v2-adapter-fixtures-2",
+  "canonical_study_key": ["source", "study_id"],
+  "cases": [
+    {
+      "id": "ctgov_chittagong_does_not_broaden_to_bangladesh",
+      "request": {
+        "condition": ["https://universalevidence.com/vocab/states/Malaria"],
+        "region": ["https://sws.geonames.org/1337200/"],
+        "condition_logic": "or",
+        "region_logic": "or"
+      },
+      "source": "ctgov",
+      "records": [
+        {
+          "source": "CT.gov",
+          "study_id": "NCT-CHITTAGONG",
+          "locations": [
+            {
+              "city": "Chattogram",
+              "state": "Chittagong",
+              "country": "Bangladesh",
+              "geoPoint": {"lat": 22.3384, "lon": 91.8317},
+              "verified_region_uris": [
+                "https://sws.geonames.org/1337200/",
+                "https://sws.geonames.org/1210997/"
+              ]
+            }
+          ]
+        },
+        {
+          "source": "CT.gov",
+          "study_id": "NCT-DHAKA-ONLY",
+          "locations": [
+            {
+              "city": "Dhaka",
+              "state": "Dhaka Division",
+              "country": "Bangladesh",
+              "verified_region_uris": [
+                "https://sws.geonames.org/1337179/",
+                "https://sws.geonames.org/1210997/"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_study_ids": ["NCT-CHITTAGONG"],
+      "forbidden_study_ids": ["NCT-DHAKA-ONLY"],
+      "coverage": "partial"
+    },
+    {
+      "id": "ctgov_context_is_scoped_to_one_location",
+      "request": {
+        "region": ["https://sws.geonames.org/1337200/"],
+        "region_logic": "or"
+      },
+      "source": "ctgov",
+      "records": [
+        {
+          "source": "CT.gov",
+          "study_id": "NCT-MULTISITE-CONTEXT",
+          "locations": [
+            {
+              "facility": "General Hospital",
+              "city": "Chittagong",
+              "country": "Bangladesh",
+              "verified_region_uris": ["https://sws.geonames.org/1337200/"]
+            },
+            {
+              "facility": "General Hospital",
+              "city": "Kolkata",
+              "country": "India",
+              "verified_region_uris": ["https://sws.geonames.org/1252881/"]
+            }
+          ]
+        }
+      ],
+      "expected_study_ids": ["NCT-MULTISITE-CONTEXT"],
+      "forbidden_cross_location_key": "city=Chittagong|country=India"
+    },
+    {
+      "id": "region_and_uses_multisite_study_semantics",
+      "request": {
+        "region": [
+          "https://sws.geonames.org/192950/",
+          "https://sws.geonames.org/226074/"
+        ],
+        "region_logic": "and"
+      },
+      "source": "ctgov",
+      "records": [
+        {
+          "source": "CT.gov",
+          "study_id": "NCT-KENYA-UGANDA",
+          "locations": [
+            {
+              "country": "Kenya",
+              "verified_region_uris": ["https://sws.geonames.org/192950/"]
+            },
+            {
+              "country": "Uganda",
+              "verified_region_uris": ["https://sws.geonames.org/226074/"]
+            }
+          ]
+        },
+        {
+          "source": "CT.gov",
+          "study_id": "NCT-KENYA-ONLY",
+          "locations": [
+            {
+              "country": "Kenya",
+              "verified_region_uris": ["https://sws.geonames.org/192950/"]
+            }
+          ]
+        }
+      ],
+      "expected_study_ids": ["NCT-KENYA-UGANDA"],
+      "forbidden_study_ids": ["NCT-KENYA-ONLY"]
+    },
+    {
+      "id": "source_capability_adm1_exclusions",
+      "request": {
+        "region": ["https://sws.geonames.org/1337200/"],
+        "region_logic": "or"
+      },
+      "source_records": {
+        "isrctn": [
+          {
+            "source": "ISRCTN",
+            "study_id": "ISRCTN-CONFIRMED",
+            "studyLocation": "Chittagong",
+            "recruitmentCountry": "Bangladesh",
+            "verified_region_uris": ["https://sws.geonames.org/1337200/"]
+          },
+          {
+            "source": "ISRCTN",
+            "study_id": "ISRCTN-COUNTRY-ONLY",
+            "studyLocation": "",
+            "recruitmentCountry": "Bangladesh",
+            "verified_region_uris": []
+          }
+        ],
+        "aea": [
+          {
+            "source": "AEA",
+            "study_id": "AEA-BANGLADESH",
+            "country": "Bangladesh"
+          }
+        ],
+        "who-ictrp": [
+          {
+            "source": "WHO ICTRP",
+            "study_id": "ICTRP-BANGLADESH",
+            "country": "Bangladesh",
+            "country_iso2": "BD"
+          }
+        ]
+      },
+      "expected_study_ids": ["ISRCTN-CONFIRMED"],
+      "forbidden_study_ids": [
+        "ISRCTN-COUNTRY-ONLY",
+        "AEA-BANGLADESH",
+        "ICTRP-BANGLADESH"
+      ],
+      "expected_source_meta": {
+        "isrctn": {"status": "included", "coverage": "partial", "reason": null},
+        "aea": {"status": "excluded", "coverage": "country_only", "reason": "unsupported_admin_level"},
+        "who-ictrp": {"status": "excluded", "coverage": "country_only", "reason": "unsupported_admin_level"}
+      }
+    },
+    {
+      "id": "unique_study_limit_precedes_presentation_expansion",
+      "request": {
+        "condition": ["https://universalevidence.com/vocab/states/Malnutrition"],
+        "condition_logic": "or"
+      },
+      "source": "ctgov",
+      "generator": {
+        "unique_studies": 101,
+        "intervention_rows_per_study": 3
+      },
+      "expected": {
+        "selected_unique_studies": 100,
+        "presentation_rows_after_selection": 300,
+        "truncated": true,
+        "global_merged_cap": null
+      }
+    },
+    {
+      "id": "state_unions_condition_and_outcome_before_deduplication",
+      "request": {
+        "state": ["https://universalevidence.com/vocab/states/Stunting"],
+        "state_logic": "or"
+      },
+      "source": "aea",
+      "records": [
+        {
+          "source": "AEA",
+          "study_id": "AEA-CONDITION-ONLY",
+          "mapped_roles": ["condition"]
+        },
+        {
+          "source": "AEA",
+          "study_id": "AEARCTR-0003248",
+          "title": "An RCT to assess effectiveness of the in-home Growth Monitoring Tool (GroMoTo) in addressing chronic childhood undernutrition in Pakistan",
+          "mapped_roles": ["outcome"]
+        },
+        {
+          "source": "AEA",
+          "study_id": "AEA-BOTH-ROLES",
+          "mapped_roles": ["condition", "outcome"]
+        }
+      ],
+      "expected_study_ids": [
+        "AEA-CONDITION-ONLY",
+        "AEARCTR-0003248",
+        "AEA-BOTH-ROLES"
+      ],
+      "expected_unique_studies": 3,
+      "condition_and_outcome_requests": 1
+    },
+    {
+      "id": "state_role_union_precedes_source_branch_cap",
+      "request": {
+        "state": ["https://universalevidence.com/vocab/states/Stunting"],
+        "state_logic": "or"
+      },
+      "source": "ctgov",
+      "generator": {
+        "condition_role_studies": 60,
+        "outcome_role_studies": 61,
+        "overlap_studies": 20,
+        "union_unique_studies": 101
+      },
+      "expected": {
+        "selected_unique_studies": 100,
+        "truncated": true,
+        "ranked_source_requests": 1
+      }
+    },
+    {
+      "id": "budget_exhaustion_never_broadens_predicate",
+      "request": {
+        "condition": ["https://universalevidence.com/vocab/states/Malaria"],
+        "region": ["https://sws.geonames.org/1337200/"],
+        "condition_logic": "or",
+        "region_logic": "or"
+      },
+      "source": "ctgov",
+      "budget": {
+        "requests_available": 9,
+        "max_requests": 8,
+        "pages_available": 4,
+        "max_pages": 3,
+        "time_required_seconds": 6,
+        "time_budget_seconds": 5
+      },
+      "expected": {
+        "returned_subset_is_sound": true,
+        "truncated": true,
+        "approximate": true,
+        "reason": "budget_exhausted",
+        "requested_predicates_preserved": true
+      }
+    },
+    {
+      "id": "missing_optional_geo_asset_is_not_http_500",
+      "request": {
+        "region": ["https://sws.geonames.org/1337200/"],
+        "region_logic": "or"
+      },
+      "source": "ctgov",
+      "environment": {
+        "boundary_resolver_configured": false,
+        "contextual_crosswalk_available": true
+      },
+      "expected": {
+        "http_status": 200,
+        "coverage": "partial",
+        "contextual_fallback_used": true
+      }
+    }
+  ]
+}

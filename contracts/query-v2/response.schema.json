@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://universalevidence.com/contracts/query-v2/response.schema.json",
+  "title": "Universal Evidence query-v2 response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["results", "meta"],
+  "properties": {
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/studyResult"
+      }
+    },
+    "meta": {
+      "$ref": "#/$defs/queryMeta"
+    }
+  },
+  "$defs": {
+    "studyResult": {
+      "type": "object",
+      "required": ["source", "study_id"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "study_id": { "type": "string", "minLength": 1 },
+        "title": { "type": ["string", "null"] },
+        "url": { "type": ["string", "null"] },
+        "intervention": { "type": ["string", "null"] },
+        "intervention_concept": { "type": ["string", "null"] },
+        "intervention_concept_uri": { "type": ["string", "null"] },
+        "condition_concept": { "type": ["string", "null"] },
+        "condition_concept_uri": { "type": ["string", "null"] },
+        "country": { "type": ["string", "null"] },
+        "status": { "type": ["string", "null"] },
+        "year": { "type": ["integer", "string", "null"] },
+        "outcomes": { "type": "array" }
+      },
+      "additionalProperties": true
+    },
+    "queryMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "api_version",
+        "returned_unique_studies",
+        "limit_per_source_branch",
+        "truncated",
+        "approximate",
+        "sources"
+      ],
+      "properties": {
+        "execution_status": { "enum": ["complete", "partial", "timeout"] },
+        "timed_out_sources": { "type": "array", "items": { "type": "string" } },
+        "completed_sources": { "type": "array", "items": { "type": "string" } },
+        "response_timeout_stage": { "const": "serialization" },
+        "api_version": { "const": "query-v2" },
+        "returned_unique_studies": { "type": "integer", "minimum": 0 },
+        "limit_per_source_branch": { "const": 100 },
+        "truncated": { "type": "boolean" },
+        "approximate": { "type": "boolean" },
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ctgov", "aea", "isrctn", "who-ictrp"],
+          "properties": {
+            "ctgov": { "$ref": "#/$defs/sourceMeta" },
+            "aea": { "$ref": "#/$defs/sourceMeta" },
+            "isrctn": { "$ref": "#/$defs/sourceMeta" },
+            "who-ictrp": { "$ref": "#/$defs/sourceMeta" }
+          }
+        }
+      }
+    },
+    "sourceMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "coverage",
+        "returned_unique_studies",
+        "truncated",
+        "approximate",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["included", "excluded", "unavailable", "error"]
+        },
+        "coverage": {
+          "type": "string",
+          "enum": ["full", "partial", "country_only", "none"]
+        },
+        "returned_unique_studies": { "type": "integer", "minimum": 0 },
+        "truncated": { "type": "boolean" },
+        "approximate": { "type": "boolean" },
+        "reason": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "unsupported_admin_level",
+            "budget_exhausted",
+            "upstream_unavailable",
+            "upstream_error"
+          ]
+        }
+      }
+    }
+  }
+}

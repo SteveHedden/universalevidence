@@ -1,0 +1,33 @@
+# Synthetic test data authored for UE; no real registry records or results.
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ue: <https://universalevidence.com/ontology/> .
+@prefix state: <https://universalevidence.com/vocab/states/> .
+
+<https://example.org/ue-tests/ctgov> a ue:Evidence ;
+ dcterms:title "Synthetic conformance example ctgov" ;
+ ue:condition state:LeadPoisoning ;
+ ue:source "CT.gov" ;
+ ue:studyId "SYNTHETIC-CTGOV-001" .
+state:LeadPoisoning a ue:State .
+
+<https://example.org/ue-tests/aea> a ue:Evidence ;
+ dcterms:title "Synthetic conformance example aea" ;
+ ue:condition state:PoliticalParticipation ;
+ ue:source "AEA" ;
+ ue:studyId "SYNTHETIC-AEA-001" .
+state:PoliticalParticipation a ue:State .
+
+<https://example.org/ue-tests/who> a ue:Evidence ;
+ dcterms:title "Synthetic conformance example who" ;
+ ue:condition state:EdentulousJaw ;
+ ue:source "WHO ICTRP" ;
+ ue:studyId "SYNTHETIC-WHO-001" .
+state:EdentulousJaw a ue:State .
+
+<https://example.org/ue-tests/isrctn> a ue:Evidence ;
+ dcterms:title "Synthetic conformance example isrctn" ;
+ ue:condition state:Syncope ;
+ ue:source "ISRCTN" ;
+ ue:studyId "SYNTHETIC-ISRCTN-001" .
+state:Syncope a ue:State .
+

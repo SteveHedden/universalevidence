@@ -1,0 +1,17 @@
+Universal Evidence
+Copyright 2026 Steve Hedden LLC
+
+Universal Evidence application code is licensed under Apache License 2.0;
+see LICENSE. The bundled ontology/ue.ttl and vocabularies/states.ttl,
+interventions.ttl, subjects.ttl, regions.ttl, sources.ttl and bearer-map.json are licensed under CC BY 4.0;
+see LICENSE-DATA and vocabularies/ATTRIBUTION.md. Upstream rights and
+attribution are preserved. Source registry data are not relicensed by UE.
+See DATA-LICENSING.md for the code/data boundary and source terms.
+
+Courtesy of the U.S. National Library of Medicine.
+NLM does not endorse Universal Evidence. The edited vocabulary snapshot
+may not reflect the most current or accurate NLM data.
+
+The standalone graph page includes D3 v7.9.0, Copyright 2010-2023 Mike Bostock,
+under the ISC license; see site/public/third-party/D3-LICENSE.txt.
+Third-party dependencies retain their own licenses.

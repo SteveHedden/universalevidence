@@ -1,0 +1,22 @@
+[
+  {
+    "subject": "https://example.org/ue-tests/ctgov",
+    "provenance": "UE-authored synthetic example; registry label identifies adapter format only.",
+    "purpose": "Validate required provenance properties and typed condition link; no real study or findings asserted."
+  },
+  {
+    "subject": "https://example.org/ue-tests/aea",
+    "provenance": "UE-authored synthetic example; registry label identifies adapter format only.",
+    "purpose": "Validate required provenance properties and typed condition link; no real study or findings asserted."
+  },
+  {
+    "subject": "https://example.org/ue-tests/who",
+    "provenance": "UE-authored synthetic example; registry label identifies adapter format only.",
+    "purpose": "Validate required provenance properties and typed condition link; no real study or findings asserted."
+  },
+  {
+    "subject": "https://example.org/ue-tests/isrctn",
+    "provenance": "UE-authored synthetic example; registry label identifies adapter format only.",
+    "purpose": "Validate required provenance properties and typed condition link; no real study or findings asserted."
+  }
+]

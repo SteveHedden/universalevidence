@@ -1,0 +1,56 @@
+name: Deploy
+
+on:
+  # Keep production deploys explicit until the VPS secrets are configured.
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -eu
+            cd /root/universalevidence
+            git pull --ff-only
+
+            # Code-only deploy. Taxonomy/crosswalk releases must use the guarded
+            # deploy/reload_taxonomy.sh procedure with explicit version hashes.
+            docker compose build --no-cache api
+            docker compose up -d --no-deps api
+
+            for attempt in $(seq 1 18); do
+              if curl -fsS http://127.0.0.1:8000/health >/dev/null; then
+                break
+              fi
+              if [ "$attempt" -eq 18 ]; then
+                docker compose logs --tail=200 api
+                exit 1
+              fi
+              sleep 5
+            done
+
+            docker compose exec -T api grep -q 'graph_v2_detail_cache' /app/api/routes/graph_v2.py
+
+            cd site
+            npm ci
+            VITE_API_BASE_URL=/api npm run build
+            mkdir -p /var/www/universalevidence
+            cp -r dist/* /var/www/universalevidence/
+            grep -q 'Details unavailable' /var/www/universalevidence/labs/malnutrition-evidence-graph.html
+
+            cd ..
+            docker builder prune -f
+            docker container prune -f

@@ -1,0 +1,105 @@
+/* Graph hues identify concepts; darker shades keep light-theme controls readable. */
+:root {
+  --ue-gold: #c9a547;
+  --ue-action: #1664a3;
+  --ue-state: #2a78d6;
+  --ue-state-dark: #3987e5;
+  --ue-intervention: #1baf7a;
+  --ue-intervention-dark: #199e70;
+}
+[data-axis="state"] {
+  --axis-accent: var(--ue-state);
+  --axis-ink: #184f95;
+  --axis-soft: #eff5fd;
+  --axis-selected: #dceafb;
+  --axis-border: #8cb3e3;
+}
+[data-axis="intervention"] {
+  --axis-accent: var(--ue-intervention);
+  --axis-ink: #126447;
+  --axis-soft: #eef8f3;
+  --axis-selected: #d5efe2;
+  --axis-border: #80bda3;
+}
+[data-axis="region"] {
+  --axis-accent: #65717d;
+  --axis-ink: #46535f;
+  --axis-soft: #f2f4f6;
+  --axis-selected: #e2e7ec;
+  --axis-border: #a5afb9;
+}
+.axis-selector[data-axis] .chip-input-wrap {
+  background: var(--axis-soft);
+  border-color: var(--axis-border);
+  border-top: 3px solid var(--axis-accent);
+}
+.axis-selector[data-axis] .chip-input-wrap:focus-within {
+  border-color: var(--axis-ink);
+  box-shadow: 0 0 0 3px var(--axis-selected);
+}
+.axis-selector[data-axis] input::placeholder,
+.axis-selector[data-axis] .chip-remove,
+.axis-selector[data-axis] .chip .concept-details-link,
+.axis-selector[data-axis] .browse-btn {
+  color: var(--axis-ink);
+}
+.axis-selector[data-axis] .chip,
+.axis-selector[data-axis] .browse-btn.active,
+.axis-selector[data-axis] .browse-btn:hover {
+  background: var(--axis-selected);
+  color: var(--axis-ink);
+  border-color: var(--axis-border);
+}
+.axis-selector[data-axis] .chip-remove:hover {
+  background: var(--axis-soft);
+}
+.axis-selector[data-axis] .chip .concept-details-link {
+  border-color: var(--axis-border);
+}
+.axis-selector[data-axis] .logic-toggle button.active,
+.browse-panel[data-axis] .browse-add-btn {
+  background: var(--axis-ink);
+  border-color: var(--axis-ink);
+  color: #fff;
+}
+.axis-selector[data-axis] .option-popover button:hover,
+.browse-panel[data-axis] .tree-row:hover {
+  background: var(--axis-soft);
+}
+.axis-selector[data-axis] :is(button, a):focus-visible,
+.browse-panel[data-axis] :is(button, input):focus-visible {
+  outline: 2px solid var(--axis-ink);
+  outline-offset: 2px;
+}
+.browse-panel[data-axis] .browse-panel-header {
+  border-top: 3px solid var(--axis-accent);
+  background: var(--axis-soft);
+}
+.browse-panel[data-axis] .browse-panel-header h3 {
+  color: var(--axis-ink);
+}
+.browse-panel[data-axis] .tree-row.selected,
+.browse-panel[data-axis] .browse-remove-btn {
+  background: var(--axis-selected);
+  color: var(--axis-ink);
+  border-color: var(--axis-border);
+}
+.browse-panel[data-axis] .browse-add-btn:hover {
+  filter: brightness(0.9);
+}
+.browse-panel[data-axis] .browse-filter-wrap input:focus {
+  border-color: var(--axis-ink);
+  box-shadow: 0 0 0 3px var(--axis-selected);
+}
+.intervention-group[data-axis] > .group-header {
+  border-left: 3px solid var(--axis-accent);
+}
+.intervention-group[data-axis] .group-label,
+.intervention-group[data-axis] .group-concept-link {
+  color: var(--axis-ink);
+}
+/* These tags represent measured State concepts, even inside Intervention groups. */
+.outcome-tag {
+  background: #eff5fd;
+  color: #184f95;
+}

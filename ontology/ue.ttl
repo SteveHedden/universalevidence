@@ -1,0 +1,803 @@
+@prefix ue:      <https://universalevidence.com/ontology/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix pico:    <https://data.cochrane.org/ontologies/pico/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix sg:      <https://netmode.gitlab.io/sustaingraph/> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+
+# ─── Ontology declaration ────────────────────────────────────────────────────
+
+<https://universalevidence.com/ontology/>
+    a owl:Ontology ;
+    dcterms:title "Universal Evidence Knowledge Graph Ontology" ;
+    dcterms:description """Ontology for the Universal Evidence KG — MVP edition.
+
+    Design principle: this ontology is associative, not causal. Observations record that an outcome was associated with an
+    intervention in a given context. Causality is never asserted in the base layer.
+    Causal interpretation is the work of analysts querying the graph, not a property
+    stored in it. This keeps the graph usable across theoretical traditions that disagree
+    on causal mechanisms.""" ;
+    owl:versionInfo "0.5.0" ;
+    dcterms:creator "Steve Hedden" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:modified "2026-09-07"^^xsd:date .
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLASSES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─── Core concept classes ─────────────────────────────────────────────────────
+
+ue:Indicator
+    a owl:Class ;
+    rdfs:label "Indicator" ;
+    rdfs:comment "A standardized, operationalized metric used to observe or track a state. Indicators are always leaves in the states thesaurus — they never have narrower concepts, and they must NOT use skos:broader. Each indicator connects to the ue:State concepts it measures via ue:measures (on the indicator) / ue:measuredBy (inverse, on the state). Examples: SDG indicators, WDI indicators, WHO/UNICEF JMP indicators, clinical outcome measures." ;
+    skos:scopeNote "Aligned with the vocabulary of the SDG indicator framework, World Bank WDI, and WHO monitoring systems. A state can be observed through multiple indicators; an indicator may operationalize one or more states when its measurement interpretation supports each link. A measures link expresses measurement applicability, not a diagnosis or simultaneous presence of the linked states." ;
+    ue:bfoCategory obo:BFO_0000031 .
+
+ue:Subject
+    a owl:Class ;
+    rdfs:label "Subject" ;
+    rdfs:comment "The bearer of a state — the entity that can be in a problematic or noteworthy condition. Covers human populations (at any scale of aggregation), human-made systems, and natural systems. Corresponds loosely to the P (Population) in PICO, but scoped to bearer types rather than study populations." ;
+    ue:bfoCategory obo:BFO_0000004 .
+
+ue:State
+    a owl:Class ;
+    rdfs:label "State" ;
+    rdfs:comment "A state of wellbeing, development, or a social, ecological, economic, institutional, or health system. The same state may play a condition role or an outcome topic role in a study." ;
+    skos:scopeNote "The bearer of a state is reified in subjects.ttl and linked via ue:bearer." ;
+    ue:bfoCategory obo:BFO_0000019 ;
+    rdfs:seeAlso sg:ClimateHazard .
+
+ue:Intervention
+    a owl:Class ;
+    rdfs:subClassOf pico:Intervention ;
+    rdfs:label "Intervention" ;
+    rdfs:comment "A deliberate action with a stated development objective; something an actor does with the intent to change a condition. Examples: cash transfer, teacher training, vaccine distribution, information campaign." ;
+    ue:bfoCategory obo:BFO_0000015 ;
+    rdfs:seeAlso sg:Intervention .
+
+ue:OutcomeMeasurement
+    a owl:Class ;
+    rdfs:subClassOf pico:Outcome ;
+    rdfs:label "Outcome measurement" ;
+    rdfs:comment "A thin per-study measurement node that links an evidence record to the state measured as an outcome and carries only per-study outcome metadata such as direction, intent, and status." ;
+    ue:bfoCategory obo:BFO_0000015 .
+
+ue:Region
+    a owl:Class ;
+    rdfs:label "Region" ;
+    rdfs:comment "A geographic entity — country, sub-national region, or multi-country grouping. Country-level instances align with ISO 3166 / UN M.49." ;
+    ue:bfoCategory obo:BFO_0000029 ;
+    rdfs:seeAlso sg:GeoArea .
+
+# ─── Evidence (Tier 3 record) ─────────────────────────────────────────────────
+
+ue:Evidence
+    a owl:Class ;
+    rdfs:label "Evidence" ;
+    rdfs:comment "A record of a study, trial, or evaluation drawn from a research registry or repository. Carries axis tags (ue:condition, ue:intervention, ue:outcome, ue:location) linking it to Tier 2 vocabulary concepts. Descriptive metadata (title, abstract, date, identifier, publisher) uses dcterms; provenance is inherited from prov:Entity." ;
+    rdfs:subClassOf prov:Entity ;
+    ue:bfoCategory obo:BFO_0000031 ;
+    rdfs:seeAlso sg:CaseStudy .
+
+ue:CrosswalkEntry
+    a owl:Class ;
+    rdfs:label "Crosswalk entry" ;
+    rdfs:comment "A source-text-to-taxonomy mapping used to normalize source vocabulary or free-text fields against UE vocabulary concepts." .
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OBJECT PROPERTIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─── Soft external ontology alignment ────────────────────────────────────────
+
+ue:bfoCategory
+    a owl:AnnotationProperty ;
+    rdfs:label "BFO category" ;
+    rdfs:comment "Level-2 soft alignment to a BFO category. This is intentionally annotation-only: UE does not import BFO or inherit its bearer-requirement axioms for terminology concepts." .
+
+# ─── Concept-level relationships (Tier 1 / Tier 2) ───────────────────────────
+
+ue:bearer
+    a owl:ObjectProperty ;
+    rdfs:label "bearer" ;
+    rdfs:domain [ owl:unionOf ( ue:State ue:Indicator ) ] ;
+    rdfs:range ue:Subject ;
+    rdfs:comment "Links a state or indicator concept to the class of entity that bears it. Reifies the BFO inheres-in relationship: a Quality must inhere in a bearer. The bearer type is drawn from subjects.ttl." .
+
+ue:measuredBy
+    a owl:ObjectProperty ;
+    rdfs:label "measured by" ;
+    rdfs:domain ue:State ;
+    rdfs:range ue:Indicator ;
+    rdfs:comment "Links a state concept to one or more indicators that operationalize it for observation. A state may have multiple indicators; each indicator may operationalize one or more states when supported by its measurement interpretation. Inverse of ue:measures." .
+
+ue:measures
+    a owl:ObjectProperty ;
+    rdfs:label "measures" ;
+    rdfs:domain ue:Indicator ;
+    rdfs:range ue:State ;
+    owl:inverseOf ue:measuredBy ;
+    rdfs:comment "Links an indicator to a state it operationalizes. Multiple targets require evidence-supported measurement applicability, not merely topical association. Inverse of ue:measuredBy." .
+
+ue:statedObjective
+    a owl:ObjectProperty ;
+    rdfs:label "stated objective" ;
+    rdfs:domain ue:Intervention ;
+    rdfs:range ue:State ;
+    rdfs:comment "The state an intervention was designed to address, per its implementing actor. Stated intent — independent of any observed outcomes." .
+
+# ─── Evidence axis tags (Tier 3 ingest) ──────────────────────────────────────
+
+ue:condition
+    a owl:ObjectProperty ;
+    rdfs:label "condition" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range ue:State ;
+    rdfs:comment "Tags an Evidence record with the state it addresses in the condition role, assigned at ingest from vocabulary matching." .
+
+ue:intervention
+    a owl:ObjectProperty ;
+    rdfs:label "intervention" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range ue:Intervention ;
+    rdfs:comment "Tags an Evidence record with its normalized intervention concept, assigned at ingest from vocabulary matching." .
+
+ue:outcome
+    a owl:ObjectProperty ;
+    rdfs:label "outcome" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range ue:OutcomeMeasurement ;
+    rdfs:comment "Links an Evidence record to a per-study outcome measurement node. The measured state topic is reached through ue:ofState." .
+
+ue:ofState
+    a owl:ObjectProperty ;
+    rdfs:label "of state" ;
+    rdfs:domain ue:OutcomeMeasurement ;
+    rdfs:range ue:State ;
+    rdfs:comment "Links a per-study outcome measurement node to the state concept it addresses. Always required — the state is the primary classification axis for search and aggregation." .
+
+ue:ofIndicator
+    a owl:ObjectProperty ;
+    rdfs:label "of indicator" ;
+    rdfs:domain ue:OutcomeMeasurement ;
+    rdfs:range ue:Indicator ;
+    rdfs:comment "Links a per-study outcome measurement node to the specific indicator used to operationalize the state in this study. Optional — present when the source names a specific metric (e.g. stunting prevalence rate, SDG 2.2.1). From the indicator, applicable states are reached via ue:measures; ue:ofState records the state addressed by this particular outcome." .
+
+ue:location
+    a owl:ObjectProperty ;
+    rdfs:label "location" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range ue:Region ;
+    rdfs:comment "Tags an Evidence record with the region where the study took place, assigned at ingest." .
+
+# ─── Source field mapping ─────────────────────────────────────────────────────
+
+ue:axisMapping
+    a owl:ObjectProperty ;
+    rdfs:label "axis mapping" ;
+    rdfs:domain dcat:Dataset ;
+    rdfs:comment "Links a source dataset to a blank node declaring how runtime query routing binds a source-native field, API parameter, or SPARQL field to a query axis. Separate from ue:fieldMapping, which routes construction inputs for the thesaurus engine." .
+
+ue:fieldMapping
+    a owl:ObjectProperty ;
+    rdfs:label "field mapping" ;
+    rdfs:domain dcat:Dataset ;
+    rdfs:comment "Links a source or reference dataset to a blank node declaring which source-native field feeds which core thesaurus axis during taxonomy construction." .
+
+ue:sourceField
+    a rdf:Property ;
+    rdfs:label "source field" ;
+    rdfs:comment "The source-native field that carries values for the declared axis. Values may be RDF predicates or literal field paths for JSON, XML, CSV, or API-backed sources." .
+
+ue:graphUri
+    a owl:DatatypeProperty ;
+    rdfs:label "graph URI" ;
+    rdfs:domain dcat:Dataset ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Named graph URI used when a materialized source is queried from the local Fuseki dataset." .
+
+ue:queryRole
+    a rdf:Property ;
+    rdfs:label "query role" ;
+    rdfs:comment "Runtime role for an axis mapping, such as keyword crosswalk, raw display text, region literal, or stamped URI join." .
+
+ue:KeywordCrosswalk
+    a owl:NamedIndividual ;
+    rdfs:label "Keyword crosswalk" ;
+    rdfs:comment "Query role: source field is a controlled-vocabulary keyword matched against UE thesaurus via exactMatch/closeMatch crosswalk and semantic expansion." .
+
+ue:RawText
+    a owl:NamedIndividual ;
+    rdfs:label "Raw text" ;
+    rdfs:comment "Query role: source field is free-text (study title, arm description, etc.) used for display or full-text search, not crosswalk matching." .
+
+ue:RegionLiteral
+    a owl:NamedIndividual ;
+    rdfs:label "Region literal" ;
+    rdfs:comment "Query role: source field is a country or region string normalised against regions.ttl via the region-normalisation pipeline." .
+
+ue:StampedUri
+    a owl:NamedIndividual ;
+    rdfs:label "Stamped URI" ;
+    rdfs:comment "Query role: source field is a URI (e.g. MeSH descriptor URI) joined directly against UE thesaurus exactMatch/closeMatch triples." .
+
+ue:LiveApiParam
+    a owl:NamedIndividual ;
+    rdfs:label "Live API parameter" ;
+    rdfs:comment "Query role: source mapping is executed by passing a transformed axis value to a live source API request parameter." .
+
+ue:feedsAxis
+    a owl:ObjectProperty ;
+    rdfs:label "feeds axis" ;
+    rdfs:comment "The core thesaurus axis populated by a construction-time ue:fieldMapping blank node." .
+
+ue:role
+    a owl:ObjectProperty ;
+    rdfs:label "role" ;
+    rdfs:comment "The construction role of a source input, such as ue:DataSource for literary-warrant inputs or ue:Reference for structural-warrant vocabularies." .
+
+ue:mirror
+    a owl:DatatypeProperty ;
+    rdfs:label "mirror" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Path or URI for the local mirror vocabulary or extracted input file used by the construction engine, when one exists." .
+
+ue:processedLog
+    a owl:DatatypeProperty ;
+    rdfs:label "processed log" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Path to the JSONL log recording source terms already processed by the construction engine, when applicable." .
+
+ue:sourceText
+    a owl:DatatypeProperty ;
+    rdfs:label "source text" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The original source string represented by a mirror vocabulary concept. Used when a source vocabulary is derived from free text rather than supplied as stable source URIs." .
+
+ue:rawText
+    a owl:DatatypeProperty ;
+    rdfs:label "raw text" ;
+    rdfs:domain ue:CrosswalkEntry ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The original source string matched by a crosswalk entry. Used by runtime crosswalk joins to normalize source-native terms against UE vocabulary concepts." .
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DATATYPE PROPERTIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─── Vocabulary alignment ─────────────────────────────────────────────────────
+
+ue:aeaKeyword
+    a owl:DatatypeProperty ;
+    rdfs:label "AEA keyword" ;
+    rdfs:domain [ owl:unionOf ( ue:State ue:Intervention ) ] ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    rdfs:comment "Deprecated legacy keyword property formerly used to align UE concepts with AEA and other free-text fields. Current construction uses source mirrors as skos:Concept schemes with ue:sourceText plus SKOS crosswalks." .
+
+# ─── Outcome properties ───────────────────────────────────────────────────────
+
+ue:observedDirection
+    a owl:DatatypeProperty ;
+    rdfs:label "observed direction" ;
+    rdfs:domain ue:OutcomeMeasurement ;
+    rdfs:range [ a rdfs:Datatype ;
+                 owl:oneOf ( "positive"^^xsd:string "negative"^^xsd:string "null"^^xsd:string "mixed"^^xsd:string ) ] ;
+    rdfs:comment "Direction of the observed change in the measured quantity. Positive and negative mean increase and decrease, not beneficial and harmful; interpretation depends on the measured state. Null denotes no observed change and mixed denotes differing directions." .
+
+ue:intended
+    a owl:DatatypeProperty ;
+    rdfs:label "intended" ;
+    rdfs:domain ue:OutcomeMeasurement ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Whether this outcome was an intended objective of the intervention (true) or an unexpected effect (false)." .
+
+ue:outcomeStatus
+    a owl:DatatypeProperty ;
+    rdfs:label "outcome status" ;
+    rdfs:domain ue:OutcomeMeasurement ;
+    rdfs:range [ a rdfs:Datatype ;
+                 owl:oneOf ( "pre-specified"^^xsd:string "reported"^^xsd:string "synthesized"^^xsd:string ) ] ;
+    rdfs:comment "Whether the outcome was pre-specified at registration (registry entry), reported from a completed study, or synthesized across studies (systematic review / meta-analysis). Most registry sources (AEA, CT.gov, ISRCTN) produce pre-specified outcomes only." .
+
+# ─── Evidence properties ──────────────────────────────────────────────────────
+
+ue:source
+    a rdf:Property ;
+    rdfs:label "source" ;
+    rdfs:comment "The registry or repository from which an evidence record originated. May be a source dataset IRI or a source identifier literal. Use a stable dataset IRI where available; do not confuse this with the study identifier within that source." .
+
+ue:studyId
+    a owl:DatatypeProperty ;
+    rdfs:label "study identifier" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The study identifier assigned by the source registry or repository, preserved as text. Interpret together with ue:source; identifiers are not necessarily globally unique across sources." .
+
+
+ue:evidenceType
+    a owl:DatatypeProperty ;
+    rdfs:label "evidence type" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range [ a rdfs:Datatype ;
+                 owl:oneOf ( "registry-entry"^^xsd:string "evaluation-report"^^xsd:string "systematic-review"^^xsd:string "meta-analysis"^^xsd:string ) ] ;
+    rdfs:comment "The artifact type of the evidence record. registry-entry: a study registration record; it may include posted results as well as planned outcomes. evaluation-report: completed study or program evaluation with reported results. systematic-review: synthesis across studies (Cochrane, Campbell). meta-analysis: quantitative pooled synthesis. Orthogonal to studyDesign — a registry-entry can be an RCT; a systematic-review synthesizes across designs." .
+
+ue:hasConfidence
+    a owl:DatatypeProperty ;
+    rdfs:label "has confidence" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range [ a rdfs:Datatype ;
+                 owl:oneOf ( "low"^^xsd:string "moderate"^^xsd:string "high"^^xsd:string ) ] ;
+    rdfs:comment "Ordinal confidence level — reflects study design, sample size, replication, and independence." .
+
+ue:studyDesign
+    a owl:DatatypeProperty ;
+    rdfs:label "study design" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range [ a rdfs:Datatype ;
+                 owl:oneOf ( "RCT"^^xsd:string "quasi-experimental"^^xsd:string "observational"^^xsd:string "program-evaluation"^^xsd:string "case-study"^^xsd:string "administrative-data"^^xsd:string ) ] ;
+    rdfs:comment "The methodological design of the study. systematic-review and meta-analysis moved to ue:evidenceType — they are artifact types, not methodological designs." .
+
+ue:studyStatus
+    a owl:DatatypeProperty ;
+    rdfs:label "study status" ;
+    rdfs:domain ue:Evidence ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Study lifecycle status as reported by the source registry." .
+
+# ─── Region properties ────────────────────────────────────────────────────────
+
+ue:iso3166Alpha2
+    a owl:DatatypeProperty ;
+    rdfs:label "ISO 3166 alpha-2" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Two-letter ISO 3166-1 alpha-2 country code." .
+
+ue:iso3166Alpha3
+    a owl:DatatypeProperty ;
+    rdfs:label "ISO 3166 alpha-3" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Three-letter ISO 3166-1 alpha-3 country code." .
+
+ue:unM49
+    a owl:DatatypeProperty ;
+    rdfs:label "UN M49" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Three-digit UN M49 numeric area code." .
+
+ue:worldBankRegion
+    a owl:DatatypeProperty ;
+    rdfs:label "World Bank region" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:string ;
+    rdfs:comment "World Bank regional grouping label." .
+
+ue:incomeGroup
+    a owl:DatatypeProperty ;
+    rdfs:label "income group" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:string ;
+    rdfs:comment "World Bank income group label." .
+
+ue:worldBankLendingType
+    a owl:DatatypeProperty ;
+    rdfs:label "World Bank lending type" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:string ;
+    rdfs:comment "World Bank lending category, when classified." .
+
+ue:oecdDacRecipient
+    a owl:DatatypeProperty ;
+    rdfs:label "OECD DAC recipient" ;
+    rdfs:domain ue:Region ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Whether a country is an OECD DAC ODA recipient." .
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION — SHACL SHAPES
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# These shapes declare the conformance POLICY Universal Evidence imposes on its
+# thesauri and evidence records. They are choices, not universal laws — SKOS does
+# not require skos:inScheme, for example; we require it for these thesauri,
+# following ISO 25964 / ANSI-NISO Z39.19 / Hedden (2026). A different application
+# of the construction engine supplies its own ontology and may declare different
+# policy. The engine is a neutral executor: it validates against whatever shapes
+# this ontology declares.
+#
+# SCOPE: declarative, machine-checkable constraints only. Generative authoring
+# craft (sentence case, noun-phrase labels, plural-for-countable, definition
+# wording, exactMatch-vs-closeMatch judgment) lives in the construction skill, not
+# here — it cannot be reduced to pass/fail. skos:related reciprocity (symmetric
+# check) remains in engine/taxonomy_validate.py — it generates noise mid-construction
+# since taxonomy_commit_batch.py fills reverse triples as a deferred step.
+
+# ─── Core thesaurus concept conformance ──────────────────────────────────────
+# Applies to every concept in the core thesauri (states and interventions), which
+# are typed with both skos:Concept and their ue: class. Targeting
+# the ue: classes scopes this to the core thesauri and excludes source mirrors.
+
+ue:IndicatorConformanceShape
+    a sh:NodeShape ;
+    rdfs:label "Indicator concept conformance" ;
+    sh:targetClass ue:Indicator ;
+    sh:sparql [
+        sh:message "Every Indicator must identify a State via ue:measures or inverse ue:measuredBy." ;
+        sh:select """SELECT $this WHERE {
+            FILTER NOT EXISTS { $this (<https://universalevidence.com/ontology/measures>|^<https://universalevidence.com/ontology/measuredBy>) ?state }
+        }""" ;
+    ] ;
+    sh:sparql [
+        sh:message "An Indicator's measured target must be a State." ;
+        sh:select """SELECT DISTINCT $this ?value WHERE {
+            $this (<https://universalevidence.com/ontology/measures>|^<https://universalevidence.com/ontology/measuredBy>) ?value .
+            FILTER NOT EXISTS { ?value a <https://universalevidence.com/ontology/State> }
+        }""" ;
+    ] ;
+    sh:sparql [
+        sh:message "Indicators must not participate in inverse broader/narrower links; use measures instead." ;
+        sh:select """SELECT DISTINCT $this ?value WHERE {
+            ?value (<http://www.w3.org/2004/02/skos/core#broader>|<http://www.w3.org/2004/02/skos/core#narrower>) $this .
+        }""" ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every Indicator concept must declare its concept scheme via skos:inScheme." ;
+    ] ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every Indicator concept must have exactly one skos:prefLabel." ;
+    ] ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "Indicators must not use skos:broader — they are connected to states via ue:measures (the inverse of ue:measuredBy on the state)." ;
+    ] ;
+    sh:property [
+        sh:path skos:narrower ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "Indicators are always leaves — they must not have skos:narrower concepts." ;
+    ] ;
+    sh:property [
+        sh:path skos:broadMatch ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "skos:broadMatch is banned in UE thesauri." ;
+    ] ;
+    sh:property [
+        sh:path skos:narrowMatch ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "skos:narrowMatch is banned in UE thesauri." ;
+    ] .
+
+ue:SubjectConformanceShape
+    a sh:NodeShape ;
+    rdfs:label "Subject concept conformance" ;
+    sh:targetClass ue:Subject ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every Subject concept must declare its concept scheme via skos:inScheme." ;
+    ] ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every Subject concept must have exactly one skos:prefLabel." ;
+    ] ;
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Subject concepts should carry a skos:definition." ;
+    ] ;
+    sh:property [
+        sh:path skos:broadMatch ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "skos:broadMatch is banned in UE thesauri." ;
+    ] ;
+    sh:property [
+        sh:path skos:narrowMatch ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "skos:narrowMatch is banned in UE thesauri." ;
+    ] .
+
+ue:ConceptConformanceShape
+    a sh:NodeShape ;
+    rdfs:label "Core thesaurus concept conformance" ;
+    sh:targetClass ue:State, ue:Intervention ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every core concept must declare its concept scheme via skos:inScheme. UE policy — skos:inScheme is optional in SKOS; we require it (ISO 25964-1)." ;
+    ] ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every core concept must have exactly one skos:prefLabel (monolingual thesaurus; ISO 25964-1 §7)." ;
+    ] ;
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Core concepts should carry a differentiating skos:definition (ISO 25964-1). Recommended; not yet a hard failure." ;
+    ] ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "UE thesauri are monohierarchical: each concept may have at most one skos:broader parent. Use skos:related for cross-domain links instead." ;
+    ] ;
+    sh:property [
+        sh:path skos:broadMatch ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "skos:broadMatch is banned in UE thesauri (ISO 25964-2 mapping policy): create the missing parent concept and link via exactMatch/closeMatch instead." ;
+    ] ;
+    sh:property [
+        sh:path skos:narrowMatch ;
+        sh:maxCount 0 ;
+        sh:severity sh:Violation ;
+        sh:message "skos:narrowMatch is banned in UE thesauri (ISO 25964-2 mapping policy): create the missing concept and link via exactMatch/closeMatch instead." ;
+    ] ;
+    sh:property [
+        sh:path skos:altLabel ;
+        sh:disjoint skos:prefLabel ;
+        sh:severity sh:Violation ;
+        sh:message "A concept's skos:altLabel must not duplicate its own skos:prefLabel (ISO 25964-1 §6.5)." ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "Duplicate skos:prefLabel: another concept in this thesaurus shares this preferred label." ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <http://www.w3.org/2004/02/skos/core#prefLabel> ?value .
+                ?other <http://www.w3.org/2004/02/skos/core#prefLabel> ?value .
+                FILTER EXISTS {
+                    $this <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme .
+                    ?other <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme .
+                }
+                FILTER ($this != ?other)
+            }
+        """ ;
+    ] .
+
+ue:ConceptLabelCollisionWarningShape
+    a sh:NodeShape ;
+    rdfs:label "Core concept synonym collision warning" ;
+    sh:targetClass ue:State, ue:Intervention ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "A concept's altLabel matches another concept's prefLabel — consider using skos:related or skos:exactMatch instead." ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <http://www.w3.org/2004/02/skos/core#altLabel> ?value .
+                ?other <http://www.w3.org/2004/02/skos/core#prefLabel> ?value .
+                FILTER EXISTS {
+                    $this <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme .
+                    ?other <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme .
+                }
+                FILTER ($this != ?other)
+            }
+        """ ;
+    ] .
+
+# ─── Broader type-inheritance ─────────────────────────────────────────────────
+# A ue:State's skos:broader must point to another ue:State; a ue:Intervention's
+# skos:broader must point to another ue:Intervention. Subsumption requires that
+# a bearer of the narrower concept is necessarily also a bearer of the broader.
+# Cross-type broader links (State → Intervention or vice versa) violate this.
+# Separate shapes are required because sh:class checks the value's RDF type and
+# the target type differs per class.
+
+ue:StateBroaderTypeShape
+    a sh:NodeShape ;
+    rdfs:label "State broader type-inheritance" ;
+    sh:targetClass ue:State ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:class ue:State ;
+        sh:severity sh:Violation ;
+        sh:message "A ue:State concept's skos:broader must point to another ue:State. Cross-type broader links break subsumption." ;
+    ] .
+
+ue:InterventionBroaderTypeShape
+    a sh:NodeShape ;
+    rdfs:label "Intervention broader type-inheritance" ;
+    sh:targetClass ue:Intervention ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:class ue:Intervention ;
+        sh:severity sh:Violation ;
+        sh:message "A ue:Intervention concept's skos:broader must point to another ue:Intervention. Cross-type broader links break subsumption." ;
+    ] .
+
+# ─── skos:related / hierarchy clash ──────────────────────────────────────────
+# A concept may not have skos:related to a concept it is also hierarchically
+# related to via skos:broader (direct only; transitive cycles are caught by the
+# broader-cycle check in taxonomy_validate.py).
+
+ue:RelatedHierarchyClashShape
+    a sh:NodeShape ;
+    rdfs:label "skos:related / hierarchy clash" ;
+    sh:targetClass ue:State, ue:Intervention ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:severity sh:Violation ;
+        sh:message "skos:related pair is also in a direct broader/narrower relationship — remove the skos:related triple." ;
+        sh:select """
+            SELECT $this ?value WHERE {
+                $this <http://www.w3.org/2004/02/skos/core#related> ?value .
+                { $this <http://www.w3.org/2004/02/skos/core#broader> ?value }
+                UNION
+                { ?value <http://www.w3.org/2004/02/skos/core#broader> $this }
+            }
+        """ ;
+    ] .
+
+ue:StateBearerShape
+    a sh:NodeShape ;
+    rdfs:label "State and indicator bearer declaration" ;
+    sh:targetClass ue:State, ue:Indicator ;
+    sh:property [
+        sh:path ue:bearer ;
+        sh:minCount 1 ;
+        sh:class ue:Subject ;
+        sh:severity sh:Warning ;
+        sh:message "State and Indicator concepts should declare their bearer type via ue:bearer, pointing to a ue:Subject concept in subjects.ttl." ;
+    ] .
+
+# ─── Evidence (Tier 3 record) conformance ────────────────────────────────────
+# Fills the previously-undefined Tier 3 SHACL constraints. Encodes the contract
+# every ingested study record should meet before merge. Type-safety on axis tags
+# is a Violation; completeness of axis coverage is a Warning.
+
+ue:EvidenceShape
+    a sh:NodeShape ;
+    rdfs:label "Evidence record conformance" ;
+    sh:targetClass ue:Evidence ;
+    sh:property [
+        sh:path ue:source ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Provenance-first: every Evidence record must name its source (ue:source)." ;
+    ] ;
+    sh:property [
+        sh:path ue:studyId ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Every Evidence record must carry a source study identifier (ue:studyId)." ;
+    ] ;
+    sh:property [
+        sh:path ue:evidenceType ;
+        sh:maxCount 1 ;
+        sh:in ( "registry-entry" "evaluation-report" "systematic-review" "meta-analysis" ) ;
+        sh:severity sh:Violation ;
+        sh:message "ue:evidenceType, when present, must be registry-entry, evaluation-report, systematic-review, or meta-analysis." ;
+    ] ;
+    sh:property [
+        sh:path ue:studyDesign ;
+        sh:maxCount 1 ;
+        sh:in ( "RCT" "quasi-experimental" "observational" "program-evaluation" "case-study" "administrative-data" ) ;
+        sh:severity sh:Violation ;
+        sh:message "ue:studyDesign, when present, must be one of the controlled values. systematic-review and meta-analysis are now ue:evidenceType values." ;
+    ] ;
+    sh:property [
+        sh:path ue:hasConfidence ;
+        sh:maxCount 1 ;
+        sh:in ( "low" "moderate" "high" ) ;
+        sh:severity sh:Violation ;
+        sh:message "ue:hasConfidence, when present, must be low, moderate, or high." ;
+    ] ;
+    sh:property [
+        sh:path ue:condition ;
+        sh:class ue:State ;
+        sh:severity sh:Violation ;
+        sh:message "ue:condition must point to a ue:State concept." ;
+    ] ;
+    sh:property [
+        sh:path ue:intervention ;
+        sh:class ue:Intervention ;
+        sh:severity sh:Violation ;
+        sh:message "ue:intervention must point to a ue:Intervention concept." ;
+    ] ;
+    sh:property [
+        sh:path ue:outcome ;
+        sh:class ue:OutcomeMeasurement ;
+        sh:severity sh:Violation ;
+        sh:message "ue:outcome must point to a ue:OutcomeMeasurement node." ;
+    ] ;
+    sh:property [
+        sh:path ue:location ;
+        sh:class ue:Region ;
+        sh:severity sh:Violation ;
+        sh:message "ue:location must point to a ue:Region." ;
+    ] ;
+    sh:property [
+        sh:path ue:intervention ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "An Evidence record should tag at least one intervention to be useful for the MVP query (recommended)." ;
+    ] ;
+    sh:property [
+        sh:path ue:location ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "An Evidence record should tag at least one region (recommended)." ;
+    ] .
+
+# ─── Observed-outcome node enums ─────────────────────────────────────────────
+# The per-observation outcome node carries direction/intent. Constrains those
+# values on outcome measurements, including planned outcomes without a direction.
+
+ue:ObservedOutcomeShape
+    a sh:NodeShape ;
+    rdfs:label "Observed outcome value conformance" ;
+    sh:targetClass ue:OutcomeMeasurement ;
+    sh:targetObjectsOf ue:outcome ;
+    sh:targetSubjectsOf ue:observedDirection, ue:outcomeStatus, ue:intended ;
+    sh:property [
+        sh:path ue:ofState ;
+        sh:minCount 1 ;
+        sh:class ue:State ;
+        sh:message "An outcome measurement must identify a measured State through ue:ofState." ;
+    ] ;
+    sh:property [
+        sh:path ue:ofIndicator ;
+        sh:class ue:Indicator ;
+        sh:message "ue:ofIndicator must identify an Indicator." ;
+    ] ;
+    sh:property [
+        sh:path ue:observedDirection ;
+        sh:maxCount 1 ;
+        sh:in ( "positive" "negative" "null" "mixed" ) ;
+        sh:severity sh:Violation ;
+        sh:message "ue:observedDirection must be positive, negative, null, or mixed." ;
+    ] ;
+    sh:property [
+        sh:path ue:intended ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:severity sh:Violation ;
+        sh:message "ue:intended must be a boolean." ;
+    ] ;
+    sh:property [
+        sh:path ue:outcomeStatus ;
+        sh:maxCount 1 ;
+        sh:in ( "pre-specified" "reported" "synthesized" ) ;
+        sh:severity sh:Violation ;
+        sh:message "ue:outcomeStatus must be pre-specified, reported, or synthesized." ;
+    ] .

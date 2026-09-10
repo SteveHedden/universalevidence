@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results total="3">
+  <trial>
+    <isrctn>ISRCTN12345678</isrctn>
+    <title>Nutrition education for child growth</title>
+    <conditionCategory>Nutritional, Metabolic, Endocrine</conditionCategory>
+    <condition>Child malnutrition</condition>
+    <intervention>Community nutrition education</intervention>
+    <recruitmentCountry>Kenya</recruitmentCountry>
+    <recruitmentCountry>Uganda</recruitmentCountry>
+    <trialStatus>Completed</trialStatus>
+    <studyType>Interventional</studyType>
+    <overallStartDate>2020-02-01T00:00:00</overallStartDate>
+    <outcomeMeasures>Weight-for-age z-score at 6 months</outcomeMeasures>
+    <outcomeMeasures>Height-for-age z-score at 6 months</outcomeMeasures>
+  </trial>
+  <trial>
+    <isrctn>87654321</isrctn>
+    <title>Minimal sentinel category record</title>
+    <conditionCategory>Not Applicable</conditionCategory>
+    <recruitmentCountry>Atlantis</recruitmentCountry>
+    <studyType>Observational</studyType>
+  </trial>
+  <trial>
+    <trialId>ISRCTN55555555</trialId>
+    <publicTitle>Malaria prevention trial</publicTitle>
+    <conditionCategory>Infections and Infestations</conditionCategory>
+    <condition>Malaria</condition>
+    <recruitmentCountry>Tanzania</recruitmentCountry>
+    <recruitmentStatus>Recruiting</recruitmentStatus>
+    <studyType>Interventional</studyType>
+    <dateApplied>2021-05-04T00:00:00</dateApplied>
+  </trial>
+</results>

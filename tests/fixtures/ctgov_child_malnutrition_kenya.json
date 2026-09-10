@@ -1,0 +1,25 @@
+{
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT00000091",
+          "briefTitle": "Synthetic nutrition intervention example"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2009-07"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "name": "Cotrimoxazole prophylaxis"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

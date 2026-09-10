@@ -1,0 +1,71 @@
+{
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT00000031",
+          "briefTitle": "Nutrition Outcomes Trial"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2020-03-01"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "name": "Nutrition counseling"
+            }
+          ]
+        }
+      },
+      "resultsSection": {
+        "outcomesModule": {
+          "primaryOutcomes": [
+            {
+              "measure": "Weight-for-age z-score",
+              "description": "Mean change in child weight-for-age z-score.",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "EG000",
+                  "measurements": [
+                    {
+                      "value": "0.42",
+                      "spread": "0.11",
+                      "unitOfMeasure": "z-score"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "secondaryOutcomes": [
+            {
+              "measure": "Clinic visits",
+              "description": "Number of clinic visits during follow-up.",
+              "timeFrame": "6 months"
+            }
+          ]
+        },
+        "adverseEventsModule": {
+          "seriousEvents": [
+            {
+              "term": "Hospitalization",
+              "organSystem": "General disorders",
+              "stats": [
+                {
+                  "groupId": "EG000",
+                  "numEvents": "2",
+                  "numAffected": "2",
+                  "numAtRisk": "120"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ue: <https://universalevidence.com/ontology/> .
+@prefix uer: <https://universalevidence.com/vocab/regions/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+uer:EastAsiaPacific a skos:Concept,
+        ue:Region ;
+    rdfs:label "East Asia & Pacific" ;
+    skos:altLabel "EAP",
+        "East Asia and Pacific" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/1327865/>,
+        <https://sws.geonames.org/1559582/>,
+        <https://sws.geonames.org/1562822/>,
+        <https://sws.geonames.org/1605651/>,
+        <https://sws.geonames.org/1643084/>,
+        <https://sws.geonames.org/1655842/>,
+        <https://sws.geonames.org/1694008/>,
+        <https://sws.geonames.org/1733045/>,
+        <https://sws.geonames.org/1814991/>,
+        <https://sws.geonames.org/1819730/>,
+        <https://sws.geonames.org/1820814/>,
+        <https://sws.geonames.org/1821275/>,
+        <https://sws.geonames.org/1831722/>,
+        <https://sws.geonames.org/1835841/>,
+        <https://sws.geonames.org/1861060/>,
+        <https://sws.geonames.org/1873107/>,
+        <https://sws.geonames.org/1880251/>,
+        <https://sws.geonames.org/1966436/>,
+        <https://sws.geonames.org/2029969/>,
+        <https://sws.geonames.org/2077456/>,
+        <https://sws.geonames.org/2080185/>,
+        <https://sws.geonames.org/2081918/>,
+        <https://sws.geonames.org/2088628/>,
+        <https://sws.geonames.org/2103350/>,
+        <https://sws.geonames.org/2110297/>,
+        <https://sws.geonames.org/2110425/>,
+        <https://sws.geonames.org/2134431/>,
+        <https://sws.geonames.org/2139685/>,
+        <https://sws.geonames.org/2186224/>,
+        <https://sws.geonames.org/2205218/>,
+        <https://sws.geonames.org/4030656/>,
+        <https://sws.geonames.org/4030945/>,
+        <https://sws.geonames.org/4032283/>,
+        <https://sws.geonames.org/4034894/>,
+        <https://sws.geonames.org/4041468/>,
+        <https://sws.geonames.org/4043988/>,
+        <https://sws.geonames.org/5880801/> ;
+    skos:prefLabel "East Asia & Pacific" .
+
+uer:EuropeCentralAsia a skos:Concept,
+        ue:Region ;
+    rdfs:label "Europe & Central Asia" ;
+    skos:altLabel "ECA",
+        "Europe and Central Asia" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/1218197/>,
+        <https://sws.geonames.org/1220409/>,
+        <https://sws.geonames.org/146669/>,
+        <https://sws.geonames.org/1512440/>,
+        <https://sws.geonames.org/1522867/>,
+        <https://sws.geonames.org/1527747/>,
+        <https://sws.geonames.org/174982/>,
+        <https://sws.geonames.org/2017370/>,
+        <https://sws.geonames.org/2264397/>,
+        <https://sws.geonames.org/2411586/>,
+        <https://sws.geonames.org/2510769/>,
+        <https://sws.geonames.org/2622320/>,
+        <https://sws.geonames.org/2623032/>,
+        <https://sws.geonames.org/2629691/>,
+        <https://sws.geonames.org/2635167/>,
+        <https://sws.geonames.org/2658434/>,
+        <https://sws.geonames.org/2661886/>,
+        <https://sws.geonames.org/2750405/>,
+        <https://sws.geonames.org/2782113/>,
+        <https://sws.geonames.org/2802361/>,
+        <https://sws.geonames.org/2921044/>,
+        <https://sws.geonames.org/2960313/>,
+        <https://sws.geonames.org/2963597/>,
+        <https://sws.geonames.org/298795/>,
+        <https://sws.geonames.org/2993457/>,
+        <https://sws.geonames.org/3017382/>,
+        <https://sws.geonames.org/3041565/>,
+        <https://sws.geonames.org/3042058/>,
+        <https://sws.geonames.org/3042225/>,
+        <https://sws.geonames.org/3057568/>,
+        <https://sws.geonames.org/3077311/>,
+        <https://sws.geonames.org/3144096/>,
+        <https://sws.geonames.org/3168068/>,
+        <https://sws.geonames.org/3175395/>,
+        <https://sws.geonames.org/3190538/>,
+        <https://sws.geonames.org/3194884/>,
+        <https://sws.geonames.org/3202326/>,
+        <https://sws.geonames.org/3277605/>,
+        <https://sws.geonames.org/3425505/>,
+        <https://sws.geonames.org/390903/>,
+        <https://sws.geonames.org/453733/>,
+        <https://sws.geonames.org/458258/>,
+        <https://sws.geonames.org/587116/>,
+        <https://sws.geonames.org/597427/>,
+        <https://sws.geonames.org/614540/>,
+        <https://sws.geonames.org/617790/>,
+        <https://sws.geonames.org/6290252/>,
+        <https://sws.geonames.org/630336/>,
+        <https://sws.geonames.org/660013/>,
+        <https://sws.geonames.org/690791/>,
+        <https://sws.geonames.org/718075/>,
+        <https://sws.geonames.org/719819/>,
+        <https://sws.geonames.org/732800/>,
+        <https://sws.geonames.org/783754/>,
+        <https://sws.geonames.org/798544/>,
+        <https://sws.geonames.org/798549/>,
+        <https://sws.geonames.org/831053/> ;
+    skos:prefLabel "Europe & Central Asia" .
+
+uer:LatinAmericaCaribbean a skos:Concept,
+        ue:Region ;
+    rdfs:label "Latin America & Caribbean" ;
+    skos:altLabel "LAC",
+        "Latin America and Caribbean" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/3374084/>,
+        <https://sws.geonames.org/3378535/>,
+        <https://sws.geonames.org/3382998/>,
+        <https://sws.geonames.org/3437598/>,
+        <https://sws.geonames.org/3439705/>,
+        <https://sws.geonames.org/3469034/>,
+        <https://sws.geonames.org/3489940/>,
+        <https://sws.geonames.org/3508796/>,
+        <https://sws.geonames.org/3562981/>,
+        <https://sws.geonames.org/3572887/>,
+        <https://sws.geonames.org/3573591/>,
+        <https://sws.geonames.org/3575174/>,
+        <https://sws.geonames.org/3575830/>,
+        <https://sws.geonames.org/3576396/>,
+        <https://sws.geonames.org/3576468/>,
+        <https://sws.geonames.org/3576916/>,
+        <https://sws.geonames.org/3577279/>,
+        <https://sws.geonames.org/3577718/>,
+        <https://sws.geonames.org/3577815/>,
+        <https://sws.geonames.org/3578421/>,
+        <https://sws.geonames.org/3580239/>,
+        <https://sws.geonames.org/3580718/>,
+        <https://sws.geonames.org/3582678/>,
+        <https://sws.geonames.org/3585968/>,
+        <https://sws.geonames.org/3595528/>,
+        <https://sws.geonames.org/3608932/>,
+        <https://sws.geonames.org/3617476/>,
+        <https://sws.geonames.org/3624060/>,
+        <https://sws.geonames.org/3625428/>,
+        <https://sws.geonames.org/3658394/>,
+        <https://sws.geonames.org/3686110/>,
+        <https://sws.geonames.org/3703430/>,
+        <https://sws.geonames.org/3723988/>,
+        <https://sws.geonames.org/3865483/>,
+        <https://sws.geonames.org/3895114/>,
+        <https://sws.geonames.org/3923057/>,
+        <https://sws.geonames.org/3932488/>,
+        <https://sws.geonames.org/3996063/>,
+        <https://sws.geonames.org/4566966/>,
+        <https://sws.geonames.org/4796775/>,
+        <https://sws.geonames.org/7609695/>,
+        <https://sws.geonames.org/7626836/> ;
+    skos:prefLabel "Latin America & Caribbean" .
+
+uer:MiddleEastNorthAfrica a skos:Concept,
+        ue:Region ;
+    rdfs:label "Middle East & North Africa" ;
+    skos:altLabel "MENA",
+        "Middle East and North Africa" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/102358/>,
+        <https://sws.geonames.org/1149361/>,
+        <https://sws.geonames.org/1168579/>,
+        <https://sws.geonames.org/130758/>,
+        <https://sws.geonames.org/163843/>,
+        <https://sws.geonames.org/2215636/>,
+        <https://sws.geonames.org/223816/>,
+        <https://sws.geonames.org/2464461/>,
+        <https://sws.geonames.org/248816/>,
+        <https://sws.geonames.org/2542007/>,
+        <https://sws.geonames.org/2562770/>,
+        <https://sws.geonames.org/2589581/>,
+        <https://sws.geonames.org/272103/>,
+        <https://sws.geonames.org/285570/>,
+        <https://sws.geonames.org/286963/>,
+        <https://sws.geonames.org/289688/>,
+        <https://sws.geonames.org/290291/>,
+        <https://sws.geonames.org/290557/>,
+        <https://sws.geonames.org/294640/>,
+        <https://sws.geonames.org/357994/>,
+        <https://sws.geonames.org/6254930/>,
+        <https://sws.geonames.org/69543/>,
+        <https://sws.geonames.org/99237/> ;
+    skos:prefLabel "Middle East & North Africa" .
+
+uer:NorthAmerica a skos:Concept,
+        ue:Region ;
+    rdfs:label "North America" ;
+    skos:altLabel "NAM" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/3573345/>,
+        <https://sws.geonames.org/6251999/>,
+        <https://sws.geonames.org/6252001/> ;
+    skos:prefLabel "North America" .
+
+uer:SouthAsia a skos:Concept,
+        ue:Region ;
+    rdfs:label "South Asia" ;
+    skos:altLabel "SAR" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/1210997/>,
+        <https://sws.geonames.org/1227603/>,
+        <https://sws.geonames.org/1252634/>,
+        <https://sws.geonames.org/1269750/>,
+        <https://sws.geonames.org/1282028/>,
+        <https://sws.geonames.org/1282988/> ;
+    skos:prefLabel "South Asia" .
+
+uer:SubSaharanAfrica a skos:Concept,
+        ue:Region ;
+    rdfs:label "Sub-Saharan Africa" ;
+    skos:altLabel "SSA" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:narrower <https://sws.geonames.org/1036973/>,
+        <https://sws.geonames.org/1062947/>,
+        <https://sws.geonames.org/149590/>,
+        <https://sws.geonames.org/192950/>,
+        <https://sws.geonames.org/203312/>,
+        <https://sws.geonames.org/2233387/>,
+        <https://sws.geonames.org/2245662/>,
+        <https://sws.geonames.org/2260494/>,
+        <https://sws.geonames.org/226074/>,
+        <https://sws.geonames.org/2275384/>,
+        <https://sws.geonames.org/2287781/>,
+        <https://sws.geonames.org/2300660/>,
+        <https://sws.geonames.org/2309096/>,
+        <https://sws.geonames.org/2328926/>,
+        <https://sws.geonames.org/2361809/>,
+        <https://sws.geonames.org/2363686/>,
+        <https://sws.geonames.org/2372248/>,
+        <https://sws.geonames.org/2378080/>,
+        <https://sws.geonames.org/2395170/>,
+        <https://sws.geonames.org/239880/>,
+        <https://sws.geonames.org/2400553/>,
+        <https://sws.geonames.org/2403846/>,
+        <https://sws.geonames.org/2410758/>,
+        <https://sws.geonames.org/241170/>,
+        <https://sws.geonames.org/2413451/>,
+        <https://sws.geonames.org/2420477/>,
+        <https://sws.geonames.org/2434508/>,
+        <https://sws.geonames.org/2440476/>,
+        <https://sws.geonames.org/2453866/>,
+        <https://sws.geonames.org/3351879/>,
+        <https://sws.geonames.org/3355338/>,
+        <https://sws.geonames.org/3374766/>,
+        <https://sws.geonames.org/337996/>,
+        <https://sws.geonames.org/338010/>,
+        <https://sws.geonames.org/366755/>,
+        <https://sws.geonames.org/433561/>,
+        <https://sws.geonames.org/49518/>,
+        <https://sws.geonames.org/51537/>,
+        <https://sws.geonames.org/7909807/>,
+        <https://sws.geonames.org/878675/>,
+        <https://sws.geonames.org/895949/>,
+        <https://sws.geonames.org/921929/>,
+        <https://sws.geonames.org/927384/>,
+        <https://sws.geonames.org/932692/>,
+        <https://sws.geonames.org/933860/>,
+        <https://sws.geonames.org/934292/>,
+        <https://sws.geonames.org/934841/>,
+        <https://sws.geonames.org/953987/> ;
+    skos:prefLabel "Sub-Saharan Africa" .
+
+uer:Other a skos:Concept,
+        ue:Region ;
+    rdfs:label "Other" ;
+    skos:altLabel "Territories and dependencies" ;
+    skos:broader uer:World ;
+    skos:inScheme uer: ;
+    skos:prefLabel "Other" .
+
+uer:World a skos:Concept,
+        ue:Region ;
+    rdfs:label "World" ;
+    skos:altLabel "Global" ;
+    skos:inScheme uer: ;
+    skos:narrower uer:EastAsiaPacific,
+        uer:EuropeCentralAsia,
+        uer:LatinAmericaCaribbean,
+        uer:MiddleEastNorthAfrica,
+        uer:NorthAmerica,
+        uer:Other,
+        uer:SouthAsia,
+        uer:SubSaharanAfrica ;
+    skos:prefLabel "World" ;
+    skos:topConceptOf uer: .
+
+uer: a owl:Ontology,
+        skos:ConceptScheme ;
+    dcterms:description "UE-owned region grouping concepts. GeoNames URIs are canonical for countries and admin1 regions." ;
+    dcterms:modified "2026-06-23"^^xsd:date ;
+    dcterms:title "Universal Evidence Regions Vocabulary" ;
+    owl:versionInfo "0.1.0" ;
+    skos:hasTopConcept uer:World .
+

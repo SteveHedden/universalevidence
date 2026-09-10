@@ -1,0 +1,146 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ue: <https://universalevidence.com/ontology/> .
+@prefix ues: <https://universalevidence.com/vocab/subjects/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://universalevidence.com/vocab/subjects/AgriculturalSystem>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "The managed system of crop production, livestock, fisheries, and associated supply chains and extension services. The bearer of agricultural productivity, food safety, and farming sector states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Agricultural system" .
+
+ues:Biodiversity a skos:Concept,
+        ue:Subject ;
+    skos:broader ues:NaturalSystem ;
+    skos:definition "Ecosystems and the variety of species, genetic resources, and habitats they contain. The bearer of biodiversity loss, habitat degradation, and ecosystem function states." ;
+    skos:inScheme ues: ;
+    skos:prefLabel "Biodiversity" .
+
+<https://universalevidence.com/vocab/subjects/Climate>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/NaturalSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "The atmospheric and climate system, including greenhouse gas concentrations, temperature regimes, precipitation patterns, and air quality. The bearer of climate change, air pollution, and meteorological states." ;
+    <http://www.w3.org/2004/02/skos/core#exactMatch> <http://id.nlm.nih.gov/mesh/D002980> ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Climate" .
+
+<https://universalevidence.com/vocab/subjects/FinancialSystem>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Markets, institutions, and instruments through which capital is mobilised and allocated, including banking, credit, insurance, and public finance. The bearer of financial sector performance and sovereign fiscal states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Financial system" .
+
+<https://universalevidence.com/vocab/subjects/GovernanceSystem>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "The institutions, rules, and processes through which political authority is exercised, laws are enforced, and public services are delivered. The bearer of corruption, rule of law, institutional capacity, and media freedom states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Governance system" .
+
+ues:HealthSystem a skos:Concept,
+        ue:Subject ;
+    skos:broader ues:HumanSystem ;
+    skos:closeMatch <http://id.nlm.nih.gov/mesh/D000046>,
+        <http://id.nlm.nih.gov/mesh/D001675>,
+        <http://id.nlm.nih.gov/mesh/D002487> ;
+    skos:definition "Organised health services, facilities, providers, supply chains, and governance structures. The bearer of health system performance states such as service quality, access gaps, and institutional dysfunction." ;
+    skos:inScheme ues: ;
+    skos:prefLabel "Health system" .
+
+<https://universalevidence.com/vocab/subjects/Infrastructure>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Built assets providing basic services — water systems, sanitation facilities, transportation networks, telecommunications, and housing stock. The bearer of access, coverage, and infrastructure condition states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Infrastructure" .
+
+<https://universalevidence.com/vocab/subjects/LaborMarket>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "The system governing employment relationships, wage-setting, and working conditions across sectors and occupations. The bearer of labor market performance, informality, and workforce participation states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Labor market" .
+
+ues:LandSoil a skos:Concept,
+        ue:Subject ;
+    skos:broader ues:NaturalSystem ;
+    skos:definition "Terrestrial land surface and soil systems, including land use patterns, soil health, and landscape integrity. The bearer of land degradation, soil quality, and land use change states." ;
+    skos:inScheme ues: ;
+    skos:prefLabel "Land and soil" .
+
+<https://universalevidence.com/vocab/subjects/Population>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Persons, households, and communities — human groups at any scale of aggregation. The bearer of health, nutritional, educational, economic, safety, and rights-related states. Corresponds to the P (Population) in PICO at the type level." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Population" ;
+    <http://www.w3.org/2004/02/skos/core#scopeNote> "Individual, household, and community scales are collapsed here; the unit of analysis varies by study design, not by subject type." ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://universalevidence.com/vocab/subjects/> .
+
+<https://universalevidence.com/vocab/subjects/PrivateSector>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "The productive and enterprise economy — firms, businesses, trade, and industrial output. Distinct from the financial system (capital and banking) and from labor markets (employment conditions). The bearer of firm performance, enterprise formalization, and private sector development states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Private sector" ;
+    <http://www.w3.org/2004/02/skos/core#scopeNote> "Covers the real economy of goods and services production; financial markets and capital allocation are ues:FinancialSystem, and employment conditions are ues:LaborMarket." .
+
+ues:WaterSystem a skos:Concept,
+        ue:Subject ;
+    skos:broader ues:NaturalSystem ;
+    skos:definition "Freshwater and coastal water systems, including rivers, lakes, groundwater aquifers, and hydrological cycles. The bearer of water quality, scarcity, and hydrological states." ;
+    skos:inScheme ues: ;
+    skos:prefLabel "Water system" .
+
+<https://universalevidence.com/vocab/subjects/NaturalSystem>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Natural systems — ecosystems, climate systems, land and soil, and hydrological systems. The bearer of environmental and ecological states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/Biodiversity> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/Climate> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/LandSoil> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/WaterSystem> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Natural system" ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://universalevidence.com/vocab/subjects/> .
+
+<https://universalevidence.com/vocab/subjects/HumanSystem>
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://universalevidence.com/ontology/Subject> ;
+    <http://www.w3.org/2004/02/skos/core#closeMatch> <http://id.nlm.nih.gov/mesh/D002608> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Human-designed and managed systems — institutions, sectors, markets, and built infrastructure. The bearer of system performance, institutional, and infrastructure states." ;
+    <http://www.w3.org/2004/02/skos/core#inScheme> <https://universalevidence.com/vocab/subjects/> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/AgriculturalSystem> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/FinancialSystem> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/GovernanceSystem> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/HealthSystem> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/Infrastructure> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/LaborMarket> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <https://universalevidence.com/vocab/subjects/PrivateSector> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Human system" ;
+    <http://www.w3.org/2004/02/skos/core#topConceptOf> <https://universalevidence.com/vocab/subjects/> .
+
+<https://universalevidence.com/vocab/subjects/>
+    <http://purl.org/dc/terms/created> "2026-06-06"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <http://purl.org/dc/terms/creator> "Steve Hedden" ;
+    <http://purl.org/dc/terms/description> "Controlled vocabulary of bearer types for ue:State concepts. A subject is the class of entity that can be in a state — the entity whose condition is being described. Used via ue:bearer on state concepts in states.ttl." ;
+    <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
+    <http://purl.org/dc/terms/modified> "2026-06-22"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    <http://purl.org/dc/terms/title> "Universal Evidence — Subjects Thesaurus" ;
+    <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+    <http://www.w3.org/2002/07/owl#versionInfo> "0.2.0" ;
+    <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://universalevidence.com/vocab/subjects/HumanSystem> ;
+    <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://universalevidence.com/vocab/subjects/NaturalSystem> ;
+    <http://www.w3.org/2004/02/skos/core#hasTopConcept> <https://universalevidence.com/vocab/subjects/Population> .
+

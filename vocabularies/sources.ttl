@@ -1,0 +1,360 @@
+# Public source registry: dataset descriptions and runtime query routing.
+@prefix aea: <https://socialscienceregistry.org/schema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ictrp: <https://universalevidence.com/source/who-ictrp/schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ue: <https://universalevidence.com/ontology/> .
+@prefix ues: <https://universalevidence.com/vocab/sources/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ue:ContextIndicator a rdfs:Class ;
+    rdfs:label "Context Indicator" ;
+    rdfs:comment "Survey or administrative data describing population conditions. Populates Context nodes, not Evidence nodes." .
+
+ue:EvaluationFinding a rdfs:Class ;
+    rdfs:label "Evaluation Finding" ;
+    rdfs:comment "Completed evaluation with results. May include coded outcomes, effect sizes, or narrative summaries." .
+
+ue:StudyRegistration a rdfs:Class ;
+    rdfs:label "Study Registration" ;
+    rdfs:comment "Registry of planned or ongoing studies. Records intent and design, not outcomes." .
+
+ue:SystematicReview a rdfs:Class ;
+    rdfs:label "Systematic Review" ;
+    rdfs:comment "Synthesis of evidence across multiple primary studies. Includes meta-analyses and evidence gap maps." .
+
+ue:LocalSparql a rdfs:Resource ;
+    rdfs:label "Local SPARQL" ;
+    rdfs:comment "Query a materialized named graph in Fuseki via SPARQL SELECT." .
+
+ue:StampedUri a rdfs:Resource ;
+    rdfs:label "Stamped URI" ;
+    rdfs:comment "Source field contains an already-normalized UE concept URI stamped on an evidence record." .
+
+ue:SubjectAxis a rdfs:Resource ;
+    rdfs:label "Subject Axis" ;
+    rdfs:comment "Query axis for subject concepts." .
+
+ue:axis a rdf:Property ;
+    rdfs:label "axis" ;
+    rdfs:comment "The query axis a ue:axisMapping blank node covers." .
+
+ue:graphUri a rdf:Property ;
+    rdfs:label "graph URI" ;
+    rdfs:comment "Named graph URI used when a materialized source is queried from the local Fuseki dataset." .
+
+ue:queryRole a rdf:Property ;
+    rdfs:label "query role" ;
+    rdfs:comment "Runtime role for an axis mapping, such as keyword crosswalk, raw display text, region literal, or stamped URI join." .
+
+ue:sourceField a rdf:Property ;
+    rdfs:label "source field" ;
+    rdfs:comment "The source-native RDF predicate or literal field path that carries values for the declared axis." .
+
+ue:sourceText a rdf:Property ;
+    rdfs:label "source text" ;
+    rdfs:comment "Original source string represented by a mirror vocabulary concept." .
+
+ues: dcterms:modified "2026-08-13"^^xsd:date ;
+    owl:versionInfo "0.4.1" .
+
+ues:aea a dcat:Dataset ;
+    dcterms:description "American Economic Association registry of randomized controlled trials in economics. J-PAL and IPA studies are heavily represented. Sector vocabulary (13 terms) and free-text keywords. No outcome data — registration only." ;
+    dcterms:license <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    dcterms:publisher <https://www.aeaweb.org> ;
+    dcterms:title "AEA RCT Registry" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcterms:format "CSV (monthly)" ;
+            dcat:downloadURL <https://doi.org/10.7910/DVN/O67RK3> ] ;
+    dcat:landingPage <https://www.socialscienceregistry.org> ;
+    ue:axisMapping [ ue:axis ue:ConditionAxis ;
+            ue:crosswalk "vocabularies/crosswalks/aea-conditions-crosswalk.ttl" ;
+            ue:queryRole ue:KeywordCrosswalk ;
+            ue:sourceField aea:keyword ],
+        [ ue:axis ue:InterventionAxis ;
+            ue:queryRole ue:RawText ;
+            ue:sourceField aea:intervention ],
+        [ ue:axis ue:InterventionAxis ;
+            ue:crosswalk "vocabularies/crosswalks/aea-interventions-crosswalk.ttl" ;
+            ue:queryRole ue:KeywordCrosswalk ;
+            ue:sourceField aea:keyword ],
+        [ ue:axis ue:OutcomeAxis ;
+            ue:queryRole ue:RawText ;
+            ue:sourceField aea:primaryOutcome ],
+        [ ue:axis ue:OutcomeAxis ;
+            ue:queryRole ue:KeywordCrosswalk ;
+            ue:sourceField aea:keyword ],
+        [ ue:axis ue:RegionAxis ;
+            ue:crosswalk "vocabularies/crosswalks/aea-regions-crosswalk.ttl" ;
+            ue:queryRole ue:RegionLiteral ;
+            ue:sourceField aea:country ] ;
+    ue:contentType ue:StudyRegistration ;
+    ue:graphUri "https://universalevidence.com/graph/aea"^^xsd:anyURI ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:State ;
+    ue:queryStrategy ue:Materialize ;
+    ue:recordCount 11818 .
+
+ues:agrovoc a dcat:Dataset ;
+    dcterms:description "FAO AGROVOC thesaurus used as structural warrant for agriculture, food security, water management, rural development, and nutrition intervention concepts." ;
+    dcterms:license <https://creativecommons.org/licenses/by/3.0/igo/> ;
+    dcterms:publisher <https://www.fao.org> ;
+    dcterms:title "AGROVOC" ;
+    dcat:landingPage <https://agrovoc.fao.org> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:campbell a dcat:Dataset ;
+    dcterms:description "Systematic reviews synthesizing evidence on the effectiveness of social interventions. Covers education, crime and justice, social welfare, international development, and knowledge translation. Highest-quality outcome synthesis in the development space." ;
+    dcterms:publisher <https://www.campbellcollaboration.org> ;
+    dcterms:title "Campbell Collaboration" ;
+    dcat:distribution [ a dcat:DataService ;
+            dcterms:format "OAI-PMH (bibliographic metadata only — no PICO or outcome data)" ;
+            dcat:endpointURL <https://www.campbellcollaboration.org/oai> ] ;
+    dcat:landingPage <https://www.campbellcollaboration.org/better-evidence/our-systematic-reviews> ;
+    ue:contentType ue:SystematicReview ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:OutcomeMeasurement,
+        ue:State ;
+    ue:queryStrategy ue:BrowseOnly .
+
+ues:cochrane a dcat:Dataset ;
+    dcterms:description "Gold-standard systematic reviews and meta-analyses, primarily health. Cochrane Reviews include PICO-structured outcome data and effect sizes. Global health reviews overlap with development challenges." ;
+    dcterms:publisher <https://www.cochrane.org> ;
+    dcterms:title "Cochrane Library" ;
+    dcat:landingPage <https://www.cochranelibrary.com> ;
+    ue:contentType ue:SystematicReview ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:OutcomeMeasurement,
+        ue:State ;
+    ue:queryStrategy ue:BrowseOnly .
+
+ues:ctgov a dcat:Dataset ;
+    dcterms:description "US NLM registry of clinical and intervention trials worldwide. MeSH-coded conditions and interventions. Rich structured JSON. Covers health and global health studies." ;
+    dcterms:license <https://clinicaltrials.gov/about-site/terms-conditions> ;
+    dcterms:publisher <https://www.nlm.nih.gov> ;
+    dcterms:title "ClinicalTrials.gov" ;
+    dcat:distribution [ a dcat:DataService ;
+            dcterms:format "REST/JSON" ;
+            dcat:endpointURL <https://clinicaltrials.gov/api/v2/studies> ;
+            foaf:page <https://clinicaltrials.gov/data-api/api> ] ;
+    dcat:landingPage <https://clinicaltrials.gov> ;
+    ue:axisMapping [ ue:apiParam "filter.advanced" ;
+            ue:axis ue:ConditionAxis ;
+            ue:queryRole ue:LiveApiParam ;
+            ue:sourceField "derivedSection.conditionBrowseModule.meshes[].id" ],
+        [ ue:apiParam "query.intr" ;
+            ue:axis ue:InterventionAxis ;
+            ue:queryRole ue:LiveApiParam ;
+            ue:sourceField "protocolSection.armsInterventionsModule.interventions[].name" ],
+        [ ue:apiParam "query.outc" ;
+            ue:axis ue:OutcomeAxis ;
+            ue:queryRole ue:LiveApiParam ;
+            ue:sourceField "protocolSection.outcomesModule.primaryOutcomes[].measure" ],
+        [ ue:apiParam "query.locn" ;
+            ue:axis ue:RegionAxis ;
+            ue:queryRole ue:LiveApiParam ;
+            ue:sourceField "protocolSection.contactsLocationsModule.locations[].country" ] ;
+    ue:contentType ue:StudyRegistration ;
+    ue:countryFormat "full-name" ;
+    ue:countryParam "query.locn" ;
+    ue:meshGate true ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:State ;
+    ue:queryStrategy ue:LiveQuery ;
+    ue:recordCount 581965 .
+
+ues:dac-crs a dcat:Dataset ;
+    dcterms:description "OECD Creditor Reporting System purpose codes used as structural warrant for intervention concepts." ;
+    dcterms:publisher <https://www.oecd.org> ;
+    dcterms:title "OECD DAC CRS purpose codes" ;
+    dcat:landingPage <https://webfs.oecd.org/crs-iati-xml/Lookup/DAC-CRS-CODES.xml> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:egap a dcat:Dataset ;
+    dcterms:description "Evidence in Governance and Politics registry of pre-analysis plans and registered designs. Focused on governance, institutions, and political economy field experiments. No outcome data." ;
+    dcterms:publisher <https://egap.org> ;
+    dcterms:title "EGAP Registry" ;
+    dcat:landingPage <https://egap.org/registry/> ;
+    ue:contentType ue:StudyRegistration ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:State ;
+    ue:queryStrategy ue:BrowseOnly .
+
+ues:givewell a dcat:Dataset ;
+    dcterms:description "In-depth charity evaluations including cost-effectiveness analysis, outcome estimates, and evidence quality ratings. Covers a small set of highly-vetted interventions (deworming, malaria nets, cash transfers, vitamin A)." ;
+    dcterms:license <https://creativecommons.org/licenses/by/3.0/> ;
+    dcterms:publisher <https://www.givewell.org> ;
+    dcterms:title "GiveWell Charity Reviews" ;
+    dcat:landingPage <https://www.givewell.org/charities/top-charities> ;
+    ue:contentType ue:EvaluationFinding ;
+    ue:provides ue:Intervention,
+        ue:OutcomeMeasurement ;
+    ue:queryStrategy ue:BrowseOnly .
+
+ues:icd11 a dcat:Dataset ;
+    dcterms:description "WHO ICD-11 chapter and block concepts used as structural warrant for condition concepts." ;
+    dcterms:license <https://creativecommons.org/licenses/by-nd/3.0/igo/> ;
+    dcterms:publisher <https://www.who.int> ;
+    dcterms:title "ICD-11 MMS chapters and blocks" ;
+    dcat:landingPage <https://icd.who.int/icdapi> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:ipa a dcat:Dataset ;
+    dcterms:description "Innovations for Poverty Action evaluation findings. Covers a wide range of development interventions. Replication datasets on Harvard Dataverse but these are microdata, not coded outcome summaries." ;
+    dcterms:publisher <https://www.poverty-action.org> ;
+    dcterms:title "IPA Research" ;
+    dcat:landingPage <https://www.poverty-action.org/research> ;
+    ue:contentType ue:EvaluationFinding ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:OutcomeMeasurement,
+        ue:State ;
+    ue:queryStrategy ue:BrowseOnly .
+
+ues:isrctn a dcat:Dataset ;
+    dcterms:description "International Standard Randomised Controlled Trial Number registry, operated by Springer Nature BioMed Central. Health-focused registry covering clinical and public health trials. Provides conditionCategory controlled vocabulary with 23 API values; Universal Evidence models the 21 semantic terms and excludes Not Specified and Not Applicable sentinel values." ;
+    dcterms:publisher <https://www.springernature.com> ;
+    dcterms:title "ISRCTN Registry" ;
+    dcat:distribution [ a dcat:DataService ;
+            dcterms:format "REST/XML (MarkLogic constraint query string via ?q= parameter)" ;
+            dcat:endpointURL <https://www.isrctn.com/api/query/format/default> ;
+            foaf:page <https://www.isrctn.com/page/faqs> ] ;
+    dcat:landingPage <https://www.isrctn.com> ;
+    ue:axisMapping [ ue:apiParam "conditionCategory" ;
+            ue:axis ue:ConditionAxis ] ;
+    ue:contentType ue:StudyRegistration ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:State ;
+    ue:queryStrategy ue:LiveQuery .
+
+ues:isrctn-condition-category a dcat:Dataset ;
+    dcterms:description "ISRCTN controlled conditionCategory terms used as source-side and structural warrant for condition concepts." ;
+    dcterms:publisher <https://www.springernature.com> ;
+    dcterms:title "ISRCTN conditionCategory vocabulary" ;
+    dcat:landingPage <https://www.isrctn.com> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:jpal a dcat:Dataset ;
+    dcterms:description "Abdul Latif Jameel Poverty Action Lab database of completed RCT evaluations by affiliated researchers. Economics-focused, rigorous methodology. Policy insights and research summaries include outcome information but are unstructured." ;
+    dcterms:publisher <https://www.povertyactionlab.org> ;
+    dcterms:title "J-PAL Evaluations Database" ;
+    dcat:landingPage <https://www.povertyactionlab.org/evaluations> ;
+    ue:contentType ue:EvaluationFinding ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:OutcomeMeasurement,
+        ue:State ;
+    ue:queryStrategy ue:BrowseOnly .
+
+ues:mesh-c a dcat:Dataset ;
+    dcterms:description "MeSH disease concepts used as structural warrant for health condition concepts." ;
+    dcterms:publisher <https://www.nlm.nih.gov> ;
+    dcterms:title "MeSH C disease tree" ;
+    dcat:landingPage <https://id.nlm.nih.gov/mesh/> ;
+    ue:queryStrategy ue:LiveQuery .
+
+ues:mesh-en a dcat:Dataset ;
+    dcterms:description "MeSH therapeutic techniques, equipment, and health-care concepts used as structural warrant for intervention and outcome concepts." ;
+    dcterms:publisher <https://www.nlm.nih.gov> ;
+    dcterms:title "MeSH E and N therapeutic / health-care trees" ;
+    dcat:landingPage <https://id.nlm.nih.gov/mesh/> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:sdg a dcat:Dataset ;
+    dcterms:description "United Nations Sustainable Development Goals and targets." ;
+    dcterms:publisher <https://unstats.un.org> ;
+    dcterms:title "United Nations Sustainable Development Goals — Goals and Targets" ;
+    dcat:landingPage <https://unstats.un.org/SDGAPI/v1/> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:unbis a dcat:Dataset ;
+    dcterms:description "UN Bibliographic Information System thesaurus used as branch warrant for development conditions and outcomes." ;
+    dcterms:publisher <https://www.un.org> ;
+    dcterms:title "UNBIS Thesaurus" ;
+    dcat:landingPage <https://metadata.un.org/thesaurus/> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:wdi a dcat:Dataset ;
+    dcterms:description "World Bank World Development Indicators used as structural warrant for measurable outcome concepts." ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:publisher <https://www.worldbank.org> ;
+    dcterms:title "World Development Indicators" ;
+    dcat:landingPage <https://data.worldbank.org/indicator> ;
+    ue:queryStrategy ue:Materialize .
+
+ues:wholictrp a dcat:Dataset ;
+    dcterms:description "WHO meta-registry aggregating trial registrations from 18+ contributing registries worldwide. Broad geographic and thematic coverage beyond health registries. Conditions and interventions are free text; quality varies by contributing registry." ;
+    dcterms:publisher <https://www.who.int> ;
+    dcterms:title "WHO International Clinical Trials Registry Platform" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcterms:format "CSV (manual per-challenge export from trialsearch.who.int)" ] ;
+    dcat:landingPage <https://trialsearch.who.int> ;
+    ue:axisMapping [ ue:axis ue:ConditionAxis ;
+            ue:sourceField ictrp:condition ],
+        [ ue:axis ue:InterventionAxis ;
+            ue:sourceField ictrp:intervention ],
+        [ ue:axis ue:OutcomeAxis ;
+            ue:sourceField ictrp:primaryOutcome ],
+        [ ue:axis ue:RegionAxis ;
+            ue:sourceField ictrp:countryIsoAlpha2 ] ;
+    ue:contentType ue:StudyRegistration ;
+    ue:graphUri "https://universalevidence.com/graph/who-ictrp"^^xsd:anyURI ;
+    ue:provides ue:Evidence,
+        ue:Intervention,
+        ue:State ;
+    ue:queryStrategy ue:Materialize .
+
+ue:RegionLiteral a rdfs:Resource ;
+    rdfs:label "Region literal" ;
+    rdfs:comment "Source field contains a country or region literal normalized to the UE regions vocabulary at ingest or query time." .
+
+ue:RawText a rdfs:Resource ;
+    rdfs:label "Raw text" ;
+    rdfs:comment "Source field contains source-native display text, such as free-text intervention or outcome descriptions." .
+
+ue:KeywordCrosswalk a rdfs:Resource ;
+    rdfs:label "Keyword crosswalk" ;
+    rdfs:comment "Source field contains source vocabulary terms that are joined to UE concepts through skos:exactMatch or skos:closeMatch in the taxonomy graph." .
+
+ue:LiveQuery a rdfs:Resource ;
+    rdfs:label "Live Query" ;
+    rdfs:comment "Query the source API at request time. No local copy stored. Source has a maintained, accessible API." .
+
+ue:RegionAxis a rdfs:Resource ;
+    rdfs:label "Region Axis" ;
+    rdfs:comment "Query axis for region concepts." .
+
+ue:ConditionAxis a rdfs:Resource ;
+    rdfs:label "Condition Axis" ;
+    rdfs:comment "Query axis for condition concepts." .
+
+ue:InterventionAxis a rdfs:Resource ;
+    rdfs:label "Intervention Axis" ;
+    rdfs:comment "Query axis for intervention concepts." .
+
+ue:LiveApiParam a rdfs:Resource ;
+    rdfs:label "Live API parameter" ;
+    rdfs:comment "Source mapping is executed by passing a transformed axis value to a source API request parameter." .
+
+ue:OutcomeAxis a rdfs:Resource ;
+    rdfs:label "Outcome Axis" ;
+    rdfs:comment "Query axis for outcome concepts." .
+
+ue:BrowseOnly a rdfs:Resource ;
+    rdfs:label "Browse Only" ;
+    rdfs:comment "No programmatic access available. Manual extraction or scraping required." .
+
+ue:Materialize a rdfs:Resource ;
+    rdfs:label "Materialize" ;
+    rdfs:comment "Store a local copy in Fuseki. Used when the source has no API but provides bulk download." .
+
