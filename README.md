@@ -4,7 +4,6 @@ Universal Evidence is an evidence search engine for people designing, funding an
 
 - [Use the hosted application](https://www.universalevidence.com/)
 - [Explore the API](https://api.universalevidence.com/docs)
-- [Query contract](contracts/query-v2/README.md)
 
 ## What it does
 
@@ -87,7 +86,7 @@ Add `intervention` or `region` to restrict the query. Repeat a parameter for mul
 | `/docs`, `/openapi.json` | Interactive API reference and machine-readable schema |
 | `/health` | API process readiness; not a guarantee that every upstream registry is available |
 
-Search responses contain `results` and `meta`. Inspect `meta.sources`, `truncated`, `approximate` and `execution_status` before interpreting results as complete. Search has a configurable default 10-second server budget and preserves completed-source results when others fail or time out. A study may appear in multiple intervention groups; presentation rows are not unique-study counts. Limits apply per source branch, and Graph has additional presentation limits. See the [query contract](contracts/query-v2/README.md) for details; the legacy `/query` and `/graph` routes have different response formats.
+Search responses contain `results` and `meta`. Inspect `meta.sources`, `truncated`, `approximate` and `execution_status` before interpreting results as complete. Search has a configurable default 10-second server budget and preserves completed-source results when others fail or time out. A study may appear in multiple intervention groups; presentation rows are not unique-study counts. Limits apply per source branch, and Graph has additional presentation limits. See the [Search API reference](contracts/query-v2/README.md) for details; the legacy `/query` and `/graph` routes have different response formats.
 
 ## Tests and builds
 
