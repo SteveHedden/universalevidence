@@ -1316,3 +1316,12 @@ code {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+.home-introduction, .home-about {
+  max-width: 1120px;
+  margin: 0 auto 24px;
+}
+.home-introduction h2, .home-about h2 { font-size: 1.25rem; line-height: 1.35; }
+.home-introduction p, .home-about p { max-width: 85ch; color: #465462; margin: 10px 0 0; }
+.home-about { margin-top: 32px; padding-bottom: 20px; }
+.home-about a { color: #17649e; text-underline-offset: 3px; }

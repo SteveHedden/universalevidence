@@ -122,6 +122,11 @@ export function App() {
         </a>
       </div>
 
+      <section className="home-introduction" aria-labelledby="home-purpose">
+        <h2 id="home-purpose">Search research evidence for global development</h2>
+        <p>Universal Evidence helps people designing, funding, and delivering development programs find relevant research. Search across four study registries to discover which interventions have been studied, for which conditions, and where. Then follow the results to the original source.</p>
+      </section>
+
       <div className="view-tabs-wrap">
       <nav className="view-tabs" aria-label="Explorer views">
         <button type="button" className="active">Search</button>
@@ -146,6 +151,12 @@ export function App() {
         />
       </section>
 
+      <section className="home-about" aria-labelledby="home-coverage">
+        <h2 id="home-coverage">Research across four registries</h2>
+        <p>Find study records from ClinicalTrials.gov, the AEA RCT Registry, ISRCTN, and WHO ICTRP using shared terms for conditions, interventions, and places.</p>
+        <p>A study registration shows what researchers planned or evaluated. It does not, by itself, establish that an intervention worked. Coverage varies by source, and results may be incomplete.</p>
+        <p>Explore the vocabulary: <a href="/vocab/states/Malaria">Malaria</a>, <a href="/vocab/states/Malnutrition">Malnutrition</a>, or <a href="/vocab/states/AnxietyDisorders">Anxiety disorders</a>. <a href="/how-to-use-universal-evidence.html">Learn how to search and interpret results.</a></p>
+      </section>
     </main>
   );
 }
