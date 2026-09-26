@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from html import escape
 from pathlib import Path
@@ -21,7 +22,7 @@ JSON = "application/json"
 JSON_LD = "application/ld+json"
 TURTLE = "text/turtle"
 HTML = "text/html"
-SUPPORTED_MEDIA_TYPES = {TURTLE, JSON_LD, JSON}
+SUPPORTED_MEDIA_TYPES = (TURTLE, JSON_LD, JSON)
 
 UE = URIRef("https://universalevidence.com/ontology/")
 UE_STATE = URIRef("https://universalevidence.com/ontology/State")
@@ -86,48 +87,80 @@ ONTOLOGY = ResourceConfig(
 router = APIRouter()
 
 
-def negotiate_content_type(request: Request, allow_html: bool = False) -> str | None:
-    """Choose a supported representation from the Accept header.
+def negotiate_content_type(
+    request: Request, allow_html: bool = False, *, default_type: str = TURTLE
+) -> str | None:
+    """Select an acceptable representation; only concept routes default to HTML.
 
-    `allow_html` is only set by the /vocab/{vocabulary}/{term} route --
-    other routes (ontology, vocabulary listings) have no HTML stub and
-    should keep 406-ing text/html.
+    A representation's most specific matching range determines its quality,
+    including q=0 exclusions. Equal qualities prefer specific ranges, then
+    client order, then our default order (HTML for concepts, Turtle otherwise).
     """
-    accept = request.headers.get("accept")
-    if not accept:
-        return TURTLE
+    supported = list(SUPPORTED_MEDIA_TYPES)
+    if allow_html:
+        supported.append(HTML)
+    supported.remove(default_type)
+    supported.insert(0, default_type)
+    accept = ",".join(request.headers.getlist("accept"))
+    if not accept.strip():
+        return default_type
 
     parsed = []
     for index, raw_part in enumerate(accept.split(",")):
         media_range, *params = [part.strip() for part in raw_part.split(";")]
-        if not media_range:
-            continue
-        q = 1.0
+        media_range = media_range.lower()
+        quality = 1.0
+        media_params = []
+        seen_quality = False
         for param in params:
-            if param.startswith("q="):
-                try:
-                    q = float(param.removeprefix("q="))
-                except ValueError:
-                    q = 0.0
-        if q > 0:
-            parsed.append((media_range.lower(), q, index))
+            name, _, value = param.partition("=")
+            if name.strip().lower() == "q":
+                # Invalid qualities are unacceptable, never an implicit fallback.
+                value = value.strip()
+                quality = (
+                    float(value)
+                    if re.fullmatch(r"(?:0(?:\.[0-9]{0,3})?|1(?:\.0{0,3})?)", value)
+                    else 0.0
+                )
+                seen_quality = True
+            elif not seen_quality:
+                media_params.append((name.strip().lower(), value.strip().strip('"').lower()))
+        if media_range:
+            parsed.append((media_range, quality, index, media_params))
 
-    if not parsed:
-        return TURTLE
-
-    parsed.sort(key=lambda item: (-item[1], item[2]))
-    for media_range, _q, _index in parsed:
-        if media_range in SUPPORTED_MEDIA_TYPES:
-            return media_range
-        if media_range in {"*/*", "application/*", "text/*"}:
-            return TURTLE
-        if media_range == HTML:
-            return HTML if allow_html else None
-    return None
+    candidates = []
+    for preference, media_type in enumerate(supported):
+        matches = []
+        for media_range, quality, index, params in parsed:
+            if media_range == media_type:
+                specificity = 2
+            elif media_range == media_type.split("/")[0] + "/*":
+                specificity = 1
+            elif media_range == "*/*":
+                specificity = 0
+            else:
+                continue
+            # Text responses advertise UTF-8; no other representation
+            # parameters (such as JSON-LD profiles) are currently offered.
+            if any(
+                (name, value) != ("charset", "utf-8")
+                or not media_type.startswith("text/")
+                for name, value in params
+            ):
+                continue
+            matches.append((specificity, len(params), -index, quality))
+        if matches:
+            specificity, param_count, order, quality = max(matches)
+            if quality > 0:
+                candidates.append((quality, specificity, param_count, order, -preference, media_type))
+    return max(candidates)[-1] if candidates else None
 
 
 def _not_acceptable() -> JSONResponse:
-    return JSONResponse(status_code=406, content={"error": "Not acceptable"})
+    return JSONResponse(
+        status_code=406, content={"error": "Not acceptable"},
+        headers={"Vary": "Accept", "Cache-Control": "no-store"},
+    )
 
 
 def _missing_vocabulary(name: str) -> JSONResponse:
@@ -801,7 +834,10 @@ def _html_response(config: ResourceConfig, graph: Graph, subject: URIRef, term: 
 
 
 def _serve_resource(request: Request, config: ResourceConfig, term: str | None = None, allow_html: bool = False):
-    media_type = negotiate_content_type(request, allow_html=allow_html)
+    media_type = negotiate_content_type(
+        request, allow_html=allow_html,
+        default_type=HTML if term is not None and allow_html else TURTLE,
+    )
     if media_type is None:
         return _not_acceptable()
 

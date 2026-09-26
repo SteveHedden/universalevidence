@@ -88,6 +88,36 @@ Add `intervention` or `region` to restrict the query. Repeat a parameter for mul
 
 Search responses contain `results` and `meta`. Inspect `meta.sources`, `truncated`, `approximate` and `execution_status` before interpreting results as complete. Search has a configurable default 10-second server budget and preserves completed-source results when others fail or time out. A study may appear in multiple intervention groups; presentation rows are not unique-study counts. Limits apply per source branch, and Graph has additional presentation limits. See the [Search API reference](contracts/query-v2/README.md) for details; the legacy `/query` and `/graph` routes have different response formats.
 
+## Vocabulary representations
+
+Individual `/vocab/{vocabulary}/{term}` URLs return server-rendered HTML when
+`Accept` is missing, empty, `*/*`, or `text/*`. This includes source records.
+These URLs previously defaulted to Turtle. RDF clients must request their
+representation explicitly:
+
+```bash
+curl -H 'Accept: text/turtle' 'https://universalevidence.com/vocab/states/Malaria'
+curl -H 'Accept: application/ld+json' 'https://universalevidence.com/vocab/states/Malaria'
+curl -H 'Accept: application/json' 'https://universalevidence.com/vocab/states/Malaria'
+```
+
+JSON-LD is RDF; `application/json` returns the simpler concept record.
+Explicit `text/html` also selects the readable page. Quality values and
+specific exclusions (`q=0`) are respected. The most specific matching range
+sets each representation's quality; ties prefer specificity, then header
+order, then the route's default format. `application/*` selects JSON-LD,
+never Turtle. If no offered representation is acceptable, the response is
+406. Missing concepts retain real 404 responses and canonical URIs are unchanged.
+
+Whole-vocabulary downloads (`/vocab/states`, `/vocab/interventions`,
+`/vocab/regions`, `/vocab/sources`) and `/ontology` retain their Turtle default.
+Ontology's explicit HTML documentation remains available.
+
+Negotiated responses carry `Vary: Accept`; HTML retains its one-hour cache
+lifetime. Any reverse proxy or CDN configured to cache these URLs must key
+representations by `Accept` or bypass caching for individual concept URLs.
+Do not assume a CDN honors `Vary` without checking its active configuration.
+
 ## Tests and builds
 
 Frontend tests run without registry data:

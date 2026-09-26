@@ -517,3 +517,104 @@ def test_ontology_term_opens_in_a_normal_browser():
     assert '<section id="State">' in response.text
     assert "Version 0.5.0" in response.text
     assert client.get("/ontology/NoSuchTerm", headers={"accept": "text/html"}).status_code == 404
+
+
+@pytest.mark.parametrize(('accept', 'expected'), [
+    (None, HTML), ('', HTML), ('*/*', HTML), ('text/*', HTML),
+    ('application/*', JSON_LD), ('TEXT/HTML', HTML),
+    ('text/turtle', TURTLE), ('application/ld+json', JSON_LD),
+    ('application/json', JSON),
+    ('text/html;q=0.2,text/turtle;q=0.9', TURTLE),
+    ('text/turtle;q=0.2,text/html;q=0.9', HTML),
+    ('text/turtle,text/html', TURTLE), ('text/html,text/turtle', HTML),
+    ('*/*,application/json', JSON),
+    ('text/html;q=0,*/*;q=1', TURTLE),
+    ('text/*;q=0,*/*;q=1', JSON_LD),
+    ('text/html;q=0,text/*;q=0.5,*/*;q=0.1', TURTLE),
+    ('text/html;q=0.2,*/*;q=0.9', TURTLE),
+    ('text/html;q=1,*/*;q=0', HTML),
+    ('*/*;q=0', None), ('text/html;q=0,text/turtle;q=0', None),
+    ('image/png', None), ('text/html;q=NaN', None),
+    ('text/html;q=2', None), ('text/html;q=-1', None),
+    ('text/html;q=bad', None), ('text/html;q=0.1234', None),
+    ('text/html; charset="utf-8"', HTML),
+    ('text/html; charset=iso-8859-1', None),
+    ('application/ld+json;profile="unsupported",text/turtle', TURTLE),
+    ('text/html;Q=0,application/json', JSON),
+])
+def test_concept_negotiation_quality_specificity_and_exclusions(accept, expected):
+    assert negotiate_content_type(
+        _request_with_accept(accept), allow_html=True, default_type=HTML
+    ) == expected
+
+
+@pytest.mark.parametrize('path', [
+    '/vocab/states/Malaria', '/vocab/interventions/NutritionEducation',
+    '/vocab/regions/SubSaharanAfrica', '/vocab/sources/ctgov',
+])
+@pytest.mark.parametrize('accept', [None, '*/*', 'text/*'])
+def test_all_concept_pages_default_to_visible_canonical_html(path, accept):
+    request = client.build_request('GET', path)
+    request.headers.pop('accept', None)
+    if accept is not None:
+        request.headers['accept'] = accept
+    response = client.send(request)
+    assert response.status_code == 200
+    assert response.headers['content-type'].startswith(HTML)
+    assert response.headers['vary'] == 'Accept'
+    # Inspect the server-rendered document, without executing its optional JS.
+    body = re.sub(r'<script\b[^>]*>.*?</script>', '', response.text, flags=re.S)
+    assert '<h1>' in body and '<title>' in body and '<a ' in body
+    assert f'<link rel="canonical" href="https://universalevidence.com{path}">' in body
+    assert 'noindex' not in body.lower()
+
+
+@pytest.mark.parametrize('formats', [
+    [HTML, TURTLE, JSON_LD, JSON, HTML],
+    [TURTLE, HTML, JSON, JSON_LD, TURTLE],
+])
+def test_repeated_concept_requests_keep_representations_separate(formats):
+    uri = 'https://universalevidence.com/vocab/states/Malaria'
+    for media_type in formats:
+        response = client.get('/vocab/states/Malaria', headers={'Accept': media_type})
+        assert response.status_code == 200
+        assert response.headers['content-type'].startswith(media_type)
+        assert response.headers['vary'] == 'Accept'
+        if media_type in (TURTLE, JSON_LD):
+            graph = Graph().parse(data=response.text, format='turtle' if media_type == TURTLE else 'json-ld')
+            assert (URIRef(uri), None, None) in graph
+        elif media_type == JSON:
+            assert response.json()['uri'] == uri
+        else:
+            assert '<h1>Malaria</h1>' in response.text
+
+
+@pytest.mark.parametrize('path', ['/ontology', '/vocab/states', '/vocab/interventions', '/vocab/regions', '/vocab/sources'])
+@pytest.mark.parametrize('accept', [None, '*/*'])
+def test_download_and_ontology_defaults_remain_turtle(path, accept):
+    request = client.build_request('GET', path)
+    request.headers.pop('accept', None)
+    if accept is not None:
+        request.headers['accept'] = accept
+    response = client.send(request)
+    assert response.status_code == 200
+    assert response.headers['content-type'].startswith(TURTLE)
+
+
+@pytest.mark.parametrize('accept', ['*/*', HTML, TURTLE, JSON_LD, JSON])
+def test_missing_concept_remains_404_with_new_default(accept):
+    assert client.get('/vocab/states/NoSuchTerm', headers={'Accept': accept}).status_code == 404
+
+
+def test_unacceptable_concept_is_not_cacheable_and_varies_by_accept():
+    response = client.get('/vocab/states/Malaria', headers={'Accept': '*/*;q=0'})
+    assert response.status_code == 406
+    assert response.headers['vary'] == 'Accept'
+    assert response.headers['cache-control'] == 'no-store'
+
+
+def test_repeated_accept_header_fields_are_combined():
+    response = client.get('/vocab/states/Malaria', headers=[
+        ('Accept', 'text/html;q=0.1'), ('Accept', 'application/json;q=0.9'),
+    ])
+    assert response.headers['content-type'].startswith(JSON)
