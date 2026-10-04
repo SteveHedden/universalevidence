@@ -400,59 +400,31 @@ def rows_by_study(
     return grouped
 
 
-def _row_state_coordinate_uris(row: Mapping[str, Any]) -> tuple[str, ...]:
-    coordinates: list[str] = []
-    for value in (
-        row.get("state_concept_uri"),
-        row.get("condition_concept_uri"),
-    ):
-        uri = str(value or "")
-        if uri and uri not in coordinates:
-            coordinates.append(uri)
-    for outcome in row.get("outcomes") or ():
-        if not isinstance(outcome, Mapping):
-            continue
-        uri = str(outcome.get("state_concept_uri") or "")
-        if uri and uri not in coordinates:
-            coordinates.append(uri)
-    return tuple(coordinates)
+def _graph_branch_rows(
+    rows: Sequence[Mapping[str, Any]], spec: Mapping[str, str],
+) -> list[dict[str, Any]]:
+    """Record actual branch membership without stamping canonical mappings."""
+    result = []
+    for raw in rows:
+        row = dict(raw)
+        if _GRAPH_ATTRIBUTION.get() and spec.get("state"):
+            row["query_matches"] = [{
+                "selected_root": spec["state"],
+                "retrieval_basis": "search",
+                "retrieval_role": None,
+            }]
+        result.append(row)
+    return result
 
 
-def _qualified_graph_state_and_rows(
-    rows: Sequence[Mapping[str, Any]],
-    spec: Mapping[str, str],
-    query: CanonicalQuery,
-) -> list[Mapping[str, Any]]:
-    """Require direct support in every branch of a multi-State Graph AND."""
-    selected_root = spec.get("state")
-    if not (
-        _GRAPH_ATTRIBUTION.get()
-        and selected_root
-        and query.logic["state"] == "and"
-        and len(query.values["state"]) > 1
-    ):
-        return list(rows)
-
-    coordinates_by_row = [
-        (row, _row_state_coordinate_uris(row))
-        for row in rows
-    ]
-    in_scope_uris = {
-        uri
-        for uri, _label in _direct_taxonomy_matches(
-            [
-                (uri, uri)
-                for _row, coordinates in coordinates_by_row
-                for uri in coordinates
-            ],
-            selected_root,
-            "states.ttl",
-        )
-    }
+def _mapping_provenance(
+    condition_candidates: Sequence[tuple[str, str]],
+    outcome_candidates: Sequence[tuple[str, str]],
+) -> list[dict[str, str]]:
     return [
-        row
-        for row, coordinates in coordinates_by_row
-        if any(uri in in_scope_uris for uri in coordinates)
+        {"uri": uri, "role": role}
+        for role, candidates in (("condition", condition_candidates), ("outcome", outcome_candidates))
+        for uri, _label in _direct_taxonomy_matches(candidates, None, "states.ttl")
     ]
 
 
@@ -535,10 +507,16 @@ def dedupe_presentation(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any
         key = (source, study_id, state_key, intervention_key)
         public = {name: raw.get(name) for name in PUBLIC_RESULT_KEYS}
         public["outcomes"] = list(raw.get("outcomes") or [])
+        for field in ("query_matches", "direct_state_mappings"):
+            public[field] = list(raw.get(field) or [])
         existing = selected.get(key)
         if existing is None:
             selected[key] = public
             continue
+        for field in ("query_matches", "direct_state_mappings"):
+            for value in public[field]:
+                if value not in existing[field]:
+                    existing[field].append(value)
         seen_outcomes = {_outcome_identity(value) for value in existing["outcomes"]}
         for outcome in public["outcomes"]:
             identity = _outcome_identity(outcome)
@@ -556,7 +534,7 @@ def dedupe_presentation(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any
     retained = [
         value
         for (source, study_id, condition_key, intervention_key), value in selected.items()
-        if condition_key
+        if value.get("query_matches") or condition_key
         or (source, study_id, intervention_key) not in attributed
     ]
     return sorted(
@@ -1028,11 +1006,7 @@ async def execute_source(
                 break
             branch_groups.append(
                 rows_by_study(
-                    _qualified_graph_state_and_rows(
-                        branch.rows,
-                        spec,
-                        planning_query,
-                    ),
+                    _graph_branch_rows(branch.rows, spec),
                     source_id,
                 )
             )
@@ -2761,6 +2735,10 @@ def _ctgov_presentation(
             )
         )
 
+        base["direct_state_mappings"] = _mapping_provenance(
+            condition_candidates, outcome_candidates
+        )
+
         candidates: list[tuple[str, str]] = []
         raw_by_uri: dict[str, str] = {}
         for name in names:
@@ -3350,6 +3328,10 @@ def _stamp_isrctn(
                 outcome_candidates,
                 spec,
             )
+        )
+
+        row["direct_state_mappings"] = _mapping_provenance(
+            condition_candidates, outcome_candidates
         )
 
         raw_interventions = list(row.get("drug_names_list") or ())

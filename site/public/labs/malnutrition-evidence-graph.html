@@ -1249,6 +1249,10 @@
     const shownStatus = edge._detailState === 'error' && !studies.length
       ? 'Details unavailable'
       : `${studies.length} shown`;
+    const supportLabels = { search_only: 'Search match', mapping_only: 'Mapped state', both: 'Both' };
+    const supportBreakdown = Object.entries(edge.support_counts || {})
+      .map(([basis, count]) => `${supportLabels[basis] || basis}: ${Number(count).toLocaleString()}`)
+      .join(' · ');
     const sourceBreakdown = Object.entries(edge.source_counts || {})
       .map(([source, count]) => `${source}: ${Number(count).toLocaleString()}`)
       .join(' · ');
@@ -1263,7 +1267,11 @@
           const titleMarkup = url
             ? `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${escapeHtml(title)}</a>`
             : `<strong>${escapeHtml(title)}</strong>`;
-          const meta = [study.source, study.study_id, study.study_design].filter(Boolean).join(' · ');
+          const support = study.support_provenance;
+          const rolledUp = (support?.direct_state_mappings || []).some(mapping => mapping.root_relationship === 'descendant');
+          const basis = support ? supportLabels[support.category] : null;
+          const meta = [study.source, study.study_id, study.study_design, basis,
+            rolledUp ? 'Mapped to a more specific state within this selection' : null].filter(Boolean).join(' · ');
           return `<li>${titleMarkup}${meta ? `<span class="edge-study-meta">${escapeHtml(meta)}</span>` : ''}</li>`;
         }).join('')
       : '<li><span class="edge-study-meta">No contributing study details were returned for this edge.</span></li>';
@@ -1300,6 +1308,8 @@
         <span class="edge-stat"><strong>${total.toLocaleString()}</strong> studies</span>
         ${sourceBreakdown ? `<span class="edge-stat">${escapeHtml(sourceBreakdown)}</span>` : ''}
       </div>
+      ${supportBreakdown ? `<p class="study-sample-note">${escapeHtml(supportBreakdown)}</p>
+        <p class="study-sample-note">Search matches were returned for the selected state. Mapped states have an independent mapping to that state or a more specific state within it. These connections do not establish treatment effectiveness. Source limits can omit studies.</p>` : ''}
       <div class="study-heading"><h3>Contributing studies</h3><span>${shownStatus}</span></div>
       <ul class="edge-study-list">${studyRows}</ul>
       ${detailNote}`;

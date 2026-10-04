@@ -471,13 +471,8 @@ def test_who_stored_projection_keeps_explicit_roles_strict_and_mixed_roots():
     mixed_query = _query(state=[STUNTING], outcome=[WASTING])
     assert projected_states(condition_query, [STUNTING]) == {STUNTING}
     assert projected_states(outcome_query, [WASTING]) == {WASTING}
-    assert graph_v2._graph_state_roots(mixed_query) == tuple(
-        sorted((STUNTING, WASTING))
-    )
-    assert projected_states(mixed_query, [STUNTING, WASTING]) == {
-        STUNTING,
-        WASTING,
-    }
+    assert graph_v2._graph_state_roots(mixed_query) == (STUNTING,)
+    assert projected_states(mixed_query, [STUNTING, WASTING]) == {STUNTING}
 
 
 def test_stored_region_and_state_any_all_are_in_the_single_capped_selector():
@@ -567,7 +562,7 @@ def test_stored_detail_uses_the_hydrated_region_index_from_execution(monkeypatch
     payload = asyncio.run(
         graph_v2.execute_edge_details(
             _query(
-                state=[STUNTING],
+                condition=[STUNTING],
                 intervention=[INHERITED_NUTRITION],
                 region=[str(group)],
             ),
@@ -635,7 +630,7 @@ def test_stored_detail_propagates_101st_source_limit_uncertainty(monkeypatch):
     monkeypatch.setattr(graph_v2, "_stored_direct_maps", direct_maps)
     payload = asyncio.run(
         graph_v2.execute_edge_details(
-            _query(state=[STUNTING], intervention=[INHERITED_NUTRITION]),
+            _query(condition=[STUNTING], intervention=[INHERITED_NUTRITION]),
             STUNTING,
             INHERITED_NUTRITION,
             0,

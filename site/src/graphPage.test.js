@@ -339,6 +339,31 @@ describe("standalone Graph query controls", () => {
     }
   });
 
+  it("shows disjoint support counts and each study's basis without claiming effectiveness", async () => {
+    const payload = graphPayload();
+    payload.edges[0].support_counts = { search_only: 1, mapping_only: 0, both: 1 };
+    payload.edges[0].studies[0].support_provenance = {
+      category: 'both',
+      direct_state_mappings: [{ uri: stateUri, role: 'outcome', root_relationship: 'descendant' }],
+    };
+    const { dom, scriptErrors } = openGraphPage({ payload });
+    try {
+      await waitFor(() => dom.window.document.querySelector('.edge-hit'));
+      dom.window.document.querySelector('.edge-hit').dispatchEvent(
+        new dom.window.KeyboardEvent('keydown', { bubbles: true, cancelable: true, key: 'Enter' }),
+      );
+      const panel = dom.window.document.querySelector('#edge-inspector');
+      expect(panel.textContent).toContain('Search match: 1 · Mapped state: 0 · Both: 1');
+      expect(panel.textContent).toContain('Mapped to a more specific state within this selection');
+      expect(panel.textContent).toContain('do not establish treatment effectiveness');
+      expect(panel.textContent).toContain('Source limits can omit studies');
+      await waitFor(() => panel.getAttribute('aria-busy') === 'false');
+      expect(scriptErrors).toEqual([]);
+    } finally {
+      dom.window.close();
+    }
+  });
+
   it("announces copy failure and never links or copies an untrusted node id", async () => {
     const invalidPayload = {
       nodes: [{ id: "javascript:alert(1)", label: "Untrusted", class: "State", studyCount: 0 }],

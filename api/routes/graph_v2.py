@@ -21,7 +21,7 @@ import os
 from pathlib import Path
 import sys
 import time
-from typing import Any, Literal, Mapping, Sequence
+from typing import Any, Iterable, Literal, Mapping, Sequence
 
 from fastapi import APIRouter, HTTPException, Query, Request
 import httpx
@@ -69,6 +69,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 SCHEMA_VERSION = "graph-v2"
+PROJECTION_VERSION = "selected-root-provenance-2"
 MAX_STATE_NODES = 100
 # One-window source compatibility for callers importing the old constant.
 MAX_CONDITION_NODES = MAX_STATE_NODES
@@ -288,6 +289,7 @@ def stable_evidence_edge_id(state: str, intervention: str) -> str:
 def _study_membership_digest(
     source_id: str,
     study_ids: Sequence[str],
+    provenance: Mapping[str, Any] | None = None,
 ) -> str:
     """Hash one source's canonical support identities deterministically."""
     membership = {
@@ -300,6 +302,7 @@ def _study_membership_digest(
             "v": 1,
             "source": source_id,
             "studies": sorted(membership),
+            **({"provenance": provenance} if provenance is not None else {}),
         },
         sort_keys=True,
         separators=(",", ":"),
@@ -308,7 +311,9 @@ def _study_membership_digest(
 
 
 def _graph_state_roots(query: CanonicalQuery) -> tuple[str, ...]:
-    """Canonical State roots, retaining strict role-filter roots for display."""
+    """Display selected canonical roots, or strict-role roots when absent."""
+    if query.values["state"]:
+        return query.values["state"]
     return tuple(
         sorted(
             set(query.values["state"])
@@ -549,8 +554,9 @@ LIMIT {UNIQUE_STUDY_LIMIT + 1}
 def stored_raw_attribution_query(
     source_id: str,
     study_uris: Sequence[str],
+    query: CanonicalQuery | None = None,
 ) -> str:
-    """Fetch only native raw fields for an already bounded study window."""
+    """Hydrate raw fields and exact root membership for a bounded window."""
     if not study_uris:
         raise ValueError("stored raw attribution requires at least one study")
     graph_uri = _source_graph(source_id)
@@ -577,14 +583,24 @@ def stored_raw_attribution_query(
     }}"""
         ]
     )
+    if query is not None and query.values["state"]:
+        roots = " ".join(v1.sparql_iri(root) for root in query.values["state"])
+        for role in ("condition", "outcome"):
+            branches += f"""
+    UNION {{
+      VALUES ?selectedRoot {{ {roots} }}
+      ?study <{v1.UE}matches{role.title()}> ?selectedRoot .
+      BIND("selected-root" AS ?rowKind)
+      BIND("{role}" AS ?role)
+    }}"""
     return f"""
-SELECT DISTINCT ?study ?rowKind ?role ?rawText WHERE {{
+SELECT DISTINCT ?study ?rowKind ?role ?rawText ?selectedRoot WHERE {{
   VALUES ?study {{ {values} }}
   GRAPH <{graph_uri}> {{
     {branches}
   }}
 }}
-ORDER BY STR(?study) ?rowKind ?role STR(?rawText)
+ORDER BY STR(?study) ?rowKind ?role COALESCE(STR(?rawText), "") COALESCE(STR(?selectedRoot), "")
 """
 
 
@@ -637,35 +653,47 @@ def _stored_direct_pair_pattern(
     graph_uri = _source_graph(source_id)
     config = _DIRECT_CROSSWALKS[source_id]
     state_branches: list[str] = []
-    for role in _stored_projection_roles(query):
-        predicate, prefix = config[role]
-        retained_values = _candidate_values("state", retained_state_uris)
-        roots = tuple(
-            sorted(
-                set(query.values["state"]).union(query.values[role])
-            )
-        )
-        root_scope = ""
-        if roots:
-            root_values = " ".join(v1.sparql_iri(uri) for uri in roots)
-            root_variable = f"{role}StateRoot"
-            root_scope = f"""
-    VALUES ?{root_variable} {{ {root_values} }}
-    ?state skos:broader* ?{root_variable} ."""
+    if query.values["state"]:
+        roots = sorted(set(query.values["state"]).intersection(retained_state_uris))
         state_branches.append(f"""{{
-{retained_values}
+{_candidate_values("state", roots) if roots else "FILTER(false)"}
   GRAPH <{graph_uri}> {{
-    ?study {_source_predicate(predicate)} ?stateRaw .
+    ?study (ue:matchesCondition|ue:matchesOutcome) ?state .
   }}
   GRAPH <{v1.TAXONOMY_GRAPH_URI}> {{
-    ?stateEntry ue:rawText ?stateCrosswalkRaw ;
-      (skos:exactMatch|skos:closeMatch) ?state .
     ?state a ue:State ; skos:prefLabel ?stateLabel .
-{root_scope}
   }}
-  FILTER(STRSTARTS(STR(?stateEntry), "{prefix}"))
-  FILTER({_direct_text_filter(source_id, '?stateRaw', '?stateCrosswalkRaw')})
 }}""")
+    else:
+        for role in _stored_projection_roles(query):
+            predicate, prefix = config[role]
+            retained_values = _candidate_values("state", retained_state_uris)
+            roots = tuple(
+                sorted(
+                    set(query.values["state"]).union(query.values[role])
+                )
+            )
+            root_scope = ""
+            if roots:
+                root_values = " ".join(v1.sparql_iri(uri) for uri in roots)
+                root_variable = f"{role}StateRoot"
+                root_scope = f"""
+        VALUES ?{root_variable} {{ {root_values} }}
+        ?state skos:broader* ?{root_variable} ."""
+            state_branches.append(f"""{{
+    {retained_values}
+      GRAPH <{graph_uri}> {{
+        ?study {_source_predicate(predicate)} ?stateRaw .
+      }}
+      GRAPH <{v1.TAXONOMY_GRAPH_URI}> {{
+        ?stateEntry ue:rawText ?stateCrosswalkRaw ;
+          (skos:exactMatch|skos:closeMatch) ?state .
+        ?state a ue:State ; skos:prefLabel ?stateLabel .
+    {root_scope}
+      }}
+      FILTER(STRSTARTS(STR(?stateEntry), "{prefix}"))
+      FILTER({_direct_text_filter(source_id, '?stateRaw', '?stateCrosswalkRaw')})
+    }}""")
     intervention_predicate, intervention_prefix = config["intervention"]
     return f"""
 {{ {(' UNION '.join(state_branches))} }}
@@ -784,6 +812,97 @@ async def _stored_direct_maps(
     return dict(zip(roles, state_maps)), intervention_map
 
 
+class _StoredSupport(dict):
+    """Edge membership and its per-study evidence basis from one bounded replay."""
+
+    def __init__(
+        self,
+        values: Mapping[tuple[str, str], tuple[str, ...]],
+        provenance: Mapping[tuple[str, str], Mapping[str, dict[str, Any]]],
+    ) -> None:
+        super().__init__(values)
+        self.provenance = provenance
+
+
+def _support_record(
+    root: str,
+    matches: Sequence[Mapping[str, Any]] = (),
+    mappings: Sequence[Mapping[str, Any]] = (),
+) -> dict[str, Any]:
+    """Canonicalize one study's retrieval and independent mapping evidence."""
+    retrieval = sorted(
+        {
+            json.dumps(item, sort_keys=True)
+            for item in matches
+            if item.get("selected_root") == root
+        }
+    )
+    mapped = []
+    for mapping in mappings:
+        uri = mapping.get("uri")
+        if not uri:
+            continue
+        relationship = (
+            "exact" if uri == root
+            else "descendant" if root in _state_ancestor_uris(uri)
+            else None
+        )
+        item = {**mapping, "root_relationship": relationship}
+        if item not in mapped:
+            mapped.append(item)
+    mapped.sort(key=lambda item: (item["uri"], item.get("role") or ""))
+    retrieval = [json.loads(item) for item in retrieval]
+    search = any(item.get("retrieval_basis") == "search" for item in retrieval)
+    mapping = (
+        any(item.get("retrieval_basis") == "mapping" for item in retrieval)
+        or any(item["root_relationship"] for item in mapped)
+    )
+    return {
+        "selected_root": root,
+        "category": "both" if search and mapping else "search_only" if search else "mapping_only",
+        "query_matches": retrieval,
+        "direct_state_mappings": mapped,
+    }
+
+
+def _merge_support(
+    left: dict[str, Any] | None, right: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if not right:
+        return left
+    if not left:
+        return right
+    return _support_record(
+        right["selected_root"],
+        left["query_matches"] + right["query_matches"],
+        left["direct_state_mappings"] + right["direct_state_mappings"],
+    )
+
+
+def _live_support(row: Mapping[str, Any], root: str) -> dict[str, Any]:
+    mappings = row.get("direct_state_mappings")
+    if mappings is None:
+        # Compatibility for direct-coordinate producers without enriched metadata.
+        mappings = []
+        if row.get("condition_concept_uri"):
+            mappings.append({"uri": row["condition_concept_uri"], "role": "condition"})
+        for outcome in row.get("outcomes") or ():
+            if isinstance(outcome, Mapping) and outcome.get("state_concept_uri"):
+                mappings.append({"uri": outcome["state_concept_uri"], "role": "outcome"})
+        if row.get("state_concept_uri") and not any(
+            item["uri"] == row["state_concept_uri"] for item in mappings
+        ):
+            mappings.append({"uri": row["state_concept_uri"], "role": None})
+    return _support_record(root, row.get("query_matches") or (), mappings)
+
+
+def _support_counts(supports: Iterable[Mapping[str, Any]]) -> dict[str, int]:
+    counts = {"search_only": 0, "mapping_only": 0, "both": 0}
+    for support in supports:
+        counts[support["category"]] += 1
+    return counts
+
+
 async def _load_stored_support(
     source_id: str,
     query: CanonicalQuery,
@@ -794,10 +913,10 @@ async def _load_stored_support(
     budget: SourceBudget | None = None,
 ) -> tuple[
     tuple[str, ...],
-    dict[tuple[str, str], tuple[str, ...]],
+    _StoredSupport,
     bool,
 ]:
-    """Select, hydrate, and directly attribute one stored-source window."""
+    """Select and hydrate one stored window, preserving its support provenance."""
     source_budget = budget or SourceBudget(max_requests=2, seconds=5.0)
     async with _bounded_slot(v1._LOCAL_QUERY_SEMAPHORE, source_budget):
         selection_rows = await _sparql_select(
@@ -815,7 +934,7 @@ async def _load_stored_support(
         selected_studies = selected_window[:UNIQUE_STUDY_LIMIT]
         raw_rows = (
             await _sparql_select(
-                stored_raw_attribution_query(source_id, selected_studies),
+                stored_raw_attribution_query(source_id, selected_studies, query),
                 source_budget,
             )
             if selected_studies
@@ -832,6 +951,8 @@ async def _load_stored_support(
     restrict_interventions = bool(query.values["intervention"])
     selected_set = set(selected_studies)
     states_by_study: dict[str, set[str]] = defaultdict(set)
+    matches_by_study = defaultdict(list)
+    mappings_by_study = defaultdict(list)
     interventions_by_study: dict[str, set[str]] = defaultdict(set)
     for row in raw_rows:
         study_uri = str(row.get("study") or "")
@@ -839,10 +960,21 @@ async def _load_stored_support(
             continue
         row_kind = str(row.get("rowKind") or "")
         role = str(row.get("role") or "")
+        if row_kind == "selected-root" and row.get("selectedRoot") in query.values["state"]:
+            matches_by_study[study_uri].append({
+                "selected_root": row["selectedRoot"],
+                "retrieval_basis": "mapping",
+                "retrieval_role": role,
+            })
+            continue
         raw_text = row.get("rawText")
         if raw_text is None:
             continue
         if row_kind == _STORED_STATE_RAW_ROW and role in state_maps:
+            mappings_by_study[study_uri].extend(
+                {"uri": uri, "role": role}
+                for uri in _mapped_source_state_uris(source_id, state_maps[role], raw_text)
+            )
             states_by_study[study_uri].update(
                 uri
                 for uri in _mapped_source_state_uris(
@@ -861,15 +993,22 @@ async def _load_stored_support(
 
     support: dict[tuple[str, str], set[str]] = defaultdict(set)
     for study_uri in selected_studies:
-        for state_uri in states_by_study[study_uri]:
+        coordinates = (
+            {match["selected_root"] for match in matches_by_study[study_uri]}
+            if query.values["state"] else states_by_study[study_uri]
+        )
+        for state_uri in coordinates:
             for intervention_uri in interventions_by_study[study_uri]:
                 support[(state_uri, intervention_uri)].add(study_uri)
     return (
         selected_studies,
-        {
-            coordinate: tuple(sorted(studies))
-            for coordinate, studies in support.items()
-        },
+        _StoredSupport(
+            {coordinate: tuple(sorted(studies)) for coordinate, studies in support.items()},
+            {coordinate: {
+                study: _support_record(coordinate[0], matches_by_study[study], mappings_by_study[study])
+                for study in studies
+            } for coordinate, studies in support.items()},
+        ),
         len(selected_window) > UNIQUE_STUDY_LIMIT,
     )
 
@@ -908,6 +1047,7 @@ async def load_local_groups(
             ),
             "weight": str(len(study_uris)),
             "studyUris": GROUP_SEPARATOR.join(study_uris),
+            "support_provenance": support.provenance[(state_uri, intervention_uri)],
         }
         for (state_uri, intervention_uri), study_uris in ranked[
             :MAX_GROUPED_ROWS
@@ -1020,6 +1160,7 @@ def _edge_record(state: str, intervention: str, intervention_label: str) -> dict
         "target": state,
         "label": intervention_label,
         "study_keys": set(),
+        "support_provenance": {},
         "source_studies": defaultdict(set),
         "design_counts": defaultdict(int),
     }
@@ -1037,6 +1178,13 @@ def _live_edge_coordinates(
         return ()
     if query.values["intervention"] and intervention not in intervention_ids:
         return ()
+    if query.values["state"]:
+        return tuple(sorted({
+            (match["selected_root"], intervention)
+            for match in row.get("query_matches") or ()
+            if match.get("selected_root") in query.values["state"]
+            and match["selected_root"] in state_ids
+        }))
     states: list[str] = []
 
     def append_state(value: object) -> None:
@@ -1130,6 +1278,13 @@ def build_graph_v2_payload(
                 for study_uri in str(row.get("studyUris") or "").split(GROUP_SEPARATOR)
                 if study_uri
             }
+            for key in studies:
+                provenance = (row.get("support_provenance") or {}).get(key[1])
+                if provenance is None:
+                    provenance = _support_record(state, (), [{"uri": state, "role": None}])
+                record["support_provenance"][key] = _merge_support(
+                    record["support_provenance"].get(key), provenance
+                )
             record["study_keys"].update(studies)
             record["source_studies"][source_id].update(studies)
             attributed_by_source[source_id].update(studies)
@@ -1152,8 +1307,7 @@ def build_graph_v2_payload(
                 continue
             for state, intervention in coordinates:
                 dedupe_key = (key, state, intervention)
-                if dedupe_key in seen_pairs:
-                    continue
+                duplicate = dedupe_key in seen_pairs
                 seen_pairs.add(dedupe_key)
                 # A row can contribute several condition/outcome coordinates.
                 # Its singular display label does not identify each coordinate.
@@ -1163,6 +1317,11 @@ def build_graph_v2_payload(
                     (state, intervention),
                     _edge_record(state, intervention, label),
                 )
+                record["support_provenance"][key] = _merge_support(
+                    record["support_provenance"].get(key), _live_support(row, state)
+                )
+                if duplicate:
+                    continue
                 intervention_labels[intervention] = label
                 record["study_keys"].add(key)
                 record["source_studies"][source_id].add(key)
@@ -1200,6 +1359,8 @@ def build_graph_v2_payload(
             source_id: _study_membership_digest(
                 source_id,
                 [study_id for _source_id, study_id in studies],
+                {study_id: record["support_provenance"][(source_id, study_id)]
+                 for _, study_id in studies} if query.values["state"] else None,
             )
             for source_id, studies in sorted(record["source_studies"].items())
         }
@@ -1218,6 +1379,7 @@ def build_graph_v2_payload(
                 "confidence": confidence_label(weighted_score),
                 "study_design_counts": dict(sorted(record["design_counts"].items())),
                 "source_counts": source_counts,
+                "support_counts": _support_counts(record["support_provenance"].values()),
                 _EDGE_MEMBERSHIP_DIGESTS: source_membership_digests,
             }
         )
@@ -1406,6 +1568,7 @@ def build_graph_v2_payload(
         "meta": {
             "api_version": "query-v2",
             "schemaVersion": SCHEMA_VERSION,
+            "projectionVersion": PROJECTION_VERSION,
             "returned_unique_studies": len(unique_studies),
             "limit_per_source_branch": 100,
             "truncated": graph_truncated,
@@ -1572,6 +1735,7 @@ def graph_cache_identity(
     return {
         **query.identity(),
         "schemaVersion": SCHEMA_VERSION,
+        "projectionVersion": PROJECTION_VERSION,
         "caps": {
             "states": MAX_STATE_NODES,
             "interventions": MAX_INTERVENTION_NODES,
@@ -1654,6 +1818,7 @@ def detail_cache_identity(
         "kind": "edge-details",
         "query": query.identity(),
         "schemaVersion": SCHEMA_VERSION,
+        "projectionVersion": PROJECTION_VERSION,
         "edgeId": edge_id,
         "edgeState": condition_uri,
         "edgeIntervention": intervention_uri,
@@ -1685,6 +1850,7 @@ def _log_graph_observability(
     metadata = payload.get("metadata") or {}
     summary = {
         "schema_version": SCHEMA_VERSION,
+        "projection_version": PROJECTION_VERSION,
         "states": list(query.values["state"]),
         "conditions": list(query.values["condition"]),
         "outcomes": list(query.values["outcome"]),
@@ -1705,6 +1871,7 @@ def _log_graph_observability(
     for source_id, source in sorted((meta.get("sources") or {}).items()):
         source_log = {
             "schema_version": SCHEMA_VERSION,
+            "projection_version": PROJECTION_VERSION,
             "source": source_id,
             "source_duration_ms": round(float(timings.get(source_id) or 0.0), 3),
             "cache_status": cache_status,
@@ -1839,6 +2006,7 @@ def _detail_cursor_context(
 ) -> str:
     identity = {
         "schemaVersion": SCHEMA_VERSION,
+        "projectionVersion": PROJECTION_VERSION,
         "edgeId": edge_id,
         "taxonomyVersion": taxonomy_version,
         "datasetVersion": dataset_version,
@@ -1898,6 +2066,7 @@ def _encode_edge_detail_token(
     payload = {
         "v": 2,
         "schemaVersion": SCHEMA_VERSION,
+        "projectionVersion": PROJECTION_VERSION,
         "edgeId": str(edge.get("id") or ""),
         "state": str(edge.get("target") or ""),
         "intervention": str(edge.get("source") or ""),
@@ -1946,6 +2115,7 @@ def _decode_edge_detail_token(
         if (
             payload.get("v") != 2
             or payload.get("schemaVersion") != SCHEMA_VERSION
+            or payload.get("projectionVersion") != PROJECTION_VERSION
             or payload.get("edgeId") != edge_id
             or payload.get("state") != condition_uri
             or payload.get("intervention") != intervention_uri
@@ -2149,11 +2319,12 @@ async def _local_detail_rows(
                 "intervention_concept": None,
                 "intervention_concept_uri": intervention_uri,
                 "state_concept": None,
-                "state_concept_uri": condition_uri,
+                "state_concept_uri": None if query.values["state"] else condition_uri,
                 "country": row.get("country"),
                 "status": row.get("status"),
                 "year": v1.extract_study_year(row.get("date")),
                 "outcomes": [],
+                "support_provenance": support.provenance[(condition_uri, intervention_uri)][str(row["study"])],
             }
     results = list(results_by_id.values())
     return results, {
@@ -2244,7 +2415,7 @@ async def execute_edge_details(
             )
             if (condition_uri, intervention_uri) not in coordinates:
                 continue
-            filtered.append(dict(row))
+            filtered.append({**row, "support_provenance": _live_support(row, condition_uri)})
         filtered_meta = dict(meta)
         filtered_meta["returned_unique_studies"] = len(
             {study_key(row, source_id) for row in filtered}
@@ -2312,6 +2483,7 @@ async def execute_edge_details(
 
     merged: dict[tuple[str, str], dict[str, Any]] = {}
     population_membership_ids: dict[str, set[str]] = defaultdict(set)
+    support_ids = {}
     sources: dict[str, Mapping[str, Any]] = {}
     for source_id, task in tasks.items():
         if task in pending:
@@ -2342,8 +2514,13 @@ async def execute_edge_details(
                 support_id = str(row.get(_DETAIL_SUPPORT_ID) or key[1]).strip()
                 if support_id:
                     population_membership_ids[source_id].add(support_id)
+                    support_ids[key] = support_id
                 public_row = dict(row)
                 public_row.pop(_DETAIL_SUPPORT_ID, None)
+                if key in merged:
+                    public_row["support_provenance"] = _merge_support(
+                        merged[key].get("support_provenance"), public_row.get("support_provenance")
+                    )
                 merged[key] = public_row
 
     ordered = [merged[key] for key in sorted(merged)]
@@ -2369,6 +2546,8 @@ async def execute_edge_details(
         source_id: _study_membership_digest(
             source_id,
             sorted(population_membership_ids[source_id]),
+            {support_ids[key]: row["support_provenance"] for key, row in merged.items()
+             if key[0] == source_id} if query.values["state"] else None,
         )
         for source_id in active_source_ids
     }
@@ -2411,6 +2590,7 @@ async def execute_edge_details(
         "meta": {
             "api_version": "query-v2",
             "schemaVersion": SCHEMA_VERSION,
+            "projectionVersion": PROJECTION_VERSION,
             "edgeId": stable_evidence_edge_id(condition_uri, intervention_uri),
             "limit": limit,
             "returned": len(page),
@@ -2418,6 +2598,9 @@ async def execute_edge_details(
             "source_counts": dict(sorted(positive_source_counts.items())),
             "detail_population_source_counts": dict(
                 sorted(population_source_counts.items())
+            ),
+            "support_counts": _support_counts(
+                row["support_provenance"] for row in ordered if row.get("support_provenance")
             ),
             "source_counts_reconciled": source_counts_reconciled,
             "source_membership_reconciled": source_membership_reconciled,

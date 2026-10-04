@@ -12,7 +12,7 @@ import time
 from typing import Awaitable, Callable, Literal
 
 
-CACHE_NAMESPACE = "graph-v2-projection-1"
+CACHE_NAMESPACE = "graph-v2-projection-2"
 CacheStatus = Literal["hit", "miss", "coalesced", "bypass"]
 
 

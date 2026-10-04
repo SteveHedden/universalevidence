@@ -283,15 +283,12 @@ def test_graph_never_stamps_state_branches_without_direct_attribution(
         )
     )
 
-    if state_logic == "and":
-        assert rows == []
-        assert meta["returned_unique_studies"] == 0
-    else:
-        assert len(rows) == 1
-        assert all(not row.get("state_concept_uri") for row in rows)
-        assert all(not row.get("condition_concept_uri") for row in rows)
-        assert {row["intervention_concept_uri"] for row in rows} == {RUTF}
-        assert meta["returned_unique_studies"] == 1
+    assert len(rows) == 1
+    assert not rows[0].get("state_concept_uri")
+    assert not rows[0].get("condition_concept_uri")
+    assert {m["selected_root"] for m in rows[0]["query_matches"]} == {STUNTING, WASTING}
+    assert rows[0]["intervention_concept_uri"] == RUTF
+    assert meta["returned_unique_studies"] == 1
     assert meta["source_limit_reached"] is False
 
 
@@ -361,7 +358,7 @@ def test_graph_state_any_all_preserves_only_direct_branch_coordinates(
         (MALARIA, "outside-subtree"),
     ],
 )
-def test_graph_state_all_rejects_unsupported_ctgov_and_isrctn_branches(
+def test_graph_state_all_accepts_search_membership_without_stamping_mappings(
     source_id,
     unsupported_state,
     case_id,
@@ -405,15 +402,17 @@ def test_graph_state_all_rejects_unsupported_ctgov_and_isrctn_branches(
         )
     )
 
-    assert rows == []
+    assert {row["study_id"] for row in rows} == {study_id}
+    assert {m["selected_root"] for row in rows for m in row["query_matches"]} == {STUNTING, WASTING}
+    assert all(row.get("state_concept_uri") != WASTING for row in rows)
     assert meta["status"] == "included"
-    assert meta["returned_unique_studies"] == 0
+    assert meta["returned_unique_studies"] == 1
     assert meta["truncated"] is False
     assert meta["approximate"] is False
 
 
 @pytest.mark.parametrize("source_id", ["ctgov", "isrctn"])
-def test_graph_state_any_keeps_only_the_directly_supported_coordinate(source_id):
+def test_graph_state_any_keeps_search_membership_separate_from_direct_coordinates(source_id):
     source = "CT.gov" if source_id == "ctgov" else "ISRCTN"
     study_id = f"{source_id.upper()}-ONE-DIRECT"
     adapter = FakeAdapter(
@@ -452,9 +451,10 @@ def test_graph_state_any_keeps_only_the_directly_supported_coordinate(source_id)
         )
     )
 
-    assert len(rows) == 1
-    assert rows[0]["state_concept_uri"] == STUNTING
-    assert rows[0]["intervention_concept_uri"] == RUTF
+    assert len(rows) == 2
+    assert {row.get("state_concept_uri") for row in rows} == {STUNTING, None}
+    assert {m["selected_root"] for row in rows for m in row["query_matches"]} == {STUNTING, WASTING}
+    assert all(row["intervention_concept_uri"] == RUTF for row in rows)
     assert meta["returned_unique_studies"] == 1
 
 

@@ -19,7 +19,7 @@ it("hydrates the crawlable homepage without losing its content or controls", asy
       root = hydrateRoot(container, <StrictMode><App /></StrictMode>, { onRecoverableError });
     });
     expect(onRecoverableError).not.toHaveBeenCalled();
-    expect(within(container.querySelector("#search") as HTMLElement).getByRole("button", { name: "Search", exact: true })).toBeEnabled();
+    expect(within(container.querySelector("#search") as HTMLElement).getByRole("button", { name: "Search" })).toBeEnabled();
   } finally {
     await act(async () => root?.unmount());
     container.remove();

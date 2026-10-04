@@ -168,7 +168,7 @@ def _direct_state_intervention_taxonomy():
 def _direct_state_aggregate_payload():
     live_rows = _direct_state_live_rows()
     return graph_v2.build_graph_v2_payload(
-        query=_query(state=[ROOT], intervention=[INTERVENTION]),
+        query=_query(condition=[ROOT], outcome=[ROOT], intervention=[INTERVENTION]),
         condition_taxonomy=_direct_state_state_taxonomy(),
         intervention_taxonomy=_direct_state_intervention_taxonomy(),
         local_rows={"aea": [], "who-ictrp": []},
@@ -428,6 +428,7 @@ def test_stored_python_attribution_preserves_direct_multimaps_and_role_dedupe(
             }
             for role in ("condition", "outcome")
         ] + [
+            {"study": study, "rowKind": "selected-root", "selectedRoot": ROOT, "role": "condition"},
             {
                 "study": study,
                 "rowKind": graph_v2._STORED_INTERVENTION_RAW_ROW,
@@ -469,10 +470,11 @@ def test_stored_python_attribution_preserves_direct_multimaps_and_role_dedupe(
     assert selected == (study,)
     assert limited is False
     assert support == {
-        (CHILD, INTERVENTION): (study,),
-        (CHILD, RUTF): (study,),
+        (ROOT, INTERVENTION): (study,),
+        (ROOT, RUTF): (study,),
     }
-    assert all(state != ROOT for state, _intervention in support)
+    assert all(state == ROOT for state, _intervention in support)
+    assert support.provenance[(ROOT, RUTF)][study]["direct_state_mappings"][0]["uri"] == CHILD
 
 
 def test_stored_dynamic_state_projection_treats_empty_retained_forest_as_unrestricted(
@@ -886,7 +888,7 @@ def test_live_edge_coordinates_are_in_scope_deduplicated_and_role_strict():
         _query(state=[ROOT]),
         state_ids,
         intervention_ids,
-    ) == ((WASTING, INTERVENTION), (CHILD, INTERVENTION))
+    ) == ()  # Canonical selection requires actual branch provenance.
     assert graph_v2._live_edge_coordinates(
         row,
         _query(condition=[ROOT]),
@@ -921,7 +923,7 @@ def test_live_edge_coordinates_are_in_scope_deduplicated_and_role_strict():
         _query(state=[ROOT, MALARIA]),
         {ROOT, CHILD, WASTING, MALARIA},
         intervention_ids,
-    ) == ((MALARIA, INTERVENTION),)
+    ) == ()  # Direct mappings alone do not establish selected-branch membership.
 
 
 def test_strict_outcome_accepts_direct_top_level_multimap_projection():
@@ -1712,7 +1714,7 @@ def test_direct_live_edge_token_and_paginated_details_reconcile(monkeypatch):
     dataset_version = "b" * 64
     aggregate = _direct_state_aggregate_payload()
     live_rows = _direct_state_live_rows()
-    query = _query(state=[ROOT], intervention=[INTERVENTION])
+    query = _query(condition=[ROOT], outcome=[ROOT], intervention=[INTERVENTION])
     expected_edge = next(
         edge
         for edge in aggregate["edges"]
@@ -1755,7 +1757,7 @@ def test_direct_live_edge_token_and_paginated_details_reconcile(monkeypatch):
     )
 
     client = TestClient(api_main.app)
-    query_params = {"state": ROOT, "intervention": INTERVENTION}
+    query_params = {"condition": ROOT, "outcome": ROOT, "intervention": INTERVENTION}
     graph_response = client.get("/graph/v2", params=query_params)
     edge = next(
         item
@@ -2026,7 +2028,7 @@ def test_edge_detail_rejects_same_count_membership_drift_between_pages(
     )
 
     client = TestClient(api_main.app)
-    query_params = {"state": ROOT, "intervention": INTERVENTION}
+    query_params = {"condition": ROOT, "intervention": INTERVENTION}
     graph_response = client.get("/graph/v2", params=query_params)
     edge = graph_response.json()["edges"][0]
     token = edge["detailToken"]
@@ -2345,8 +2347,8 @@ def test_edge_detail_deadline_reaps_pending_sources_and_is_not_cacheable(
         lambda: {"ctgov": "ctgov"},
     )
     query = graph_v2._graph_query(
-        state=[ROOT],
-        condition=[],
+        state=[],
+        condition=[ROOT],
         intervention=[INTERVENTION],
         outcome=[],
         region=[],
@@ -2473,8 +2475,8 @@ def test_edge_detail_cursor_does_not_mask_population_count_mismatch(
         lambda: {"ctgov": "ctgov"},
     )
     query = graph_v2._graph_query(
-        state=[ROOT],
-        condition=[],
+        state=[],
+        condition=[ROOT],
         intervention=[INTERVENTION],
         outcome=[],
         region=[],
