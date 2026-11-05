@@ -5,9 +5,9 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt requirements-production.lock ./
 COPY scripts/generate_dependency_notices.py /tmp/generate_dependency_notices.py
-RUN pip install --no-cache-dir -r requirements.txt && \
+RUN pip install --no-cache-dir -r requirements-production.lock && \
     python /tmp/generate_dependency_notices.py --output /app/third-party/python-notices.txt
 
 COPY . .

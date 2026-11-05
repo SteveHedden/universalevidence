@@ -23,7 +23,7 @@ except ModuleNotFoundError:
     from scripts.query_runtime import REQUEST_DEADLINE, BACKGROUND_TASKS, bounded, observe, stage
 
 
-CACHE_NAMESPACE = "query-v2-envelope-1"
+CACHE_NAMESPACE = "query-v2-envelope-5-indicator-namespace"
 
 
 @dataclass
@@ -56,6 +56,7 @@ class QueryV2Cache:
 
     @staticmethod
     def canonical_key(query: CanonicalQuery) -> str:
+        from scripts.evidence_enrichment import version as enrichment_version
         identity = {
             **query.identity(),
             # The cache is process-local and the deployment procedure restarts
@@ -65,6 +66,7 @@ class QueryV2Cache:
             "taxonomy_version": os.getenv(
                 "UE_TAXONOMY_VERSION", "process-local-fuseki"
             ),
+            "enrichment_version": enrichment_version(),
             "dataset_version": os.getenv(
                 "UE_DATASET_VERSION", "process-local-fuseki"
             ),

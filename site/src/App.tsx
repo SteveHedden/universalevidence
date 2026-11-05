@@ -1,3 +1,4 @@
+import { initialSearchAxes } from "./searchHandoff";
 import { useEffect, useState } from "react";
 
 import { getApiHealth } from "./api/client";
@@ -44,14 +45,10 @@ export function buildEvidenceGraphPath(
 
 export function App() {
   const [health, setHealth] = useState<ApiHealth>({ ok: false, status: "checking" });
-  const [selectedAxes, setSelectedAxes] = useState<SelectedAxes>({
-    state: { uri: "https://universalevidence.com/vocab/states/Malaria", label: "Malaria" },
-  });
+  const [selectedAxes, setSelectedAxes] = useState<SelectedAxes>(() => initialSearchAxes(typeof window === "undefined" ? "" : window.location.search));
   const [regionText, setRegionText] = useState("");
   const [graphHandoff, setGraphHandoff] = useState<GraphHandoffState>({
-    chips: {
-      state: [{ uri: "https://universalevidence.com/vocab/states/Malaria", label: "Malaria" }],
-    },
+    chips: Object.fromEntries(Object.entries(initialSearchAxes(typeof window === "undefined" ? "" : window.location.search)).map(([axis, term]) => [axis, [term]])),
     logic: {},
     regionText: "",
   });
@@ -83,7 +80,7 @@ export function App() {
   return (
     <main className="app-shell">
       <header className="app-header">
-        <div className="brand-lockup">
+        <a className="brand-lockup" href="/" aria-label="Universal Evidence home" style={{ color: "inherit", textDecoration: "none" }}>
           <svg className="brand-mark" viewBox="44 16 112 112" aria-hidden="true" focusable="false">
             <defs>
               <clipPath id="logo-clip">
@@ -100,9 +97,9 @@ export function App() {
           </svg>
           <div>
             <h1>Universal Evidence</h1>
-            <p className="tagline">what was tried and what happened</p>
+            <p className="tagline">Know what’s been done. Decide what’s next.</p>
           </div>
-        </div>
+        </a>
         <span
           className={health.ok ? "api-dot api-dot-ok" : "api-dot"}
           title={health.ok ? `API connected — ${health.title ?? health.status}` : `API unavailable — ${health.status}`}
@@ -121,11 +118,6 @@ export function App() {
           <span aria-hidden="true">→</span>
         </a>
       </div>
-
-      <section className="home-introduction" aria-labelledby="home-purpose">
-        <h2 id="home-purpose">Search research evidence for global development</h2>
-        <p>Universal Evidence helps people designing, funding, and delivering development programs find relevant research. Search across four study registries to discover which interventions have been studied, for which conditions, and where. Then follow the results to the original source.</p>
-      </section>
 
       <div className="view-tabs-wrap">
       <nav className="view-tabs" aria-label="Explorer views">
@@ -151,12 +143,6 @@ export function App() {
         />
       </section>
 
-      <section className="home-about" aria-labelledby="home-coverage">
-        <h2 id="home-coverage">Research across four registries</h2>
-        <p>Find study records from ClinicalTrials.gov, the AEA RCT Registry, ISRCTN, and WHO ICTRP using shared terms for conditions, interventions, and places.</p>
-        <p>A study registration shows what researchers planned or evaluated. It does not, by itself, establish that an intervention worked. Coverage varies by source, and results may be incomplete.</p>
-        <p>Explore the vocabulary: <a href="/vocab/states/Malaria">Malaria</a>, <a href="/vocab/states/Malnutrition">Malnutrition</a>, or <a href="/vocab/states/AnxietyDisorders">Anxiety disorders</a>. <a href="/how-to-use-universal-evidence.html">Learn how to search and interpret results.</a></p>
-      </section>
     </main>
   );
 }

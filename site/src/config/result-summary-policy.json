@@ -1,0 +1,128 @@
+{
+  "version": "reviewed-intervention-summary-v1",
+  "entries": [
+    {
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-charts-col2",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+      "unit": "SD",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null
+    },
+    {
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-charts-col6",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+      "unit": "prevalence ratio",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null
+    },
+    {
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-combined-col2",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+      "unit": "SD",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null
+    },
+    {
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-combined-col6",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+      "unit": "prevalence ratio",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null
+    },
+    {
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-sq-lns-col2",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+      "unit": "SD",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null
+    },
+    {
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-sq-lns-col6",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+      "unit": "prevalence ratio",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null
+    },
+    {
+      "study": "https://universalevidence.com/studies/ctgov/NCT00659061",
+      "measurement": null,
+      "selector": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/6/derived/0",
+      "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+      "unit": "percentage points",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/MicronutrientSupplementation"
+      ],
+      "comparator": [],
+      "background": [
+        "https://universalevidence.com/vocab/interventions/NutritionEducation"
+      ],
+      "pValueSelector": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/6/analyses/1"
+    }
+  ],
+  "pooling": false,
+  "alpha": 0.05,
+  "transforms": {
+    "prevalence ratio": {
+      "factor": 100,
+      "offset": -100,
+      "unit": "% relative change"
+    },
+    "SD": {
+      "factor": 1,
+      "offset": 0,
+      "unit": "SD"
+    },
+    "percentage points": {
+      "factor": 1,
+      "offset": 0,
+      "unit": "percentage points"
+    }
+  },
+  "layers": {
+    "eleven-study-semantic.ttl": "83be7e5018445bf0df8700cc05df62b7ce2d8ff9a15781918f2eb7d5e5e11229",
+    "result-interpretation.ttl": "a9db1f5f494ffd961baef30286ec6aa9e3bf98c9d0b4c0722f251e7347467744",
+    "aggregation-rules.ttl": "a4700f9e8e87cab991c2d9347b7f756ffaaf7b5923f0f2f9e73007f44ef318a2"
+  }
+}

@@ -1,0 +1,270 @@
+[
+  {
+    "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-combined-col2",
+    "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+    "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+    "indicator_label": "Height-for-age z-score",
+    "value": "0.07",
+    "unit": "SD",
+    "comparison": {
+      "comparator_concepts": [],
+      "id": "combined-vs-control-col2",
+      "intervention": "Growth chart plus same daily SQ-LNS regimen",
+      "intervention_concepts": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "kind": "between-groups",
+      "quantity": "SD; fully adjusted: Table1 covariates, baseline HAZ and district",
+      "reference": "No assigned intervention control",
+      "taxonomy_rationale": "Map only components in the assigned arm; combined arm is a bundle, not isolated component effects. Control receives no assigned intervention."
+    },
+    "timing": {
+      "reference_point": "Intervention implementation 2021\u20132023",
+      "reported": "After 18 months of intervention; endline 27 June\u201313 September 2023"
+    },
+    "uncertainty": {
+      "kind": "confidence-interval",
+      "level": 95,
+      "lower": -0.07,
+      "upper": 0.22
+    },
+    "summary_mapping": {
+      "selected": true,
+      "effect_multiplier": 1,
+      "estimand": "pairwise",
+      "model_context": "",
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-combined-col2",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+      "unit": "SD",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null,
+      "contrast_id": "https://universalevidence.com/mapping-rules/results/readiness-AEARCTR-0014624/combined-col2/contrast",
+      "package": true,
+      "group_labels": [
+        "Growth chart with feeding messages plus SQ-LNS",
+        "No assigned intervention"
+      ]
+    },
+    "citations": [
+      {
+        "url": "https://gh.bmj.com/content/9/8/e015438",
+        "citation": "Fink G et al. The impact of home-installed growth charts and small-quantity lipid-based nutrient supplements (SQ-LNS) on child growth in Zambia: a four-arm parallel open-label cluster randomised controlled trial. BMJ Global Health 2024;9:e015438."
+      }
+    ],
+    "clear_direction": false,
+    "direction_sign": 1,
+    "intervention_labels": {
+      "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion": "Child growth monitoring and promotion",
+      "https://universalevidence.com/vocab/interventions/NutritionEducation": "Nutrition education",
+      "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation": "Oral nutritional supplementation"
+    }
+  },
+  {
+    "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-combined-col6",
+    "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+    "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+    "indicator_label": "SDG 2.2.1 under-five stunting prevalence",
+    "value": "0.91",
+    "unit": "prevalence ratio",
+    "comparison": {
+      "comparator_concepts": [],
+      "id": "combined-vs-control-col6",
+      "intervention": "Growth chart plus same daily SQ-LNS regimen",
+      "intervention_concepts": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "kind": "between-groups",
+      "quantity": "prevalence ratio; fully adjusted: Table1 covariates, baseline HAZ and district",
+      "reference": "No assigned intervention control",
+      "taxonomy_rationale": "Map only components in the assigned arm; combined arm is a bundle, not isolated component effects. Control receives no assigned intervention."
+    },
+    "timing": {
+      "reference_point": "Intervention implementation 2021\u20132023",
+      "reported": "After 18 months of intervention; endline 27 June\u201313 September 2023"
+    },
+    "uncertainty": {
+      "kind": "confidence-interval",
+      "level": 95,
+      "lower": 0.81,
+      "upper": 1.03
+    },
+    "summary_mapping": {
+      "selected": true,
+      "effect_multiplier": 1,
+      "estimand": "pairwise",
+      "model_context": "",
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-combined-col6",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+      "unit": "prevalence ratio",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion",
+        "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null,
+      "contrast_id": "https://universalevidence.com/mapping-rules/results/readiness-AEARCTR-0014624/combined-col6/contrast",
+      "package": true,
+      "group_labels": [
+        "Growth chart with feeding messages plus SQ-LNS",
+        "No assigned intervention"
+      ]
+    },
+    "citations": [
+      {
+        "url": "https://gh.bmj.com/content/9/8/e015438",
+        "citation": "Fink G et al. The impact of home-installed growth charts and small-quantity lipid-based nutrient supplements (SQ-LNS) on child growth in Zambia: a four-arm parallel open-label cluster randomised controlled trial. BMJ Global Health 2024;9:e015438."
+      }
+    ],
+    "clear_direction": false,
+    "direction_sign": -1,
+    "intervention_labels": {
+      "https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion": "Child growth monitoring and promotion",
+      "https://universalevidence.com/vocab/interventions/NutritionEducation": "Nutrition education",
+      "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation": "Oral nutritional supplementation"
+    }
+  },
+  {
+    "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-sq-lns-col2",
+    "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+    "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+    "indicator_label": "Height-for-age z-score",
+    "value": "0.21",
+    "unit": "SD",
+    "comparison": {
+      "comparator_concepts": [],
+      "id": "sq-lns-vs-control-col2",
+      "intervention": "Nutributter+ 20 g SQ-LNS daily; 30 sachets monthly",
+      "intervention_concepts": [
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "kind": "between-groups",
+      "quantity": "SD; fully adjusted: Table1 covariates, baseline HAZ and district",
+      "reference": "No assigned intervention control",
+      "taxonomy_rationale": "Map only components in the assigned arm; combined arm is a bundle, not isolated component effects. Control receives no assigned intervention."
+    },
+    "timing": {
+      "reference_point": "Intervention implementation 2021\u20132023",
+      "reported": "After 18 months of intervention; endline 27 June\u201313 September 2023"
+    },
+    "uncertainty": {
+      "kind": "confidence-interval",
+      "level": 95,
+      "lower": 0.06,
+      "upper": 0.36
+    },
+    "summary_mapping": {
+      "selected": true,
+      "effect_multiplier": 1,
+      "estimand": "pairwise",
+      "model_context": "",
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-sq-lns-col2",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+      "unit": "SD",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null,
+      "contrast_id": "https://universalevidence.com/mapping-rules/results/readiness-AEARCTR-0014624/sq-lns-col2/contrast",
+      "package": false,
+      "group_labels": [
+        "SQ-LNS supplementation",
+        "No assigned intervention"
+      ]
+    },
+    "citations": [
+      {
+        "url": "https://gh.bmj.com/content/9/8/e015438",
+        "citation": "Fink G et al. The impact of home-installed growth charts and small-quantity lipid-based nutrient supplements (SQ-LNS) on child growth in Zambia: a four-arm parallel open-label cluster randomised controlled trial. BMJ Global Health 2024;9:e015438."
+      }
+    ],
+    "clear_direction": true,
+    "direction_sign": 1,
+    "intervention_labels": {
+      "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation": "Oral nutritional supplementation"
+    }
+  },
+  {
+    "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-sq-lns-col6",
+    "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+    "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+    "indicator_label": "SDG 2.2.1 under-five stunting prevalence",
+    "value": "0.83",
+    "unit": "prevalence ratio",
+    "comparison": {
+      "comparator_concepts": [],
+      "id": "sq-lns-vs-control-col6",
+      "intervention": "Nutributter+ 20 g SQ-LNS daily; 30 sachets monthly",
+      "intervention_concepts": [
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "kind": "between-groups",
+      "quantity": "prevalence ratio; fully adjusted: Table1 covariates, baseline HAZ and district",
+      "reference": "No assigned intervention control",
+      "taxonomy_rationale": "Map only components in the assigned arm; combined arm is a bundle, not isolated component effects. Control receives no assigned intervention."
+    },
+    "timing": {
+      "reference_point": "Intervention implementation 2021\u20132023",
+      "reported": "After 18 months of intervention; endline 27 June\u201313 September 2023"
+    },
+    "uncertainty": {
+      "kind": "confidence-interval",
+      "level": 95,
+      "lower": 0.73,
+      "upper": 0.94
+    },
+    "summary_mapping": {
+      "selected": true,
+      "effect_multiplier": 1,
+      "estimand": "pairwise",
+      "model_context": "",
+      "study": "https://universalevidence.com/studies/aea/AEARCTR-0014624",
+      "measurement": "https://universalevidence.com/studies/aea/AEARCTR-0014624/findings/bmj2024-table2-sq-lns-col6",
+      "selector": null,
+      "indicator": "https://universalevidence.com/vocab/indicators/SDG221UnderFiveStuntingPrevalence",
+      "unit": "prevalence ratio",
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation"
+      ],
+      "comparator": [],
+      "background": [],
+      "pValueSelector": null,
+      "contrast_id": "https://universalevidence.com/mapping-rules/results/readiness-AEARCTR-0014624/sq-lns-col6/contrast",
+      "package": false,
+      "group_labels": [
+        "SQ-LNS supplementation",
+        "No assigned intervention"
+      ]
+    },
+    "citations": [
+      {
+        "url": "https://gh.bmj.com/content/9/8/e015438",
+        "citation": "Fink G et al. The impact of home-installed growth charts and small-quantity lipid-based nutrient supplements (SQ-LNS) on child growth in Zambia: a four-arm parallel open-label cluster randomised controlled trial. BMJ Global Health 2024;9:e015438."
+      }
+    ],
+    "clear_direction": true,
+    "direction_sign": -1,
+    "intervention_labels": {
+      "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation": "Oral nutritional supplementation"
+    }
+  }
+]

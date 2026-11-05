@@ -135,9 +135,9 @@ async def query_v2(
     trace_token = TRACE.set((request_id, started))
     try:
         stage("request_start", budget_seconds=RESPONSE_TIMEOUT_SECONDS)
-        payload = await await_query_or_disconnect(
-            query_v2_cache.get_or_execute(query, execute_query_v2), request
-        )
+        from live_results import combine
+        execution = combine(query_v2_cache.get_or_execute(query, execute_query_v2), query)
+        payload = await await_query_or_disconnect(execution, request)
         stage("serialization_start")
         try:
             body = await bounded(asyncio.to_thread(encode_response, payload),
@@ -166,3 +166,16 @@ async def query_v2(
 @router.get("/query/v2/cache/stats")
 def query_v2_cache_stats() -> dict[str, int | str]:
     return query_v2_cache.stats()
+
+
+@router.get("/studies/enrichment")
+def study_enrichment_history(study: str = Query(..., min_length=1, max_length=2000)) -> dict:
+    """Stable metadata/history access, independent of current search eligibility."""
+    from scripts import evidence_enrichment as enrichment
+    try:
+        with enrichment.reader() as conn:
+            if conn is None or not enrichment._get(conn, "studies", study):
+                raise HTTPException(status_code=404, detail="Study enrichment not found")
+            return {**enrichment.public_study(conn, study), "enrichment_version": enrichment.snapshot_version(conn)}
+    except (OSError, enrichment.StoreError) as exc:
+        raise HTTPException(status_code=503, detail="Study enrichment temporarily unavailable") from exc

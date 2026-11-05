@@ -28,6 +28,8 @@ from api.vocabulary_compat import canonical_vocabulary_uri
 from api.graph_v2_cache import graph_v2_cache
 from api.query_cache import query_result_cache
 
+from isrctn_metadata import copy_metadata
+
 logger = logging.getLogger(__name__)
 
 VOCAB_PREFIX = "https://universalevidence.com/vocab/"
@@ -184,7 +186,7 @@ def normalize_query_results(results: list[dict]) -> list[dict]:
     """Constrain query results to the public schema and guarantee outcomes."""
     normalized = []
     for result in results:
-        item = {key: result.get(key) for key in PUBLIC_RESULT_KEYS}
+        item = copy_metadata({key: result.get(key) for key in PUBLIC_RESULT_KEYS}, result)
         item["outcomes"] = result.get("outcomes") or []
         normalized.append(item)
     return normalized

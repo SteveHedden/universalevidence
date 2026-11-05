@@ -1,0 +1,33 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ue: <https://universalevidence.com/ontology/> .
+@prefix pico: <http://data.cochrane.org/ontologies/pico/> .
+@prefix schema: <https://schema.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Local profile using existing classes and the separately defined intendedState property.
+[] a sh:NodeShape; sh:targetClass ue:Study;
+   sh:property [ sh:path dcterms:title; sh:minCount 1; sh:maxCount 1 ];
+   sh:property [ sh:path ue:studyContext; sh:class pico:PICO ];
+   sh:property [ sh:path dcterms:source; sh:minCount 1; sh:nodeKind sh:IRI ].
+[] a sh:NodeShape; sh:targetClass pico:PICO;
+   sh:property [ sh:path prov:wasDerivedFrom; sh:minCount 1; sh:class prov:Entity ];
+   sh:property [ sh:path prov:generatedAtTime; sh:minCount 1; sh:datatype xsd:dateTime ];
+   sh:property [ sh:path schema:creativeWorkStatus; sh:minCount 1; sh:maxCount 1; sh:in ("active" "withdrawn" "superseded") ];
+   sh:property [ sh:path ue:intendedState; sh:minCount 1; sh:maxCount 1; sh:nodeKind sh:IRI; sh:pattern "^https://universalevidence.com/vocab/states/" ];
+   sh:property [ sh:path pico:interventionGroup; sh:minCount 1; sh:class pico:InterventionGroup ].
+[] a sh:NodeShape; sh:targetClass pico:Condition;
+   sh:property [ sh:path ue:taxonomyConcept; sh:minCount 1; sh:maxCount 1; sh:nodeKind sh:IRI; sh:pattern "^https://universalevidence.com/vocab/states/" ].
+[] a sh:NodeShape; sh:targetClass pico:Intervention;
+   sh:property [ sh:path ue:taxonomyConcept; sh:minCount 1; sh:nodeKind sh:IRI; sh:pattern "^https://universalevidence.com/vocab/interventions/" ].
+[] a sh:NodeShape; sh:targetClass schema:Role;
+   sh:property [ sh:path schema:about; sh:minCount 1; sh:maxCount 1; sh:nodeKind sh:IRI;
+     sh:or ([sh:class ue:Study] [sh:class pico:PICO] [sh:class pico:Intervention]) ];
+   sh:property [ sh:path schema:member; sh:minCount 1; sh:maxCount 1; sh:nodeKind sh:IRI ];
+   sh:property [ sh:path schema:roleName; sh:minCount 1; sh:maxCount 1 ];
+   sh:property [ sh:path prov:wasDerivedFrom; sh:minCount 1; sh:class prov:Entity ];
+   sh:sparql [ sh:message "Implementer role requires context or component scope, not study-wide scope";
+     sh:select """PREFIX schema: <https://schema.org/>
+       PREFIX ue: <https://universalevidence.com/ontology/>
+       SELECT $this WHERE { $this schema:roleName "implementer"; schema:about ?scope . ?scope a ue:Study }""" ].

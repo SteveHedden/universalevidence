@@ -1,0 +1,296 @@
+{
+  "schema": "study-enrichment-1",
+  "study": {
+    "id": "https://example.org/studies/S",
+    "title": "SYNTHETIC: Nutrition study, not real evidence",
+    "records": [
+      {
+        "source": "ctgov",
+        "record_id": "NCT-FIXTURE",
+        "url": "https://example.org/registry/A",
+        "verification": {
+          "basis": "explicit-registry-id",
+          "source_url": "https://example.org/fixture",
+          "locator": "Synthetic fixture registry identifiers",
+          "checked_by": "fixture-reviewer",
+          "checked_at": "2026-10-04T12:00:00Z"
+        }
+      },
+      {
+        "source": "who-ictrp",
+        "record_id": "WHO-FIXTURE",
+        "record_uri": "https://example.org/registry/B",
+        "url": "https://example.org/registry/B",
+        "verification": {
+          "basis": "explicit-registry-id",
+          "source_url": "https://example.org/fixture",
+          "locator": "Synthetic fixture registry identifiers",
+          "checked_by": "fixture-reviewer",
+          "checked_at": "2026-10-04T12:00:00Z"
+        }
+      }
+    ],
+    "axes": [
+      {
+        "axis": "intervention",
+        "uri": "https://universalevidence.com/vocab/interventions/NutritionEducation",
+        "source": {
+          "document_id": "https://example.org/reports/1",
+          "locator": "Methods"
+        }
+      }
+    ],
+    "planned_outcomes": [
+      {
+        "measure": "Planned height measurement",
+        "source": {
+          "document_id": "https://example.org/reports/1",
+          "locator": "Protocol summary"
+        }
+      }
+    ],
+    "context": {
+      "population": {
+        "kind": "human",
+        "description": "Children in synthetic fixture",
+        "age": "Under five",
+        "source": {
+          "document_id": "https://example.org/reports/1",
+          "locator": "Methods"
+        }
+      },
+      "intervention_groups": [
+        {
+          "id": "education",
+          "label": "Nutrition education",
+          "dose": "Weekly session",
+          "source": {
+            "document_id": "https://example.org/reports/1",
+            "locator": "Methods"
+          }
+        }
+      ],
+      "comparator_groups": [
+        {
+          "id": "control",
+          "label": "Usual practice",
+          "source": {
+            "document_id": "https://example.org/reports/1",
+            "locator": "Methods"
+          }
+        }
+      ]
+    }
+  },
+  "documents": [
+    {
+      "id": "https://example.org/reports/1",
+      "identifier": "doi:10.0000/fixture1",
+      "version": "1",
+      "kind": "article",
+      "citation": "Synthetic report 1",
+      "url": "https://example.org/reports/1",
+      "status": "active",
+      "status_check": {
+        "checked_at": "2026-10-04T12:00:00Z",
+        "source_url": "https://example.org/reports/1",
+        "result": "active",
+        "checked_by": "fixture-reviewer"
+      },
+      "study_links": [
+        {
+          "study_id": "https://example.org/studies/S",
+          "verification": {
+            "basis": "explicit-registry-id",
+            "source_url": "https://example.org/fixture",
+            "locator": "Synthetic fixture registry identifiers",
+            "checked_by": "fixture-reviewer",
+            "checked_at": "2026-10-04T12:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "https://example.org/reports/2",
+      "identifier": "doi:10.0000/fixture2",
+      "version": "1",
+      "kind": "follow-up",
+      "citation": "Synthetic report 2",
+      "url": "https://example.org/reports/2",
+      "status": "active",
+      "status_check": {
+        "checked_at": "2026-10-04T12:00:00Z",
+        "source_url": "https://example.org/reports/2",
+        "result": "active",
+        "checked_by": "fixture-reviewer"
+      },
+      "study_links": [
+        {
+          "study_id": "https://example.org/studies/S",
+          "verification": {
+            "basis": "explicit-registry-id",
+            "source_url": "https://example.org/fixture",
+            "locator": "Synthetic fixture registry identifiers",
+            "checked_by": "fixture-reviewer",
+            "checked_at": "2026-10-04T12:00:00Z"
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "https://example.org/studies/S/findings/1",
+      "study_id": "https://example.org/studies/S",
+      "status": "active",
+      "state_uri": "https://universalevidence.com/vocab/states/Stunting",
+      "measure": "Stunting prevalence difference (HAZ < -2)",
+      "mapping": {
+        "basis": "indicator-measures-state",
+        "rationale": "Synthetic methods specify children under five, WHO HAZ threshold below -2, and a stunting prevalence endpoint; age and subgroup remain on the finding."
+      },
+      "comparison": {
+        "id": "education-vs-control",
+        "kind": "between-groups",
+        "reference": "Usual practice",
+        "quantity": "Stunting prevalence",
+        "intervention": "education"
+      },
+      "subgroup": "All children",
+      "timing": {
+        "reported": "12 months",
+        "reference_point": "randomization"
+      },
+      "value": -1.2,
+      "unit": "percentage points",
+      "direction": "decrease",
+      "significance": "not statistically significant",
+      "uncertainty": {
+        "kind": "confidence-interval",
+        "level": 95,
+        "lower": -3.2,
+        "upper": 0.8
+      },
+      "sources": [
+        {
+          "document_id": "https://example.org/reports/1",
+          "locator": "Table 2, row 1",
+          "fields": [
+            "measure",
+            "comparison",
+            "subgroup",
+            "timing",
+            "value",
+            "unit",
+            "direction",
+            "significance",
+            "uncertainty"
+          ]
+        }
+      ],
+      "indicator_uri": "https://universalevidence.com/vocab/states/SDG221UnderFiveStuntingPrevalence"
+    },
+    {
+      "id": "https://example.org/studies/S/findings/2",
+      "study_id": "https://example.org/studies/S",
+      "status": "active",
+      "state_uri": "https://universalevidence.com/vocab/states/Stunting",
+      "measure": "Stunting prevalence difference (HAZ < -2)",
+      "mapping": {
+        "basis": "indicator-measures-state",
+        "rationale": "Synthetic methods specify children under five, WHO HAZ threshold below -2, and a stunting prevalence endpoint; age and subgroup remain on the finding."
+      },
+      "comparison": {
+        "id": "education-vs-control",
+        "kind": "between-groups",
+        "reference": "Usual practice",
+        "quantity": "Stunting prevalence",
+        "intervention": "education"
+      },
+      "subgroup": "All children",
+      "timing": {
+        "reported": "24 months",
+        "reference_point": "randomization"
+      },
+      "value": -1.2,
+      "unit": "percentage points",
+      "direction": "decrease",
+      "significance": "not statistically significant",
+      "uncertainty": {
+        "kind": "confidence-interval",
+        "level": 95,
+        "lower": -3.2,
+        "upper": 0.8
+      },
+      "sources": [
+        {
+          "document_id": "https://example.org/reports/2",
+          "locator": "Table 2, row 2",
+          "fields": [
+            "measure",
+            "comparison",
+            "subgroup",
+            "timing",
+            "value",
+            "unit",
+            "direction",
+            "significance",
+            "uncertainty"
+          ]
+        }
+      ],
+      "indicator_uri": "https://universalevidence.com/vocab/states/SDG221UnderFiveStuntingPrevalence"
+    },
+    {
+      "id": "https://example.org/studies/S/findings/3",
+      "study_id": "https://example.org/studies/S",
+      "status": "active",
+      "state_uri": "https://universalevidence.com/vocab/states/Stunting",
+      "measure": "Stunting prevalence difference (HAZ < -2)",
+      "mapping": {
+        "basis": "indicator-measures-state",
+        "rationale": "Synthetic methods specify children under five, WHO HAZ threshold below -2, and a stunting prevalence endpoint; age and subgroup remain on the finding."
+      },
+      "comparison": {
+        "id": "education-vs-control",
+        "kind": "between-groups",
+        "reference": "Usual practice",
+        "quantity": "Stunting prevalence",
+        "intervention": "education"
+      },
+      "subgroup": "Girls",
+      "timing": {
+        "reported": "24 months",
+        "reference_point": "randomization"
+      },
+      "value": 0,
+      "unit": "percentage points",
+      "direction": "no-change",
+      "significance": "not statistically significant",
+      "uncertainty": {
+        "kind": "confidence-interval",
+        "level": 95,
+        "lower": -3.2,
+        "upper": 0.8
+      },
+      "sources": [
+        {
+          "document_id": "https://example.org/reports/2",
+          "locator": "Table 2, row 3",
+          "fields": [
+            "measure",
+            "comparison",
+            "subgroup",
+            "timing",
+            "value",
+            "unit",
+            "direction",
+            "significance",
+            "uncertainty"
+          ]
+        }
+      ],
+      "indicator_uri": "https://universalevidence.com/vocab/states/SDG221UnderFiveStuntingPrevalence"
+    }
+  ]
+}

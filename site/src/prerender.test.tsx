@@ -5,12 +5,12 @@ import { expect, it, vi } from "vitest";
 import { App } from "./App";
 import { renderHome } from "./prerender";
 
-it("hydrates the crawlable homepage without losing its content or controls", async () => {
+it("hydrates the crawlable search page without losing its content or controls", async () => {
   const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("{}"));
   const container = document.createElement("div");
   container.innerHTML = renderHome();
   expect(fetchMock).not.toHaveBeenCalled();
-  expect(container.textContent).toContain("Then follow the results to the original source.");
+  expect(container.textContent).toContain("Know what’s been done. Decide what’s next.");
   document.body.append(container);
   const onRecoverableError = vi.fn();
   let root: ReturnType<typeof hydrateRoot>;

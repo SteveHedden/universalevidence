@@ -1325,3 +1325,9 @@ code {
 .home-introduction p, .home-about p { max-width: 85ch; color: #465462; margin: 10px 0 0; }
 .home-about { margin-top: 32px; padding-bottom: 20px; }
 .home-about a { color: #17649e; text-underline-offset: 3px; }
+
+/* Match the deployed desktop search alignment. */
+@media (min-width: 721px) {
+  .cq-sentence, .cq-pair { align-items: center; }
+  .cq-text { align-self: center; }
+}

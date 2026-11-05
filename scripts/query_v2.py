@@ -9,6 +9,8 @@ presentation expansion, and retains source-specific coverage/failure metadata.
 from __future__ import annotations
 
 import asyncio
+import copy
+import json
 from contextvars import ContextVar
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
@@ -42,6 +44,11 @@ try:
 except ModuleNotFoundError:
     from scripts.query_runtime import REQUEST_DEADLINE, bounded, observe, stage, timed_thread
 
+try:
+    from .isrctn_metadata import copy_metadata, merge_metadata
+except ImportError:
+    from isrctn_metadata import copy_metadata, merge_metadata
+
 logger = logging.getLogger(__name__)
 
 AXES = ("state", "condition", "intervention", "outcome", "region")
@@ -65,6 +72,11 @@ SOURCE_ALIASES = {
 }
 
 UNIQUE_STUDY_LIMIT = 100
+CTGOV_STUDY_LIMIT = 200
+
+def source_study_limit(source):
+    return CTGOV_STUDY_LIMIT if source == "ctgov" else UNIQUE_STUDY_LIMIT
+
 MAX_REQUESTS_PER_SOURCE = v1._positive_int_env(
     "REGION_QUERY_MAX_REQUESTS_PER_SOURCE", 8
 )
@@ -87,6 +99,7 @@ def _positive_float_env(name: str, default: float) -> float:
 RESPONSE_TIMEOUT_SECONDS = _positive_float_env("QUERY_V2_RESPONSE_TIMEOUT_SECONDS", 10.0)
 
 TIME_BUDGET_SECONDS = _positive_float_env("REGION_QUERY_TIME_BUDGET_SECONDS", 5.0)
+CTGOV_TIME_BUDGET_SECONDS = _positive_float_env("CTGOV_QUERY_TIME_BUDGET_SECONDS", 8.0)
 
 CTGOV_V2_FIELDS = "|".join(
     (
@@ -106,6 +119,10 @@ CTGOV_V2_FIELDS = "|".join(
         "PrimaryOutcomeMeasure",
         "SecondaryOutcomeMeasure",
         "OtherOutcomeMeasure",
+        "ResultsSection",
+        "HasResults",
+        "ArmGroup",
+        "Intervention",
     )
 )
 
@@ -132,6 +149,8 @@ PUBLIC_RESULT_KEYS = (
     "status",
     "year",
     "outcomes",
+    "api_results",
+    "state_mappings",
 )
 
 
@@ -159,6 +178,10 @@ def _local_taxonomy_graph(filename: str) -> Graph:
     """Load a tracked taxonomy asset once for network-independent planning."""
     graph = Graph()
     graph.parse(VOCABULARIES_DIR / filename, format="turtle")
+    # Load related indicators for local concept lookup across the two schemes.
+    indicators = VOCABULARIES_DIR / "indicators.ttl"
+    if filename == "states.ttl" and indicators.exists():
+        graph.parse(indicators, format="turtle")
     return graph
 
 
@@ -171,7 +194,7 @@ def _resolve_local_concept(uri: str) -> ConceptResolution | None:
     """
     if "/vocab/interventions/" in uri:
         filenames = ("interventions.ttl",)
-    elif "/vocab/states/" in uri:
+    elif "/vocab/states/" in uri or "/vocab/indicators/" in uri:
         filenames = ("states.ttl",)
     else:
         return None
@@ -431,7 +454,7 @@ def _mapping_provenance(
 def _outcome_identity(value: object) -> str:
     if isinstance(value, dict):
         return "|".join(str(value.get(key) or "") for key in (
-            "type", "measure", "state_concept_uri", "description"
+            "type", "measure", "state_concept_uri", "description", "specification_id", "role", "method", "time_frame"
         ))
     return str(value)
 
@@ -439,6 +462,22 @@ def _outcome_identity(value: object) -> str:
 _GRAPH_ATTRIBUTION: ContextVar[bool] = ContextVar(
     "query_v2_graph_attribution", default=False
 )
+
+
+def merge_api_results(existing, incoming):
+    left,right=existing.get("api_results"),incoming.get("api_results")
+    if right is None:return
+    if left is None:existing["api_results"]=copy.deepcopy(right);return
+    merged=copy.deepcopy(left)
+    # Fingerprints do not authorize selecting one scientific payload. Preserve
+    # distinct variants until global conflict detection, including State projections.
+    entries = {json.dumps(row, sort_keys=True): copy.deepcopy(row)
+               for row in [*left.get("rows", []), *right.get("rows", [])]}
+    merged["rows"] = list(entries.values())
+    merged["coverage"]=merged.get("coverage",[])+right.get("coverage",[])
+    if left.get("sha256") != right.get("sha256") or right.get("source_versions_differ"):
+        merged["source_versions_differ"] = True
+    existing["api_results"]=merged
 
 
 def dedupe_presentation(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
@@ -455,12 +494,18 @@ def dedupe_presentation(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any
                 or f"raw:{raw.get('intervention') or ''}"
             )
             key = (source, study_id, intervention_key)
-            public = {name: raw.get(name) for name in PUBLIC_RESULT_KEYS}
+            public = copy_metadata({name: raw.get(name) for name in PUBLIC_RESULT_KEYS}, raw)
             public["outcomes"] = list(raw.get("outcomes") or [])
+            public["state_mappings"] = list(raw.get("state_mappings") or [])
             existing = selected.get(key)
             if existing is None:
                 selected[key] = public
                 continue
+            for mapping in public["state_mappings"]:
+                if mapping not in existing["state_mappings"]:
+                    existing["state_mappings"].append(mapping)
+            merge_api_results(existing, public)
+            merge_metadata(existing, public)
             seen_outcomes = {
                 _outcome_identity(value) for value in existing["outcomes"]
             }
@@ -505,7 +550,7 @@ def dedupe_presentation(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any
             or ""
         )
         key = (source, study_id, state_key, intervention_key)
-        public = {name: raw.get(name) for name in PUBLIC_RESULT_KEYS}
+        public = copy_metadata({name: raw.get(name) for name in PUBLIC_RESULT_KEYS}, raw)
         public["outcomes"] = list(raw.get("outcomes") or [])
         for field in ("query_matches", "direct_state_mappings"):
             public[field] = list(raw.get(field) or [])
@@ -513,6 +558,7 @@ def dedupe_presentation(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any
         if existing is None:
             selected[key] = public
             continue
+        merge_metadata(existing, public)
         for field in ("query_matches", "direct_state_mappings"):
             for value in public[field]:
                 if value not in existing[field]:
@@ -584,6 +630,7 @@ class BranchResult:
     truncated: bool = False
     approximate: bool = False
     budget_exhausted: bool = False
+    state_enrichment_partial: bool = False
 
 
 class SourceAdapter(Protocol):
@@ -956,9 +1003,12 @@ async def execute_source(
             )
 
     budget = budget_factory()
+    if source_id == "ctgov" and budget_factory is SourceBudget:
+        budget.seconds = max(budget.seconds, CTGOV_TIME_BUDGET_SECONDS)
     completed_clause_rows: list[dict[str, Any]] = []
     any_truncated = False
     any_approximate = False
+    state_enrichment_partial = False
     budget_exhausted = False
     terminal_status = "included"
     terminal_reason: str | None = None
@@ -1012,7 +1062,8 @@ async def execute_source(
             )
             clause_truncated = clause_truncated or branch.truncated
             any_truncated = any_truncated or branch.truncated
-            any_approximate = any_approximate or branch.approximate
+            any_approximate = any_approximate or branch.approximate or branch.state_enrichment_partial
+            state_enrichment_partial = state_enrichment_partial or branch.state_enrichment_partial
             budget_exhausted = budget_exhausted or branch.budget_exhausted
             if branch.budget_exhausted:
                 # A partially paged single branch is already a sound subset.
@@ -1053,6 +1104,11 @@ async def execute_source(
         if terminal_reason is None:
             terminal_reason = "unsupported_admin_level"
 
+    if state_enrichment_partial:
+        if coverage == "full":
+            coverage = "partial"
+        if terminal_reason is None:
+            terminal_reason = "state_enrichment_unavailable"
     rows = await asyncio.to_thread(dedupe_presentation, completed_clause_rows)
     unique_count = len({study_key(row, source_id) for row in rows})
     return rows, _source_meta(
@@ -1087,14 +1143,14 @@ async def execute_graph_source(
             key = study_key(row, adapter.source_id)
             if key in retained_set:
                 continue
-            if len(retained_keys) >= UNIQUE_STUDY_LIMIT:
+            if len(retained_keys) >= source_study_limit(adapter.source_id):
                 break
             retained_keys.append(key)
             retained_set.add(key)
         unique_count = len({study_key(row, adapter.source_id) for row in rows})
-        post_union_excess = unique_count > UNIQUE_STUDY_LIMIT
+        post_union_excess = unique_count > source_study_limit(adapter.source_id)
         exact_source_cap = bool(
-            unique_count == UNIQUE_STUDY_LIMIT
+            unique_count == source_study_limit(adapter.source_id)
             and meta.get("truncated")
             and not meta.get("reason")
         )
@@ -1118,7 +1174,7 @@ async def execute_graph_source(
                 # zero as the honest lower bound unless the post-union set
                 # itself proves excess.
                 "source_limit_omitted_lower_bound": max(
-                    0, unique_count - UNIQUE_STUDY_LIMIT
+                    0, unique_count - source_study_limit(adapter.source_id)
                 ),
             }
         else:
@@ -1171,6 +1227,7 @@ class ExecutionProgress:
             "api_version": "query-v2",
             "returned_unique_studies": len({study_key(row) for row in rows}),
             "limit_per_source_branch": UNIQUE_STUDY_LIMIT,
+            "limits_per_source_branch": {source: source_study_limit(source) for source in SOURCE_IDS},
             "truncated": any(value[1]["truncated"] for value in sources.values()),
             "approximate": any(value[1]["approximate"] for value in sources.values()),
             "sources": {source: value[1] for source, value in sources.items()},
@@ -1186,7 +1243,7 @@ def annotate_completion(payload: dict) -> dict:
                  if value.get("reason") == "budget_exhausted"]
     completed = [source for source, value in meta["sources"].items()
                  if value.get("status") == "included" and value.get("reason") is None]
-    failed = any(value.get("status") in {"error", "unavailable"} for value in meta["sources"].values())
+    failed = any(value.get("status") in {"error", "unavailable"} or value.get("reason") == "state_enrichment_unavailable" for value in meta["sources"].values())
     meta["timed_out_sources"] = timed_out
     meta["completed_sources"] = completed
     meta["execution_status"] = (
@@ -1210,6 +1267,26 @@ async def execute_query_v2(query: CanonicalQuery, **kwargs) -> QueryV2Execution:
             progress.payload = annotate_completion(execution.payload)
         else:
             stage("execution_deadline")
+        try:
+            from evidence_enrichment import enrich_search
+        except ModuleNotFoundError:
+            from scripts.evidence_enrichment import enrich_search
+        registry_payload = progress.snapshot()
+        if os.getenv("UE_ENRICHMENT_TTL"):
+            # A caller may reach its response deadline during the bounded metadata
+            # join. Expose that incompleteness in the shared timeout snapshot.
+            progress.payload = {**registry_payload, "meta": {**registry_payload["meta"],
+                "enrichment": {"status": "pending", "reason": "response_budget"},
+                "truncated": True, "approximate": True, "execution_status": "partial"}}
+            try:
+                progress.payload = await asyncio.wait_for(
+                    asyncio.to_thread(enrich_search, registry_payload, query),
+                    timeout=max(0.001, deadline - time.monotonic()),
+                )
+            except asyncio.TimeoutError:
+                progress.payload["meta"]["enrichment"] = {"status": "unavailable", "reason": "response_budget"}
+        else:
+            progress.payload = registry_payload
         return QueryV2Execution(progress.snapshot())
     finally:
         if not task.done():
@@ -1246,6 +1323,7 @@ async def _execute_query_v2(
                     "api_version": "query-v2",
                     "returned_unique_studies": 0,
                     "limit_per_source_branch": UNIQUE_STUDY_LIMIT,
+                    "limits_per_source_branch": {source: source_study_limit(source) for source in SOURCE_IDS},
                     "truncated": True,
                     "approximate": True,
                     "sources": source_meta,
@@ -1271,6 +1349,7 @@ async def _execute_query_v2(
                     "api_version": "query-v2",
                     "returned_unique_studies": 0,
                     "limit_per_source_branch": UNIQUE_STUDY_LIMIT,
+                    "limits_per_source_branch": {source: source_study_limit(source) for source in SOURCE_IDS},
                     "truncated": True,
                     "approximate": True,
                     "sources": source_meta,
@@ -1313,7 +1392,7 @@ async def _execute_query_v2(
     # every source that completed and represent remaining work as a sound empty
     # subset with explicit budget metadata.
     deadline = (
-        TIME_BUDGET_SECONDS + 0.25
+        max(TIME_BUDGET_SECONDS, CTGOV_TIME_BUDGET_SECONDS) + 0.25
         if source_stage_timeout is None
         else source_stage_timeout
     )
@@ -1377,6 +1456,7 @@ async def _execute_query_v2(
                 "api_version": "query-v2",
                 "returned_unique_studies": unique_count,
                 "limit_per_source_branch": UNIQUE_STUDY_LIMIT,
+                "limits_per_source_branch": {source: source_study_limit(source) for source in SOURCE_IDS},
                 "truncated": any(meta["truncated"] for meta in source_meta.values()),
                 "approximate": any(meta["approximate"] for meta in source_meta.values()),
                 "sources": source_meta,
@@ -1673,6 +1753,15 @@ def _local_detail_query(
     OPTIONAL {{ GRAPH <{v1.TAXONOMY_GRAPH_URI}> {{ ?outcomeUri skos:prefLabel ?outcomeLabel . }} }}
   }}
 """
+    if hydrate_direct_interventions and not any(spec.get(k) for k in ("state", "condition", "outcome")):
+        selected_bindings += f"""
+  OPTIONAL {{
+    {{ GRAPH <{graph_uri}> {{ ?study <{v1._AXIS_MATCH_PRED['condition']}> ?mappedState . }} BIND("condition" AS ?stateRole) }}
+    UNION
+    {{ GRAPH <{graph_uri}> {{ ?study <{v1._AXIS_MATCH_PRED['outcome']}> ?mappedState . }} BIND("outcome" AS ?stateRole) }}
+    OPTIONAL {{ GRAPH <{v1.TAXONOMY_GRAPH_URI}> {{ ?mappedState skos:prefLabel ?mappedStateLabel . }} }}
+  }}
+"""
     if hydrate_direct_interventions:
         intervention_text_predicate = (
             v1._first_source_field("aea", "intervention", "raw_text")
@@ -1691,7 +1780,7 @@ PREFIX skos: <{v1.SKOS}>
 SELECT DISTINCT ?study ?source ?study_id ?title ?status ?date ?country
        ?intervention
        ?matchedInterventionUri ?matchedInterventionLabel
-       ?conditionUri ?conditionLabel ?outcomeText ?outcomeUri ?outcomeLabel WHERE {{
+       ?conditionUri ?conditionLabel ?outcomeText ?outcomeUri ?outcomeLabel ?mappedState ?mappedStateLabel ?stateRole WHERE {{
   VALUES ?study {{ {values} }}
 {details}
 {selected_bindings}
@@ -1793,6 +1882,7 @@ def _local_rows(
                     ),
                     "intervention_concept": intervention_label,
                     "intervention_concept_uri": intervention_uri,
+                    "state_mappings": ([{"uri": row["mappedState"], "label": row.get("mappedStateLabel") or row["mappedState"], "role": row["stateRole"]}] if row.get("mappedState") else []),
                     "condition_concept": row.get("conditionLabel"),
                     "condition_concept_uri": row.get("conditionUri"),
                     "country": row.get("country"),
@@ -2634,6 +2724,13 @@ def _ctgov_presentation(
         base.pop("_location_region_uris", None)
         base.pop("_locations", None)
         if not specific_attribution:
+            base["state_mappings"] = [
+                {"uri": uri, "label": label, "role": role}
+                for role, candidates in (
+                    ("condition", [m for mesh in condition_mesh_uris for m in _concept_match_sequence(condition_map.get(str(mesh)))]),
+                    ("outcome", [m for o in mapped.get("outcomes") or [] for m in _concept_match_sequence(outcome_map.get(str(o.get("measure") or "")))]),
+                ) for uri, label in dict(candidates).items()
+            ]
             if spec.get("condition"):
                 base["condition_concept_uri"] = spec["condition"]
                 base["condition_concept"] = labels.get("condition")
@@ -2641,14 +2738,14 @@ def _ctgov_presentation(
                 for mesh_uri in condition_mesh_uris:
                     match = condition_map.get(str(mesh_uri))
                     if match:
-                        base["condition_concept_uri"], base["condition_concept"] = match
+                        base["condition_concept_uri"], base["condition_concept"] = _concept_match_sequence(match)[0]
                         break
             base["outcomes"] = []
             for original_outcome in mapped.get("outcomes") or []:
                 outcome = dict(original_outcome)
                 match = outcome_map.get(str(outcome.get("measure") or ""))
                 if match:
-                    outcome["state_concept_uri"], outcome["state_concept"] = match
+                    outcome["state_concept_uri"], outcome["state_concept"] = _concept_match_sequence(match)[0]
                 base["outcomes"].append(outcome)
             if spec.get("intervention"):
                 # A verified study-specific mapping identifies the active source
@@ -2808,6 +2905,12 @@ class CtgovAdapter:
         regions: RegionIndex,
     ) -> BranchResult:
         specific_attribution = _GRAPH_ATTRIBUTION.get()
+        state_enrichment_partial = False
+        all_states = bool(spec.get("intervention")) and not any(spec.get(k) for k in ("state", "condition", "outcome"))
+        from live_result_identity import (
+            reviewed_interventions, intervention_discovery_terms, scoped_intervention_match,
+        )
+        reviewed_map = await asyncio.to_thread(reviewed_interventions)
         labels: dict[str, str | None] = {}
         terms: dict[str, list[str]] = {}
         resolutions: dict[str, ConceptResolution] = {}
@@ -2822,8 +2925,8 @@ class CtgovAdapter:
 
         base: dict[str, str] = {
             "format": "json",
-            "pageSize": str(UNIQUE_STUDY_LIMIT),
-            "fields": CTGOV_V2_FIELDS,
+            "pageSize": str(CTGOV_STUDY_LIMIT),
+            "fields": "|".join(f for f in CTGOV_V2_FIELDS.split("|") if not _GRAPH_ATTRIBUTION.get() or f not in ("ResultsSection", "HasResults", "ArmGroup", "Intervention")),
         }
         approximate = False
         if spec.get("state"):
@@ -2835,8 +2938,25 @@ class CtgovAdapter:
         if spec.get("intervention"):
             available = terms["intervention"]
             chosen = available[:20] or [str(labels["intervention"])]
-            terms["intervention"] = chosen
-            base["query.intr"] = _quoted_or(chosen)
+            # Retrieve contextual mappings by exact study identity. Broad source
+            # names (e.g. "Nutrition") must not crowd out ordinary term matches.
+            # The source State predicate still applies to both retrieval routes;
+            # scoped_intervention_match below verifies the current source label.
+            from ctgov_intervention_identity import parse_key
+            scoped_ids = sorted({
+                parsed[0] for key, targets in reviewed_map.items()
+                if (parsed := parse_key(key)) and len(targets) == 1
+                and targets[0][0] == spec["intervention"]
+            })
+            if scoped_ids:
+                expression = (
+                    f"(AREA[InterventionSearch]({_quoted_or(chosen)}) OR "
+                    f"AREA[NCTId]({_quoted_or(scoped_ids)}))"
+                )
+                prior = base.get("query.term")
+                base["query.term"] = f"({prior}) AND {expression}" if prior else expression
+            else:
+                base["query.intr"] = _quoted_or(chosen)
             approximate = approximate or len(available) > len(chosen)
         if spec.get("outcome"):
             chosen = terms["outcome"][:20] or [str(labels["outcome"])]
@@ -2876,6 +2996,7 @@ class CtgovAdapter:
                 ) from exc
 
         mapped_by_id: dict[str, dict[str, Any]] = {}
+        raw_results_by_id: dict[str, dict[str, Any]] = {}
         truncated = approximate
         budget_exhausted = False
         endpoint = v1._source_endpoint("ctgov", v1.CTGOV_API_BASE)
@@ -2906,8 +3027,9 @@ class CtgovAdapter:
                         for raw in payload.get("studies", ()):
                             country_isos = _raw_ctgov_country_isos(raw, regions)
                             iso_hint = next(iter(country_isos)) if len(country_isos) == 1 else ""
+                            from live_result_rules import presentation_record
                             mapped = v1.map_ctgov_study(
-                                raw,
+                                presentation_record(raw),
                                 iso_hint,
                                 include_region_evidence=bool(
                                     descriptor and descriptor.kind == "adm1"
@@ -2930,13 +3052,20 @@ class CtgovAdapter:
                                         continue
                                 elif not country_isos.intersection(descriptor.country_isos):
                                     continue
-                            if spec.get("intervention") and not v1._ctgov_study_matches_intervention_terms(
-                                terms.get("intervention", ()), mapped.get("_intervention_names", ())
-                            ):
-                                continue
+                            if spec.get("intervention"):
+                                names = mapped.get("_intervention_names", ())
+                                scoped_match, unmapped_names = scoped_intervention_match(
+                                    mapped["nctId"], names, spec["intervention"], reviewed_map
+                                )
+                                ordinary_match = not names or bool(unmapped_names) and v1._ctgov_study_matches_intervention_terms(
+                                    terms.get("intervention", ()), unmapped_names
+                                )
+                                if not scoped_match and not ordinary_match:
+                                    continue
+                            raw_results_by_id[mapped["nctId"]] = raw
                             mapped_by_id[mapped["nctId"]] = mapped
                         next_token = payload.get("nextPageToken")
-                        if len(mapped_by_id) >= UNIQUE_STUDY_LIMIT:
+                        if len(mapped_by_id) >= CTGOV_STUDY_LIMIT:
                             truncated = bool(next_token) or (
                                 filter_index + 1 < len(condition_filters)
                             )
@@ -2948,14 +3077,14 @@ class CtgovAdapter:
                         if page + 1 >= budget.max_pages_per_branch:
                             budget_exhausted = True
                             break
-                    if budget_exhausted or len(mapped_by_id) >= UNIQUE_STUDY_LIMIT:
+                    if budget_exhausted or len(mapped_by_id) >= CTGOV_STUDY_LIMIT:
                         break
-            if len(condition_filters) > 1 and len(mapped_by_id) > UNIQUE_STUDY_LIMIT:
+            if len(condition_filters) > 1 and len(mapped_by_id) > CTGOV_STUDY_LIMIT:
                 approximate = True
 
         ordered = list(mapped_by_id.values())
-        if len(ordered) > UNIQUE_STUDY_LIMIT:
-            ordered = ordered[:UNIQUE_STUDY_LIMIT]
+        if len(ordered) > CTGOV_STUDY_LIMIT:
+            ordered = ordered[:CTGOV_STUDY_LIMIT]
             truncated = True
         if budget_exhausted:
             truncated = True
@@ -2974,7 +3103,7 @@ class CtgovAdapter:
                     condition_map = await _taxonomy_call(
                         (
                             _local_states_by_mesh_multi
-                            if specific_attribution
+                            if specific_attribution or all_states
                             else _local_states_by_mesh
                         ),
                         condition_mesh_uris,
@@ -2984,6 +3113,7 @@ class CtgovAdapter:
                         raise SourceUnavailable(
                             "CT.gov direct condition mapping unavailable"
                         )
+                    state_enrichment_partial = True
                     logger.warning(
                         "CT.gov condition presentation enrichment failed",
                         exc_info=True,
@@ -2999,7 +3129,7 @@ class CtgovAdapter:
                 if isinstance(outcome, Mapping) and outcome.get("measure")
             }
         )
-        if specific_attribution and outcome_measures:
+        if (specific_attribution or all_states) and outcome_measures:
             try:
                 direct_outcomes = await _taxonomy_call(
                     _source_direct_state_crosswalk,
@@ -3024,6 +3154,9 @@ class CtgovAdapter:
                         for uri in uris
                     }
                 )
+                # Preserve known identities if only the optional label hydration fails.
+                outcome_map.update({key: tuple((uri, uri.rsplit("/", 1)[-1]) for uri in uris)
+                                    for key, uris in selected_direct_outcomes.items()})
                 direct_outcome_labels = await _taxonomy_call(
                     _local_state_labels,
                     direct_outcome_uris,
@@ -3042,9 +3175,12 @@ class CtgovAdapter:
                     }
                 )
             except Exception as exc:
-                raise SourceUnavailable(
-                    "CT.gov direct outcome State map unavailable"
-                ) from exc
+                if specific_attribution or any(spec.get(axis) for axis in ("state", "condition", "outcome")):
+                    raise SourceUnavailable(
+                        "CT.gov direct outcome State map unavailable"
+                    ) from exc
+                state_enrichment_partial = True
+                logger.warning("CT.gov outcome presentation enrichment failed", exc_info=True)
         intervention_map: dict[
             str, tuple[str, str] | Sequence[tuple[str, str]]
         ] = {}
@@ -3129,7 +3265,7 @@ class CtgovAdapter:
                             (
                                 unmatched_names
                                 if specific_attribution
-                                else unmatched_names[:UNIQUE_STUDY_LIMIT]
+                                else unmatched_names[:CTGOV_STUDY_LIMIT]
                             ),
                         )
                     ).items():
@@ -3173,6 +3309,18 @@ class CtgovAdapter:
                         "CT.gov intervention MeSH enrichment failed",
                         exc_info=True,
                     )
+        # Retain ordinary Fuseki mappings and use the reviewed contextual keys
+        # for the exact source study/label in both Search and Graph presentation.
+        intervention_map.update({
+            key: targets if specific_attribution else targets[0] if len(targets) == 1 else ()
+            for key, targets in reviewed_map.items()
+        })
+        from live_result_rules import interpret_safely
+        # Reuse the exact returned record; no ID catalogue, follow-up fetch, or paper join.
+        for study in ordered:
+            raw = raw_results_by_id.get(study["nctId"])
+            if raw is not None and not _GRAPH_ATTRIBUTION.get():
+                study["api_results"] = await asyncio.to_thread(interpret_safely, raw, intervention_map)
         return BranchResult(
             rows=_ctgov_presentation(
                 ordered,
@@ -3187,6 +3335,7 @@ class CtgovAdapter:
             truncated=truncated,
             approximate=approximate,
             budget_exhausted=budget_exhausted,
+            state_enrichment_partial=state_enrichment_partial,
         )
 
 
@@ -3240,6 +3389,13 @@ def _stamp_isrctn(
             for outcome in row.get("outcomes") or ()
         ]
         if not specific_attribution:
+            row["state_mappings"] = [
+                {"uri": uri, "label": state_labels.get(uri) or condition_labels.get(uri) or uri, "role": role}
+                for role, values, crosswalk in (
+                    ("condition", row.get("condition_descriptions") or (), condition_crosswalk),
+                    ("outcome", [o.get("measure") if isinstance(o, dict) else o for o in row.get("outcomes") or ()], outcome_crosswalk),
+                ) for uri in sorted({uri for value in values for uri in _mapped_state_uris(crosswalk, value)})
+            ]
             if spec.get("condition"):
                 row["condition_concept_uri"] = spec["condition"]
                 row["condition_concept"] = labels.get("condition")
@@ -3408,7 +3564,7 @@ async def _fetch_isrctn_batch(
 
     response = await client.get(
         endpoint,
-        params={"q": query, "limit": str(UNIQUE_STUDY_LIMIT)},
+        params={"q": query, "limit": str(CTGOV_STUDY_LIMIT)},
         timeout=timeout,
     )
     if response.status_code == 429 or response.status_code >= 500:
@@ -3439,6 +3595,7 @@ class IsrctnAdapter:
         regions: RegionIndex,
     ) -> BranchResult:
         specific_attribution = _GRAPH_ATTRIBUTION.get()
+        all_states = bool(spec.get("intervention")) and not any(spec.get(k) for k in ("state", "condition", "outcome"))
         labels: dict[str, str | None] = {}
         clauses: list[str] = []
         approximate = False
@@ -3573,7 +3730,7 @@ class IsrctnAdapter:
         ]
         if selected and (specific_attribution or not spec.get("condition")):
             try:
-                if specific_attribution:
+                if specific_attribution or all_states:
                     if selected_condition_values:
                         condition_crosswalk = await _taxonomy_call(
                             _isrctn_direct_state_crosswalk, "condition"

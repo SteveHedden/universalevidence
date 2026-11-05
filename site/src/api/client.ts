@@ -27,7 +27,55 @@ export type Outcome =
       [key: string]: unknown;
     };
 
+export type ReportedFinding = {
+  eligibility?: string;
+  id: string;
+  status: string;
+  state_uri: string;
+  measure: string;
+  direction?: string;
+  comparison: Record<string, unknown>;
+  timing: Record<string, unknown>;
+  subgroup?: string;
+  value?: number | string | null;
+  unit?: string;
+  result_text?: string;
+  uncertainty?: unknown;
+  significance?: string;
+  citations: { id: string; citation: string; url: string; locator: string; status: string }[];
+};
+
+export type SourceXmlProvenance = { record_url: string; xml_path: string; response_sha256: string };
+export type OutcomeSpecification = {
+  id: string; type: "pre-specified-measure"; role: "primary" | "secondary" | "unspecified";
+  source_id: string | null; representation: "structured" | "legacy_prose";
+  variable: string | null; method: string | null; timepoints: string | null; legacy_text: string | null;
+  provenance: SourceXmlProvenance[];
+  legacy_representations?: { text: string; source_id: string | null; provenance: SourceXmlProvenance[] }[];
+};
+export type IsrctnReportMetadata = {
+  schema: "isrctn-document-metadata-1";
+  results: { fields: Record<string, string | null>; provenance: SourceXmlProvenance }[];
+  outputs: { id: string; attributes: Record<string, string>;
+    external_links: { url: string | null; provenance: SourceXmlProvenance }[];
+    local_files: { attributes: Record<string, string>; provenance: SourceXmlProvenance }[];
+    descriptions: string[]; provenance: SourceXmlProvenance }[];
+};
+
 export type StudyResult = {
+  state_mappings?: {uri:string; label:string; role:'condition'|'outcome'|'result'}[];
+  group_state_roles?: string[];
+  outcome_specifications?: OutcomeSpecification[];
+  report_metadata?: IsrctnReportMetadata;
+  result_availability?: { planned_specification_count: number; results_documents: "typed_metadata_present" | "publication_or_report_text_only" | "not_identified"; structured_numerical_results: "not_extracted"; reason: string };
+  study_identity?: string;
+  registry_records?: { source: string; record_id: string; url: string }[];
+  reported_findings?: ReportedFinding[];
+  finding_history?: ReportedFinding[];
+  planned_outcomes?: Outcome[];
+  source_reported_outcomes?: Outcome[];
+  source_unspecified_outcomes?: Outcome[];
+  match_provenance?: { basis: string }[];
   source?: string | null;
   study_id?: string | null;
   title?: string | null;
@@ -54,10 +102,13 @@ export type QueryV2SourceMeta = {
   returned_unique_studies: number;
   truncated: boolean;
   approximate: boolean;
-  reason: "unsupported_admin_level" | "budget_exhausted" | "upstream_unavailable" | "upstream_error" | null;
+  reason: "unsupported_admin_level" | "budget_exhausted" | "upstream_unavailable" | "upstream_error" | "state_enrichment_unavailable" | null;
 };
 
 export type QueryV2Meta = {
+  enrichment?: { status: string; limit?: number; truncated?: boolean; reason?: string | null };
+  enrichment_version?: string;
+  source_counts_overlap?: boolean;
   execution_status?: "complete" | "partial" | "timeout";
   timed_out_sources?: string[];
   completed_sources?: string[];
@@ -71,6 +122,7 @@ export type QueryV2Meta = {
 };
 
 export type QueryV2Response = {
+  reviewed_results?: {status: string; mode?: string; partial?: boolean; coverage?: {study:string;source:string;status:string;reason?:string}[]; graph: string; rows: import("../components/InterventionResults").ResultRow[]};
   results: StudyResult[];
   meta: QueryV2Meta;
 };

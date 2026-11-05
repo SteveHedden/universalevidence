@@ -1,0 +1,9 @@
+@prefix ue: <https://universalevidence.com/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pico: <http://data.cochrane.org/ontologies/pico/> .
+
+ue:intendedState a owl:ObjectProperty ;
+  rdfs:label "intended State addressed" ;
+  rdfs:domain pico:PICO ; rdfs:range ue:State ;
+  rdfs:comment "A reviewed study question context explicitly intends to address this State through its intervention programme. Does not assert the population currently has that condition, that the intervention is effective, or that delivery continues today. Requires located source evidence and independent review in the study implementation profile." .

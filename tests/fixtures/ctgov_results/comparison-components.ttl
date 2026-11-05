@@ -1,0 +1,95 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix pico: <http://data.cochrane.org/ontologies/pico/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ue: <https://universalevidence.com/ontology/> .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/6a8e94b6c19cc4debdb3d3744b1b4da1bb923f570d9466853967e7c85db524c5> a pico:InterventionGroup ;
+    rdfs:label "No assigned intervention control" ;
+    dcterms:description "Existing reviewed assigned-arm component mappings. Empty control set explicitly means no assigned intervention; it does not mean absence of background care." ;
+    dcterms:identifier "6a8e94b6c19cc4debdb3d3744b1b4da1bb923f570d9466853967e7c85db524c5" ;
+    dcterms:isPartOf <https://universalevidence.com/studies/aea/AEARCTR-0014624> ;
+    dcterms:source <https://gh.bmj.com/content/9/8/e015438> ;
+    dcterms:type "reviewed-complete-component-set" ;
+    ue:rawText "{\"components\": [], \"title\": \"No assigned intervention control\"}" .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/d898f88b7a03d101b1ba94c4ca3a39c0346f259f3900e93a44c6508c6c667498> a pico:InterventionGroup ;
+    rdfs:label "Home-installed growth chart with IYCF messages and parent orientation" ;
+    pico:intervention <https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/d898f88b7a03d101b1ba94c4ca3a39c0346f259f3900e93a44c6508c6c667498/component/8116a814e397b54c96acbbc798006b62a8e2a673705230be35b2ba413c20acbb>,
+        <https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/d898f88b7a03d101b1ba94c4ca3a39c0346f259f3900e93a44c6508c6c667498/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> ;
+    dcterms:description "Existing reviewed assigned-arm component mappings. Empty control set explicitly means no assigned intervention; it does not mean absence of background care." ;
+    dcterms:identifier "d898f88b7a03d101b1ba94c4ca3a39c0346f259f3900e93a44c6508c6c667498" ;
+    dcterms:isPartOf <https://universalevidence.com/studies/aea/AEARCTR-0014624> ;
+    dcterms:source <https://gh.bmj.com/content/9/8/e015438> ;
+    dcterms:type "reviewed-complete-component-set" ;
+    ue:rawText "{\"components\": [\"https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion\", \"https://universalevidence.com/vocab/interventions/NutritionEducation\"], \"title\": \"Home-installed growth chart with IYCF messages and parent orientation\"}" .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00> a pico:InterventionGroup ;
+    rdfs:label "Growth chart plus same daily SQ-LNS regimen" ;
+    pico:intervention <https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00/component/36c88ac2666cc117104ff64b59fb20501ee1879351aaf6ea41f232228374ca24>,
+        <https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00/component/8116a814e397b54c96acbbc798006b62a8e2a673705230be35b2ba413c20acbb>,
+        <https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> ;
+    dcterms:description "Existing reviewed assigned-arm component mappings. Empty control set explicitly means no assigned intervention; it does not mean absence of background care." ;
+    dcterms:identifier "dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00" ;
+    dcterms:isPartOf <https://universalevidence.com/studies/aea/AEARCTR-0014624> ;
+    dcterms:source <https://gh.bmj.com/content/9/8/e015438> ;
+    dcterms:type "reviewed-complete-component-set" ;
+    ue:rawText "{\"components\": [\"https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion\", \"https://universalevidence.com/vocab/interventions/NutritionEducation\", \"https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation\"], \"title\": \"Growth chart plus same daily SQ-LNS regimen\"}" .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/fd669a5382a5acf38a9cb4eb6b6324179000d9780c0b966ee88013eaab34433a> a pico:InterventionGroup ;
+    rdfs:label "Nutributter+ 20 g SQ-LNS daily; 30 sachets monthly" ;
+    pico:intervention <https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/fd669a5382a5acf38a9cb4eb6b6324179000d9780c0b966ee88013eaab34433a/component/36c88ac2666cc117104ff64b59fb20501ee1879351aaf6ea41f232228374ca24> ;
+    dcterms:description "Existing reviewed assigned-arm component mappings. Empty control set explicitly means no assigned intervention; it does not mean absence of background care." ;
+    dcterms:identifier "fd669a5382a5acf38a9cb4eb6b6324179000d9780c0b966ee88013eaab34433a" ;
+    dcterms:isPartOf <https://universalevidence.com/studies/aea/AEARCTR-0014624> ;
+    dcterms:source <https://gh.bmj.com/content/9/8/e015438> ;
+    dcterms:type "reviewed-complete-component-set" ;
+    ue:rawText "{\"components\": [\"https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation\"], \"title\": \"Nutributter+ 20 g SQ-LNS daily; 30 sachets monthly\"}" .
+
+<https://universalevidence.com/studies/ctgov/NCT00659061/result-group/17cb26a5419d52439ef65034a5c22d2bd04d375eb764ac4c7053bec1517fa0b1> a pico:InterventionGroup ;
+    rdfs:label "Advice Only" ;
+    pico:intervention <https://universalevidence.com/studies/ctgov/NCT00659061/result-group/17cb26a5419d52439ef65034a5c22d2bd04d375eb764ac4c7053bec1517fa0b1/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> ;
+    dcterms:description "Outcome group descriptions explicitly give feeding advice to both arms and Sprinkles additionally to OG000. Completeness covers assigned components at this taxonomy granularity, not dose or adherence." ;
+    dcterms:identifier "17cb26a5419d52439ef65034a5c22d2bd04d375eb764ac4c7053bec1517fa0b1" ;
+    dcterms:isPartOf <https://universalevidence.com/studies/ctgov/NCT00659061> ;
+    dcterms:source <https://clinicaltrials.gov/api/v2/studies/NCT00659061> ;
+    dcterms:type "reviewed-complete-component-set" ;
+    ue:rawText "{\"description\": \"Age-appropriate feeding advice given by LHWs as part of the standard nutrition messages given by all Lady Health Workers (LHWs) during their community visits.\", \"id\": \"OG001\", \"title\": \"Advice Only\"}" .
+
+<https://universalevidence.com/studies/ctgov/NCT00659061/result-group/95cc5d45a884caeb096c42f2a14ec6d526273ba0c27d500d526a44e88a3d78f0> a pico:InterventionGroup ;
+    rdfs:label "Sprinkle-Advice" ;
+    pico:intervention <https://universalevidence.com/studies/ctgov/NCT00659061/result-group/95cc5d45a884caeb096c42f2a14ec6d526273ba0c27d500d526a44e88a3d78f0/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038>,
+        <https://universalevidence.com/studies/ctgov/NCT00659061/result-group/95cc5d45a884caeb096c42f2a14ec6d526273ba0c27d500d526a44e88a3d78f0/component/a1a4b23abe5989b6f9734b9996851f20481176a924a66cf625a28b48182accc5> ;
+    dcterms:description "Outcome group descriptions explicitly give feeding advice to both arms and Sprinkles additionally to OG000. Completeness covers assigned components at this taxonomy granularity, not dose or adherence." ;
+    dcterms:identifier "95cc5d45a884caeb096c42f2a14ec6d526273ba0c27d500d526a44e88a3d78f0" ;
+    dcterms:isPartOf <https://universalevidence.com/studies/ctgov/NCT00659061> ;
+    dcterms:source <https://clinicaltrials.gov/api/v2/studies/NCT00659061> ;
+    dcterms:type "reviewed-complete-component-set" ;
+    ue:rawText "{\"description\": \"Sprinkles and age-appropriate feeding advice given by Lady Health Workers (LHWs). Age-appropriate feeding advice is part of the standard nutrition messages given by all Lady Health Workers (LHWs) during their community visits.\", \"id\": \"OG000\", \"title\": \"Sprinkle-Advice\"}" .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/d898f88b7a03d101b1ba94c4ca3a39c0346f259f3900e93a44c6508c6c667498/component/8116a814e397b54c96acbbc798006b62a8e2a673705230be35b2ba413c20acbb> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion> .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/d898f88b7a03d101b1ba94c4ca3a39c0346f259f3900e93a44c6508c6c667498/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/NutritionEducation> .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00/component/36c88ac2666cc117104ff64b59fb20501ee1879351aaf6ea41f232228374ca24> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation> .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00/component/8116a814e397b54c96acbbc798006b62a8e2a673705230be35b2ba413c20acbb> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/ChildGrowthMonitoringAndPromotion> .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/dc55ba7f20f0b839dfbe7602a583f2e00f98c2fa07cc63619cec28dd51429b00/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/NutritionEducation> .
+
+<https://universalevidence.com/studies/aea/AEARCTR-0014624/result-group/fd669a5382a5acf38a9cb4eb6b6324179000d9780c0b966ee88013eaab34433a/component/36c88ac2666cc117104ff64b59fb20501ee1879351aaf6ea41f232228374ca24> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation> .
+
+<https://universalevidence.com/studies/ctgov/NCT00659061/result-group/17cb26a5419d52439ef65034a5c22d2bd04d375eb764ac4c7053bec1517fa0b1/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/NutritionEducation> .
+
+<https://universalevidence.com/studies/ctgov/NCT00659061/result-group/95cc5d45a884caeb096c42f2a14ec6d526273ba0c27d500d526a44e88a3d78f0/component/871aab619d77b23291d287f6b3aa0de2d127ac25a38e833220078be800751038> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/NutritionEducation> .
+
+<https://universalevidence.com/studies/ctgov/NCT00659061/result-group/95cc5d45a884caeb096c42f2a14ec6d526273ba0c27d500d526a44e88a3d78f0/component/a1a4b23abe5989b6f9734b9996851f20481176a924a66cf625a28b48182accc5> a pico:Intervention ;
+    ue:taxonomyConcept <https://universalevidence.com/vocab/interventions/MicronutrientSupplementation> .
+

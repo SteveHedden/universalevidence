@@ -1,0 +1,118 @@
+{
+  "fixture_notice": "Read-only CT.gov result-field excerpt for regression testing; not a production study store. Other outcomes omitted.",
+  "hasResults": true,
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT04002908",
+      "orgStudyIdInfo": {
+        "id": "HSPH OPP1192260"
+      },
+      "organization": {
+        "fullName": "Harvard School of Public Health (HSPH)",
+        "class": "OTHER"
+      },
+      "briefTitle": "Low-birthweight Infant Feeding Exploration",
+      "officialTitle": "Low-birthweight Infant Feeding Exploration",
+      "acronym": "LIFE"
+    },
+    "eligibilityModule": {
+      "eligibilityCriteria": "Inclusion Criteria:\n\n* Infant birthweight between 1500 and \\<2500g (according to chart and then verified by study staff).\n* Residence within catchment area of facility.\n* Mother's consent obtained for herself and infant.\n* Newborns must be enrolled within 72 hours of birth.\n* Women (mothers) who are of age of majority in their respective countries.\n\nExclusion Criteria:\n\n* Mother does not meet the local age of majority.\n* Infant very low birthweight \\<1500g.\n* Infant has congenital abnormality that interferes with feeding, which includes: Cleft lip or palate; Hydrocephalus; Gastrointestinal tract anomalies including gastroschisis, omphalocele, or anal atresia; Neural tube defects; Congenital cardiac defects; Suspected Trisomy 21; Suspected TORCH infection such as congenital rubella, cytomegalovirus (CMV), toxoplasmosis, or syphilis.\n* Critical or severe illness jeopardizing early survival, specifically, investigators will exclude infants with severe encephalopathy as determined by modified Sarnat criteria.\n* If the Infant dies before enrollment can occur.\n* Infant has a twin or triplet that has died.\n* Plans to leave the study area before end of data collection.\n* Infants must be enrolled in the prospective study within 72 hours of birth. If the infant is older than 72 hours at the time of screening, s/he will be ineligible for the study.\n* Maternal death: The study will exclude cases of maternal death that occur during labor and delivery (or at any time before the consenting process would begin for this study).\n* Maternal deaths will count as an exclusion criterion for the prospective cohort if they occur before enrollment. In the event that a mother dies at any time after enrollment the infant will still be retained in the cohort.\n\n  6-Month Extension Study Criteria:\n\nInclusion criteria for the mother/infant pair are:\n\n* Currently enrolled in the LIFE study and fulfills all original inclusion criteria.\n* Mother's or surrogate consent obtained for herself and infant for another 6 months of follow up.\n\nExclusion criteria for the mother/infant pair are:\n\n\u2022 Not previously enrolled in the LIFE study in addition to all original exclusion criteria.",
+      "healthyVolunteers": true,
+      "sex": "ALL",
+      "minimumAge": "16 Years",
+      "maximumAge": "59 Years",
+      "stdAges": [
+        "CHILD",
+        "ADULT"
+      ],
+      "studyPopulation": "Mothers and their LBW babies who are either born in the study health facilities or arrive within 72 hours of birth and meet eligibility criteria",
+      "samplingMethod": "NON_PROBABILITY_SAMPLE"
+    },
+    "designModule": {
+      "studyType": "OBSERVATIONAL",
+      "patientRegistry": false,
+      "designInfo": {
+        "observationalModel": "COHORT",
+        "timePerspective": "PROSPECTIVE"
+      },
+      "enrollmentInfo": {
+        "count": 3188,
+        "type": "ACTUAL"
+      }
+    },
+    "armsInterventionsModule": {
+      "armGroups": [
+        {
+          "label": "In-facility Observations",
+          "description": "Mothers and their LBW babies will be observed starting within 6 hours of birth until the baby is discharged from the health facility."
+        },
+        {
+          "label": "Prospective cohort study - Quantitative",
+          "description": "Mothers and their low-birth weight babies will be enrolled 72 hours after birth and followed through 12 months postpartum. The prospective cohort survey (which includes anthropometric measurements and feeding observations) occurs at multiple time points over this 12-month period."
+        },
+        {
+          "label": "Prospective cohort study - Qualitative",
+          "description": "Research specialists at each site will be speaking to key informants (includes doctors, nurses, midwives, community health workers (CHWs), Ministry of Health (MOH) officials, supply chain \\& milk bank experts) who are knowledgeable about breastfeeding policy, supply chain, or milk banks. Clinicians in study health facilities who work on labor and delivery, postnatal, newborn and neonatal ICU wards. They participate in In-depth interviews. Mothers, family members and health care workers of LBW babies, as well as community leaders (including religious leaders) who are knowledgeable about infant feeding in their communities will participate in focus group discussions. Focus group discussion will take up to 2 hours. In-depth interviews will take up to 1 hour.\n\nMothers (6-month extension): Mothers chosen and consented for in-depth interviews (IDIs) will include those currently enrolled in the prospective cohort. Additionally, their infants need to be between 9 and 12 months of age."
+        },
+        {
+          "label": "Retrospective Chart review",
+          "description": "The retrospective chart review is a review of secondary data of mothers and their LBW babies who were born in the study health facilities prior to the start of the study."
+        },
+        {
+          "label": "Donor Human Milk Readiness Assessment",
+          "description": "Key stakeholders in the area of newborn health who determine policy and procedures or who are directly involved with the provision of care. This includes clinicians, nurses, lactation/nutrition specialists, hospital leadership and/or Ministry of Health officials present in the study health facilities.\n\nThis is a one-time data collection exercise in the form of either: (1) a largely qualitative facility readiness assessment tool with some qualitative questions for facility staff or (2) a facility tool observing the \"flow of milk\" along with key informant interviews in the study facilities. This could take anywhere from 1hr to a day depending on the tool administered, key informants involved and size of the study facility."
+        }
+      ]
+    }
+  },
+  "resultsSection": {
+    "outcomeMeasuresModule": {
+      "outcomeMeasures": [
+        {
+          "type": "PRIMARY",
+          "title": "Length-for-Age Z-score",
+          "description": "A Child's length-for-age z-score at 6 months of age. Length-for-age z-scores (LAZ) are based on World Health Organization (WHO) child growth standards for term infants and INTERGROWTH-21st standards were used for preterm infants. A LAZ Z-score of 0 represents the population mean and scores below 0 represent a worse outcome. Further, Z-scores less than -2.0 indicates stunting in the infant.",
+          "populationDescription": "Low birth weight infants. This outcome was only collected on the quantitative prospective cohort population.",
+          "reportingStatus": "POSTED",
+          "paramType": "MEAN",
+          "dispersionType": "Standard Deviation",
+          "unitOfMeasure": "Z-score",
+          "timeFrame": "At 6 month of age",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Prospective Cohort Study - Quantitative",
+              "description": "Mothers and their low-birth weight babies will be enrolled 72 hours after birth and followed through 12 months postpartum. The prospective cohort survey (which includes anthropometric measurements and feeding observations) occurs at multiple time points over this 12-month period.\n\nThis outcome (like all others reported) was only assessed in the prospective cohort and not in the in-facility observations, Donor human milk readiness assessment, prospective cohort qualitative or the retrospective chart review."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "1114"
+                }
+              ]
+            }
+          ],
+          "classes": [
+            {
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "-1.43",
+                      "spread": "1.28"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

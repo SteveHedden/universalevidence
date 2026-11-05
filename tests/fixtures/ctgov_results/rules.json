@@ -1,0 +1,71 @@
+{
+  "version": "task258-reviewed-v2",
+  "scope": "isolated three-study validation; not deployed",
+  "outcomes": [
+    {
+      "key": "ctgov-indicator:v1|%7B%22description%22%3A%22Change%20in%20length-for-age%20z%20score%20from%20enrollment%20to%20end%20of%20study%206%20months%22%2C%22paramType%22%3A%22MEAN%22%2C%22populationDescription%22%3Anull%2C%22record_id%22%3A%22NCT02472262%22%2C%22timeFrame%22%3A%226%20months%22%2C%22title%22%3A%22Change%20in%20Length-for-age%20z%20Score%20Over%206%20Months%20From%20Enrollment%20to%20End%20of%20Study.%22%2C%22unitOfMeasure%22%3A%22z-score%22%7D",
+      "indicator": "https://universalevidence.com/vocab/states/HeightForAgeZScore",
+      "state": "https://universalevidence.com/vocab/states/Stunting",
+      "context_sha256": "122ce197bc194c1a7f130ae0ea54798578288339486a1bc0599275cdaca21c62",
+      "review_reason": "Continuous length-for-age z-score fits HeightForAgeZScore. The mean change is a statistic on that metric, not prevalence or an intervention effect. Growth reference is unreported; preserve this limitation.  Isolated coordinator correction retains ChildGrowth and adds WHO-supported Stunting measurement applicability. Direction remains scoped to HAZ/LAZ, never inferred as the direction of stunting prevalence.",
+      "arm_rule": {
+        "kind": "within_arm_change",
+        "quantity": "length-for-age z-score",
+        "semantics": "explicit",
+        "statistic": "difference",
+        "orientation": "forward",
+        "scale": "identity",
+        "comparison": "end of six months minus enrollment within the same group; not an intervention effect"
+      },
+      "analysis_rules": {}
+    },
+    {
+      "key": "ctgov-indicator:v1|%7B%22description%22%3A%22Stunted%20defined%20as%20Height%20for%20Age%20Z-score%20%5C%5C%3C%20-2%20standard%20deviation%22%2C%22paramType%22%3A%22NUMBER%22%2C%22populationDescription%22%3A%22Those%20who%20had%20complete%20anthropometric%20measurements%20at%20endline%22%2C%22record_id%22%3A%22NCT00659061%22%2C%22timeFrame%22%3A%22Baseline%20measurements%20taken%20at%20time%20of%20enrollment%3B%20Endline%20measurments%20taken%204-5%20months%20post%20enrollment%22%2C%22title%22%3A%22Percentage%20of%20Participants%20With%20Stunted%20Growth%22%2C%22unitOfMeasure%22%3A%22percentage%20of%20participants%22%7D",
+      "indicator": "https://universalevidence.com/vocab/states/SDG221UnderFiveStuntingPrevalence",
+      "state": "https://universalevidence.com/vocab/states/Stunting",
+      "context_sha256": "db31b5ac54a72516316118af6e264661850a39a5ae50dbd7486c40892c151233",
+      "review_reason": "Children enrolled at 6-18 months; endline is 4-5 months later. Source defines HAZ below -2 and reports percentages of assessed children. Reuse under-five stunting prevalence as closeMatch, preserving unspecified growth reference; do not claim exact SDG/WHO comparability. Advice is present in both groups.",
+      "arm_rule": {
+        "kind": "arm_level"
+      },
+      "analysis_rules": {},
+      "derived": [
+        {
+          "kind": "derived_comparison",
+          "quantity": "stunting prevalence",
+          "semantics": "explicit",
+          "statistic": "difference",
+          "orientation": "forward",
+          "scale": "identity",
+          "formula": "left - right",
+          "source_unit": "percentage of participants",
+          "unit": "percentage points",
+          "operands": [
+            {
+              "class": "Endline Stunted %",
+              "category": null,
+              "groupId": "OG000"
+            },
+            {
+              "class": "Endline Stunted %",
+              "category": null,
+              "groupId": "OG001"
+            }
+          ],
+          "comparison": "Sprinkle-Advice minus Advice Only; unadjusted rounded endline percentage difference, not an effect of advice alone"
+        }
+      ]
+    },
+    {
+      "key": "ctgov-indicator:v1|%7B%22description%22%3A%22A%20Child%27s%20length-for-age%20z-score%20at%206%20months%20of%20age.%20Length-for-age%20z-scores%20%28LAZ%29%20are%20based%20on%20World%20Health%20Organization%20%28WHO%29%20child%20growth%20standards%20for%20term%20infants%20and%20INTERGROWTH-21st%20standards%20were%20used%20for%20preterm%20infants.%20A%20LAZ%20Z-score%20of%200%20represents%20the%20population%20mean%20and%20scores%20below%200%20represent%20a%20worse%20outcome.%20Further%2C%20Z-scores%20less%20than%20-2.0%20indicates%20stunting%20in%20the%20infant.%22%2C%22paramType%22%3A%22MEAN%22%2C%22populationDescription%22%3A%22Low%20birth%20weight%20infants.%20This%20outcome%20was%20only%20collected%20on%20the%20quantitative%20prospective%20cohort%20population.%22%2C%22record_id%22%3A%22NCT04002908%22%2C%22timeFrame%22%3A%22At%206%20month%20of%20age%22%2C%22title%22%3A%22Length-for-Age%20Z-score%22%2C%22unitOfMeasure%22%3A%22Z-score%22%7D",
+      "indicator": "https://universalevidence.com/vocab/states/HeightForAgeZScore",
+      "state": "https://universalevidence.com/vocab/states/Stunting",
+      "context_sha256": "3f745a392de81fd4c6722e47bd2e8fe02e706a583e64255036d9dc5d299db4fb",
+      "review_reason": "Continuous LAZ at six months fits HeightForAgeZScore. Source explicitly mixes WHO reference for term infants and INTERGROWTH-21st for preterm infants. Preserve that distinction and low-birthweight cohort context. This is a group level without a comparator; never classify its negative z-score as a decrease. The twelve-month description contains a conflicting underweight interpretation and is left unsupported. Isolated coordinator correction retains ChildGrowth and adds WHO-supported Stunting measurement applicability. Direction remains scoped to HAZ/LAZ, never inferred as the direction of stunting prevalence.",
+      "arm_rule": {
+        "kind": "arm_level"
+      },
+      "analysis_rules": {}
+    }
+  ]
+}

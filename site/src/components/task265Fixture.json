@@ -1,0 +1,3238 @@
+{
+  "fresh": {
+    "status": "available",
+    "graph": "live-results-v3",
+    "mode": "api-first",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "24.75",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG000",
+              "title": "Control",
+              "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+            },
+            "class": "Baseline",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "11.83"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG000",
+              "value": "24.75",
+              "spread": "11.83"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+        ],
+        "value": "25.17",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG001",
+              "title": "Expressive Writing (EW)",
+              "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+            },
+            "class": "Baseline",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "12.07"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG001",
+              "value": "25.17",
+              "spread": "12.07"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/2",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+        ],
+        "value": "29.06",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG002",
+              "title": "Self-Affirmation (SA)",
+              "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+            },
+            "class": "Baseline",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "13.41"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/2",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG002",
+              "value": "29.06",
+              "spread": "13.41"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "21.03",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG000",
+              "title": "Control",
+              "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+            },
+            "class": "Post-Intervention",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "33"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "33"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "11.79"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/0",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG000",
+              "value": "21.03",
+              "spread": "11.79"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+        ],
+        "value": "17.42",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG001",
+              "title": "Expressive Writing (EW)",
+              "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+            },
+            "class": "Post-Intervention",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "33"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "33"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "11.46"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/1",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG001",
+              "value": "17.42",
+              "spread": "11.46"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/2",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+        ],
+        "value": "21.73",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG002",
+              "title": "Self-Affirmation (SA)",
+              "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+            },
+            "class": "Post-Intervention",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "33"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "33"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "13.45"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/2",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG002",
+              "value": "21.73",
+              "spread": "13.45"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/2/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "23.44",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG000",
+              "title": "Control",
+              "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+            },
+            "class": "3 Months",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "27"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "32"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "26"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "13.09"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/2/categories/0/measurements/0",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG000",
+              "value": "23.44",
+              "spread": "13.09"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/2/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+        ],
+        "value": "18.45",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG001",
+              "title": "Expressive Writing (EW)",
+              "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+            },
+            "class": "3 Months",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "27"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "32"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "26"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "10.97"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/2/categories/0/measurements/1",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG001",
+              "value": "18.45",
+              "spread": "10.97"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/2/categories/0/measurements/2",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+        ],
+        "value": "22.92",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "OG002",
+              "title": "Self-Affirmation (SA)",
+              "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+            },
+            "class": "3 Months",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "OG000",
+                    "value": "27"
+                  },
+                  {
+                    "groupId": "OG001",
+                    "value": "32"
+                  },
+                  {
+                    "groupId": "OG002",
+                    "value": "26"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "14.61"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/2/categories/0/measurements/2",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "OG002",
+              "value": "22.92",
+              "spread": "14.61"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT03751020",
+        "measurement": "https://clinicaltrials.gov/study/NCT03751020/response/9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "-6.34",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": null,
+          "semantics": "unsupported",
+          "scale": "identity",
+          "quantity": "Mean Difference (Net) of CES-D 20-item total score",
+          "time_scope": null,
+          "model_context": "Mixed Models Analysis",
+          "summary_eligible": false,
+          "estimand": "interaction",
+          "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+          "ordered_groups": [],
+          "ordered_components": [],
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "statistic": "Mean Difference (Net)",
+            "groups": [
+              {
+                "id": "OG000",
+                "title": "Control",
+                "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+              },
+              {
+                "id": "OG001",
+                "title": "Expressive Writing (EW)",
+                "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+              }
+            ],
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "adjustment": null,
+            "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time."
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "nonscalar",
+              "reason": "Threshold or nonnumeric source value"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": null,
+          "pValue": "<0.01",
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "-11.03",
+          "ciUpperLimit": "-1.64"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "<0.01",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-6.34",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-11.03",
+              "ciUpperLimit": "-1.64"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Change in Depression.",
+              "description": "Depression will be measured using the Center for Epidemiological Studies -- Depression Scale (CESD). An overall depression score is computed as the sum of 20 items, with items 3, 11, 14, and 16 reversed. In cases with internally missing data (items not answered), the sums are computed after imputation of the missing values: # items on scale / # actually answered, multiplied by the sum obtained from the answered items. A range of 0-60, with higher scores indicating more depressive symptomatology during the past week.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "OG000",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "OG001",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "OG002",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT03751020",
+            "citation": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      }
+    ],
+    "coverage": [
+      {
+        "study": "NCT03751020",
+        "source": "ctgov",
+        "title": "Development and Preliminary Trial of a Brief, Portable Health Intervention for Rural Sexual Minority Emerging Adults",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "coverage": [
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+            "title": "Change in Depression.",
+            "source_analysis": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "<0.01",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-6.34",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-11.03",
+              "ciUpperLimit": "-1.64"
+            }
+          },
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/1/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+            "title": "Change in Psychological Distress.",
+            "source_analysis": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "0.03",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-0.33",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-0.62",
+              "ciUpperLimit": "-0.03"
+            }
+          },
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/2/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+            "title": "Change in Anxiety.",
+            "source_analysis": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "0.07",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-4.03",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-8.55",
+              "ciUpperLimit": "0.47"
+            }
+          },
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/3/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+            "title": "Change in Suicidality - Suicidal Ideation.",
+            "source_analysis": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "0.73",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "1.12",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-6.48",
+              "ciUpperLimit": "8.77"
+            }
+          },
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/4/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+            "title": "Change in Alcohol Use.",
+            "source_analysis": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "0.10",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-1.28",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-2.80",
+              "ciUpperLimit": "0.24"
+            }
+          },
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/5/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Source must state ordered group subtraction; group-ID order and \"between\" do not establish direction; Source must specify the treatment-by-time change contrast and its two assessment classes",
+            "title": "Change in Drug Use.",
+            "source_analysis": {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "groupDescription": "The primary comparison was between EW and control to test the interaction between treatment and time.",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "0.76",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "0.09",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-1.19",
+              "ciUpperLimit": "1.57"
+            }
+          },
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/19",
+            "title": "Change in Risk Taking",
+            "status": "not_collected",
+            "reason": "This outcome measure was never collected."
+          }
+        ],
+        "version": "live-results-v3",
+        "sha256": "9ec3388eef1ad4cb533b6d7895e98f668258eba9324ee3023dc5c087a64e51e7",
+        "retrieved_at": "2026-10-13T02:27:10.432129+00:00",
+        "status": "available",
+        "interpretation_seconds": 0.055483332835137844
+      }
+    ],
+    "partial": false,
+    "local_evidence_status": "not_configured",
+    "scope": "Results cover returned studies only; unsupported interpretations are disclosed. No API paper supplementation."
+  },
+  "synthetic": {
+    "status": "available",
+    "graph": "live-results-v3",
+    "mode": "api-first",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "24.75",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "TEST_CONTROL_41",
+              "title": "Control",
+              "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+            },
+            "class": "Baseline",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "11.83"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "TEST_CONTROL_41",
+              "value": "24.75",
+              "spread": "11.83"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+        ],
+        "value": "25.17",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "TEST_WRITING_17",
+              "title": "Expressive Writing (EW)",
+              "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+            },
+            "class": "Baseline",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "12.07"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "TEST_WRITING_17",
+              "value": "25.17",
+              "spread": "12.07"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/2",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+        ],
+        "value": "29.06",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "TEST_AFFIRMATION_9",
+              "title": "Self-Affirmation (SA)",
+              "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+            },
+            "class": "Baseline",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "13.41"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/2",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "TEST_AFFIRMATION_9",
+              "value": "29.06",
+              "spread": "13.41"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "23.44",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "TEST_CONTROL_41",
+              "title": "Control",
+              "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+            },
+            "class": "3 Months",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "27"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "32"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "26"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "13.09"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/0",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "TEST_CONTROL_41",
+              "value": "23.44",
+              "spread": "13.09"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+        ],
+        "value": "18.45",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "TEST_WRITING_17",
+              "title": "Expressive Writing (EW)",
+              "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+            },
+            "class": "3 Months",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "27"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "32"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "26"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "10.97"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/1",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "TEST_WRITING_17",
+              "value": "18.45",
+              "spread": "10.97"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/2",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+        ],
+        "value": "22.92",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "CES-D 20-item total score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/AffirmationIntervention"
+            ],
+            "mapping_status": "mapped",
+            "mapping_reason": null,
+            "statistic": "MEAN",
+            "dispersionType": "Standard Deviation",
+            "group": {
+              "id": "TEST_AFFIRMATION_9",
+              "title": "Self-Affirmation (SA)",
+              "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+            },
+            "class": "3 Months",
+            "category": null,
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "outcome_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "36"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "36"
+                  }
+                ]
+              }
+            ],
+            "class_denoms": [
+              {
+                "units": "Participants",
+                "counts": [
+                  {
+                    "groupId": "TEST_CONTROL_41",
+                    "value": "27"
+                  },
+                  {
+                    "groupId": "TEST_WRITING_17",
+                    "value": "32"
+                  },
+                  {
+                    "groupId": "TEST_AFFIRMATION_9",
+                    "value": "26"
+                  }
+                ]
+              }
+            ]
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "valid",
+              "reason": null
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": "Standard Deviation",
+          "spread": "14.61"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/1/categories/0/measurements/2",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupId": "TEST_AFFIRMATION_9",
+              "value": "22.92",
+              "spread": "14.61"
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT12345678",
+        "measurement": "https://clinicaltrials.gov/study/NCT12345678/response/75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/CESD20TotalScore",
+        "indicator_label": "CES-D 20-item total score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Depression"
+        ],
+        "measure_definition": "Total symptom score on the 20-item Center for Epidemiological Studies Depression Scale; range 0-60, with higher scores indicating more depressive symptoms during the past week.",
+        "scope_notes": [
+          "Source reverse-item numbering is preserved in the contextual key and requires clarification before implementing a scoring algorithm; this concept does not establish a depression diagnosis. Source evidence: resultsSection.outcomeMeasuresModule.outcomeMeasures[0]. Taxonomy identity does not imply supported statistical interpretation."
+        ],
+        "result_interventions": [
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "value": "-6.34",
+        "unit": "units on a scale",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": "forward",
+          "semantics": "explicit",
+          "scale": "identity",
+          "quantity": "Mean Difference (Net) of CES-D 20-item total score",
+          "time_scope": "baseline to 3 months",
+          "model_context": "Mixed Models Analysis \u00b7 Treatment-by-time interaction: change from Baseline to 3 Months.",
+          "summary_eligible": false,
+          "estimand": "interaction",
+          "ordered_groups": [
+            "Expressive Writing (EW)",
+            "Control"
+          ],
+          "ordered_components": [
+            [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ]
+          ],
+          "attribution": {
+            "tested": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention"
+            ],
+            "comparator": [
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "background": [],
+            "package": false
+          },
+          "displayable": true,
+          "context": {
+            "components": [
+              "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+              "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+            ],
+            "mapping_status": "mapped",
+            "statistic": "Mean Difference (Net)",
+            "groups": [
+              {
+                "id": "TEST_WRITING_17",
+                "title": "Expressive Writing (EW)",
+                "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+              },
+              {
+                "id": "TEST_CONTROL_41",
+                "title": "Control",
+                "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+              }
+            ],
+            "population": "Data were analyzed intention to treat.",
+            "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+            "adjustment": "Treatment-by-time interaction: change from Baseline to 3 Months.",
+            "groupDescription": "Expressive Writing (EW) minus Control"
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "nonscalar",
+              "reason": "Threshold or nonnumeric source value"
+            }
+          }
+        },
+        "timing": "Baseline, Post Intervention (day 5), and 3 Months.",
+        "subgroup": "Data were analyzed intention to treat.",
+        "uncertainty": {
+          "dispersionType": null,
+          "pValue": "<0.01",
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "-11.03",
+          "ciUpperLimit": "-1.64"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+            "rule_version": "live-results-v3",
+            "raw": {
+              "groupIds": [
+                "TEST_WRITING_17",
+                "TEST_CONTROL_41"
+              ],
+              "groupDescription": "Expressive Writing (EW) minus Control",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "<0.01",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-6.34",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-11.03",
+              "ciUpperLimit": "-1.64",
+              "statisticalComment": "Treatment-by-time interaction: change from Baseline to 3 Months."
+            },
+            "outcome": {
+              "type": "PRIMARY",
+              "title": "Synthetic reviewed score",
+              "description": "A reviewed 20-item score; observed assessments, not computed changes.",
+              "populationDescription": "Data were analyzed intention to treat.",
+              "reportingStatus": "POSTED",
+              "paramType": "MEAN",
+              "dispersionType": "Standard Deviation",
+              "unitOfMeasure": "units on a scale",
+              "timeFrame": "Baseline, Post Intervention (day 5), and 3 Months.",
+              "groups": [
+                {
+                  "id": "TEST_CONTROL_41",
+                  "title": "Control",
+                  "description": "Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days.\n\nControl: Participants randomly assigned to the control condition will be asked to write about what they have done since waking up that morning for 20 minutes across 3 consecutive days. This control matches the time and activity of the EW and SA arms and has been implemented across dozens of EW and SA studies."
+                },
+                {
+                  "id": "TEST_WRITING_17",
+                  "title": "Expressive Writing (EW)",
+                  "description": "Expressive Writing (EW) prompts individuals to write about personally stressful events, potentially enabling cognitive processing of unresolved, psychological and physiological stressors.\n\nExpressive Writing (EW) Intervention: The EW intervention will utilize the procedures piloted earlier with gay and bisexual male college students in urban and rural regions of the US. In this condition, participants will be instructed to write for 20 minutes across three consecutive days in a free-form manner about the most stressful or traumatic LGB-related event that they have encountered."
+                },
+                {
+                  "id": "TEST_AFFIRMATION_9",
+                  "title": "Self-Affirmation (SA)",
+                  "description": "Self-Affirmation (SA) interventions prompt individuals to write advice to a (hypothetical) similarly stigmatized person regarding how best to cope with stigma-related stress. By affirming one's own stigmatized identity through the process of helping another similarly stigmatized person.\n\nSelf-Affirmation (SA) Intervention: The SA intervention will ask participants to read a brief description, over the course of 3 consecutive days, of a (hypothetical) LGB youth who is facing minority stress. Each day's description will contain a different LGB youth facing a different stigma-related stressor derived from Phase 1 and 2 interviews. Participants will then be asked to write a letter for 20 minutes to advise the LGB youth how best to cope with minority stress drawing on their personal experiences."
+                }
+              ],
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "TEST_CONTROL_41",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_WRITING_17",
+                      "value": "36"
+                    },
+                    {
+                      "groupId": "TEST_AFFIRMATION_9",
+                      "value": "36"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT12345678",
+            "citation": "Synthetic explicit net interaction \u2014 test evidence only"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ]
+      }
+    ],
+    "coverage": [
+      {
+        "study": "NCT12345678",
+        "source": "ctgov",
+        "title": "Synthetic explicit net interaction \u2014 test evidence only",
+        "discovery_interventions": [
+          "https://universalevidence.com/vocab/interventions/AffirmationIntervention",
+          "https://universalevidence.com/vocab/interventions/ExpressiveWritingIntervention",
+          "https://universalevidence.com/vocab/interventions/NeutralWritingComparatorIntervention"
+        ],
+        "coverage": [
+          {
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "status": "unsupported_summary",
+            "reason": "Reported interaction is displayable but excluded from effect-direction summaries and ranking",
+            "title": "Synthetic reviewed score",
+            "source_analysis": {
+              "groupIds": [
+                "TEST_WRITING_17",
+                "TEST_CONTROL_41"
+              ],
+              "groupDescription": "Expressive Writing (EW) minus Control",
+              "nonInferiorityType": "SUPERIORITY",
+              "pValue": "<0.01",
+              "statisticalMethod": "Mixed Models Analysis",
+              "paramType": "Mean Difference (Net)",
+              "paramValue": "-6.34",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "-11.03",
+              "ciUpperLimit": "-1.64",
+              "statisticalComment": "Treatment-by-time interaction: change from Baseline to 3 Months."
+            }
+          }
+        ],
+        "version": "live-results-v3",
+        "sha256": "75b45510bc09d1406850effb51336d880018b900906b2f06ffeb5157878668d4",
+        "retrieved_at": "2026-10-13T02:27:11.013404+00:00",
+        "status": "available",
+        "interpretation_seconds": 0.000975416973233223
+      }
+    ],
+    "partial": false,
+    "local_evidence_status": "not_configured",
+    "scope": "Results cover returned studies only; unsupported interpretations are disclosed. No API paper supplementation."
+  }
+}

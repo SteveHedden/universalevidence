@@ -1,0 +1,956 @@
+[
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+    "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+    "indicator_label": "Height-for-age z-score",
+    "states": [
+      "https://universalevidence.com/vocab/states/Stunting",
+      "https://universalevidence.com/vocab/states/ChildGrowth"
+    ],
+    "value": "0.3",
+    "unit": "z-score",
+    "direction": "unknown/unsupported",
+    "comparison": {
+      "kind": "arm_level",
+      "quantity": "height-for-age z-score",
+      "reason": "Descriptive measurement; not an intervention effect",
+      "context": {
+        "statistic": "MEAN",
+        "dispersionType": null,
+        "group": {
+          "id": "G1",
+          "title": "Education"
+        },
+        "class": null,
+        "category": null,
+        "population": null,
+        "timeFrame": "6 months",
+        "outcome_denoms": null,
+        "class_denoms": null
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "missing",
+          "reason": "No explicitly identified interval supplied"
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "sha256": "a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupId": "G1",
+          "value": "0.3"
+        },
+        "outcome": {
+          "title": "Height-for-age z-score",
+          "unitOfMeasure": "z-score",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+    "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+    "indicator_label": "Height-for-age z-score",
+    "states": [
+      "https://universalevidence.com/vocab/states/Stunting",
+      "https://universalevidence.com/vocab/states/ChildGrowth"
+    ],
+    "value": "0.1",
+    "unit": "z-score",
+    "direction": "unknown/unsupported",
+    "comparison": {
+      "kind": "arm_level",
+      "quantity": "height-for-age z-score",
+      "reason": "Descriptive measurement; not an intervention effect",
+      "context": {
+        "statistic": "MEAN",
+        "dispersionType": null,
+        "group": {
+          "id": "G2",
+          "title": "Control"
+        },
+        "class": null,
+        "category": null,
+        "population": null,
+        "timeFrame": "6 months",
+        "outcome_denoms": null,
+        "class_denoms": null
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "missing",
+          "reason": "No explicitly identified interval supplied"
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "sha256": "a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupId": "G2",
+          "value": "0.1"
+        },
+        "outcome": {
+          "title": "Height-for-age z-score",
+          "unitOfMeasure": "z-score",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+    "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+    "indicator_label": "Height-for-age z-score",
+    "states": [
+      "https://universalevidence.com/vocab/states/Stunting",
+      "https://universalevidence.com/vocab/states/ChildGrowth"
+    ],
+    "value": "0.2",
+    "unit": "z-score",
+    "direction": "increase",
+    "comparison": {
+      "kind": "source_comparison",
+      "statistic": "difference",
+      "orientation": "forward",
+      "semantics": "explicit",
+      "scale": "identity",
+      "quantity": "Mean Difference of height-for-age z-score",
+      "context": {
+        "statistic": "Mean Difference",
+        "groups": [
+          {
+            "id": "G1",
+            "title": "Education"
+          },
+          {
+            "id": "G2",
+            "title": "Control"
+          }
+        ],
+        "population": null,
+        "timeFrame": "6 months",
+        "adjustment": null,
+        "groupDescription": "Education minus Control"
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "valid",
+          "reason": null,
+          "lower": {
+            "status": "valid",
+            "reason": null
+          },
+          "upper": {
+            "status": "valid",
+            "reason": null
+          }
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null,
+      "ciPctValue": "95",
+      "ciNumSides": "TWO_SIDED",
+      "ciLowerLimit": "0.1",
+      "ciUpperLimit": "0.3"
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "sha256": "a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupIds": [
+            "G1",
+            "G2"
+          ],
+          "groupDescription": "Education minus Control",
+          "paramType": "Mean Difference",
+          "paramValue": "0.2",
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "outcome": {
+          "title": "Height-for-age z-score",
+          "unitOfMeasure": "z-score",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+    "summary_mapping": {
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/NutritionEducation"
+      ],
+      "comparator": [],
+      "background": [],
+      "package": false,
+      "group_labels": [
+        "Education",
+        "Control"
+      ],
+      "selected": true,
+      "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+      "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a88fc747e0ec3abb1352a9a0d621acbff8aa348c5506efc708379f925ae10a66/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+      "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+      "unit": "z-score",
+      "contrast_id": "e21d520a16dc81cd9d527cdd9cb98bfe1840251135e952aa060b21b4c7da3b68",
+      "model_context": "Mean Difference of height-for-age z-score",
+      "effect_multiplier": 1
+    }
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+    "indicator": "https://universalevidence.com/vocab/indicators/BloodPressureMeasurement",
+    "indicator_label": "Blood pressure measurement",
+    "states": [
+      "https://universalevidence.com/vocab/states/CardiovascularDiseases"
+    ],
+    "value": "0.3",
+    "unit": "mmHg",
+    "direction": "unknown/unsupported",
+    "comparison": {
+      "kind": "arm_level",
+      "quantity": "systolic blood pressure",
+      "reason": "Descriptive measurement; not an intervention effect",
+      "context": {
+        "statistic": "MEAN",
+        "dispersionType": null,
+        "group": {
+          "id": "G1",
+          "title": "Education"
+        },
+        "class": null,
+        "category": null,
+        "population": null,
+        "timeFrame": "6 months",
+        "outcome_denoms": null,
+        "class_denoms": null
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "missing",
+          "reason": "No explicitly identified interval supplied"
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "sha256": "7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupId": "G1",
+          "value": "0.3"
+        },
+        "outcome": {
+          "title": "Systolic blood pressure",
+          "unitOfMeasure": "mmHg",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+    "indicator": "https://universalevidence.com/vocab/indicators/BloodPressureMeasurement",
+    "indicator_label": "Blood pressure measurement",
+    "states": [
+      "https://universalevidence.com/vocab/states/CardiovascularDiseases"
+    ],
+    "value": "0.1",
+    "unit": "mmHg",
+    "direction": "unknown/unsupported",
+    "comparison": {
+      "kind": "arm_level",
+      "quantity": "systolic blood pressure",
+      "reason": "Descriptive measurement; not an intervention effect",
+      "context": {
+        "statistic": "MEAN",
+        "dispersionType": null,
+        "group": {
+          "id": "G2",
+          "title": "Control"
+        },
+        "class": null,
+        "category": null,
+        "population": null,
+        "timeFrame": "6 months",
+        "outcome_denoms": null,
+        "class_denoms": null
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "missing",
+          "reason": "No explicitly identified interval supplied"
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "sha256": "7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupId": "G2",
+          "value": "0.1"
+        },
+        "outcome": {
+          "title": "Systolic blood pressure",
+          "unitOfMeasure": "mmHg",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+    "indicator": "https://universalevidence.com/vocab/indicators/BloodPressureMeasurement",
+    "indicator_label": "Blood pressure measurement",
+    "states": [
+      "https://universalevidence.com/vocab/states/CardiovascularDiseases"
+    ],
+    "value": "0.2",
+    "unit": "mmHg",
+    "direction": "increase",
+    "comparison": {
+      "kind": "source_comparison",
+      "statistic": "difference",
+      "orientation": "forward",
+      "semantics": "explicit",
+      "scale": "identity",
+      "quantity": "Mean Difference of systolic blood pressure",
+      "context": {
+        "statistic": "Mean Difference",
+        "groups": [
+          {
+            "id": "G1",
+            "title": "Education"
+          },
+          {
+            "id": "G2",
+            "title": "Control"
+          }
+        ],
+        "population": null,
+        "timeFrame": "6 months",
+        "adjustment": null,
+        "groupDescription": "Education minus Control"
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "valid",
+          "reason": null,
+          "lower": {
+            "status": "valid",
+            "reason": null
+          },
+          "upper": {
+            "status": "valid",
+            "reason": null
+          }
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null,
+      "ciPctValue": "95",
+      "ciNumSides": "TWO_SIDED",
+      "ciLowerLimit": "0.1",
+      "ciUpperLimit": "0.3"
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "sha256": "7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupIds": [
+            "G1",
+            "G2"
+          ],
+          "groupDescription": "Education minus Control",
+          "paramType": "Mean Difference",
+          "paramValue": "0.2",
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "outcome": {
+          "title": "Systolic blood pressure",
+          "unitOfMeasure": "mmHg",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+    "summary_mapping": {
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/NutritionEducation"
+      ],
+      "comparator": [],
+      "background": [],
+      "package": false,
+      "group_labels": [
+        "Education",
+        "Control"
+      ],
+      "selected": true,
+      "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+      "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/7b1fddf900e55b02dfd48ed45a92f9856362908db57000ffcfdb894643df6cdd/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+      "indicator": "https://universalevidence.com/vocab/indicators/BloodPressureMeasurement",
+      "unit": "mmHg",
+      "contrast_id": "e21d520a16dc81cd9d527cdd9cb98bfe1840251135e952aa060b21b4c7da3b68",
+      "model_context": "Mean Difference of systolic blood pressure",
+      "effect_multiplier": 1
+    }
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+    "indicator": "https://universalevidence.com/vocab/indicators/GlycemicControl",
+    "indicator_label": "Glycemic control",
+    "states": [
+      "https://universalevidence.com/vocab/states/NonCommunicableDiseases"
+    ],
+    "value": "0.3",
+    "unit": "%",
+    "direction": "unknown/unsupported",
+    "comparison": {
+      "kind": "arm_level",
+      "quantity": "hba1c",
+      "reason": "Descriptive measurement; not an intervention effect",
+      "context": {
+        "statistic": "MEAN",
+        "dispersionType": null,
+        "group": {
+          "id": "G1",
+          "title": "Education"
+        },
+        "class": null,
+        "category": null,
+        "population": null,
+        "timeFrame": "6 months",
+        "outcome_denoms": null,
+        "class_denoms": null
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "missing",
+          "reason": "No explicitly identified interval supplied"
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "sha256": "1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupId": "G1",
+          "value": "0.3"
+        },
+        "outcome": {
+          "title": "HbA1c",
+          "unitOfMeasure": "%",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+    "indicator": "https://universalevidence.com/vocab/indicators/GlycemicControl",
+    "indicator_label": "Glycemic control",
+    "states": [
+      "https://universalevidence.com/vocab/states/NonCommunicableDiseases"
+    ],
+    "value": "0.1",
+    "unit": "%",
+    "direction": "unknown/unsupported",
+    "comparison": {
+      "kind": "arm_level",
+      "quantity": "hba1c",
+      "reason": "Descriptive measurement; not an intervention effect",
+      "context": {
+        "statistic": "MEAN",
+        "dispersionType": null,
+        "group": {
+          "id": "G2",
+          "title": "Control"
+        },
+        "class": null,
+        "category": null,
+        "population": null,
+        "timeFrame": "6 months",
+        "outcome_denoms": null,
+        "class_denoms": null
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "missing",
+          "reason": "No explicitly identified interval supplied"
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "sha256": "1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupId": "G2",
+          "value": "0.1"
+        },
+        "outcome": {
+          "title": "HbA1c",
+          "unitOfMeasure": "%",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+  },
+  {
+    "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+    "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+    "indicator": "https://universalevidence.com/vocab/indicators/GlycemicControl",
+    "indicator_label": "Glycemic control",
+    "states": [
+      "https://universalevidence.com/vocab/states/NonCommunicableDiseases"
+    ],
+    "value": "0.2",
+    "unit": "%",
+    "direction": "increase",
+    "comparison": {
+      "kind": "source_comparison",
+      "statistic": "difference",
+      "orientation": "forward",
+      "semantics": "explicit",
+      "scale": "identity",
+      "quantity": "Mean Difference of hba1c",
+      "context": {
+        "statistic": "Mean Difference",
+        "groups": [
+          {
+            "id": "G1",
+            "title": "Education"
+          },
+          {
+            "id": "G2",
+            "title": "Control"
+          }
+        ],
+        "population": null,
+        "timeFrame": "6 months",
+        "adjustment": null,
+        "groupDescription": "Education minus Control"
+      },
+      "numerical_validation": {
+        "estimate": {
+          "status": "valid",
+          "reason": null
+        },
+        "confidence_interval": {
+          "status": "valid",
+          "reason": null,
+          "lower": {
+            "status": "valid",
+            "reason": null
+          },
+          "upper": {
+            "status": "valid",
+            "reason": null
+          }
+        },
+        "dispersion": {
+          "status": "unsupported",
+          "reason": "No supported SD/SE type supplied"
+        },
+        "p_value": {
+          "status": "missing",
+          "reason": "Not supplied"
+        }
+      }
+    },
+    "timing": "6 months",
+    "subgroup": null,
+    "uncertainty": {
+      "dispersionType": null,
+      "ciPctValue": "95",
+      "ciNumSides": "TWO_SIDED",
+      "ciLowerLimit": "0.1",
+      "ciUpperLimit": "0.3"
+    },
+    "source_details": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "sha256": "1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790",
+        "rule_version": "live-results-v1",
+        "raw": {
+          "groupIds": [
+            "G1",
+            "G2"
+          ],
+          "groupDescription": "Education minus Control",
+          "paramType": "Mean Difference",
+          "paramValue": "0.2",
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "outcome": {
+          "title": "HbA1c",
+          "unitOfMeasure": "%",
+          "paramType": "MEAN",
+          "reportingStatus": "POSTED",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "G1",
+              "title": "Education"
+            },
+            {
+              "id": "G2",
+              "title": "Control"
+            }
+          ]
+        }
+      }
+    ],
+    "citations": [
+      {
+        "url": "https://clinicaltrials.gov/study/NCT99999999",
+        "citation": "An unseen trial"
+      }
+    ],
+    "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+    "summary_mapping": {
+      "tested": [
+        "https://universalevidence.com/vocab/interventions/NutritionEducation"
+      ],
+      "comparator": [],
+      "background": [],
+      "package": false,
+      "group_labels": [
+        "Education",
+        "Control"
+      ],
+      "selected": true,
+      "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+      "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/1224c0d6d2a19f6fe2e8e5b6a0bb5d5a065c30aecdb5a07e0e9ce5b83ed54790/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+      "indicator": "https://universalevidence.com/vocab/indicators/GlycemicControl",
+      "unit": "%",
+      "contrast_id": "e21d520a16dc81cd9d527cdd9cb98bfe1840251135e952aa060b21b4c7da3b68",
+      "model_context": "Mean Difference of hba1c",
+      "effect_multiplier": 1
+    }
+  }
+]

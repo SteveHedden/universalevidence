@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<trial xmlns:ns0="http://www.67bricks.com/isrctn"><isrctn>ISRCTN18275142</isrctn><ns0:primaryOutcomes>
+	<ns0:outcomeMeasure id="6bfde67a-0c65-490f-8005-d674db9b81ba">
+	  <ns0:variable>Length velocity: recumbent length</ns0:variable>
+	  <ns0:method>anthropometry (calculated as mm/month)</ns0:method>
+	  <ns0:timepoints>baseline (Visit 0) to month 5 (visit 5)</ns0:timepoints>
+	</ns0:outcomeMeasure>
+      </ns0:primaryOutcomes>
+      <ns0:primaryOutcome />
+      <ns0:secondaryOutcomes>
+	<ns0:outcomeMeasure id="acd36a2c-0673-4de7-8dae-68eb5d229819">
+	  <ns0:variable>Weight velocity</ns0:variable>
+	  <ns0:method>body weight anthropometry (calculated as g/month)</ns0:method>
+	  <ns0:timepoints>baseline (visit 0) to month 5 (visit 5)</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="9fb1f081-2304-4884-9251-51e5743357aa">
+	  <ns0:variable>Height-for-age Z-score (HAZ)</ns0:variable>
+	  <ns0:method>WHO Child Growth Standards</ns0:method>
+	  <ns0:timepoints>baseline (Visit 0) to month 5 (visit 5)</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="bc9d9b18-86ed-4a4f-8dcd-1558a97b55b9">
+	  <ns0:variable>Weight-for-age Z-score (WAZ)</ns0:variable>
+	  <ns0:method>WHO Child Growth Standards</ns0:method>
+	  <ns0:timepoints>baseline (visit 0) to month 5 (visit 5)</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="a86f1704-8807-48cc-b147-912c68dcb124">
+	  <ns0:variable>Gastrointestinal tolerance</ns0:variable>
+	  <ns0:method>the Infant Gastrointestinal Symptom Questionnaire (IGSQ) and 3-day stool diary</ns0:method>
+	  <ns0:timepoints>month 1 to month 5</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="5f6524cd-863a-4aea-a5dc-6ed31a9ec473">
+	  <ns0:variable>Incidence of common infections</ns0:variable>
+	  <ns0:method>physician assessment and clinical monitoring of infection events</ns0:method>
+	  <ns0:timepoints>month 1 to month 5</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="15576a81-01b5-4c8e-a073-2cb66a3cfce9">
+	  <ns0:variable>Product acceptability</ns0:variable>
+	  <ns0:method>ability to consume the recommended daily serving of investigational product</ns0:method>
+	  <ns0:timepoints>month 1 to month 5</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="7d88dd3f-a491-4bd9-8940-1cbb200eafd3">
+	  <ns0:variable>Parental perception of product quality and value</ns0:variable>
+	  <ns0:method>structured questionnaire responses</ns0:method>
+	  <ns0:timepoints>month 1 to month 5</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="b03f57e9-b616-4440-8acc-5efbb7757e3c">
+	  <ns0:variable>Dietary diversity (minimum dietary diversity [MDD])</ns0:variable>
+	  <ns0:method>24-hour dietary recall based on WHO/UNICEF Infant and Young Child Feeding (IYCF) guidelines</ns0:method>
+	  <ns0:timepoints>baseline and month 5</ns0:timepoints>
+	</ns0:outcomeMeasure>
+	<ns0:outcomeMeasure id="524498ea-0b5d-499d-ab37-705642623e37">
+	  <ns0:variable>Growth biomarkers</ns0:variable>
+	  <ns0:method>serum insulin-like growth factor-1 (IGF-1) and leptin measurement in a sub-sample of participants (n = 20)</ns0:method>
+	  <ns0:timepoints>baseline and month 5</ns0:timepoints>
+	</ns0:outcomeMeasure>
+      </ns0:secondaryOutcomes>
+      <ns0:secondaryOutcome />
+      <ns0:results>
+      <ns0:publicationDetails />
+      <ns0:publicationStage />
+      <ns0:basicReport />
+      <ns0:plainEnglishReport />
+    </ns0:results>
+    <ns0:outputs>
+      
+    </ns0:outputs>
+    </trial>

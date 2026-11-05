@@ -1,0 +1,184 @@
+{
+  "fixture_notice": "Read-only CT.gov result-field excerpt for regression testing; not a production study store. Other outcomes omitted.",
+  "hasResults": true,
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT02472262",
+      "orgStudyIdInfo": {
+        "id": "LG1"
+      },
+      "organization": {
+        "fullName": "Washington University School of Medicine",
+        "class": "OTHER"
+      },
+      "briefTitle": "The Impact of Legumes vs Corn-soy Flour on Environmental Enteric Dysfunction in Rural Malawian Children 6-11 Months",
+      "officialTitle": "Randomized, Single-blinded, Prospective Clinical Trials Comparing the Impact of Legumes vs Corn-soy Flour on Environmental Enteric Dysfunction and Stunting in Rural Malawian Children 6-11 Months"
+    },
+    "eligibilityModule": {
+      "eligibilityCriteria": "Inclusion Criteria:\n\nchildren residing in catchment area of Limela, Machinga District and Ntenda (Chikwawa District), Malawi aged 6-11 months youngest eligible child in each household\n\n\\-\n\nExclusion Criteria:\n\nUnable to drink 20 mL of sugar water Demonstrating evidence of severe acute malnutrition Apparent need for acute medical treatment for an illness or injury Caregiver refusal to participate and return for 3 and 6 month follow-ups -\n\n\\-",
+      "healthyVolunteers": true,
+      "sex": "ALL",
+      "minimumAge": "5 Months",
+      "maximumAge": "12 Months",
+      "stdAges": [
+        "CHILD"
+      ]
+    },
+    "designModule": {
+      "studyType": "INTERVENTIONAL",
+      "phases": [
+        "NA"
+      ],
+      "designInfo": {
+        "allocation": "RANDOMIZED",
+        "interventionModel": "PARALLEL",
+        "primaryPurpose": "TREATMENT",
+        "maskingInfo": {
+          "masking": "DOUBLE",
+          "whoMasked": [
+            "PARTICIPANT",
+            "CARE_PROVIDER"
+          ]
+        }
+      },
+      "enrollmentInfo": {
+        "count": 355,
+        "type": "ACTUAL"
+      }
+    },
+    "armsInterventionsModule": {
+      "armGroups": [
+        {
+          "label": "Cow pea complementary food",
+          "type": "EXPERIMENTAL",
+          "description": "A legume-based complementary food made from cowpeas will be given for 6 months,200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.",
+          "interventionNames": [
+            "Dietary Supplement: Cow pea complementary food"
+          ]
+        },
+        {
+          "label": "Common bean",
+          "type": "EXPERIMENTAL",
+          "description": "A legume-based complementary food made from common beans will be given for 6 months,200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.",
+          "interventionNames": [
+            "Dietary Supplement: Common bean"
+          ]
+        },
+        {
+          "label": "Corn Soy Flour",
+          "type": "ACTIVE_COMPARATOR",
+          "description": "Corn flour with 10% soy will be given for 6 months, 200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.",
+          "interventionNames": [
+            "Dietary Supplement: Corn soy flour"
+          ]
+        }
+      ],
+      "interventions": [
+        {
+          "type": "DIETARY_SUPPLEMENT",
+          "name": "Cow pea complementary food",
+          "description": "A legume-based complementary food made from cowpeas will be given for 6 months, 200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.",
+          "armGroupLabels": [
+            "Cow pea complementary food"
+          ]
+        },
+        {
+          "type": "DIETARY_SUPPLEMENT",
+          "name": "Corn soy flour",
+          "description": "Corn flour with 10% soy will be given for 6 months, 200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.",
+          "armGroupLabels": [
+            "Corn Soy Flour"
+          ]
+        },
+        {
+          "type": "DIETARY_SUPPLEMENT",
+          "name": "Common bean",
+          "description": "A legume-based complementary food made from common beans will be given for 6 months,200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.",
+          "armGroupLabels": [
+            "Common bean"
+          ]
+        }
+      ]
+    }
+  },
+  "resultsSection": {
+    "outcomeMeasuresModule": {
+      "outcomeMeasures": [
+        {
+          "type": "PRIMARY",
+          "title": "Change in Length-for-age z Score Over 6 Months From Enrollment to End of Study.",
+          "description": "Change in length-for-age z score from enrollment to end of study 6 months",
+          "reportingStatus": "POSTED",
+          "paramType": "MEAN",
+          "dispersionType": "95% Confidence Interval",
+          "unitOfMeasure": "z-score",
+          "timeFrame": "6 months",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Cow Pea Complementary Food",
+              "description": "A legume-based complementary food made from cowpeas will be given for 6 months,200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.\n\nCow pea complementary food: A legume-based complementary food made from cowpeas will be given for 6 months, 200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old."
+            },
+            {
+              "id": "OG001",
+              "title": "Common Bean",
+              "description": "A legume-based complementary food made from common beans will be given for 6 months,200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.\n\nCommon bean: A legume-based complementary food made from common beans will be given for 6 months,200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old."
+            },
+            {
+              "id": "OG002",
+              "title": "Corn Soy Flour",
+              "description": "Corn flour with 10% soy will be given for 6 months, 200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old.\n\nCorn soy flour: Corn flour with 10% soy will be given for 6 months, 200 kcal/day for children 6-9 months old and 300 kcal/day for children 9-11 months old."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "99"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "99"
+                },
+                {
+                  "groupId": "OG002",
+                  "value": "93"
+                }
+              ]
+            }
+          ],
+          "classes": [
+            {
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "-0.14",
+                      "lowerLimit": "-0.24",
+                      "upperLimit": "-0.04"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "-0.27",
+                      "lowerLimit": "-0.38",
+                      "upperLimit": "-0.16"
+                    },
+                    {
+                      "groupId": "OG002",
+                      "value": "-0.27",
+                      "lowerLimit": "-0.35",
+                      "upperLimit": "-0.19"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

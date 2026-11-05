@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "scope": "Capability-based numerical results routing; registry discovery is independent.",
+  "sources": {
+    "ctgov": {
+      "indicator_status": "ready",
+      "results_status": "structured-api-ready",
+      "adapter": "scripts/ctgov_results.py",
+      "key_builder": "scripts/ctgov_indicator_context.py",
+      "queue_work_type": "ctgov_reported_indicators",
+      "dependency": null,
+      "indicator_crosswalk": "vocabularies/crosswalks/ctgov-indicators-crosswalk.ttl",
+      "result_rules": "vocabularies/crosswalks/ctgov-results-rules.ttl",
+      "report_semantics": "vocabularies/crosswalks/ctgov-report-results-crosswalk.ttl",
+      "api_semantics": "vocabularies/crosswalks/ctgov-api-results-crosswalk.ttl",
+      "results_lane": "api-result-mapping",
+      "worker_skill": "map-api-results",
+      "canonical_numerical_storage": false,
+      "capability_checked_at": "2026-10-14",
+      "capability_review_trigger": "New numerical API schema or changed document access; review representative responses before changing lanes."
+    },
+    "aea": {
+      "indicator_status": "report-context-required",
+      "results_status": "reviewed-local-extraction",
+      "adapter": "scripts/evidence_enrichment.py",
+      "queue_work_type": "report_outcome_enrichment",
+      "dependency": null,
+      "indicator_crosswalk": "vocabularies/crosswalks/aea-indicators-crosswalk.ttl",
+      "result_rules": "vocabularies/crosswalks/aea-results-rules.ttl",
+      "report_semantics": "vocabularies/crosswalks/aea-report-results-crosswalk.ttl",
+      "results_lane": "local-result-extraction",
+      "worker_skill": "extract-local-results",
+      "canonical_numerical_storage": true,
+      "capability_checked_at": "2026-10-14",
+      "capability_review_trigger": "New numerical API schema or changed document access; review representative responses before changing lanes."
+    },
+    "isrctn": {
+      "indicator_status": "task-259-reviewed; planned specifications available",
+      "results_status": "result-document-discovery-then-extraction",
+      "adapter": "scripts/isrctn_metadata.py",
+      "queue_work_type": "report_outcome_enrichment",
+      "dependency": "reviewed report extraction for numerical results",
+      "indicator_crosswalk": "vocabularies/crosswalks/isrctn-indicators-crosswalk.ttl",
+      "result_rules": "vocabularies/crosswalks/isrctn-results-rules.ttl",
+      "report_semantics": "vocabularies/crosswalks/isrctn-report-results-crosswalk.ttl",
+      "results_lane": "local-result-extraction",
+      "worker_skill": "extract-local-results",
+      "canonical_numerical_storage": true,
+      "capability_checked_at": "2026-10-14",
+      "capability_review_trigger": "New numerical API schema or changed document access; review representative responses before changing lanes.",
+      "capability_evidence": "https://www.isrctn.com/page/guidance",
+      "capability_uncertainty": "No supported structured numerical API established; developing reporting system does not establish API capability."
+    },
+    "who-ictrp": {
+      "indicator_status": "originating-registry-routing",
+      "results_status": "resolve-origin-or-extract-report",
+      "adapter": null,
+      "queue_work_type": "report_outcome_enrichment",
+      "dependency": "originating registry identity and source evidence",
+      "indicator_crosswalk": "vocabularies/crosswalks/who-ictrp-indicators-crosswalk.ttl",
+      "result_rules": "vocabularies/crosswalks/who-ictrp-results-rules.ttl",
+      "report_semantics": "vocabularies/crosswalks/who-ictrp-report-results-crosswalk.ttl",
+      "results_lane": "local-result-extraction",
+      "worker_skill": "extract-local-results",
+      "canonical_numerical_storage": true,
+      "capability_checked_at": "2026-10-14",
+      "capability_review_trigger": "New numerical API schema or changed document access; review representative responses before changing lanes."
+    }
+  },
+  "work_index": "data/taxonomy-expansion/stunting-work-index.json"
+}

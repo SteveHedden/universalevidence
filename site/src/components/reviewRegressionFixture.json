@@ -1,0 +1,1562 @@
+[
+  {
+    "context": "Treatment by sex interaction coefficient",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/0c2e4360a8335e8511cce094babbff2f4986ea9aff787ae0fc083dbb2981a437/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.3",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G1",
+              "title": "Education"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "0c2e4360a8335e8511cce094babbff2f4986ea9aff787ae0fc083dbb2981a437",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G1",
+              "value": "0.3"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/0c2e4360a8335e8511cce094babbff2f4986ea9aff787ae0fc083dbb2981a437/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.1",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G2",
+              "title": "Control"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "0c2e4360a8335e8511cce094babbff2f4986ea9aff787ae0fc083dbb2981a437",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G2",
+              "value": "0.1"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/0c2e4360a8335e8511cce094babbff2f4986ea9aff787ae0fc083dbb2981a437/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.2",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": "forward",
+          "semantics": "unsupported",
+          "scale": "identity",
+          "quantity": "Mean Difference of height-for-age z-score",
+          "estimand": "interaction",
+          "reason": "Source describes an unsupported interaction estimand",
+          "context": {
+            "statistic": "Mean Difference",
+            "groups": [
+              {
+                "id": "G1",
+                "title": "Education"
+              },
+              {
+                "id": "G2",
+                "title": "Control"
+              }
+            ],
+            "population": null,
+            "timeFrame": "6 months",
+            "adjustment": "Treatment by sex interaction coefficient",
+            "groupDescription": "Education minus Control"
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null,
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "0c2e4360a8335e8511cce094babbff2f4986ea9aff787ae0fc083dbb2981a437",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupIds": [
+                "G1",
+                "G2"
+              ],
+              "groupDescription": "Education minus Control",
+              "paramType": "Mean Difference",
+              "paramValue": "0.2",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "0.1",
+              "ciUpperLimit": "0.3",
+              "statisticalComment": "Treatment by sex interaction coefficient"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      }
+    ]
+  },
+  {
+    "context": "Association between exposure and outcome",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a7e7e499e44f3d18f5125dd41c433d08908802c433d8740dbd3c1b2af0e598ca/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.3",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G1",
+              "title": "Education"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "a7e7e499e44f3d18f5125dd41c433d08908802c433d8740dbd3c1b2af0e598ca",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G1",
+              "value": "0.3"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a7e7e499e44f3d18f5125dd41c433d08908802c433d8740dbd3c1b2af0e598ca/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.1",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G2",
+              "title": "Control"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "a7e7e499e44f3d18f5125dd41c433d08908802c433d8740dbd3c1b2af0e598ca",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G2",
+              "value": "0.1"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/a7e7e499e44f3d18f5125dd41c433d08908802c433d8740dbd3c1b2af0e598ca/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.2",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": "forward",
+          "semantics": "unsupported",
+          "scale": "identity",
+          "quantity": "Mean Difference of height-for-age z-score",
+          "estimand": "association",
+          "reason": "Source describes an unsupported association estimand",
+          "context": {
+            "statistic": "Mean Difference",
+            "groups": [
+              {
+                "id": "G1",
+                "title": "Education"
+              },
+              {
+                "id": "G2",
+                "title": "Control"
+              }
+            ],
+            "population": null,
+            "timeFrame": "6 months",
+            "adjustment": "Association between exposure and outcome",
+            "groupDescription": "Education minus Control"
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null,
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "a7e7e499e44f3d18f5125dd41c433d08908802c433d8740dbd3c1b2af0e598ca",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupIds": [
+                "G1",
+                "G2"
+              ],
+              "groupDescription": "Education minus Control",
+              "paramType": "Mean Difference",
+              "paramValue": "0.2",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "0.1",
+              "ciUpperLimit": "0.3",
+              "statisticalComment": "Association between exposure and outcome"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      }
+    ]
+  },
+  {
+    "context": "Log transformed regression coefficient",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/02a3bebaafc350333c5056a4a8917af56a903a2064be70796982c156c4c2292a/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.3",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G1",
+              "title": "Education"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "02a3bebaafc350333c5056a4a8917af56a903a2064be70796982c156c4c2292a",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G1",
+              "value": "0.3"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/02a3bebaafc350333c5056a4a8917af56a903a2064be70796982c156c4c2292a/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.1",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G2",
+              "title": "Control"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "02a3bebaafc350333c5056a4a8917af56a903a2064be70796982c156c4c2292a",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G2",
+              "value": "0.1"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/02a3bebaafc350333c5056a4a8917af56a903a2064be70796982c156c4c2292a/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.2",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": "forward",
+          "semantics": "unsupported",
+          "scale": "identity",
+          "quantity": "Mean Difference of height-for-age z-score",
+          "estimand": "transformed",
+          "reason": "Source describes an unsupported transformed estimand",
+          "context": {
+            "statistic": "Mean Difference",
+            "groups": [
+              {
+                "id": "G1",
+                "title": "Education"
+              },
+              {
+                "id": "G2",
+                "title": "Control"
+              }
+            ],
+            "population": null,
+            "timeFrame": "6 months",
+            "adjustment": "Log transformed regression coefficient",
+            "groupDescription": "Education minus Control"
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null,
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "02a3bebaafc350333c5056a4a8917af56a903a2064be70796982c156c4c2292a",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupIds": [
+                "G1",
+                "G2"
+              ],
+              "groupDescription": "Education minus Control",
+              "paramType": "Mean Difference",
+              "paramValue": "0.2",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "0.1",
+              "ciUpperLimit": "0.3",
+              "statisticalComment": "Log transformed regression coefficient"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      }
+    ]
+  },
+  {
+    "context": "Model-specific quantity with unclear meaning",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/731ae63e4765f77d133b98652d8384d9d4c71290ef8e5c9ad6d7393e94a5f82a/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.3",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G1",
+              "title": "Education"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "731ae63e4765f77d133b98652d8384d9d4c71290ef8e5c9ad6d7393e94a5f82a",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G1",
+              "value": "0.3"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/731ae63e4765f77d133b98652d8384d9d4c71290ef8e5c9ad6d7393e94a5f82a/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.1",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G2",
+              "title": "Control"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "731ae63e4765f77d133b98652d8384d9d4c71290ef8e5c9ad6d7393e94a5f82a",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G2",
+              "value": "0.1"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/731ae63e4765f77d133b98652d8384d9d4c71290ef8e5c9ad6d7393e94a5f82a/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.2",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": "forward",
+          "semantics": "unsupported",
+          "scale": "identity",
+          "quantity": "Mean Difference of height-for-age z-score",
+          "estimand": "unsupported",
+          "reason": "Analysis model context requires an explicit reusable estimand rule",
+          "context": {
+            "statistic": "Mean Difference",
+            "groups": [
+              {
+                "id": "G1",
+                "title": "Education"
+              },
+              {
+                "id": "G2",
+                "title": "Control"
+              }
+            ],
+            "population": null,
+            "timeFrame": "6 months",
+            "adjustment": "Model-specific quantity with unclear meaning",
+            "groupDescription": "Education minus Control"
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null,
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "731ae63e4765f77d133b98652d8384d9d4c71290ef8e5c9ad6d7393e94a5f82a",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupIds": [
+                "G1",
+                "G2"
+              ],
+              "groupDescription": "Education minus Control",
+              "paramType": "Mean Difference",
+              "paramValue": "0.2",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "0.1",
+              "ciUpperLimit": "0.3",
+              "statisticalComment": "Model-specific quantity with unclear meaning"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      }
+    ]
+  },
+  {
+    "context": "",
+    "rows": [
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.3",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G1",
+              "title": "Education"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/0",
+            "sha256": "2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G1",
+              "value": "0.3"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.1",
+        "unit": "z-score",
+        "direction": "unknown/unsupported",
+        "comparison": {
+          "kind": "arm_level",
+          "quantity": "height-for-age z-score",
+          "reason": "Descriptive measurement; not an intervention effect",
+          "context": {
+            "statistic": "MEAN",
+            "dispersionType": null,
+            "group": {
+              "id": "G2",
+              "title": "Control"
+            },
+            "class": null,
+            "category": null,
+            "population": null,
+            "timeFrame": "6 months",
+            "outcome_denoms": null,
+            "class_denoms": null
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "missing",
+              "reason": "No explicitly identified interval supplied"
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/classes/0/categories/0/measurements/1",
+            "sha256": "2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupId": "G2",
+              "value": "0.1"
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect"
+      },
+      {
+        "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+        "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+        "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+        "indicator_label": "Height-for-age z-score",
+        "states": [
+          "https://universalevidence.com/vocab/states/Stunting",
+          "https://universalevidence.com/vocab/states/ChildGrowth"
+        ],
+        "value": "0.2",
+        "unit": "z-score",
+        "direction": "increase",
+        "comparison": {
+          "kind": "source_comparison",
+          "statistic": "difference",
+          "orientation": "forward",
+          "semantics": "explicit",
+          "scale": "identity",
+          "quantity": "Mean Difference of height-for-age z-score",
+          "estimand": "pairwise",
+          "context": {
+            "statistic": "Mean Difference",
+            "groups": [
+              {
+                "id": "G1",
+                "title": "Education"
+              },
+              {
+                "id": "G2",
+                "title": "Control"
+              }
+            ],
+            "population": null,
+            "timeFrame": "6 months",
+            "adjustment": "",
+            "groupDescription": "Education minus Control"
+          },
+          "numerical_validation": {
+            "estimate": {
+              "status": "valid",
+              "reason": null
+            },
+            "confidence_interval": {
+              "status": "valid",
+              "reason": null,
+              "lower": {
+                "status": "valid",
+                "reason": null
+              },
+              "upper": {
+                "status": "valid",
+                "reason": null
+              }
+            },
+            "dispersion": {
+              "status": "unsupported",
+              "reason": "No supported SD/SE type supplied"
+            },
+            "p_value": {
+              "status": "missing",
+              "reason": "Not supplied"
+            }
+          }
+        },
+        "timing": "6 months",
+        "subgroup": null,
+        "uncertainty": {
+          "dispersionType": null,
+          "ciPctValue": "95",
+          "ciNumSides": "TWO_SIDED",
+          "ciLowerLimit": "0.1",
+          "ciUpperLimit": "0.3"
+        },
+        "source_details": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "locator": "/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+            "sha256": "2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27",
+            "rule_version": "live-results-v2",
+            "raw": {
+              "groupIds": [
+                "G1",
+                "G2"
+              ],
+              "groupDescription": "Education minus Control",
+              "paramType": "Mean Difference",
+              "paramValue": "0.2",
+              "ciPctValue": "95",
+              "ciNumSides": "TWO_SIDED",
+              "ciLowerLimit": "0.1",
+              "ciUpperLimit": "0.3",
+              "statisticalComment": ""
+            },
+            "outcome": {
+              "title": "Height-for-age z-score",
+              "unitOfMeasure": "z-score",
+              "paramType": "MEAN",
+              "reportingStatus": "POSTED",
+              "timeFrame": "6 months",
+              "groups": [
+                {
+                  "id": "G1",
+                  "title": "Education"
+                },
+                {
+                  "id": "G2",
+                  "title": "Control"
+                }
+              ]
+            }
+          }
+        ],
+        "citations": [
+          {
+            "url": "https://clinicaltrials.gov/study/NCT99999999",
+            "citation": "An unseen trial"
+          }
+        ],
+        "interpretation": "Source-reported result; no pooled effect or inferred component effect",
+        "summary_mapping": {
+          "estimand": "pairwise",
+          "tested": [
+            "https://universalevidence.com/vocab/interventions/NutritionEducation"
+          ],
+          "comparator": [],
+          "background": [],
+          "package": false,
+          "group_labels": [
+            "Education",
+            "Control"
+          ],
+          "selected": true,
+          "study": "https://universalevidence.com/studies/ctgov/NCT99999999",
+          "measurement": "https://clinicaltrials.gov/study/NCT99999999/response/2a0ee6ac594369864f0a1df11d527cd1e7cb50ad2bfb689eeef2e38c86b67d27/resultsSection/outcomeMeasuresModule/outcomeMeasures/0/analyses/0",
+          "indicator": "https://universalevidence.com/vocab/indicators/HeightForAgeZScore",
+          "unit": "z-score",
+          "contrast_id": "c12ad3e55f5713b892d9b914073a54403df3a03de12901e7fa0ddba1a3bb1156",
+          "model_context": "Mean Difference of height-for-age z-score",
+          "effect_multiplier": 1
+        }
+      }
+    ]
+  }
+]

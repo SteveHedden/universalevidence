@@ -12,7 +12,8 @@ def test_actual_release_coverage_and_robots(tmp_path):
     tree = ET.parse(tmp_path / "sitemap.xml")
     urls = [node.text for node in tree.findall(f"{{{XMLNS}}}url/{{{XMLNS}}}loc")]
     assert count == len(urls) == len(set(urls))
-    assert count > 9900
+    assert count > 9000
+    assert not any("/vocab/indicators/" in url for url in urls)
     assert ORIGIN + "/vocab/states/Malaria" in urls
     assert ORIGIN + "/ontology" in urls
     assert all(url.startswith(ORIGIN + "/") and "?" not in url for url in urls)
@@ -52,6 +53,6 @@ def test_only_defined_public_terms_and_regeneration(tmp_path):
 def test_generator_tracks_supported_public_routes():
     from api.routes.vocab import VOCABULARIES as routes
     from scripts.generate_discovery import VOCABULARIES
-    assert set(VOCABULARIES) == set(routes)
+    assert set(VOCABULARIES) == set(routes) - {"indicators", "indicator-migrations"}
     for name, config in routes.items():
         assert config.namespace == f"{ORIGIN}/vocab/{name}/"

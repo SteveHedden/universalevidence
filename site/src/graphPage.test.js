@@ -634,3 +634,49 @@ describe("standalone Graph query controls", () => {
     }
   });
 });
+
+describe('reported findings in Graph study details', () => {
+  it('shows citations, distinct plans, estimates and withdrawal history', async () => {
+    const payload = graphPayload();
+    const finding = {id:'f',status:'active',state_uri:stateUri,measure:'Stunting prevalence difference',comparison:{reference:'Control'},timing:{reported:'12 months'},value:-1.2,unit:'percentage points',direction:'decrease',uncertainty:{lower:-3.2,upper:0.8},citations:[{id:'report',citation:'Synthetic report',url:'https://example.org/report',locator:'Table 2',status:'active'}]};
+    payload.edges[0].studies = [{source:'CT.gov',study_id:'A',study_identity:'https://example.org/studies/S',title:'Verified study',registry_records:[{source:'ctgov',record_id:'A',url:'https://example.org/A'},{source:'who-ictrp',record_id:'B',url:'https://example.org/B'}],planned_outcomes:[{measure:'Height'}],reported_findings:[finding],finding_history:[{...finding,id:'old',eligibility:'withdrawn-source-support'}]}];
+    const {dom,scriptErrors} = openGraphPage({payload});
+    try {
+      await waitFor(()=>dom.window.document.querySelector('.edge-hit'));
+      dom.window.document.querySelector('.edge-hit').dispatchEvent(new dom.window.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));
+      await waitFor(()=>dom.window.document.querySelector('#edge-inspector').textContent.includes('Reported findings (1)'));
+      const panel=dom.window.document.querySelector('#edge-inspector');
+      expect(panel.textContent).toContain('Planned outcomes (1)');
+      expect(panel.textContent).toContain('-1.2 percentage points');
+      expect(panel.textContent).toContain('withdrawn-source-support');
+      expect(panel.querySelector('a[href="https://example.org/report"]')).not.toBeNull();
+      expect(panel.querySelector('a[href^="/studies/enrichment?"]')).not.toBeNull();
+      await waitFor(()=>panel.getAttribute('aria-busy')==='false');
+      expect(scriptErrors).toEqual([]);
+    } finally {dom.window.close();}
+  });
+});
+
+it.each([false,true])('Graph separates extractor source results from plans (enriched=%s)', async enriched => {
+  const payload=graphPayload();
+  const outcomes=[{type:'pre-specified-measure',measure:'Planned height'},{type:'reported-result',measure:'Posted height',value:-1.2,unit:'cm'},{type:'adverse-event',measure:'Nausea',value:5},{measure:'Legacy outcome'}];
+  payload.edges[0].studies=[{source:'CT.gov',study_id:'A',title:'Registry study',outcomes,...(enriched?{study_identity:'https://example.org/studies/S',planned_outcomes:[outcomes[0]],source_reported_outcomes:outcomes.slice(1,3),source_unspecified_outcomes:outcomes.slice(3)}:{})}];
+  const {dom,scriptErrors}=openGraphPage({payload});
+  try {
+    await waitFor(()=>dom.window.document.querySelector('.edge-hit'));
+    dom.window.document.querySelector('.edge-hit').dispatchEvent(new dom.window.KeyboardEvent('keydown',{bubbles:true,cancelable:true,key:'Enter'}));
+    const panel=dom.window.document.querySelector('#edge-inspector');
+    await waitFor(()=>panel.textContent.includes('Registry-reported results'));
+    const plans=Array.from(panel.querySelectorAll('details')).find(d=>d.querySelector('summary')?.textContent?.startsWith('Planned outcomes'));
+    expect(plans.textContent).toContain('Planned outcomes (1)');
+    expect(plans.textContent).not.toMatch(/Posted height|Nausea|Legacy outcome/);
+    expect(panel.textContent).toContain('Registry-reported results — not yet verified (2)');
+    expect(panel.textContent).toContain('Posted height');
+    expect(panel.textContent).toContain('Nausea');
+    expect(panel.textContent).toContain('"value":-1.2');
+    expect(panel.textContent).toContain('Registry outcomes — status unspecified (1)');
+    expect(panel.textContent).toContain('Reported findings (0)');
+    await waitFor(()=>panel.getAttribute('aria-busy')==='false');
+    expect(scriptErrors).toEqual([]);
+  } finally {dom.window.close();}
+});

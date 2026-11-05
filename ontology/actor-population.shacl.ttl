@@ -1,0 +1,14 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix actorshape: <https://universalevidence.com/shapes/actors/> .
+actorshape:Organization a sh:NodeShape ; sh:targetClass prov:Organization ;
+    sh:property [ sh:path dcterms:identifier ; sh:minCount 1 ] ;
+    sh:property [ sh:path dcterms:source ; sh:minCount 1 ; sh:nodeKind sh:IRI ] .
+actorshape:Activity a sh:NodeShape ; sh:targetClass prov:Activity ;
+    sh:property [ sh:path dcterms:identifier ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dcterms:source ; sh:minCount 1 ; sh:nodeKind sh:IRI ] .
+actorshape:PublishedAssociation a sh:NodeShape ; sh:targetClass prov:Association ;
+    sh:property [ sh:path prov:agent ; sh:minCount 1 ; sh:maxCount 1 ; sh:class prov:Organization ] ;
+    sh:property [ sh:path prov:hadRole ; sh:minCount 1 ; sh:maxCount 1 ; sh:class prov:Role ] ;
+    sh:property [ sh:path dcterms:source ; sh:minCount 1 ; sh:class prov:Entity ] .

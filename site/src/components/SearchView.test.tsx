@@ -201,3 +201,14 @@ describe("SearchView", () => {
     ).toBeInTheDocument();
   });
 });
+
+it('discloses partial State enrichment without calling discovered studies unavailable',async()=>{
+ const user=userEvent.setup();
+ makeFetchMock({results:[],meta:{...emptyV2Response.meta,sources:{ctgov:{status:'included',coverage:'partial',returned_unique_studies:0,truncated:false,approximate:true,reason:'state_enrichment_unavailable'}}}},[kenyaTerm]);
+ render(<SearchHarness />);
+ await user.type(screen.getByRole('combobox',{name:'Region'}),'Kenya');
+ await user.click(await screen.findByRole('button',{name:'Kenya'}));
+ await user.click(screen.getByRole('button',{name:'Search'}));
+ expect(await screen.findByText(/ClinicalTrials.gov State mapping is temporarily incomplete; discovered studies are retained/)).toBeVisible();
+ expect(screen.queryByText(/ClinicalTrials.gov are temporarily unavailable/)).toBeNull();
+});

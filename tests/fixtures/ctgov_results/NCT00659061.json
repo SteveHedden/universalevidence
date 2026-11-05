@@ -1,0 +1,216 @@
+{
+  "fixture_notice": "Read-only CT.gov result-field excerpt for regression testing; not a production study store. Other outcomes omitted.",
+  "hasResults": true,
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT00659061",
+      "orgStudyIdInfo": {
+        "id": "754-Ped/ERC-07"
+      },
+      "organization": {
+        "fullName": "Aga Khan University",
+        "class": "OTHER"
+      },
+      "briefTitle": "Monitoring and Evaluation of Micronutrients (Sprinkles) Project",
+      "officialTitle": "Monitoring and Evaluation of Micronutrients (Sprinkles) Project",
+      "acronym": "Sprinkles"
+    },
+    "eligibilityModule": {
+      "eligibilityCriteria": "Inclusion Criteria:\n\n* Child's mother gives written consent after hearing an explanation of the study\n* Random selection of child in household with more than one eligible child\n\nExclusion Criteria:\n\n* Any household in which consent is not given\n* Children with any congenital or physical disability (such as cleft palate, Down's Syndrome, etc.)\n* Child from a family which intends to migrate during the study period",
+      "healthyVolunteers": true,
+      "sex": "ALL",
+      "minimumAge": "6 Months",
+      "maximumAge": "18 Months",
+      "stdAges": [
+        "CHILD"
+      ]
+    },
+    "designModule": {
+      "studyType": "INTERVENTIONAL",
+      "phases": [
+        "NA"
+      ],
+      "designInfo": {
+        "allocation": "NON_RANDOMIZED",
+        "interventionModel": "PARALLEL",
+        "primaryPurpose": "PREVENTION",
+        "maskingInfo": {
+          "masking": "SINGLE",
+          "whoMasked": [
+            "OUTCOMES_ASSESSOR"
+          ]
+        }
+      },
+      "enrollmentInfo": {
+        "count": 610,
+        "type": "ACTUAL"
+      }
+    },
+    "armsInterventionsModule": {
+      "armGroups": [
+        {
+          "label": "Intervention",
+          "type": "ACTIVE_COMPARATOR",
+          "description": "Multiple micronutrient fortificant (Sprinkles) and nutrition education given by LHWs.",
+          "interventionNames": [
+            "Dietary Supplement: SPRINKLES",
+            "Behavioral: Nutrition education"
+          ]
+        },
+        {
+          "label": "Control",
+          "type": "NO_INTERVENTION",
+          "description": "Routine public health massages by Lady Health Workers (LHWs) during their community visits."
+        }
+      ],
+      "interventions": [
+        {
+          "type": "DIETARY_SUPPLEMENT",
+          "name": "SPRINKLES",
+          "description": "Sprinkles is a multiple micronutrient fortificant. It is packed as a single serving sachets each containing micro encapsulated iron (12.5 mg), zinc (7.5 mg), vitamin C (30 mg), vitamin A (300 \u00b5g), vitamin D (5 \u00b5g), folic acid (150 \u00b5g) and iodine (90\u00b5g).\n\nTwo month supply of the Sprinkle sachet along with advice on its benefits as well as its appropriate use will be given by the LHWs. The LHWs will also provide their age-appropriate nutritional advice as per their regular door to door community services.",
+          "armGroupLabels": [
+            "Intervention"
+          ],
+          "otherNames": [
+            "Multiple micronutrient fortificant"
+          ]
+        },
+        {
+          "type": "BEHAVIORAL",
+          "name": "Nutrition education",
+          "description": "Nutrition education will be provided by LHWs as per their regular routine monthly door to door community services",
+          "armGroupLabels": [
+            "Intervention"
+          ]
+        }
+      ]
+    }
+  },
+  "resultsSection": {
+    "outcomeMeasuresModule": {
+      "outcomeMeasures": [
+        {
+          "title": "Outside fixture scope",
+          "reportingStatus": "NOT_POSTED"
+        },
+        {
+          "title": "Outside fixture scope",
+          "reportingStatus": "NOT_POSTED"
+        },
+        {
+          "title": "Outside fixture scope",
+          "reportingStatus": "NOT_POSTED"
+        },
+        {
+          "title": "Outside fixture scope",
+          "reportingStatus": "NOT_POSTED"
+        },
+        {
+          "title": "Outside fixture scope",
+          "reportingStatus": "NOT_POSTED"
+        },
+        {
+          "title": "Outside fixture scope",
+          "reportingStatus": "NOT_POSTED"
+        },
+        {
+          "type": "SECONDARY",
+          "title": "Percentage of Participants With Stunted Growth",
+          "description": "Stunted defined as Height for Age Z-score \\< -2 standard deviation",
+          "populationDescription": "Those who had complete anthropometric measurements at endline",
+          "reportingStatus": "POSTED",
+          "paramType": "NUMBER",
+          "unitOfMeasure": "percentage of participants",
+          "timeFrame": "Baseline measurements taken at time of enrollment; Endline measurments taken 4-5 months post enrollment",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Sprinkle-Advice",
+              "description": "Sprinkles and age-appropriate feeding advice given by Lady Health Workers (LHWs). Age-appropriate feeding advice is part of the standard nutrition messages given by all Lady Health Workers (LHWs) during their community visits."
+            },
+            {
+              "id": "OG001",
+              "title": "Advice Only",
+              "description": "Age-appropriate feeding advice given by LHWs as part of the standard nutrition messages given by all Lady Health Workers (LHWs) during their community visits."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "286"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "287"
+                }
+              ]
+            }
+          ],
+          "classes": [
+            {
+              "title": "Baseline Stunted %",
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "55"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "57"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Endline Stunted %",
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "62"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "61"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "analyses": [
+            {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "nonInferiorityType": "SUPERIORITY_OR_OTHER",
+              "pValue": "0.62",
+              "pValueComment": "baseline",
+              "statisticalMethod": "Chi-squared",
+              "ciPctValue": "95"
+            },
+            {
+              "groupIds": [
+                "OG000",
+                "OG001"
+              ],
+              "nonInferiorityType": "SUPERIORITY_OR_OTHER",
+              "pValue": "0.89",
+              "pValueComment": "endline",
+              "statisticalMethod": "Chi-squared",
+              "ciPctValue": "95"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

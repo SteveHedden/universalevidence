@@ -624,3 +624,9 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+# Pinned, source-preserving nutrition release snapshot.
+DEFAULT_TAXONOMY_SOURCES = [REPO_ROOT / "taxonomy-release.ttl"]
+
+# Pinned, source-preserving nutrition release snapshot.
+DEFAULT_TAXONOMY_SOURCES = [REPO_ROOT / "taxonomy-release.ttl"]

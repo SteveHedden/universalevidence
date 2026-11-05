@@ -1,0 +1,6 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+<https://universalevidence.com/vocab/agents/> a void:Dataset ;
+    dcterms:title "Universal Evidence organizations" ;
+    dcterms:description "Flat named organization instances, not organization-type concepts. Reviewed bounded populations export prov:Organization entities here; source-scoped unresolved/withheld participants are separate activity metadata. This declaration contains no live population." ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .

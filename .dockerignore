@@ -20,3 +20,14 @@ data/taxonomy-expansion/
 # Local frontend dependencies and generated builds
 **/node_modules
 site/dist/
+
+# Private study enrichment databases and coordinator receipts
+data/evidence-enrichment/
+
+# Private actor population metadata and coordinator receipts
+data/actor-population/
+
+# Teacher operational sidecars; canonical evidence/*.ttl remains trackable.
+evidence/.*.workflow.json
+evidence/.*.transaction.json
+evidence/.*.lock

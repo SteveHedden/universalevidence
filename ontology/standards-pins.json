@@ -1,0 +1,228 @@
+[
+  {
+    "file": "pico-4.0.1.ttl",
+    "url": "https://data.cochrane.org/ontologies/pico/ontology.ttl",
+    "sha256": "f81f54443315028379deda4f448fbadd3bdff9607860563f3f13cacc9a884bc8",
+    "version_iris": [],
+    "retrieved_at": "2026-10-04",
+    "documented_version": "4.0.1 (2019-09-06)",
+    "namespace": "http://data.cochrane.org/ontologies/pico/",
+    "terms": {
+      "PICO": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#Class"
+        ],
+        "domain": [],
+        "range": []
+      },
+      "Population": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#Class"
+        ],
+        "domain": [],
+        "range": []
+      },
+      "population": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/PICO"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Population"
+        ]
+      },
+      "age": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Population"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Age"
+        ]
+      },
+      "condition": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Population"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Condition"
+        ]
+      },
+      "interventionGroup": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/PICO"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/InterventionGroup"
+        ]
+      },
+      "comparatorGroup": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/PICO"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/InterventionGroup"
+        ]
+      },
+      "outcomeMeasurement": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Outcome"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/AssessmentScale"
+        ]
+      },
+      "aggregationMethod": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Outcome"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/AggregationMethod"
+        ]
+      },
+      "endpoint": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/OutcomeGroup"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Duration"
+        ]
+      },
+      "primaryEndpoint": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/OutcomeGroup"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Duration"
+        ]
+      },
+      "dose": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Intervention"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Dose"
+        ]
+      },
+      "duration": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Intervention"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Duration"
+        ]
+      },
+      "schedule": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Intervention"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Schedule"
+        ]
+      },
+      "modeOfDelivery": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/Intervention"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/ModeOfDelivery"
+        ]
+      },
+      "SpecificMetric": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#Class"
+        ],
+        "domain": [],
+        "range": []
+      },
+      "intervention": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/InterventionGroup"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Intervention"
+        ]
+      },
+      "outcome": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/OutcomeGroup"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/Outcome"
+        ]
+      },
+      "outcomeGroup": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "domain": [
+          "http://data.cochrane.org/ontologies/pico/PICO"
+        ],
+        "range": [
+          "http://data.cochrane.org/ontologies/pico/OutcomeGroup"
+        ]
+      }
+    }
+  },
+  {
+    "file": "obi.owl",
+    "url": "https://raw.githubusercontent.com/obi-ontology/obi/master/obi.owl",
+    "sha256": "8874abcca971ee26b4e4442198387916d788d14af3519e1040474908ed12b946",
+    "version_iris": [
+      "http://purl.obolibrary.org/obo/obi/2026-07-27/obi.owl"
+    ],
+    "retrieved_at": "2026-10-04"
+  },
+  {
+    "file": "stato.owl",
+    "url": "https://raw.githubusercontent.com/ISA-tools/stato/dev/releases/latest_release/stato.owl",
+    "sha256": "7e8f945ee30c6b24139f0064d57c2edbcfc988f3f74811cad6b5c84819ce1494",
+    "version_iris": [
+      "http://purl.obolibrary.org/obo/stato/releases/2026-04-20/stato.owl"
+    ],
+    "retrieved_at": "2026-10-04"
+  }
+]

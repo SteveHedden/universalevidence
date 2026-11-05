@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<trial xmlns:ns0="http://www.67bricks.com/isrctn"><isrctn>ISRCTN10612149</isrctn><ns0:primaryOutcomes />
+      <ns0:primaryOutcome>Self-reported quit attempt (at least 24 hours quit) measured using an online questionnaire at 2, 4, 6, 8 and 10 weeks, and 3-month follow up</ns0:primaryOutcome>
+      <ns0:secondaryOutcomes />
+      <ns0:secondaryOutcome>1. Engagement with, and completion of, the online smoking cessation and mental health programmes measured using SilverCloud data over 12 weeks.
+2. Self-reported smoking cessation medicine and e-cigarette use measured using an online questionnaire at baseline, 2, 4, 6, 8 and 10 weeks, and 3 and 6 months follow up.
+3. Depression and anhedonia (Patient Health Questionnaire; PHQ-9) measured using SilverCloud data at baseline and at 2, 4, 6, 8 and 10 weeks, and 3 and 6 months follow up by online questionnaire
+4. Anxiety (General Anxiety Disorder Questionnaire; GAD-7) measured using SilverCloud data at baseline and at 2, 4, 6, 8 and 10 weeks, and 3 and 6 months follow up by online questionnaire
+5. Quality of health measured using an online questionnaire at 3 and 6 months follow up
+6.  Self-reported smoking cessation measured using an online questionnaire at the 3-month follow-up (4-weeks abstinent) and 6-month follow-up (prolonged 12-week abstinence)
+7. Saliva cotinine (i.e., 15 nanograms per millilitre), or salivary anabasine (&lt;1ng/ml) if using nicotine, measured to confirm smoking abstinence, using saliva sample testing kits that will be posted to participants with a pre-paid envelope to send to ACM Bioanalytical Services (https://www.acmgloballab.com/bioanalytical-services) laboratory for testing at the 3 and 6-month follow-ups (for those reporting cessations)
+8. Patient acceptability and satisfaction with the intervention measured using an online questionnaire and qualitative interview conducted remotely online or by telephone (intervention arm only) at the 6-month follow-up
+9. Patient acceptability with the trial procedures measured using an online questionnaire at the 6-month follow-up
+9.  Clinician acceptability of the intervention measured using an online questionnaire and qualitative interview conducted remotely online or by telephone at the end of the trial 
+10. Engagement with the mental health treatment service (e.g., number of attended/missed appointments, discharge/completion status) measured using NHS service data collected over 12 weeks</ns0:secondaryOutcome>
+      <ns0:results>
+      <ns0:publicationDetails>2025 Results article in https://pubmed.ncbi.nlm.nih.gov/41348446/ (added 18/12/2025)
+2024 Protocol article in https://doi.org/10.1016/j.cct.2024.107541 (added 22/04/2024)</ns0:publicationDetails>
+      <ns0:publicationStage>Results</ns0:publicationStage>
+      <ns0:basicReport>Basic results see attached file ISRCTN10612149_BasicResults_20Mar25.pdf (added 20/03/2025)</ns0:basicReport>
+      <ns0:plainEnglishReport />
+    </ns0:results>
+    <ns0:outputs>
+      <ns0:output id="4a03462f-aac8-420e-8cc5-603e48385361" outputType="resultsarticle" artefactType="ExternalLink" dateCreated="2025-12-05T00:00:00.000Z" dateUploaded="2025-12-18T00:00:00.000Z" peerReviewed="true" patientFacing="false">
+	<ns0:externalLink url="https://pubmed.ncbi.nlm.nih.gov/41348446/" />
+	<ns0:description />
+	</ns0:output>
+      <ns0:output id="686b11fe-6a86-4ed9-a008-3b33f11294fb" outputType="protocolarticle" artefactType="ExternalLink" dateCreated="2024-04-19T00:00:00.000Z" dateUploaded="2024-04-22T00:00:00.000Z" peerReviewed="true" patientFacing="false">
+	<ns0:externalLink url="https://doi.org/10.1016/j.cct.2024.107541" />
+	<ns0:description />
+	</ns0:output>
+      <ns0:output id="162920c8-3590-434c-add4-611ceab739ca" outputType="basicresults" artefactType="LocalFile" dateCreated="2025-03-20T00:00:00.000Z" dateUploaded="2025-03-20T00:00:00.000Z" peerReviewed="false" patientFacing="false">
+	<ns0:localFile fileId="d6f87434-4744-46a5-a4d4-635d1e7563bf" originalFilename="ISRCTN10612149_BasicResults_20Mar25.pdf" downloadFilename="ISRCTN10612149_BasicResults_20Mar25.pdf" version="" mimeType="application/pdf" length="301038" md5sum="cd7e7e7fc40aa367edc1896f28d1ed57" />
+	<ns0:description />
+	</ns0:output>
+      <ns0:output id="1aadc973-cf0a-48eb-b655-d0681e67542c" outputType="hrasummary" artefactType="ExternalLink" dateCreated="" dateUploaded="2023-06-28T00:00:00.000Z" peerReviewed="false" patientFacing="false">
+	<ns0:externalLink url="https://www.hra.nhs.uk/planning-and-improving-research/application-summaries/research-summaries/integrating-smoking-cessation-treatment-into-online-psychological-care/" />
+	<ns0:description />
+	</ns0:output>
+      <ns0:output id="efe0597b-8812-436b-b111-a386ace583f0" outputType="plainenglishresults" artefactType="LocalFile" dateCreated="2025-03-13T00:00:00.000Z" dateUploaded="2025-03-13T00:00:00.000Z" peerReviewed="false" patientFacing="true">
+	<ns0:localFile fileId="86c6878f-5617-4d0a-9b4e-2c6972e34d1d" originalFilename="ISRCTN10612149_ResultsPlainEnglish_13Mar25.pdf" downloadFilename="ISRCTN10612149_ResultsPlainEnglish_13Mar25.pdf" version="" mimeType="application/pdf" length="36047" md5sum="5a02ddef70b8d95f0ab1e1cc06c95588" />
+	<ns0:description />
+	</ns0:output>
+      <ns0:output id="b04716ee-cf57-4a81-9273-ba62bd673e2f" outputType="sap" artefactType="LocalFile" dateCreated="2024-03-06T00:00:00.000Z" dateUploaded="2024-11-12T00:00:00.000Z" peerReviewed="false" patientFacing="false">
+	<ns0:localFile fileId="1aee8177-bde2-40a7-b463-db57d586b6a3" originalFilename="ISRCTN10612149 240306 ESCAPE Digital analysis plan v1.0_ISRCTN.pdf" downloadFilename="ISRCTN10612149 240306 ESCAPE Digital analysis plan v1.0_ISRCTN.pdf" version="1.0" mimeType="application/pdf" length="330823" md5sum="8b618593c9570df385ba9735c966f060" />
+	<ns0:description />
+	</ns0:output>
+    </ns0:outputs>
+    </trial>

@@ -358,3 +358,52 @@ ue:Materialize a rdfs:Resource ;
     rdfs:label "Materialize" ;
     rdfs:comment "Store a local copy in Fuseki. Used when the source has no API but provides bulk download." .
 
+
+# Storage target for measures; shares the Conditions and Outcomes concept scheme.
+ue:IndicatorAxis a rdfs:Resource ;
+    rdfs:label "Indicator construction axis" ;
+    ue:targetClass ue:Indicator ;
+    ue:targetFile "vocabularies/indicators.ttl" ;
+    ue:targetNamespace "https://universalevidence.com/vocab/states/" ;
+    ue:writable true ;
+    ue:slotName "indicator" .
+
+# IATI query bindings. Vocabulary/code identity is scoped to the same nested entry.
+@prefix iq: <https://universalevidence.com/source/iati/config#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+ues:iati a dcat:Dataset ;
+    dcterms:title "IATI activity datastore" ;
+    dcat:accessService iq:api ;
+    ue:queryStrategy ue:LiveQuery ;
+    ue:fieldMapping iq:title, iq:description, iq:dacSector, iq:sdgTargetSector,
+        iq:sdgTargetTag, iq:agrovocTag, iq:nutritionMarker, iq:cashModality ;
+    iq:searchCrosswalk "vocabularies/crosswalks/iati-search.ttl" .
+iq:api a dcat:DataService ; dcat:endpointURL <https://api.iatistandard.org/datastore/activity/select> .
+iq:title ue:sourceField "title" ; iq:queryField "title_narrative" ;
+    iq:valueKind "narrative" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:description ue:sourceField "description" ; iq:queryField "description_narrative" ;
+    iq:valueKind "narrative" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:dacSector ue:sourceField "sector" ; iq:valueKind "code" ;
+    iq:queryField "sector_code" ; iq:vocabularyField "sector_vocabulary" ;
+    iq:vocabularyCode "1" ; iq:vocabulary <https://reference.iatistandard.org/en/iati-standard/203/codelists/sector/> ;
+    iq:defaultVocabulary "1" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:sdgTargetSector ue:sourceField "sector" ; iq:valueKind "code" ;
+    iq:queryField "sector_code" ; iq:vocabularyField "sector_vocabulary" ;
+    iq:vocabularyCode "8" ; iq:vocabulary <https://reference.iatistandard.org/en/iati-standard/203/codelists/unsdg-targets/> ;
+    iq:defaultVocabulary "1" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:sdgTargetTag ue:sourceField "tag" ; iq:valueKind "code" ;
+    iq:queryField "tag_code" ; iq:vocabularyField "tag_vocabulary" ;
+    iq:vocabularyCode "3" ; iq:vocabulary <https://reference.iatistandard.org/en/iati-standard/203/codelists/unsdg-targets/> ;
+    iq:defaultVocabulary "" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:agrovocTag ue:sourceField "tag" ; iq:valueKind "code" ;
+    iq:queryField "tag_code" ; iq:vocabularyField "tag_vocabulary" ;
+    iq:vocabularyCode "1" ; iq:vocabulary <http://aims.fao.org/aos/agrovoc/> ;
+    iq:defaultVocabulary "" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:nutritionMarker ue:sourceField "policy-marker" ; iq:valueKind "code" ;
+    iq:queryField "policy_marker_code" ; iq:vocabularyField "policy_marker_vocabulary" ;
+    iq:vocabularyCode "1" ; iq:vocabulary <https://reference.iatistandard.org/en/iati-standard/203/codelists/policymarker/> ;
+    iq:defaultVocabulary "1" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .
+iq:cashModality ue:sourceField "default-aid-type" ; iq:valueKind "code" ;
+    iq:queryField "default_aid_type_code" ; iq:vocabularyField "default_aid_type_vocabulary" ;
+    iq:vocabularyCode "4" ; iq:vocabulary <https://reference.iatistandard.org/en/iati-standard/203/codelists/cashandvouchermodalities/> ;
+    iq:defaultVocabulary "1" ; ue:feedsAxis ue:ConditionAxis, ue:InterventionAxis .

@@ -15,6 +15,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from api.query_v2_timing import QueryResponseTimingMiddleware
+from api.routes.actors import router as actors_router
 from api.routes.graph import router as graph_router
 from api.routes.graph_v2 import router as graph_v2_router
 from api.routes.query import router as query_router
@@ -88,9 +89,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from api.routes.results import router as results_router
+app.include_router(results_router)
 app.include_router(query_router)
 app.include_router(query_v2_router)
 app.include_router(taxonomy_router)
 app.include_router(vocab_router)
 app.include_router(graph_router)
 app.include_router(graph_v2_router)
+
+app.include_router(actors_router)
+
+# Explicit opt-in for the local review flow; absent from normal deployments.
+import os as _local_results_os
+if _local_results_os.getenv("UE_RESULTS_CONFIG"):
+    from api.local_results import app as local_results_app
+    app.mount("/local-results", local_results_app)
+
+from api.routes.organizations import router as organizations_router
+app.include_router(organizations_router)

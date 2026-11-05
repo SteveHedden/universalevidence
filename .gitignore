@@ -113,3 +113,17 @@ taxonomy-classification-guide.md
 # Generated crawler discovery files (refreshed by frontend prebuild)
 /site/public/robots.txt
 /site/public/sitemap.xml
+
+# Teacher operational sidecars; canonical evidence/*.ttl remains trackable.
+evidence/.*.workflow.json
+evidence/.*.transaction.json
+evidence/.*.lock
+
+# Captured production runtime assets: retained privately with checksums.
+/taxonomy-release.ttl
+/evidence/
+/load_release.py
+/config/teacher-study-implementation.json
+
+# Checksummed runtime snapshots are restored separately, never published in Git.
+/result-assets/

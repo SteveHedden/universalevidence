@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import hashlib
 import logging
 import os
 import re
@@ -15,6 +16,11 @@ from pathlib import Path
 from typing import Any
 
 import httpx
+
+try:
+    from .isrctn_metadata import extract_metadata, outcome_projection
+except ImportError:
+    from isrctn_metadata import extract_metadata, outcome_projection
 
 logger = logging.getLogger(__name__)
 
@@ -199,6 +205,7 @@ def parse_isrctn_xml(
     country_norm: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """Parse ISRCTN XML into normalized study dictionaries."""
+    response_hash = hashlib.sha256(xml_content if isinstance(xml_content, bytes) else xml_content.encode("utf-8")).hexdigest()
     if isinstance(xml_content, bytes):
         xml_content = xml_content.decode("utf-8", errors="replace")
     if not xml_content.strip():
@@ -226,9 +233,8 @@ def parse_isrctn_xml(
         intervention_descriptions = extract_intervention_descriptions(trial)
         drug_names_list = extract_drug_names(trial)
         study_locations = extract_study_locations(trial)
-        outcomes = outcome_items(
-            xml_texts(trial, "outcomeMeasures", "outcomeMeasure", "primaryOutcome", "secondaryOutcome")
-        )
+        metadata = extract_metadata(trial, study_id, response_hash)
+        outcomes = outcome_projection(metadata["outcome_specifications"])
 
         start_date = xml_text(trial, "overallStartDate", "startDate", "dateApplied")
         study = {
@@ -257,6 +263,7 @@ def parse_isrctn_xml(
             "study_type": xml_text(trial, "studyType"),
             "outcomes": outcomes,
         }
+        study.update(metadata)
         studies.append(study)
 
     return studies

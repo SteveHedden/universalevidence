@@ -1,0 +1,91 @@
+{
+  "schema": "iati-live-1",
+  "mappings": [
+    {
+      "axis": "state",
+      "concept": "https://universalevidence.com/vocab/states/Stunting",
+      "label": "Stunting",
+      "phrases": [
+        "stunting",
+        "stunted children",
+        "stunted growth"
+      ],
+      "exclude_phrases": [
+        "economic",
+        "livestock",
+        "cattle",
+        "crop",
+        "plant",
+        "business"
+      ],
+      "codes": [],
+      "review": {
+        "status": "approved",
+        "reviewer": "Codex independent re-review; Steve Hedden owner approval",
+        "date": "2026-10-09",
+        "rationale": "Matches the existing UE concept definition. Only explicit objective/delivery sentences qualify; background remains unconfirmed. No broad nutrition code, conditional cash, fortification or activity-specific exception. English-only conservative rule proposal. R1 revision: lexical retrieval is separate from relation acceptance. Intervention terms must be the direct object or passive subject of an explicit provision/distribution/delivery statement. Information, advice, advocacy, referrals, discussions, research and planned procurement do not establish actual provision. Unknown grammatical relations remain unsupported. No identity rule is relaxed. Independently accepted in Task 262 R1 re-review; owner authorized promotion and deployment in conversation on 2026-10-09.",
+        "sources": [
+          "vocabularies/states.ttl",
+          "https://docs.datastore.iatistandard.org/en/latest/api/"
+        ]
+      },
+      "text_relation": "condition-objective-v1"
+    },
+    {
+      "axis": "intervention",
+      "concept": "https://universalevidence.com/vocab/interventions/OralNutritionalSupplementation",
+      "label": "Oral nutritional supplementation",
+      "phrases": [
+        "oral nutritional supplements",
+        "oral nutritional supplementation",
+        "nutritional supplements",
+        "nutritional supplementation",
+        "lipid-based nutrient supplements",
+        "lipid based nutrient supplements",
+        "lipid-based nutritional supplements"
+      ],
+      "exclude_phrases": [
+        "livestock",
+        "cattle",
+        "animal feed",
+        "fertilizer"
+      ],
+      "codes": [],
+      "review": {
+        "status": "approved",
+        "reviewer": "Codex independent re-review; Steve Hedden owner approval",
+        "date": "2026-10-09",
+        "rationale": "Matches the existing UE concept definition. Only explicit objective/delivery sentences qualify; background remains unconfirmed. No broad nutrition code, conditional cash, fortification or activity-specific exception. English-only conservative rule proposal. R1 revision: lexical retrieval is separate from relation acceptance. Intervention terms must be the direct object or passive subject of an explicit provision/distribution/delivery statement. Information, advice, advocacy, referrals, discussions, research and planned procurement do not establish actual provision. Unknown grammatical relations remain unsupported. No identity rule is relaxed. Independently accepted in Task 262 R1 re-review; owner authorized promotion and deployment in conversation on 2026-10-09.",
+        "sources": [
+          "vocabularies/interventions.ttl",
+          "https://docs.datastore.iatistandard.org/en/latest/api/"
+        ]
+      },
+      "text_relation": "direct-provision-v1"
+    },
+    {
+      "axis": "intervention",
+      "concept": "https://universalevidence.com/vocab/interventions/UnconditionalCashTransfer",
+      "label": "Unconditional cash transfer",
+      "phrases": [
+        "unconditional cash transfers",
+        "unconditional cash transfer",
+        "unconditional cash grants",
+        "unconditional cash grant"
+      ],
+      "exclude_phrases": [],
+      "codes": [],
+      "review": {
+        "status": "approved",
+        "reviewer": "Codex independent re-review; Steve Hedden owner approval",
+        "date": "2026-10-09",
+        "rationale": "Matches the existing UE concept definition. Only explicit objective/delivery sentences qualify; background remains unconfirmed. No broad nutrition code, conditional cash, fortification or activity-specific exception. English-only conservative rule proposal. R1 revision: lexical retrieval is separate from relation acceptance. Intervention terms must be the direct object or passive subject of an explicit provision/distribution/delivery statement. Information, advice, advocacy, referrals, discussions, research and planned procurement do not establish actual provision. Unknown grammatical relations remain unsupported. No identity rule is relaxed. Independently accepted in Task 262 R1 re-review; owner authorized promotion and deployment in conversation on 2026-10-09.",
+        "sources": [
+          "vocabularies/interventions.ttl",
+          "https://docs.datastore.iatistandard.org/en/latest/api/"
+        ]
+      },
+      "text_relation": "direct-provision-v1"
+    }
+  ]
+}

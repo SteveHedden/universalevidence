@@ -26,6 +26,11 @@ try:
 except ModuleNotFoundError:
     from ctgov_intervention_identity import lookup as ctgov_intervention_lookup
 
+try:
+    from .isrctn_metadata import copy_metadata
+except ImportError:
+    from isrctn_metadata import copy_metadata
+
 logger = logging.getLogger(__name__)
 
 
@@ -1430,7 +1435,7 @@ def dedupe_and_sort_results(results: list[dict]) -> list[dict]:
 
 def format_result(result: dict) -> dict:
     """Return a result dict constrained to the public output schema."""
-    formatted = {key: result.get(key) for key in RESULT_KEYS}
+    formatted = copy_metadata({key: result.get(key) for key in RESULT_KEYS}, result)
     formatted["outcomes"] = result.get("outcomes") or []
     return formatted
 

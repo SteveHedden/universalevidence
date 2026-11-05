@@ -38,6 +38,7 @@ type SearchViewProps = {
 };
 
 function studyKey(s: StudyResult): string {
+  if (s.study_identity) return s.study_identity;
   const identity = s.study_id ?? s.url ?? `${s.title ?? ""}|${s.year ?? ""}`;
   return `${s.source ?? ""}\x00${identity}`;
 }
@@ -49,7 +50,7 @@ async function executeQuery(
   chips: Chips,
   logic: Logic,
   countryFallback: string,
-): Promise<{ results: StudyResult[]; meta: QueryV2Meta | null }> {
+): Promise<{ results: StudyResult[]; meta: QueryV2Meta | null; reviewed_results?: import("../api/client").QueryV2Response["reviewed_results"] }> {
   const axes = SEARCH_AXES.map((a) => a.id).filter((ax) => (chips[ax]?.length ?? 0) > 0);
   const hasCountry = !chips.region?.length && countryFallback.trim().length > 0;
 
@@ -147,6 +148,10 @@ function coverageNotice(meta: QueryV2Meta | null): string | null {
     .filter(([, source]) => source.status === "unavailable" || source.status === "error")
     .map(([source]) => SOURCE_NAMES[source] ?? source);
   const messages: string[] = [];
+  const stateEnrichment = entries.filter(([, source])=>source.reason==='state_enrichment_unavailable').map(([source])=>SOURCE_NAMES[source]??source);
+  if(stateEnrichment.length)messages.push(`${stateEnrichment.join(', ')} State mapping is temporarily incomplete; discovered studies are retained.`);
+  if (meta.enrichment?.status === "unavailable") messages.push("Reported-outcome enrichment is temporarily unavailable; coverage is incomplete.");
+  else if (meta.enrichment?.truncated) messages.push(`Reported-outcome enrichment reached its ${meta.enrichment.limit ?? "configured"}-study candidate limit; results may be incomplete.`);
   if (meta.execution_status === "timeout") {
     messages.push(meta.response_timeout_stage === "serialization"
       ? "Search timed out while preparing the response. Please try Search again."
@@ -184,6 +189,9 @@ export function SearchView({
     return () => document.body.classList.remove("browse-open");
   }, [browseAxis]);
   const [results, setResults] = useState<StudyResult[] | null>(null);
+  const [resultContext, setResultContext] = useState<import("./InterventionResults").ResultContext | undefined>();
+  const [resultPresentation,setResultPresentation] = useState<{groupBy:"intervention"|"condition"; labels:string[]} | null>(null);
+  const [searchGeneration,setSearchGeneration] = useState(0);
   const [queryMeta, setQueryMeta] = useState<QueryV2Meta | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -241,6 +249,10 @@ export function SearchView({
     setError(null);
     try {
       const response = await executeQuery(chips, logic, regionText);
+      const values = Object.fromEntries(Object.entries(chips).map(([axis,terms])=>[axis,terms.map(t=>t.uri)]));
+      setResultContext({state:chips.state?.[0]?.uri ?? '',context:JSON.stringify({values,logic,country:regionText.trim()}),reviewed:response.reviewed_results ?? {status:'unavailable',graph:'',rows:[]}});
+      setResultPresentation({groupBy:chips.state?.length?'intervention':'condition',labels:(chips.state?.length?chips.state:chips.intervention ?? []).map(t=>t.label)});
+      setSearchGeneration(n=>n+1);
       setResults(response.results);
       setQueryMeta(response.meta);
     } catch (caught) {
@@ -341,7 +353,7 @@ export function SearchView({
         {!loading && incompleteEmpty && queryMeta?.execution_status !== "timeout" ? (
           <p className="empty-state">No matching studies were returned from the sources that finished. The search is incomplete; please try again.</p>
         ) : null}
-        {!loading && results && !incompleteEmpty ? <SearchResults results={results} groupBy={groupBy} contextLabels={contextLabels} /> : null}
+        {!loading && results && !incompleteEmpty ? <SearchResults key={searchGeneration} resultContext={resultContext} results={results} groupBy={resultPresentation?.groupBy ?? groupBy} contextLabels={resultPresentation?.labels ?? contextLabels} /> : null}
       </div>
 
       <BrowsePanel

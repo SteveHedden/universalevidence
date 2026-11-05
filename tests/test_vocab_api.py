@@ -199,7 +199,7 @@ def test_term_route_returns_branded_html_for_browser_accept():
         '<link rel="canonical" '
         'href="https://universalevidence.com/vocab/states/ChildMalnutrition">'
     ) in body
-    assert '<link rel="icon" type="image/svg+xml" href="/favicon.svg">' in body
+    assert '<link rel="icon" type="image/svg+xml" href="/assets/ue-mark-transparent.svg">' in body
     assert '<a class="brand-link" href="/" aria-label="Universal Evidence home">' in body
     assert '<main class="page-shell">' in body
     assert '<article class="term-card">' in body
@@ -439,9 +439,14 @@ def test_html_does_not_link_unsafe_external_relation_schemes(monkeypatch):
     ) in response.text
 
 
-def test_hierarchical_term_with_no_relations_uses_single_empty_state():
+def test_hierarchical_term_with_no_relations_uses_single_empty_state(monkeypatch):
+    graph = Graph()
+    subject = URIRef("https://universalevidence.com/vocab/states/UnrelatedState")
+    graph.add((subject, RDF.type, SKOS.Concept))
+    graph.add((subject, SKOS.prefLabel, Literal("Unrelated state")))
+    monkeypatch.setattr(vocab_routes, "_load_graph", lambda _config: graph)
     response = client.get(
-        "/vocab/states/AbnormalInvoluntaryMovementScale",
+        "/vocab/states/UnrelatedState",
         headers={"accept": "text/html"},
     )
 
@@ -515,7 +520,7 @@ def test_ontology_term_opens_in_a_normal_browser():
     assert response.status_code == 200
     assert response.headers["content-type"].startswith("text/html")
     assert '<section id="State">' in response.text
-    assert "Version 0.5.0" in response.text
+    assert "Version 0.6.0" in response.text
     assert client.get("/ontology/NoSuchTerm", headers={"accept": "text/html"}).status_code == 404
 
 

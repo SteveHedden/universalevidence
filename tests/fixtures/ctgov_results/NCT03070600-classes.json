@@ -1,0 +1,233 @@
+{
+  "hasResults": true,
+  "protocolSection": {
+    "identificationModule": {
+      "nctId": "NCT03070600",
+      "briefTitle": "PrEP Implementation for Mothers in Antenatal Care"
+    },
+    "eligibilityModule": {
+      "eligibilityCriteria": "Inclusion Criteria:\n\n* Eligibility for enrollment will include age \u226515 years\n* Pregnant at any gestational age\n* Tuberculosis negative\n* Plans to reside in area for at least one year postpartum\n* Plans to receive postnatal and infant care at the study facility\n* Not currently enrolled in any other studies.\n\nExclusion Criteria:\n\n* HIV+ at time of enrollment",
+      "healthyVolunteers": false,
+      "sex": "FEMALE",
+      "genderBased": true,
+      "genderDescription": "All participants must be pregnant at time of enrollment.",
+      "minimumAge": "15 Years",
+      "stdAges": [
+        "CHILD",
+        "ADULT",
+        "OLDER_ADULT"
+      ]
+    },
+    "designModule": {
+      "studyType": "INTERVENTIONAL",
+      "phases": [
+        "PHASE4"
+      ],
+      "designInfo": {
+        "allocation": "NON_RANDOMIZED",
+        "interventionModel": "PARALLEL",
+        "interventionModelDescription": "We will select 20 clinics from Western Kenya. Ten clinics will be randomized to universal PrEP and ten to targeted PrEP (Table 2). To ensure balance between study arms in terms of key site characteristics, sites will be categorized on HIV prevalence and ANC volume, and restricted randomization will be used for site (cluster) allocation to intervention and control arms (68).",
+        "primaryPurpose": "PREVENTION",
+        "maskingInfo": {
+          "masking": "NONE"
+        }
+      },
+      "enrollmentInfo": {
+        "count": 4447,
+        "type": "ACTUAL"
+      }
+    },
+    "armsInterventionsModule": {
+      "armGroups": [
+        {
+          "label": "Universal PrEP Counselling",
+          "type": "ACTIVE_COMPARATOR",
+          "description": "All enrolled women receiving antenatal care at facilities assigned to Universal PrEP arm will receive standardized HIV risk counseling and then self-select whether they want to use PrEP.",
+          "interventionNames": [
+            "Other: Universal PrEP Counseling"
+          ]
+        },
+        {
+          "label": "Targeted PrEP Clinics",
+          "type": "EXPERIMENTAL",
+          "description": "All enrolled women receiving antenatal care at facilities assigned to the Targeted PrEP arm will be assessed for HIV-risk prior to receiving targeted PrEP counseling.",
+          "interventionNames": [
+            "Other: Targeted PrEP Counseling"
+          ]
+        }
+      ],
+      "interventions": [
+        {
+          "type": "OTHER",
+          "name": "Universal PrEP Counseling",
+          "description": "Counseling at universal sites, will use a standardized counseling script to state that PrEP is available for women at risk for HIV, explain that HIV prevalence in the region is high, and will note that women with HIV positive partners or who don't know their partner's status may be at risk. Counseling will specify that women may have their own reasons to feel at risk or to want PrEP. Following standardized counseling, women will select PrEP at the same visit or will be allowed to deliberate on the decision and come back at the next visit with a decision. Women will be informed that it is advisable to use PrEP if they know their partner is HIV positive or if they do not know their partner's status and will be encouraged to bring untested partners to clinic if status is unknown.",
+          "armGroupLabels": [
+            "Universal PrEP Counselling"
+          ]
+        },
+        {
+          "type": "OTHER",
+          "name": "Targeted PrEP Counseling",
+          "description": "Following enrollment, the targeted PrEP clinics will provide two inter-related innovations over two ANC visits. In the targeted PrEP clinics, any of the following three criteria can trigger enhanced PrEP counseling. A participant that meets any one of these criteria will receive PrEP counseling during the study visit where the criteria is met:\n\n1. Risk Score \\>6 (Risk score includes male partner status known/unknown, syphilis infection, and lifetime number of male partners) or any National AIDS and STI Control Programme (NASCOP) risk factors\n2. participant declines partner self-tests regardless of partner HIV status, and/or\n3. their partner declines self-testing or tests positive.",
+          "armGroupLabels": [
+            "Targeted PrEP Clinics"
+          ]
+        }
+      ]
+    }
+  },
+  "resultsSection": {
+    "outcomeMeasuresModule": {
+      "outcomeMeasures": [
+        {
+          "type": "SECONDARY",
+          "title": "Infant Growth",
+          "description": "Infant height, weight, and age (Weight-for-Age \\[WAZ\\], Height-for-Age \\[HAZ\\], Weight-for-Height \\[WHZ\\] Z-scores). A Z-score of 0 represents the population mean. Indicators of infant malnutrition are defined as Underweight- WAZ Z-score\\<-2; Stunting-HAZ Z-Score \\<-2; Wasting- WHZ Z-Score \\<-2.",
+          "populationDescription": "Length measurements could not be ascertained from all infants",
+          "reportingStatus": "POSTED",
+          "paramType": "MEDIAN",
+          "dispersionType": "Inter-Quartile Range",
+          "unitOfMeasure": "z-score",
+          "timeFrame": "9 months of age",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Universal PrEP Counselling",
+              "description": "All enrolled women receiving antenatal care at facilities assigned to Universal PrEP arm will receive standardized HIV risk counseling and then self-select whether they want to use PrEP.\n\nUniversal PrEP Counseling: Counseling at universal sites, will use a standardized counseling script to state that PrEP is available for women at risk for HIV, explain that HIV prevalence in the region is high, and will note that women with HIV positive partners or who don't know their partner's status may be at risk. Counseling will specify that women may have their own reasons to feel at risk or to want PrEP. Following standardized counseling, women will select PrEP at the same visit or will be allowed to deliberate on the decision and come back at the next visit with a decision. Women will be informed that it is advisable to use PrEP if they know their partner is HIV positive or if they do not know their partner's status and will be encouraged to bring untested partners to clinic if status is unknown."
+            },
+            {
+              "id": "OG001",
+              "title": "Targeted PrEP Clinics",
+              "description": "All enrolled women receiving antenatal care at facilities assigned to the Targeted PrEP arm will be assessed for HIV-risk prior to receiving targeted PrEP counseling.\n\nTargeted PrEP Counseling: Following enrollment, the targeted PrEP clinics will provide two inter-related innovations over two ANC visits. In the targeted PrEP clinics, any of the following three criteria can trigger enhanced PrEP counseling. A participant that meets any one of these criteria will receive PrEP counseling during the study visit where the criteria is met:\n\n1. Risk Score \\>6 (Risk score includes male partner status known/unknown, syphilis infection, and lifetime number of male partners) or any National AIDS and STI Control Programme (NASCOP) risk factors\n2. participant declines partner self-tests regardless of partner HIV status, and/or\n3. their partner declines self-testing or tests positive."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "1847"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "1659"
+                }
+              ]
+            }
+          ],
+          "classes": [
+            {
+              "title": "Infant WAZ at 9mo PP",
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "1847"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "1659"
+                    }
+                  ]
+                }
+              ],
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "0.12",
+                      "lowerLimit": "-0.61",
+                      "upperLimit": "0.88"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "-0.01",
+                      "lowerLimit": "-0.77",
+                      "upperLimit": "0.86"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Infant HAZ at 9mo PP",
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "1777"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "1575"
+                    }
+                  ]
+                }
+              ],
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "-0.35",
+                      "lowerLimit": "-1.25",
+                      "upperLimit": "0.50"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "-0.47",
+                      "lowerLimit": "-1.31",
+                      "upperLimit": "0.48"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Infant WHZ at 9mo PP",
+              "denoms": [
+                {
+                  "units": "Participants",
+                  "counts": [
+                    {
+                      "groupId": "OG000",
+                      "value": "1774"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "1586"
+                    }
+                  ]
+                }
+              ],
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "0.42",
+                      "lowerLimit": "-0.48",
+                      "upperLimit": "1.37"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "0.29",
+                      "lowerLimit": "-0.59",
+                      "upperLimit": "1.26"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

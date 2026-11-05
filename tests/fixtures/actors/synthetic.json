@@ -1,0 +1,130 @@
+{
+  "iati_json": {
+    "iati-activity": [
+      {
+        "iati-identifier": [
+          {
+            "text()": "test-activity"
+          }
+        ],
+        "@last-updated-datetime": "2026-10-04T12:00:00Z",
+        "reporting-org": [
+          {
+            "@ref": "PUB-1",
+            "narrative": [
+              {
+                "text()": "Publisher only"
+              }
+            ]
+          }
+        ],
+        "title": [
+          {
+            "narrative": [
+              {
+                "text()": "Stunting prevention"
+              }
+            ]
+          }
+        ],
+        "description": [
+          {
+            "narrative": [
+              {
+                "text()": "Nutrition education for stunting prevention."
+              }
+            ]
+          }
+        ],
+        "activity-status": [
+          {
+            "@code": "3"
+          }
+        ],
+        "activity-date": [
+          {
+            "@type": "4",
+            "@iso-date": "2020-12-31"
+          }
+        ],
+        "sector": [
+          {
+            "@code": "12240",
+            "@vocabulary": "1",
+            "narrative": [
+              {
+                "text()": "Basic nutrition"
+              }
+            ]
+          },
+          {
+            "@code": "A",
+            "@vocabulary": "99",
+            "@vocabulary-uri": "https://example.org/codes",
+            "narrative": [
+              {
+                "text()": "Bundled nutrition"
+              }
+            ]
+          }
+        ],
+        "participating-org": [
+          {
+            "@role": "4",
+            "@type": "21",
+            "@ref": "ORG-1",
+            "narrative": [
+              {
+                "text()": "Partner"
+              }
+            ]
+          },
+          {
+            "@role": "1",
+            "@type": "21",
+            "@ref": "ORG-1",
+            "narrative": [
+              {
+                "text()": "Alias"
+              }
+            ]
+          },
+          {
+            "@role": "4",
+            "@type": "21",
+            "@ref": "ORG-1",
+            "narrative": [
+              {
+                "text()": "Partner"
+              }
+            ]
+          },
+          {
+            "@role": "4",
+            "@type": "21",
+            "@ref": "ORG-2"
+          },
+          {
+            "@role": "4",
+            "@type": "21",
+            "narrative": [
+              {
+                "text()": "Unknown"
+              }
+            ]
+          },
+          {
+            "@role": "4",
+            "@type": "21",
+            "@ref": "OPAQUE-1",
+            "narrative": [
+              {
+                "text()": "IP not published"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

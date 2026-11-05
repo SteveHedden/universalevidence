@@ -1,11 +1,17 @@
+import { summarizeResults } from './resultSummaries';
+import { InterventionResults, type ResultContext } from "./InterventionResults";
 import { useState } from "react";
+import {fetchGroup, groupQuery, mergeStudies, mergeMeasurements} from "./expandedStudies";
+import type {QueryV2Response} from "../api/client";
 import type { Outcome, StudyResult } from "../api/client";
 import { ConceptDetailsLink } from "./ConceptDetailsLink";
+import {StateResults,stateRows} from './StateResults';
 
 type SearchResultsProps = {
   results: StudyResult[];
   groupBy?: "intervention" | "condition";
   contextLabels?: string[];
+  resultContext?: ResultContext;
 };
 
 const STATUS_ORDER: Record<string, number> = {
@@ -40,6 +46,7 @@ type InterventionGroup = {
 };
 
 function studyIdentity(result: StudyResult, fallback = ""): string {
+  if (result.study_identity) return result.study_identity;
   const identity = result.study_id ?? result.url ?? result.title ?? fallback;
   return `${result.source ?? ""}\x00${identity}`;
 }
@@ -57,6 +64,15 @@ function groupResults(results: StudyResult[], groupBy: "intervention" | "conditi
   groups: InterventionGroup[];
   ungrouped: StudyResult[];
 } {
+  if(groupBy==='condition') {
+    results=results.flatMap(result=>{
+      const mappings=[...(result.state_mappings??[])];
+      if(result.condition_concept_uri) mappings.push({uri:result.condition_concept_uri,label:result.condition_concept??result.condition_concept_uri,role:'condition'});
+      for(const o of result.outcomes??[]) if(typeof o!=='string'&&o.state_concept_uri) mappings.push({uri:o.state_concept_uri,label:o.state_concept??o.state_concept_uri,role:'outcome'});
+      const uris=[...new Set(mappings.map(m=>m.uri))];
+      return uris.length?uris.map(uri=>({...result,condition_concept_uri:uri,condition_concept:mappings.find(m=>m.uri===uri)!.label,group_state_roles:[...new Set(mappings.filter(m=>m.uri===uri).map(m=>m.role))]})):[result];
+    });
+  }
   // Use source-qualified study identities within each group so the same study
   // never appears twice there (it may legitimately appear in multiple groups).
   const groupMap = new Map<string, { concept: string; conceptUri: string | null; studies: Map<string, StudyResult> }>();
@@ -79,7 +95,8 @@ function groupResults(results: StudyResult[], groupBy: "intervention" | "conditi
       if (!groupMap.has(groupKey)) {
         groupMap.set(groupKey, { concept: concept.trim(), conceptUri: conceptUri ?? null, studies: new Map() });
       }
-      groupMap.get(groupKey)!.studies.set(studyKey, result);
+      const previous=groupMap.get(groupKey)!.studies.get(studyKey);
+      groupMap.get(groupKey)!.studies.set(studyKey, {...result,group_state_roles:[...new Set([...(previous?.group_state_roles??[]),...(result.group_state_roles??[])])]});
     } else if (!mappedStudies.has(studyKey)) {
       ungroupedMap.set(studyKey, result);
     }
@@ -92,35 +109,55 @@ function groupResults(results: StudyResult[], groupBy: "intervention" | "conditi
   return { groups, ungrouped: Array.from(ungroupedMap.values()) };
 }
 
-export function SearchResults({ results, groupBy = "intervention", contextLabels }: SearchResultsProps) {
+export function SearchResults({ results: initialResults, groupBy = "intervention", contextLabels, resultContext: initialContext }: SearchResultsProps) {
+  const [expansions,setExpansions]=useState<Record<string,QueryV2Response>>({});
+  const results=Object.values(expansions).reduce((rows,e)=>mergeStudies(rows,e.results),initialResults);
+  const resultContext=initialContext?.reviewed?{...initialContext,reviewed:{...initialContext.reviewed,
+    rows:Object.values(expansions).reduce((rows,e)=>mergeMeasurements(rows,e.reviewed_results?.rows??[]),initialContext.reviewed.rows),
+    coverage:[...(initialContext.reviewed.coverage??[]),...Object.values(expansions).flatMap(e=>e.reviewed_results?.coverage??[])],
+    partial:initialContext.reviewed.partial || Object.values(expansions).some(e=>e.meta.execution_status!=='complete'),
+  }}:initialContext;
+  async function expandGroup(uri:string):Promise<string|null> {
+    const response=await fetchGroup(initialContext!.context,uri);
+    setExpansions(prev=>({...prev,[uri]:response}));
+    return response.meta.execution_status!=='complete' || response.meta.truncated
+      ? 'Some matching studies could not be loaded. Showing those available.' : null;
+  }
+
   if (results.length === 0) {
     return <p className="empty-state">No studies matched the selected filters.</p>;
   }
 
   const { groups, ungrouped } = groupResults(results, groupBy);
+  if (resultContext?.reviewed?.status==='available' && groupBy==='intervention') {
+    const hasClear=(uri:string|null)=>Boolean(uri && summarizeResults(resultContext.reviewed!.rows,uri).some(s=>s.evidence.some(e=>e.clear)));
+    groups.sort((a,b)=>Number(hasClear(b.conceptUri))-Number(hasClear(a.conceptUri)) || b.studies.length-a.studies.length);
+  }
   const distinctStudies = uniqueStudies(results);
 
   if (groups.length > 0) {
     const uniqueStudyCount = distinctStudies.length;
-    const completedTotal = distinctStudies.filter((r) => r.status === "completed").length;
+    const resultsTotal = resultContext?.reviewed?.status==='available' ? new Set(resultContext.reviewed.rows.filter(r=>r.value!==null && r.value!==undefined).map(r=>r.study)).size : null;
     return (
       <div className="study-list">
         <p className="results-summary">
           {uniqueStudyCount.toLocaleString()} {uniqueStudyCount === 1 ? "study" : "studies"}
           {" · "}
           {groups.length}{" "}
-          {groupBy === "condition" ? `condition${groups.length === 1 ? "" : "s"}` : `intervention${groups.length === 1 ? "" : "s"}`}
+          {groupBy === "condition" ? `State${groups.length === 1 ? "" : "s"}` : `intervention${groups.length === 1 ? "" : "s"}`}
           {contextLabels && contextLabels.length > 0 && (
             <span className="results-summary-context"> for {contextLabels.join(", ")}</span>
           )}
-          {completedTotal > 0 && (
-            <span className="results-summary-sub"> · {completedTotal} completed</span>
+          {resultsTotal !== null && (
+            <span className="results-summary-sub"> · {resultsTotal} with results</span>
           )}
         </p>
         {groups.map((group) => (
           <InterventionGroupBlock
             key={`${group.conceptUri ?? "label"}:${group.concept}`}
             group={group}
+            expandGroup={groupBy==='intervention' && group.conceptUri && groupQuery(initialContext?.context??'',group.conceptUri) ? expandGroup : undefined}
+            resultContext={resultContext}
             conceptType={groupBy === "condition" ? "state" : "intervention"}
           />
         ))}
@@ -135,13 +172,13 @@ export function SearchResults({ results, groupBy = "intervention", contextLabels
   // expansion can produce several rows per study, so keep the fallback count
   // and cards study-level as well.
   const sorted = sortStudies(distinctStudies);
-  const completedCount = sorted.filter((r) => r.status === "completed").length;
+  const resultsCount = resultContext?.reviewed?.status==='available' ? new Set(resultContext.reviewed.rows.filter(r=>r.value!==null && r.value!==undefined).map(r=>r.study)).size : null;
   return (
     <div className="study-list">
       <p className="results-summary">
         {sorted.length.toLocaleString()} {sorted.length === 1 ? "study" : "studies"} found
-        {completedCount > 0 && (
-          <span className="results-summary-sub"> · {completedCount} completed</span>
+        {resultsCount !== null && (
+          <span className="results-summary-sub"> · {resultsCount} with results</span>
         )}
       </p>
       {sorted.map((result, index) => (
@@ -186,13 +223,31 @@ function aggregateOutcomeLabels(studies: StudyResult[]): Array<{ label: string; 
 function InterventionGroupBlock({
   group,
   conceptType,
+  resultContext,
+  expandGroup,
 }: {
+  expandGroup?: (uri:string)=>Promise<string|null>;
   group: InterventionGroup;
   conceptType: "state" | "intervention";
+  resultContext?: ResultContext;
 }) {
   const [open, setOpen] = useState(false);
+  const [expansion,setExpansion]=useState<'idle'|'loading'|'done'|'retry'>('idle');
+  const [expansionNotice,setExpansionNotice]=useState<string|null>(null);
+  async function loadMore() {
+    if(!expandGroup || !group.conceptUri || expansion==='loading' || expansion==='done')return;
+    setExpansion('loading');setExpansionNotice(null);
+    try {const notice=await expandGroup(group.conceptUri);setExpansionNotice(notice);setExpansion(notice?'retry':'done');}
+    catch {setExpansionNotice('Additional studies could not be loaded. Your current studies are still shown.');setExpansion('retry');}
+  }
   const sorted = sortStudies(group.studies);
-  const completedCount = sorted.filter((r) => r.status === "completed").length;
+  const summaries = group.conceptUri && resultContext?.reviewed?.status==='available' ? summarizeResults(resultContext.reviewed.rows,group.conceptUri) : null;
+  const resultsCount = conceptType==='state' && resultContext?.reviewed?.status==='available'
+    ? new Set(stateRows(resultContext,group.conceptUri??'').filter(r=>r.value!==null&&r.value!==undefined).map(r=>r.study)).size
+    : resultContext?.reviewed?.mode==='api-first'
+    ? new Set(resultContext.reviewed.rows.filter(r=>r.value!==null && r.value!==undefined &&
+      (r.discovery_interventions?.includes(group.conceptUri ?? '') || summaries?.some(s=>s.evidence.some(e=>e.measurement===r.measurement)))).map(r=>r.study)).size
+    : summaries ? new Set(summaries.flatMap(s=>s.evidence.map(e=>e.study))).size : null;
   const outcomeLabels = open ? aggregateOutcomeLabels(group.studies) : [];
 
   return (
@@ -201,14 +256,15 @@ function InterventionGroupBlock({
         <button
           type="button"
           className="group-toggle"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {if(!open)void loadMore();setOpen(v=>!v);}}
           aria-expanded={open}
         >
           <span className={`group-chevron${open ? " open" : ""}`}>›</span>
           <span className="group-label">{group.concept}</span>
+          {resultContext?.reviewed?.status==='available' && group.conceptUri && summarizeResults(resultContext.reviewed.rows,group.conceptUri).some(s=>s.evidence.some(e=>e.clear)) && <span className="group-count">Some clear findings · </span>}
           <span className="group-count">{group.studies.length} {group.studies.length === 1 ? "study" : "studies"}</span>
-          {completedCount > 0 && (
-            <span className="group-completed">{completedCount} completed</span>
+          {resultsCount !== null && (
+            <span className="group-completed">{resultsCount} with results</span>
           )}
         </button>
         <ConceptDetailsLink
@@ -218,8 +274,14 @@ function InterventionGroupBlock({
           expectedType={conceptType}
         />
       </div>
-      {open && (
-        <>
+      {open && expansion==='loading' && <p role="status">Loading matching studies…</p>}
+      {open && expansionNotice && <p role="status">{expansionNotice} <button type="button" onClick={()=>void loadMore()}>Retry</button></p>}
+      {conceptType === "intervention" && group.conceptUri ? (
+        <InterventionResults {...(resultContext ?? {state:"",context:"",reviewed:{status:"unavailable",graph:"",rows:[]}})} intervention={group.conceptUri} active={open}>
+          {sorted.map((result,i)=><StudyCard key={studyIdentity(result,String(i))} result={result}/>)}
+        </InterventionResults>
+      ) : open && group.conceptUri ? (<StateResults state={group.conceptUri} context={resultContext} studies={group.studies}>
+
           {outcomeLabels.length > 0 && (
             <div className="group-outcomes">
               <span className="group-outcomes-label">Outcomes measured:</span>
@@ -236,8 +298,7 @@ function InterventionGroupBlock({
           {sorted.map((result, i) => (
             <StudyCard key={studyIdentity(result, String(i))} result={result} />
           ))}
-        </>
-      )}
+        </StateResults>) : open && sorted.map((result,i)=><StudyCard key={studyIdentity(result,String(i))} result={result}/>)}
     </div>
   );
 }
@@ -245,7 +306,6 @@ function InterventionGroupBlock({
 function OtherStudiesBlock({ studies }: { studies: StudyResult[] }) {
   const [open, setOpen] = useState(false);
   const sorted = sortStudies(studies);
-  const completedCount = sorted.filter((r) => r.status === "completed").length;
   return (
     <div className="intervention-group">
       <button
@@ -257,9 +317,6 @@ function OtherStudiesBlock({ studies }: { studies: StudyResult[] }) {
         <span className={`group-chevron${open ? " open" : ""}`}>›</span>
         <span className="group-label muted">Other studies</span>
         <span className="group-count">{studies.length} {studies.length === 1 ? "study" : "studies"}</span>
-        {completedCount > 0 && (
-          <span className="group-completed">{completedCount} completed</span>
-        )}
       </button>
       {open && sorted.map((result, i) => (
         <StudyCard key={`other-${studyIdentity(result, String(i))}`} result={result} />
@@ -299,6 +356,7 @@ function StudyCard({ result }: { result: StudyResult }) {
       ) : null}
 
       <div className="study-card-footer">
+        {result.group_state_roles?.length ? <p className="result-note">{result.group_state_roles.map(role=>({'condition':'Condition studied','outcome':'Planned/mapped outcome','result':'Reported result'}[role]??role)).join(' · ')}</p>:null}
         <div className="study-meta">
           {result.country ? <span>{result.country}</span> : null}
           {statusLabel ? (

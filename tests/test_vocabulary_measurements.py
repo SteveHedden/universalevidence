@@ -6,29 +6,30 @@ from rdflib.namespace import RDF,SH
 from pyshacl import validate
 R=Path(__file__).resolve().parents[1]
 U=Namespace('https://universalevidence.com/ontology/');S=Namespace('https://universalevidence.com/vocab/states/')
+I=Namespace('https://universalevidence.com/vocab/indicators/')
 @pytest.fixture(scope='module')
 def core():
-    g=Graph().parse(R/'vocabularies/states.ttl');g.parse(R/'vocabularies/subjects.ttl');return g
+    g=Graph().parse(R/'vocabularies/states.ttl');g.parse(R/'vocabularies/subjects.ttl');g.parse(R/'vocabularies/indicators.ttl');return g
 
 def test_fetal_weight_retains_both_applicable_states_in_rdf_queries(core):
     expected={S.FetalGrowthRestriction,S.FetalMacrosomia}
-    assert set(core.objects(S.FetalWeight,U.measures))==expected
-    found={row.state for row in core.query("SELECT DISTINCT ?state WHERE { <https://universalevidence.com/vocab/states/FetalWeight> (<https://universalevidence.com/ontology/measures>|^<https://universalevidence.com/ontology/measuredBy>) ?state }")}
+    assert set(core.objects(I.FetalWeight,U.measures))==expected
+    found={row.state for row in core.query("SELECT DISTINCT ?state WHERE { <https://universalevidence.com/vocab/indicators/FetalWeight> (<https://universalevidence.com/ontology/measures>|^<https://universalevidence.com/ontology/measuredBy>) ?state }")}
     assert found==expected
     for state in expected:
-        assert (state,U.measuredBy,S.FetalWeight) in core
+        assert (state,U.measuredBy,I.FetalWeight) in core
     # The metric link does not add a subsumption edge between the conditions.
     from rdflib.namespace import SKOS
     assert not (S.FetalGrowthRestriction,SKOS.broader,S.FetalMacrosomia) in core
 
 def test_indicator_targets_are_states_and_reviewed_pairs_are_reciprocal(core):
     for name in ['FetalWeight','LiteracyRate','EarlyGradeReadingAssessment','ContraceptivePrevalence','WDISPDYNCONMQ2ZS','SDG153NationalDisasterRiskStrategyAdoption','SDG1681DevelopingCountryVotingRightsShare','SDG841MaterialFootprint','AlertFatigueRate','MedicalOveruseRate']:
-        i=S[name];forward=set(core.objects(i,U.measures));reverse=set(core.subjects(U.measuredBy,i))
+        i=I[name];forward=set(core.objects(i,U.measures));reverse=set(core.subjects(U.measuredBy,i))
         assert forward and forward==reverse,name
         assert all((s,RDF.type,U.State) in core for s in forward)
     assert (S.DisasterLoss,RDF.type,U.State) in core
     assert (S.ServiceSatisfaction,RDF.type,U.State) in core
-    assert (S.ContraceptivePrevalence,RDF.type,U.Indicator) in core
+    assert (I.ContraceptivePrevalence,RDF.type,U.Indicator) in core
 
 @pytest.fixture(scope='module')
 def record_shapes():
@@ -54,7 +55,7 @@ def test_normalized_outcome_selects_specific_state_of_shared_metric(record_shape
     body='''@prefix ue: <https://universalevidence.com/ontology/> .
       @prefix state: <https://universalevidence.com/vocab/states/> .
       <https://example.org/outcome> a ue:OutcomeMeasurement;
-        ue:ofState state:FetalGrowthRestriction; ue:ofIndicator state:FetalWeight;
+        ue:ofState state:FetalGrowthRestriction; ue:ofIndicator <https://universalevidence.com/vocab/indicators/FetalWeight>;
         ue:outcomeStatus "pre-specified" .'''
     g=Graph().parse(data=body,format='turtle')
     for t in core.triples((None,RDF.type,None)):g.add(t)

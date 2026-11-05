@@ -3,18 +3,21 @@
 from __future__ import annotations
 
 import json
+from collections import OrderedDict
+from threading import RLock
 import re
 from dataclasses import dataclass
 from html import escape
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import quote, urlsplit
+from urllib.parse import quote, urlsplit, urlencode
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse, Response, RedirectResponse
 from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.namespace import DCAT, DCTERMS, RDF, RDFS, SKOS
-from api.vocabulary_compat import vocabulary_replacements
+from api.vocabulary_compat import vocabulary_replacements, indicator_migrations
+from api.concept_pages import page as concept_page
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -40,6 +43,11 @@ class ResourceConfig:
 
 
 VOCABULARIES = {
+    "indicator-migrations": ResourceConfig("indicator-migrations", REPO_ROOT / "vocabularies" / "indicator-migrations.ttl", "https://universalevidence.com/vocab/indicator-migrations/"),
+    "indicators": ResourceConfig(
+        name="indicators", path=REPO_ROOT / "vocabularies" / "indicators.ttl",
+        namespace="https://universalevidence.com/vocab/indicators/",
+    ),
     "states": ResourceConfig(
         name="states",
         path=REPO_ROOT / "vocabularies" / "states.ttl",
@@ -63,6 +71,7 @@ VOCABULARIES = {
 }
 
 VOCABULARY_DISPLAY_NAMES = {
+    "indicators": "Indicators",
     "states": "Conditions & outcomes",
     "interventions": "Interventions",
     "regions": "Regions",
@@ -177,12 +186,49 @@ def _missing_term(name: str, term: str) -> JSONResponse:
     )
 
 
-def _load_graph(config: ResourceConfig) -> Graph | None:
-    if not config.path.exists():
+_GRAPH_CACHE_LIMIT = 8
+_GRAPH_CACHE: OrderedDict = OrderedDict()
+_GRAPH_CACHE_LOCK = RLock()
+
+
+def _graph_file_signature(path: Path):
+    try:
+        stat = path.stat()
+    except FileNotFoundError:
         return None
-    graph = Graph()
-    graph.parse(config.path, format="turtle")
-    return graph
+    return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+
+
+def _load_graph(config: ResourceConfig) -> Graph | None:
+    """Reuse read-only graphs per process; replace them when any input changes.
+
+    Each concept scheme has its own graph and cache signature.
+    Never mutate a published graph or cache a failed/unstable parse.
+    """
+    paths = (config.path,)
+
+    with _GRAPH_CACHE_LOCK:
+        for _attempt in range(3):
+            signature = tuple(_graph_file_signature(path) for path in paths)
+            if signature[0] is None:
+                _GRAPH_CACHE.pop(config, None)
+                return None
+            cached = _GRAPH_CACHE.get(config)
+            if cached is not None and cached[0] == signature:
+                _GRAPH_CACHE.move_to_end(config)
+                return cached[1]
+            _GRAPH_CACHE.pop(config, None)
+            graph = Graph()
+            for path, stamp in zip(paths, signature):
+                if stamp is not None:
+                    graph.parse(path, format="turtle")
+            if signature != tuple(_graph_file_signature(path) for path in paths):
+                continue
+            _GRAPH_CACHE[config] = (signature, graph)
+            while len(_GRAPH_CACHE) > _GRAPH_CACHE_LIMIT:
+                _GRAPH_CACHE.popitem(last=False)
+            return graph
+    raise RuntimeError(f"Vocabulary changed repeatedly while loading: {config.name}")
 
 
 def _literal(graph: Graph, subject: URIRef, predicates: Iterable[URIRef]) -> str | None:
@@ -688,6 +734,10 @@ h2 { font-size: 1.05rem; line-height: 1.25; margin: 0 0 12px; }
 
 def _html_response(config: ResourceConfig, graph: Graph, subject: URIRef, term: str) -> Response:
     """Branded, server-rendered, crawlable HTML representation for a term."""
+    from api.concept_pilots import pilot_html
+    pilot = pilot_html(str(subject))
+    if pilot is not None:
+        return Response(content=pilot, media_type=HTML, headers={"Cache-Control": "public, max-age=3600", "Vary": "Accept"})
     label = _literal(graph, subject, (SKOS.prefLabel, RDFS.label, DCTERMS.title)) or term
     definition = _literal(graph, subject, (SKOS.definition, RDFS.comment, DCTERMS.description))
     broader = _values(graph, subject, SKOS.broader)
@@ -723,6 +773,20 @@ def _html_response(config: ResourceConfig, graph: Graph, subject: URIRef, term: 
         )
         if not relations_html:
             relations_html = '<p class="empty-relations">No broader or narrower concepts are recorded.</p>'
+
+    if config.name == "states":
+        indicator_graph = _load_graph(VOCABULARIES["indicators"])
+        if indicator_graph is not None:
+            measures = set(graph.objects(subject, URIRef(str(UE) + "measuredBy")))
+            measures.update(indicator_graph.subjects(URIRef(str(UE) + "measures"), subject))
+            items = []
+            for measure in sorted(measures, key=lambda x: _relation_label(indicator_graph, str(x)).casefold()):
+                measure_label = _relation_label(indicator_graph, str(measure))
+                description = _literal(indicator_graph, measure, (SKOS.definition,)) or ""
+                items.append('<li><strong>' + escape(measure_label) + '</strong>' +
+                             ('<p>' + escape(description) + '</p>' if description else '') + '</li>')
+            if items:
+                relations_html += _relation_section("indicators-title", "Measures", "\n".join(items))
 
     source_details_html = _source_details(graph, subject, label) if config.name == "sources" else ""
     copyable_type = COPYABLE_TERM_TYPES.get(config.name)
@@ -764,68 +828,17 @@ def _html_response(config: ResourceConfig, graph: Graph, subject: URIRef, term: 
 })();
 </script>""" if supports_copy else ""
 
-    body = f"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{escape(label)} — {escape(vocabulary_label)} — Universal Evidence</title>
-<meta name="description" content="{escape(description_meta, quote=True)}">
-<link rel="canonical" href="{escape(canonical_uri, quote=True)}">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<style>{TERM_PAGE_CSS}</style>
-</head>
-<body>
-<header class="site-header">
-  <div class="header-inner">
-    <a class="brand-link" href="/" aria-label="Universal Evidence home">
-      <svg class="brand-mark" viewBox="44 16 112 112" aria-hidden="true" focusable="false">
-        <defs><clipPath id="logo-clip"><circle cx="100" cy="72" r="56"></circle></clipPath></defs>
-        <circle cx="100" cy="72" r="56" fill="#c9a547"></circle>
-        <g clip-path="url(#logo-clip)">
-          <rect x="43" y="72" width="114" height="6" fill="#f6f7f9"></rect>
-          <rect x="43" y="86" width="114" height="6" fill="#f6f7f9"></rect>
-          <rect x="43" y="100" width="114" height="6" fill="#f6f7f9"></rect>
-          <rect x="43" y="114" width="114" height="6" fill="#f6f7f9"></rect>
-        </g>
-      </svg>
-      <span>
-        <span class="brand-name">Universal Evidence</span>
-        <span class="tagline">what was tried and what happened</span>
-      </span>
-    </a>
-  </div>
-</header>
-<main class="page-shell">
-  <div class="page-content">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">{escape(vocabulary_label)}</span>
-    </nav>
-    <article class="term-card">
-      <header class="term-heading">
-        <span class="vocabulary-badge">{escape(vocabulary_label)}</span>
-        <h1>{escape(label)}</h1>
-      </header>
-      <div class="uri-block">
-        <div class="uri-heading">
-          <span class="uri-label">Canonical URI</span>
-          {copy_button_html}
-        </div>
-        <code id="canonical-uri">{escape(canonical_uri)}</code>
-        {copy_status_html}
-      </div>
-      <div class="term-body">
-        {definition_html}
-        {relations_html}
-        {source_details_html}
-      </div>
-    </article>
-    <footer class="page-footer">Universal Evidence controlled vocabulary</footer>
-  </div>
-</main>
-{copy_script_html}
-</body>
-</html>"""
+    axis = {"states": "state", "interventions": "intervention"}.get(config.name)
+    search_html = ""
+    if axis:
+        query = urlencode({axis: canonical_uri, f"{axis}_label": label})
+        search_html = f'<a class="search-topic" href="/explore.html?{escape(query, quote=True)}" target="_blank" rel="noopener noreferrer">Search evidence for this topic <span aria-hidden="true">→</span></a>'
+    directory = f"/browse/{config.name}" if config.name in {"states", "interventions"} else "/browse"
+    content = f"""<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/browse">Browse</a><span aria-hidden="true">/</span><a href="{directory}">{escape(vocabulary_label)}</a></nav>
+<article class="term-card"><header class="term-heading"><span class="vocabulary-badge">{escape(vocabulary_label)}</span><h1>{escape(label)}</h1></header>
+<div class="term-body">{definition_html}{search_html}{relations_html}{source_details_html}</div>
+<details class="technical-details"><summary>Concept URI &amp; technical details</summary><div class="uri-block"><div class="uri-heading"><span class="uri-label">Canonical URI</span>{copy_button_html}</div><code id="canonical-uri">{escape(canonical_uri)}</code>{copy_status_html}</div></details></article>"""
+    body = concept_page(f"{label} — {vocabulary_label} — Universal Evidence", description_meta, canonical_uri, content, copy_script_html)
     return Response(
         content=body,
         media_type=HTML,
@@ -838,6 +851,8 @@ def _serve_resource(request: Request, config: ResourceConfig, term: str | None =
         request, allow_html=allow_html,
         default_type=HTML if term is not None and allow_html else TURTLE,
     )
+    if media_type is None and config.name == "indicators" and negotiate_content_type(request, allow_html=True, default_type=HTML) == HTML:
+        media_type = TURTLE
     if media_type is None:
         return _not_acceptable()
 
@@ -868,7 +883,10 @@ def _serve_resource(request: Request, config: ResourceConfig, term: str | None =
         return _html_response(config, graph, subject, term)
     if media_type == JSON:
         return _json_response(config, graph, subject)
-    return _rdf_response(response_graph, media_type)
+    response = _rdf_response(response_graph, media_type)
+    if config.name == "indicators":
+        response.headers["X-Robots-Tag"] = "noindex"
+    return response
 
 
 @router.get("/ontology")
@@ -889,7 +907,7 @@ async def ontology(request: Request):
             sections.append(f'<section id="{escape(term, quote=True)}"><h2>{label}</h2><p><code>{escape(str(subject))}</code></p><p>{description}</p></section>')
         body = f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{title}</title>
-<style>body{{font:18px/1.6 system-ui,sans-serif;max-width:900px;margin:40px auto;padding:0 24px;color:#18232c}}section{{border-top:1px solid #ccd5dd;margin-top:32px}}code{{font-size:.8em;overflow-wrap:anywhere}}a{{color:#1664a3}}</style></head>
+<style>body{{font:18px/1.6 system-ui,sans-serif;max-width:900px;margin:40px auto;padding:0 24px;color:#18232c}}section{{border-top:1px solid #ccd5dd;margin-top:32px}}code{{font-size:.8em;overflow-wrap:anywhere}}a{{color:#1664a3}}</style><script defer src="https://cloud.umami.is/script.js" data-website-id="c1903a71-2894-474a-ab38-5d28a8a75884"></script></head>
 <body><main><h1>{title}</h1><p>Version {version} · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
 <p>Classes, properties and validation rules for Universal Evidence. Software can request this document as Turtle or JSON-LD using the Accept header.</p>
 {''.join(sections)}</main></body></html>'''
@@ -922,4 +940,66 @@ async def vocabulary_term(request: Request, vocabulary: str, term: str):
     config = VOCABULARIES.get(vocabulary)
     if config is None:
         return _missing_vocabulary(vocabulary)
-    return _serve_resource(request, config, term=term, allow_html=True)
+    old_uri = f"{config.namespace}{term}"
+    target = vocabulary_replacements().get(old_uri)
+    if target and target.startswith(VOCABULARIES["indicators"].namespace):
+        graph = _load_graph(VOCABULARIES["indicators"])
+        if graph is not None and (URIRef(target), RDF.type, SKOS.Concept) in graph:
+            return RedirectResponse(url=urlsplit(target).path, status_code=308,
+                                    headers={"Cache-Control": "no-cache"})
+    return _serve_resource(request, config, term=term, allow_html=vocabulary != "indicators")
+
+
+def _browse_terms(config, graph, roots=False):
+    terms = {s for s in graph.subjects(RDF.type, SKOS.Concept)
+             if isinstance(s, URIRef) and str(s).startswith(config.namespace)}
+    if roots:
+        terms = {s for s in terms if _narrower_values(graph, s) and not any(parent in terms for parent in graph.objects(s, SKOS.broader))}
+    return sorted(terms, key=lambda s: (_relation_label(graph, str(s)).casefold(), str(s)))
+
+
+@router.get("/browse")
+def browse_home():
+    sections = []
+    for name, description in [("states", "Conditions and outcomes we want to understand or improve."), ("interventions", "Actions taken to change conditions and outcomes.")]:
+        config = VOCABULARIES[name]
+        graph = _load_graph(config)
+        if graph is None:
+            continue
+        roots = _browse_terms(config, graph, roots=True)
+        links = _relation_list(config, graph, map(str, roots[:8]))
+        sections.append(f'<section><h2><a href="/browse/{name}">{escape(VOCABULARY_DISPLAY_NAMES[name])}</a></h2><p class="browse-intro">{description}</p><ul class="concept-grid">{links}</ul><p><a href="/browse/{name}">Browse all categories →</a></p></section>')
+    sections.append('<section><h2><a href="/browse/indicators">Indicators</a></h2><p class="browse-intro">Explore measures used to describe conditions and outcomes.</p><p><a href="/browse/indicators">Browse indicators →</a></p></section>')
+    content = '<nav class="breadcrumb"><a href="/">Home</a><span>/</span><span>Browse</span></nav><h1>Find your way into the evidence.</h1><p class="browse-intro">Explore the conditions we want to change and the interventions used to address them.</p><div class="browse-sections">' + ''.join(sections) + '</div>'
+    return Response(concept_page('Browse conditions and interventions | Universal Evidence', 'Browse Universal Evidence conditions, outcomes and interventions through their existing vocabulary relationships.', 'https://universalevidence.com/browse', content), media_type=HTML)
+
+
+@router.get("/browse/{vocabulary}")
+def browse_vocabulary(vocabulary: str, view: str = "categories", page: int = 1):
+    if vocabulary not in {"states", "interventions", "indicators"} or view not in {"categories", "all"}:
+        return _missing_vocabulary(vocabulary)
+    config = VOCABULARIES[vocabulary]
+    graph = _load_graph(config)
+    if graph is None:
+        return _missing_vocabulary(vocabulary)
+    terms = _browse_terms(config, graph, roots=view == "categories" and vocabulary != "indicators")
+    size = 100
+    pages = max(1, (len(terms) + size - 1) // size)
+    if page < 1 or page > pages:
+        return JSONResponse(status_code=404, content={"error": "Page not found"})
+    def url(number):
+        params = {}
+        if view == "all": params['view'] = 'all'
+        if number > 1: params['page'] = number
+        return f'/browse/{vocabulary}' + ('?' + urlencode(params) if params else '')
+    label = "Indicators" if vocabulary == "indicators" else VOCABULARY_DISPLAY_NAMES[vocabulary]
+    links = _relation_list(config, graph, map(str, terms[(page-1)*size:page*size]))
+    pagination = '<nav class="pagination" aria-label="Pagination">'
+    if page > 1: pagination += f'<a href="{escape(url(page-1), quote=True)}">← Previous</a>'
+    pagination += f'<span aria-current="page">Page {page} of {pages}</span>'
+    if page < pages: pagination += f'<a href="{escape(url(page+1), quote=True)}">Next →</a>'
+    pagination += '</nav>'
+    heading = 'Indicators A–Z' if vocabulary == 'indicators' else ('All concepts A–Z' if view == 'all' else 'Top-level categories')
+    tabs = '' if vocabulary == 'indicators' else f'<nav class="browse-links"><a href="/browse/{vocabulary}">Categories</a><a href="/browse/{vocabulary}?view=all">All concepts A–Z</a></nav>'
+    content = f'<nav class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/browse">Browse</a><span>/</span><span>{escape(label)}</span></nav><h1>{escape(label)}</h1>{tabs}<h2>{heading}</h2><p class="small">{len(terms):,} concepts</p><ul class="concept-grid">{links}</ul>{pagination}'
+    return Response(concept_page(f'{label} — {heading}' + (f' — Page {page}' if page > 1 else '') + ' | Universal Evidence', f'Browse {label.lower()} in the Universal Evidence vocabulary.', 'https://universalevidence.com' + url(page), content), media_type=HTML)

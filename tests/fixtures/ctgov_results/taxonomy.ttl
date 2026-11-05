@@ -1,0 +1,40 @@
+@prefix ns1: <https://universalevidence.com/ontology/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://universalevidence.com/vocab/states/HeightForAgeZScore> a skos:Concept,
+        ns1:Indicator ;
+    skos:definition "Age- and sex-standardized height or recumbent length expressed in standard deviation units relative to a specified child growth reference." ;
+    skos:inScheme <https://universalevidence.com/vocab/states/> ;
+    skos:prefLabel "Height-for-age z-score" ;
+    ns1:bearer <https://universalevidence.com/vocab/subjects/Population> ;
+    ns1:measures <https://universalevidence.com/vocab/states/ChildGrowth>,
+        <https://universalevidence.com/vocab/states/Stunting> .
+
+<https://universalevidence.com/vocab/states/SDG221UnderFiveStuntingPrevalence> a skos:Concept,
+        ns1:Indicator ;
+    skos:definition "Prevalence of stunting (height for age <-2 standard deviation from the median of the World Health Organization (WHO) Child Growth Standards) among children under 5 years of age" ;
+    skos:inScheme <https://universalevidence.com/vocab/states/> ;
+    skos:prefLabel "SDG 2.2.1 under-five stunting prevalence" ;
+    ns1:bearer <https://universalevidence.com/vocab/subjects/Population> ;
+    ns1:measures <https://universalevidence.com/vocab/states/Stunting> .
+
+<https://universalevidence.com/vocab/states/ChildGrowth> a skos:Concept,
+        ns1:State ;
+    skos:definition "Physical growth status and change in children, reflected in height or length, weight gain, head circumference, standardized anthropometric measures, or growth velocity." ;
+    skos:inScheme <https://universalevidence.com/vocab/states/> ;
+    skos:prefLabel "Child growth" ;
+    ns1:bearer <https://universalevidence.com/vocab/subjects/Population> .
+
+<https://universalevidence.com/vocab/states/Stunting> a skos:Concept,
+        ns1:State ;
+    skos:definition "The condition of impaired linear growth in children, defined as height-for-age more than two standard deviations below the WHO Child Growth Standards median, reflecting chronic undernutrition." ;
+    skos:inScheme <https://universalevidence.com/vocab/states/> ;
+    skos:prefLabel "Stunting" ;
+    ns1:bearer <https://universalevidence.com/vocab/subjects/Population> .
+
+<https://universalevidence.com/vocab/subjects/Population> a skos:Concept,
+        ns1:Subject ;
+    skos:definition "Persons, households, and communities — human groups at any scale of aggregation. The bearer of health, nutritional, educational, economic, safety, and rights-related states. Corresponds to the P (Population) in PICO at the type level." ;
+    skos:inScheme <https://universalevidence.com/vocab/subjects/> ;
+    skos:prefLabel "Population" .
+

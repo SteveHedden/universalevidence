@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<trial xmlns:ns0="http://www.67bricks.com/isrctn"><isrctn>ISRCTN03467700</isrctn><ns0:primaryOutcomes />
+      <ns0:primaryOutcome>The primary outcome measure is the proportion of exclusive breastfeeding for the first 6 months. This will involve determining the impact of the BFCI intervention on the level or proportion of exclusive breastfeeding for the first 6 months. Data on breastfeeding practices will be collected longitudinally from birth every 2 months through an interviewer-administered questionnaire to the mother (24-hour recall at 2, 4, 6 months) with probes on the age at introduction of foods or liquids (if appropriate). Analyses will focus on the differences between the two study arms in the proportion of infants being exclusively breastfed at 6 months, as well as at the two earlier times of 2 and 4 months postpartum.</ns0:primaryOutcome>
+      <ns0:secondaryOutcomes />
+      <ns0:secondaryOutcome>Qualitative 
+1. Norms and cultural factors that influence breastfeeding and other maternal, infant and young child feeding practices. Data will be collected through qualitative interviews with mothers, fathers, community leaders, TBAs, community health workers, other community members, and healthcare providers. 
+2. Enabling factors and barriers. Data will be collected through qualitative interviews with mothers, fathers, community leaders, TBAs, community health workers, other community members, and healthcare providers to identify key players and structures in the community that would facilitate implementation of BFCI; factors that influence uptake of interventions in the community; and any potential hindrances to the success of the intervention (e.g., myths, beliefs)
+
+Quantitative
+3. MIYCN knowledge, attitudes and practices according to WHO recommendations. Data will be collected through self-reports by mothers using an interviewer-administered questionnaire at recruitment and every 2 months during the follow-up period to determine change in knowledge, attitudes and practices with the intervention.
+4. Timing of initiation of breastfeeding. Data will be collected through self-reports by mothers using an interviewer-administered questionnaire within the first 2 months of birth.
+5. Nutritional status: stunting, underweight, wasting within the first 6 months. This will be done through anthropometric measurements (weight, height and mid-upper arm circumference) every 2 months after birth till 6 months.
+6. Diarrhea morbidity: evidence indicates that breastfeeding is preventive against infections such as rotaviral diarrhea. It is therefore expected that promotion of exclusive breastfeeding would impact on the rate of diarrhea morbidity. Data on diarrhea morbidity in the last 2 weeks for the child will be collected longitudinally through an interviewer-administered questionnaire to the mother every 2 months.
+7. Satisfaction with the intervention, facilitating and limiting factors. Data will be collected through a self-administered questionnaire to the mother. Additionally, qualitative interviews will be conducted with the mothers and community members including community health workers on experiences with the intervention.</ns0:secondaryOutcome>
+      <ns0:results>
+      <ns0:publicationDetails>2018 Results article in http://www.ncbi.nlm.nih.gov/pubmed/29739374 results
+2015 Protocol article in http://www.ncbi.nlm.nih.gov/pubmed/26416177 protocol</ns0:publicationDetails>
+      <ns0:publicationStage>Results</ns0:publicationStage>
+      <ns0:basicReport />
+      <ns0:plainEnglishReport />
+    </ns0:results>
+    <ns0:outputs>
+      <ns0:output id="ec42163b-9234-48d7-99d2-26a916520034" outputType="resultsarticle" artefactType="ExternalLink" dateCreated="2018-05-08T00:00:00.000Z" dateUploaded="" peerReviewed="true" patientFacing="false">
+	<ns0:externalLink url="http://www.ncbi.nlm.nih.gov/pubmed/29739374" />
+	<ns0:description>results</ns0:description>
+	</ns0:output>
+      <ns0:output id="e6899775-7dd4-4346-a516-8f881fabe736" outputType="protocolarticle" artefactType="ExternalLink" dateCreated="2015-09-28T00:00:00.000Z" dateUploaded="" peerReviewed="true" patientFacing="false">
+	<ns0:externalLink url="http://www.ncbi.nlm.nih.gov/pubmed/26416177" />
+	<ns0:description>protocol</ns0:description>
+	</ns0:output>
+    </ns0:outputs>
+    </trial>

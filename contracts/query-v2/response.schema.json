@@ -4,7 +4,10 @@
   "title": "Universal Evidence query-v2 response",
   "type": "object",
   "additionalProperties": false,
-  "required": ["results", "meta"],
+  "required": [
+    "results",
+    "meta"
+  ],
   "properties": {
     "results": {
       "type": "array",
@@ -14,26 +17,230 @@
     },
     "meta": {
       "$ref": "#/$defs/queryMeta"
+    },
+    "reviewed_results": {
+      "type": "object",
+      "required": [
+        "status",
+        "rows"
+      ],
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "mode": {
+          "const": "api-first"
+        },
+        "coverage": {
+          "type": "array"
+        },
+        "partial": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "$defs": {
     "studyResult": {
       "type": "object",
-      "required": ["source", "study_id"],
+      "required": [
+        "source",
+        "study_id"
+      ],
       "properties": {
-        "source": { "type": "string", "minLength": 1 },
-        "study_id": { "type": "string", "minLength": 1 },
-        "title": { "type": ["string", "null"] },
-        "url": { "type": ["string", "null"] },
-        "intervention": { "type": ["string", "null"] },
-        "intervention_concept": { "type": ["string", "null"] },
-        "intervention_concept_uri": { "type": ["string", "null"] },
-        "condition_concept": { "type": ["string", "null"] },
-        "condition_concept_uri": { "type": ["string", "null"] },
-        "country": { "type": ["string", "null"] },
-        "status": { "type": ["string", "null"] },
-        "year": { "type": ["integer", "string", "null"] },
-        "outcomes": { "type": "array" }
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "study_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_concept": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_concept_uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "condition_concept": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "condition_concept_uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "year": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "outcomes": {
+          "type": "array"
+        },
+        "study_identity": {
+          "type": "string",
+          "format": "uri"
+        },
+        "registry_records": {
+          "type": "array"
+        },
+        "planned_outcomes": {
+          "type": "array"
+        },
+        "reported_findings": {
+          "type": "array"
+        },
+        "finding_history": {
+          "type": "array"
+        },
+        "match_provenance": {
+          "type": "array"
+        },
+        "source_reported_outcomes": {
+          "type": "array",
+          "description": "Original posted results and adverse events from registries; not Teacher-verified findings."
+        },
+        "source_unspecified_outcomes": {
+          "type": "array",
+          "description": "Legacy source outcomes whose planned/reported status is unknown."
+        },
+        "preconditions": {
+          "type": "object",
+          "description": "Snapshot hashes keyed by studies/documents/findings then identity; retain before editing.",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "outcome_specifications": {
+          "type": "array",
+          "description": "Planned outcome context; no observed values or Indicator mappings inferred.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "role",
+              "provenance"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "const": "pre-specified-measure"
+              },
+              "role": {
+                "enum": [
+                  "primary",
+                  "secondary",
+                  "unspecified"
+                ]
+              },
+              "provenance": {
+                "type": "array"
+              }
+            }
+          }
+        },
+        "report_metadata": {
+          "type": "object",
+          "required": [
+            "schema",
+            "results",
+            "outputs"
+          ],
+          "properties": {
+            "schema": {
+              "const": "isrctn-document-metadata-1"
+            },
+            "results": {
+              "type": "array"
+            },
+            "outputs": {
+              "type": "array"
+            }
+          }
+        },
+        "result_availability": {
+          "type": "object",
+          "required": [
+            "planned_specification_count",
+            "results_documents",
+            "structured_numerical_results",
+            "reason"
+          ],
+          "properties": {
+            "planned_specification_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "results_documents": {
+              "enum": [
+                "typed_metadata_present",
+                "publication_or_report_text_only",
+                "not_identified"
+              ]
+            },
+            "structured_numerical_results": {
+              "const": "not_extracted"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        }
       },
       "additionalProperties": true
     },
@@ -49,25 +256,79 @@
         "sources"
       ],
       "properties": {
-        "execution_status": { "enum": ["complete", "partial", "timeout"] },
-        "timed_out_sources": { "type": "array", "items": { "type": "string" } },
-        "completed_sources": { "type": "array", "items": { "type": "string" } },
-        "response_timeout_stage": { "const": "serialization" },
-        "api_version": { "const": "query-v2" },
-        "returned_unique_studies": { "type": "integer", "minimum": 0 },
-        "limit_per_source_branch": { "const": 100 },
-        "truncated": { "type": "boolean" },
-        "approximate": { "type": "boolean" },
+        "execution_status": {
+          "enum": [
+            "complete",
+            "partial",
+            "timeout"
+          ]
+        },
+        "timed_out_sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "completed_sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_timeout_stage": {
+          "const": "serialization"
+        },
+        "api_version": {
+          "const": "query-v2"
+        },
+        "returned_unique_studies": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit_per_source_branch": {
+          "const": 100
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "approximate": {
+          "type": "boolean"
+        },
         "sources": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["ctgov", "aea", "isrctn", "who-ictrp"],
+          "required": [
+            "ctgov",
+            "aea",
+            "isrctn",
+            "who-ictrp"
+          ],
           "properties": {
-            "ctgov": { "$ref": "#/$defs/sourceMeta" },
-            "aea": { "$ref": "#/$defs/sourceMeta" },
-            "isrctn": { "$ref": "#/$defs/sourceMeta" },
-            "who-ictrp": { "$ref": "#/$defs/sourceMeta" }
+            "ctgov": {
+              "$ref": "#/$defs/sourceMeta"
+            },
+            "aea": {
+              "$ref": "#/$defs/sourceMeta"
+            },
+            "isrctn": {
+              "$ref": "#/$defs/sourceMeta"
+            },
+            "who-ictrp": {
+              "$ref": "#/$defs/sourceMeta"
+            }
           }
+        },
+        "enrichment": {
+          "type": "object"
+        },
+        "enrichment_version": {
+          "type": "string"
+        },
+        "source_counts_overlap": {
+          "type": "boolean"
+        },
+        "reviewed_results": {
+          "type": "object"
         }
       }
     },
@@ -85,24 +346,53 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["included", "excluded", "unavailable", "error"]
+          "enum": [
+            "included",
+            "excluded",
+            "unavailable",
+            "error"
+          ]
         },
         "coverage": {
           "type": "string",
-          "enum": ["full", "partial", "country_only", "none"]
+          "enum": [
+            "full",
+            "partial",
+            "country_only",
+            "none"
+          ]
         },
-        "returned_unique_studies": { "type": "integer", "minimum": 0 },
-        "truncated": { "type": "boolean" },
-        "approximate": { "type": "boolean" },
+        "returned_unique_studies": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "approximate": {
+          "type": "boolean"
+        },
         "reason": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
             null,
             "unsupported_admin_level",
             "budget_exhausted",
             "upstream_unavailable",
-            "upstream_error"
+            "upstream_error",
+            "state_enrichment_unavailable"
           ]
+        },
+        "registry_returned_unique_studies": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "enrichment_returned_unique_studies": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     }

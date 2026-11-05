@@ -1,0 +1,15 @@
+{
+  "source_repository": "https://github.com/SteveHedden/universalevidence-ontology",
+  "status": "local unreleased working tree; not published",
+  "synced_at": "2026-10-05",
+  "files": {
+    "ue.ttl": "2e1574423b8b41bba768a6c1a921957431ab319564f40a70e30fba1e2785e024",
+    "study-enrichment.md": "34a4a39223f53068148852d02a70e430d159a2e8f3d3208da8b9a57db8daa953"
+  },
+  "CIDS_alignment": {
+    "vocabulary": "https://ontology.commonapproach.org/cids.ttl",
+    "version": "3.2.1",
+    "sha256": "e6aba4b40b3ffab16a8ca58c9e472a1e2ae37e7d8d4537c2f85f42978b140be1",
+    "conformance": "UE application profile; not CIDS tier certification"
+  }
+}

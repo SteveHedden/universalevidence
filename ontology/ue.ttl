@@ -5,7 +5,7 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov:    <http://www.w3.org/ns/prov#> .
-@prefix pico:    <https://data.cochrane.org/ontologies/pico/> .
+@prefix pico:    <http://data.cochrane.org/ontologies/pico/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 @prefix sg:      <https://netmode.gitlab.io/sustaingraph/> .
@@ -24,10 +24,10 @@
     Causal interpretation is the work of analysts querying the graph, not a property
     stored in it. This keeps the graph usable across theoretical traditions that disagree
     on causal mechanisms.""" ;
-    owl:versionInfo "0.5.0" ;
+    owl:versionInfo "0.6.0" ;
     dcterms:creator "Steve Hedden" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:modified "2026-09-07"^^xsd:date .
+    dcterms:modified "2026-10-05"^^xsd:date .
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -67,10 +67,10 @@ ue:Intervention
 
 ue:OutcomeMeasurement
     a owl:Class ;
-    rdfs:subClassOf pico:Outcome ;
+    rdfs:subClassOf prov:Entity ;
     rdfs:label "Outcome measurement" ;
-    rdfs:comment "A thin per-study measurement node that links an evidence record to the state measured as an outcome and carries only per-study outcome metadata such as direction, intent, and status." ;
-    ue:bfoCategory obo:BFO_0000015 .
+    rdfs:comment "A study-specific outcome information record, planned, reported or synthesized. Reported records identify a particular indicator/measure, comparison, population or subgroup, timepoint and analysis, with the original result, uncertainty and source provenance. Multiple records can concern the same indicator in one study; they are not independent studies or measurement processes." ;
+    rdfs:seeAlso obo:IAO_0000030 .
 
 ue:Region
     a owl:Class ;
@@ -294,8 +294,8 @@ ue:observedDirection
     rdfs:label "observed direction" ;
     rdfs:domain ue:OutcomeMeasurement ;
     rdfs:range [ a rdfs:Datatype ;
-                 owl:oneOf ( "positive"^^xsd:string "negative"^^xsd:string "null"^^xsd:string "mixed"^^xsd:string ) ] ;
-    rdfs:comment "Direction of the observed change in the measured quantity. Positive and negative mean increase and decrease, not beneficial and harmful; interpretation depends on the measured state. Null denotes no observed change and mixed denotes differing directions." .
+                 owl:oneOf ( "positive"^^xsd:string "negative"^^xsd:string "null"^^xsd:string "mixed"^^xsd:string "uncertain"^^xsd:string ) ] ;
+    rdfs:comment "Direction of the observed change in the measured quantity. Positive and negative mean increase and decrease, not beneficial and harmful; interpretation depends on the measured state. Null denotes no observed change, mixed denotes differing directions, and uncertain denotes an unresolved direction; it does not mean statistical nonsignificance." .
 
 ue:intended
     a owl:DatatypeProperty ;
@@ -425,8 +425,7 @@ ue:oecdDacRecipient
 # craft (sentence case, noun-phrase labels, plural-for-countable, definition
 # wording, exactMatch-vs-closeMatch judgment) lives in the construction skill, not
 # here — it cannot be reduced to pass/fail. skos:related reciprocity (symmetric
-# check) remains in engine/taxonomy_validate.py — it generates noise mid-construction
-# since taxonomy_commit_batch.py fills reverse triples as a deferred step.
+# check) is handled by vocabulary construction tooling rather than these shapes.
 
 # ─── Core thesaurus concept conformance ──────────────────────────────────────
 # Applies to every concept in the core thesauri (states and interventions), which
@@ -648,7 +647,7 @@ ue:InterventionBroaderTypeShape
 # ─── skos:related / hierarchy clash ──────────────────────────────────────────
 # A concept may not have skos:related to a concept it is also hierarchically
 # related to via skos:broader (direct only; transitive cycles are caught by the
-# broader-cycle check in taxonomy_validate.py).
+# broader-cycle checks in vocabulary construction tooling).
 
 ue:RelatedHierarchyClashShape
     a sh:NodeShape ;
@@ -770,22 +769,22 @@ ue:ObservedOutcomeShape
     sh:targetObjectsOf ue:outcome ;
     sh:targetSubjectsOf ue:observedDirection, ue:outcomeStatus, ue:intended ;
     sh:property [
-        sh:path ue:ofState ;
+        sh:path [ sh:alternativePath ( ue:ofState ue:outcomeState ) ] ;
         sh:minCount 1 ;
         sh:class ue:State ;
         sh:message "An outcome measurement must identify a measured State through ue:ofState." ;
     ] ;
     sh:property [
-        sh:path ue:ofIndicator ;
+        sh:path [ sh:alternativePath ( ue:ofIndicator ue:findingIndicator ) ] ;
         sh:class ue:Indicator ;
         sh:message "ue:ofIndicator must identify an Indicator." ;
     ] ;
     sh:property [
         sh:path ue:observedDirection ;
         sh:maxCount 1 ;
-        sh:in ( "positive" "negative" "null" "mixed" ) ;
+        sh:in ( "positive" "negative" "null" "mixed" "uncertain" ) ;
         sh:severity sh:Violation ;
-        sh:message "ue:observedDirection must be positive, negative, null, or mixed." ;
+        sh:message "ue:observedDirection must be positive, negative, null, mixed, or uncertain." ;
     ] ;
     sh:property [
         sh:path ue:intended ;
@@ -801,3 +800,144 @@ ue:ObservedOutcomeShape
         sh:severity sh:Violation ;
         sh:message "ue:outcomeStatus must be pre-specified, reported, or synthesized." ;
     ] .
+
+# Study enrichment 0.6.0: additive identities, no corpus-wide relabeling.
+# HTTP is the actual Cochrane 4.0.1 namespace. The historical HTTPS aliases
+# below are local compatibility axioms, not a claim that RDF normalizes URLs.
+<https://data.cochrane.org/ontologies/pico/Intervention> owl:equivalentClass pico:Intervention .
+<https://data.cochrane.org/ontologies/pico/Outcome> owl:equivalentClass pico:Outcome .
+
+ue:Study a owl:Class ; rdfs:subClassOf obo:OBI_0000066 ;
+    rdfs:label "Underlying study" ;
+    rdfs:comment "A verified investigation counted once, independently of its registry records and report documents. Identity verification is required; citation/aboutness alone is insufficient." .
+ue:ReportDocument a owl:Class ; rdfs:subClassOf obo:IAO_0000310, prov:Entity ;
+    rdfs:label "Report document version" ;
+    rdfs:comment "Metadata for a registration, protocol, posted results, article, correction or follow-up. A document can describe several studies. A DOI identifies a document, not a study." .
+ue:ReportedFinding a owl:Class ; rdfs:subClassOf ue:OutcomeMeasurement ;
+    owl:deprecated true ;
+    rdfs:label "Reported finding" ;
+    rdfs:comment "Deprecated compatibility subclass for previously stored reported results. Use OutcomeMeasurement with outcomeStatus reported for new data. Not equivalent to OutcomeMeasurement, which also permits plans and synthesized outcomes. Existing instance IRIs and facts must be preserved during migration." .
+ue:OutcomeSpecification a owl:Class ; rdfs:subClassOf pico:Outcome ; rdfs:label "Outcome specification" .
+ue:NonHumanPopulation a owl:Class ; rdfs:label "Non-human study population" ;
+    rdfs:comment "Study-specific farms, ecosystems, institutions or other non-human units. Not asserted to be Cochrane's people/patients Population." .
+ue:studyIdentity a owl:ObjectProperty ; rdfs:domain ue:Evidence ; rdfs:range ue:Study ; rdfs:label "verified underlying study" .
+ue:studyContext a owl:ObjectProperty ; rdfs:domain ue:Study ; rdfs:range pico:PICO ; rdfs:label "study question context" .
+ue:nonHumanPopulation a owl:ObjectProperty ; rdfs:domain pico:PICO ; rdfs:range ue:NonHumanPopulation ; rdfs:label "non-human population" .
+ue:taxonomyConcept a owl:ObjectProperty ; rdfs:label "shared taxonomy concept" .
+ue:findingStudy a owl:ObjectProperty ; owl:deprecated true ; rdfs:subPropertyOf ue:measurementStudy ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:Study ; rdfs:label "finding study" .
+ue:outcomeState a owl:ObjectProperty ; owl:deprecated true ; rdfs:subPropertyOf ue:ofState ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:State ; rdfs:label "reported outcome state" .
+ue:findingIndicator a owl:ObjectProperty ; owl:deprecated true ; rdfs:subPropertyOf ue:ofIndicator ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:Indicator ; rdfs:label "reported indicator" .
+ue:outcomeSpecification a owl:ObjectProperty ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:OutcomeSpecification ; rdfs:label "outcome specification" .
+ue:specificationGroup a owl:ObjectProperty ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range pico:OutcomeGroup ; rdfs:label "outcome specification group" .
+ue:sourceLocator a owl:ObjectProperty ; rdfs:domain ue:OutcomeMeasurement ; rdfs:label "field-level source locator" .
+ue:estimate a owl:ObjectProperty ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range obo:STATO_0000039 ; rdfs:label "reported statistic" .
+ue:uncertaintyInterval a owl:ObjectProperty ; rdfs:range obo:STATO_0000196 ; rdfs:label "reported confidence interval" .
+
+ue:StudyIdentityShape a sh:NodeShape ; sh:targetSubjectsOf ue:studyIdentity ;
+    sh:property [ sh:path ue:studyIdentity ; sh:maxCount 1 ; sh:class ue:Study ] ;
+    sh:property [ sh:path ue:identityVerification ; sh:minCount 1 ] .
+ue:ReportDocumentShape a sh:NodeShape ; sh:targetClass ue:ReportDocument ;
+    sh:property [ sh:path dcterms:identifier ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dcterms:hasVersion ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path dcterms:source ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path dcterms:bibliographicCitation ; sh:minCount 1 ] ;
+    sh:property [ sh:path obo:IAO_0000136 ; sh:minCount 1 ; sh:class ue:Study ] ;
+    sh:property [ sh:path ue:identityVerification ; sh:minCount 1 ] ;
+    sh:property [ sh:path ue:reportStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("active" "superseded" "retracted") ] .
+ue:ReportedFindingShape a sh:NodeShape ; sh:targetClass ue:ReportedFinding ;
+    sh:property [ sh:path ue:findingStudy ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ue:Study ] ;
+    sh:property [ sh:path ue:outcomeState ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path ue:measure ; sh:minCount 1 ] ;
+    sh:property [ sh:path ue:comparison ; sh:minCount 1 ] ;
+    sh:property [ sh:path ue:timing ; sh:minCount 1 ] ;
+    sh:property [ sh:path ue:sourceLocator ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ; sh:class ue:ReportDocument ] ;
+    sh:property [ sh:path ue:findingStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("active" "superseded" "retracted") ] ;
+    sh:property [ sh:path ue:direction ; sh:maxCount 1 ; sh:in ("increase" "decrease" "no-change" "mixed" "uncertain") ] ;
+    sh:or ( [ sh:property [ sh:path ue:value ; sh:minCount 1 ] ; sh:property [ sh:path ue:unit ; sh:minCount 1 ] ]
+            [ sh:property [ sh:path ue:result_text ; sh:minCount 1 ] ] ) .
+ue:FindingLocatorShape a sh:NodeShape ; sh:targetObjectsOf ue:sourceLocator ;
+    sh:property [ sh:path dcterms:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ue:ReportDocument ] ;
+    sh:property [ sh:path dcterms:description ; sh:minCount 1 ] ;
+    sh:property [ sh:path ue:supportedFields ; sh:minCount 1 ] .
+ue:identityVerification a owl:DatatypeProperty ; rdfs:label "identityVerification" ; rdfs:comment "Documented evidence for a verified study identity, serialized JSON metadata." .
+ue:statusCheck a owl:DatatypeProperty ; rdfs:label "statusCheck" ; rdfs:comment "Dated source and result of correction/retraction inspection." .
+ue:reportStatus a owl:DatatypeProperty ; rdfs:label "reportStatus" ; rdfs:comment "Eligibility of this report version." .
+ue:findingStatus a owl:DatatypeProperty ; owl:deprecated true ; rdfs:subPropertyOf ue:measurementStatus ; rdfs:label "findingStatus" ; rdfs:comment "Revision status of this finding." .
+ue:activeForRetrieval a owl:DatatypeProperty ; rdfs:label "activeForRetrieval" ; rdfs:comment "Computed eligibility including supporting document versions and reviewed lineage." .
+ue:measure a owl:DatatypeProperty ; rdfs:label "measure" ; rdfs:comment "Reported measured quantity." .
+ue:comparison a owl:DatatypeProperty ; rdfs:label "comparison" ; rdfs:comment "Comparison identity, type, reference and quantity as JSON." .
+ue:subgroup a owl:DatatypeProperty ; rdfs:label "subgroup" ; rdfs:comment "Reported subgroup." .
+ue:timing a owl:DatatypeProperty ; rdfs:label "timing" ; rdfs:comment "Reported follow-up and its reference point as JSON." .
+ue:value a owl:DatatypeProperty ; rdfs:label "value" ; rdfs:comment "Original reported numerical value, including exact zero." .
+ue:unit a owl:DatatypeProperty ; rdfs:label "unit" ; rdfs:comment "Reported unit or dimensionless." .
+ue:result_text a owl:DatatypeProperty ; rdfs:label "result_text" ; rdfs:comment "Faithful short reported result when a numerical estimate is unavailable." .
+ue:uncertainty a owl:DatatypeProperty ; rdfs:label "uncertainty" ; rdfs:comment "Original reported uncertainty metadata." .
+ue:direction a owl:DatatypeProperty ; owl:deprecated true ; rdfs:label "direction" ; rdfs:comment "Quantity-relative direction; separate from benefit/harm and significance." .
+ue:significance a owl:DatatypeProperty ; rdfs:label "significance" ; rdfs:comment "Reported significance, separate from direction." .
+ue:derivation a owl:DatatypeProperty ; rdfs:label "derivation" ; rdfs:comment "Explicit method, inputs and author for derived values." .
+ue:mapping a owl:DatatypeProperty ; rdfs:label "mapping" ; rdfs:comment "Justification for the State/indicator mapping." .
+ue:reportedValue a owl:DatatypeProperty ; rdfs:label "reportedValue" ; rdfs:comment "Original statistic value." .
+ue:reportedUnit a owl:DatatypeProperty ; rdfs:label "reportedUnit" ; rdfs:comment "Original statistic unit." .
+ue:reportedInterval a owl:DatatypeProperty ; rdfs:label "reportedInterval" ; rdfs:comment "Original confidence interval metadata." .
+ue:supportedFields a owl:DatatypeProperty ; rdfs:label "supportedFields" ; rdfs:comment "Extraction fields supported by this locator, as JSON." .
+
+# Canonical RDF persistence / comparison-level mappings (2026-10-05)
+ue:ActivityRecord a owl:Class ; rdfs:label "Reviewed activity source record" .
+ue:ActivityPopulation a owl:Class ; rdfs:label "Bounded activity population coverage" .
+ue:RevisionEvent a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Immutable metadata revision event" .
+ue:storageSchema a owl:DatatypeProperty ; rdfs:label "Canonical storage schema" .
+ue:storageMetadata a owl:DatatypeProperty ; rdfs:label "Canonical snapshot metadata" .
+ue:storedFields a owl:DatatypeProperty ; rdfs:label "Lossless field type manifest" .
+ue:indicator_review a owl:DatatypeProperty ; rdfs:label "Unresolved indicator review" .
+ue:comparisonIntervention a owl:ObjectProperty ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:Intervention ; rdfs:label "Comparison intervention concept" .
+ue:comparisonComparator a owl:ObjectProperty ; rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:Intervention ; rdfs:label "Comparison comparator concept" .
+
+
+# OutcomeMeasurement reconciliation — unreleased, 2026-10-05.
+# No FHIR conformance claim; existing ReportedFinding storage remains readable.
+ue:measurementStudy a owl:ObjectProperty ;
+    rdfs:domain ue:OutcomeMeasurement ; rdfs:range ue:Study ;
+    rdfs:label "underlying study for outcome measurement" ;
+    rdfs:comment "Links a study-specific outcome record to its verified underlying investigation. Does not change Evidence registry identity or imply that a synthesis has only one contributing study." .
+ue:measurementStatus a owl:DatatypeProperty ;
+    rdfs:domain ue:OutcomeMeasurement ; rdfs:range xsd:string ;
+    rdfs:label "measurement revision status" ;
+    rdfs:comment "active, superseded or retracted. Separate from outcomeStatus (pre-specified, reported or synthesized)." .
+
+ue:ReportedOutcomeMeasurementShape a sh:NodeShape ;
+    rdfs:label "Reported OutcomeMeasurement result contract" ;
+    sh:targetClass ue:OutcomeMeasurement ;
+    sh:or (
+      [ sh:not [ sh:property [ sh:path ue:outcomeStatus ; sh:hasValue "reported" ] ] ]
+      [ sh:property [ sh:path [ sh:alternativePath ( ue:measurementStudy ue:findingStudy ) ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ue:Study ] ;
+        sh:property [ sh:path [ sh:alternativePath ( ue:ofState ue:outcomeState ) ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ue:State ] ;
+        sh:property [ sh:path [ sh:alternativePath ( ue:ofIndicator ue:findingIndicator ) ] ; sh:maxCount 1 ; sh:class ue:Indicator ] ;
+        sh:property [ sh:path ue:measure ; sh:minCount 1 ] ;
+        sh:property [ sh:path ue:comparison ; sh:minCount 1 ] ;
+        sh:property [ sh:path ue:timing ; sh:minCount 1 ] ;
+        sh:property [ sh:path ue:sourceLocator ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+        sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ; sh:class ue:ReportDocument ] ;
+        sh:property [ sh:path [ sh:alternativePath ( ue:measurementStatus ue:findingStatus ) ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("active" "superseded" "retracted") ] ;
+        sh:or ( [ sh:property [ sh:path ue:value ; sh:minCount 1 ] ; sh:property [ sh:path ue:unit ; sh:minCount 1 ] ]
+                [ sh:property [ sh:path ue:result_text ; sh:minCount 1 ] ] )
+      ]
+    ) .
+
+
+# CIDS alignment, local unreleased UE application profile (2026-10-05).
+# Reuse published terms without importing the full organization-reporting tier.
+@prefix cids: <https://ontology.commonapproach.org/cids#> .
+@prefix i72: <http://ontology.eil.utoronto.ca/ISO21972/iso21972#> .
+ue:contextualOutcome a owl:ObjectProperty ;
+ rdfs:domain ue:OutcomeMeasurement ; rdfs:range cids:Outcome ;
+ rdfs:label "contextual CIDS outcome" ;
+ rdfs:comment "Study-specific outcome, coded to the shared State through cids:hasCode/hasSpecification. Does not assert causation or equate all States to CIDS Outcomes." .
+ue:contextualIndicator a owl:ObjectProperty ;
+ rdfs:domain ue:OutcomeMeasurement ; rdfs:range cids:Indicator ;
+ rdfs:label "contextual CIDS indicator" ;
+ rdfs:comment "Study-specific indicator coded to the reusable thesaurus indicator. Comparative effects remain separate statistics; they are not indicator level values." .
+ue:CidsOutcomeAlignmentShape a sh:NodeShape ;
+ sh:targetSubjectsOf ue:contextualOutcome ;
+ sh:property [ sh:path ue:contextualOutcome ; sh:minCount 1 ; sh:maxCount 1 ; sh:class cids:Outcome ] ;
+ sh:property [ sh:path ue:contextualIndicator ; sh:maxCount 1 ; sh:class cids:Indicator ] .

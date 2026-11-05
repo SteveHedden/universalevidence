@@ -1,0 +1,20 @@
+{
+  "NCT02472262": {
+    "source": "https://clinicaltrials.gov/api/v2/studies/NCT02472262",
+    "source_body_sha256": "70103ffd8d71b5fe66815ba3c02cd50e669332e134d133cb978a24d87c62c72b",
+    "date": "2026-10-06",
+    "selected_outcome": 0
+  },
+  "NCT00659061": {
+    "source": "https://clinicaltrials.gov/api/v2/studies/NCT00659061",
+    "source_body_sha256": "7aae11b178535d7e8456755cd716d45350e7d818763d7f738023050548251393",
+    "date": "2026-10-06",
+    "selected_outcome": 6
+  },
+  "NCT04002908": {
+    "source": "https://clinicaltrials.gov/api/v2/studies/NCT04002908",
+    "source_body_sha256": "90723e7135ff50693b66961a5c2efac3e32081fb7128a765749c19fa448fcbb6",
+    "date": "2026-10-06",
+    "selected_outcome": 0
+  }
+}

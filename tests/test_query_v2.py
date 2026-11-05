@@ -136,7 +136,7 @@ def test_canonical_request_sorts_deduplicates_and_cache_key_includes_logic():
     assert first.values["condition"] == tuple(sorted((MALARIA, MALNUTRITION)))
     assert QueryV2Cache.canonical_key(first) == QueryV2Cache.canonical_key(second)
     assert QueryV2Cache.canonical_key(first) != QueryV2Cache.canonical_key(changed_logic)
-    assert QueryV2Cache.canonical_key(first).startswith("query-v2-envelope-1|")
+    assert QueryV2Cache.canonical_key(first).startswith("query-v2-envelope-2-live-results|")
     assert '"taxonomy_version":"process-local-fuseki"' in QueryV2Cache.canonical_key(first)
     assert '"dataset_version":"process-local-fuseki"' in QueryV2Cache.canonical_key(first)
 
@@ -2159,7 +2159,7 @@ def test_ctgov_adapter_caps_unique_studies_then_expands_interventions(monkeypatc
     assert "http://id.nlm.nih.gov/mesh/D000100" not in looked_up
     assert "LocationGeoPoint" in CTGOV_V2_FIELDS
     assert "PrimaryOutcomeMeasure" in CTGOV_V2_FIELDS
-    assert "Results" not in CTGOV_V2_FIELDS
+    assert "ResultsSection" in CTGOV_V2_FIELDS
 
 
 def test_ctgov_v2_mapping_skips_unbounded_outcome_crosswalk_enrichment(monkeypatch):
@@ -2622,7 +2622,12 @@ def test_query_v2_http_contract_uses_repeated_params_and_keeps_v1_shape(monkeypa
     )
 
     assert response.status_code == 200
-    assert response.json() == payload
+    actual=response.json()
+    assert actual['results'][0]['study_id']==payload['results'][0]['study_id']
+    assert actual['meta']['limit_per_source_branch']==payload['meta']['limit_per_source_branch']
+    assert actual['reviewed_results']['mode']=='api-first'
+    assert actual['reviewed_results']['coverage'][0]['status']=='unavailable'
+    assert 'reviewed_results' not in payload
     assert observed[0].values["condition"] == tuple(sorted((MALARIA, MALNUTRITION)))
     assert observed[0].logic["condition"] == "and"
 

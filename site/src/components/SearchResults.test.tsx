@@ -79,7 +79,7 @@ describe("SearchResults", () => {
       />,
     );
 
-    expect(screen.getByText("1 study · 1 condition")).toBeInTheDocument();
+    expect(screen.getByText("1 study · 1 State")).toBeInTheDocument();
     expect(screen.getByText("Sanitation access")).toBeInTheDocument();
   });
 
@@ -164,7 +164,7 @@ describe("SearchResults", () => {
     expect(screen.getByText("KE")).toBeInTheDocument();
     expect(screen.getByText("Completed")).toBeInTheDocument();
     expect(screen.getByText("2019")).toBeInTheDocument();
-    expect(screen.getByText("Anthropometry")).toBeInTheDocument();
+    expect(screen.getAllByText("Anthropometry").length).toBeGreaterThan(0);
   });
 
   it("groups a study under every direct intervention and excludes its blank duplicate from Other", () => {
@@ -287,4 +287,29 @@ describe("SearchResults", () => {
     render(<SearchResults results={[]} />);
     expect(screen.getByText("No studies matched the selected filters.")).toBeInTheDocument();
   });
+});
+
+it('puts clear evidence first even when another intervention has more live studies', () => {
+ const cash='https://universalevidence.com/vocab/interventions/UnconditionalCashTransfer';
+ const rows=[{measurement:'urn:m',study:'urn:s',indicator:'urn:haz',indicator_label:'HAZ',value:'0.2',unit:'SD',direction:'increase',uncertainty:{kind:'confidence-interval',level:95,lower:0.1,upper:0.3},summary_mapping:{selected:true,study:'urn:s',measurement:'urn:m',indicator:'urn:haz',unit:'SD',tested:[cash],comparator:[],background:[],effect_multiplier:1,group_labels:['Cash','Control']}}];
+ render(<SearchResults results={[
+  {study_id:'1',title:'One',intervention_concept:'Other',intervention_concept_uri:'urn:other'},
+  {study_id:'2',title:'Two',intervention_concept:'Other',intervention_concept_uri:'urn:other'},
+  {study_identity:'urn:s',study_id:'3',title:'Three',intervention_concept:'Cash',intervention_concept_uri:cash}
+ ]} resultContext={{state:'urn:state',context:'{}',reviewed:{status:'available',graph:'urn:g',rows}}} />);
+ const buttons=screen.getAllByRole('button').filter(b=>b.getAttribute('aria-expanded')!==null);
+ expect(buttons[0]).toHaveTextContent('Cash');
+ expect(buttons[0]).toHaveTextContent('Some clear findings');
+ expect(buttons[0]).toHaveTextContent('1 with results');
+ expect(buttons[1]).toHaveTextContent('0 with results');
+ expect(screen.queryByText(/completed$/i)).not.toBeInTheDocument();
+});
+
+it('counts returned descriptive measurements without advertising clear effects',()=>{
+ const intervention='https://universalevidence.com/vocab/interventions/NutritionEducation';
+ const study='https://universalevidence.com/studies/ctgov/NCT99999999';
+ const rows=[{measurement:'urn:level',study,indicator_label:'Height-for-age z-score',value:'0.2',unit:'z-score',direction:'unknown',discovery_interventions:[intervention]}];
+ render(<SearchResults results={[{source:'CT.gov',study_id:'NCT99999999',study_identity:study,title:'Source title',intervention_concept:'Nutrition education',intervention_concept_uri:intervention}]} resultContext={{state:'urn:state',context:'{}',reviewed:{mode:'api-first',status:'available',graph:'live-results-v1',rows}}} />);
+ expect(screen.getByText('1 with results')).toBeInTheDocument();
+ expect(screen.queryByText(/Some clear findings/)).not.toBeInTheDocument();
 });

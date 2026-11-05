@@ -9,6 +9,7 @@ export default defineConfig({
       "/stats": "http://localhost:8000",
       "/query": "http://localhost:8000",
       "/taxonomy": "http://localhost:8000",
+      "/studies": "http://localhost:8000",
       "/graph": "http://localhost:8000"
     }
   },
