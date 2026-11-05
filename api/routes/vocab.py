@@ -969,20 +969,21 @@ def browse_home():
         roots = _browse_terms(config, graph, roots=True)
         links = _relation_list(config, graph, map(str, roots[:8]))
         sections.append(f'<section><h2><a href="/browse/{name}">{escape(VOCABULARY_DISPLAY_NAMES[name])}</a></h2><p class="browse-intro">{description}</p><ul class="concept-grid">{links}</ul><p><a href="/browse/{name}">Browse all categories →</a></p></section>')
-    sections.append('<section><h2><a href="/browse/indicators">Indicators</a></h2><p class="browse-intro">Explore measures used to describe conditions and outcomes.</p><p><a href="/browse/indicators">Browse indicators →</a></p></section>')
     content = '<nav class="breadcrumb"><a href="/">Home</a><span>/</span><span>Browse</span></nav><h1>Find your way into the evidence.</h1><p class="browse-intro">Explore the conditions we want to change and the interventions used to address them.</p><div class="browse-sections">' + ''.join(sections) + '</div>'
     return Response(concept_page('Browse conditions and interventions | Universal Evidence', 'Browse Universal Evidence conditions, outcomes and interventions through their existing vocabulary relationships.', 'https://universalevidence.com/browse', content), media_type=HTML)
 
 
 @router.get("/browse/{vocabulary}")
 def browse_vocabulary(vocabulary: str, view: str = "categories", page: int = 1):
-    if vocabulary not in {"states", "interventions", "indicators"} or view not in {"categories", "all"}:
+    if vocabulary == "indicators":
+        return RedirectResponse(url="/browse", status_code=308)
+    if vocabulary not in {"states", "interventions"} or view not in {"categories", "all"}:
         return _missing_vocabulary(vocabulary)
     config = VOCABULARIES[vocabulary]
     graph = _load_graph(config)
     if graph is None:
         return _missing_vocabulary(vocabulary)
-    terms = _browse_terms(config, graph, roots=view == "categories" and vocabulary != "indicators")
+    terms = _browse_terms(config, graph, roots=view == "categories")
     size = 100
     pages = max(1, (len(terms) + size - 1) // size)
     if page < 1 or page > pages:
@@ -992,14 +993,14 @@ def browse_vocabulary(vocabulary: str, view: str = "categories", page: int = 1):
         if view == "all": params['view'] = 'all'
         if number > 1: params['page'] = number
         return f'/browse/{vocabulary}' + ('?' + urlencode(params) if params else '')
-    label = "Indicators" if vocabulary == "indicators" else VOCABULARY_DISPLAY_NAMES[vocabulary]
+    label = VOCABULARY_DISPLAY_NAMES[vocabulary]
     links = _relation_list(config, graph, map(str, terms[(page-1)*size:page*size]))
     pagination = '<nav class="pagination" aria-label="Pagination">'
     if page > 1: pagination += f'<a href="{escape(url(page-1), quote=True)}">← Previous</a>'
     pagination += f'<span aria-current="page">Page {page} of {pages}</span>'
     if page < pages: pagination += f'<a href="{escape(url(page+1), quote=True)}">Next →</a>'
     pagination += '</nav>'
-    heading = 'Indicators A–Z' if vocabulary == 'indicators' else ('All concepts A–Z' if view == 'all' else 'Top-level categories')
-    tabs = '' if vocabulary == 'indicators' else f'<nav class="browse-links"><a href="/browse/{vocabulary}">Categories</a><a href="/browse/{vocabulary}?view=all">All concepts A–Z</a></nav>'
+    heading = 'All concepts A–Z' if view == 'all' else 'Top-level categories'
+    tabs = f'<nav class="browse-links"><a href="/browse/{vocabulary}">Categories</a><a href="/browse/{vocabulary}?view=all">All concepts A–Z</a></nav>'
     content = f'<nav class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/browse">Browse</a><span>/</span><span>{escape(label)}</span></nav><h1>{escape(label)}</h1>{tabs}<h2>{heading}</h2><p class="small">{len(terms):,} concepts</p><ul class="concept-grid">{links}</ul>{pagination}'
     return Response(concept_page(f'{label} — {heading}' + (f' — Page {page}' if page > 1 else '') + ' | Universal Evidence', f'Browse {label.lower()} in the Universal Evidence vocabulary.', 'https://universalevidence.com' + url(page), content), media_type=HTML)

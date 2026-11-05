@@ -63,18 +63,16 @@ def test_machine_representations_and_mapping_download():
 
 
 def test_browse_sitemap_and_state_measures():
-    links = set()
-    import re
+    assert '/browse/indicators' not in client.get('/browse').text
     for page in range(1, 10):
-        response = client.get(f'/browse/indicators?page={page}')
-        assert response.status_code == 200
-        links.update(re.findall(r'href="(/vocab/indicators/[^\"]+)"', response.text))
-        assert '/vocab/states/' not in response.text
-    assert len(links) == 879
+        response = client.get(f'/browse/indicators?page={page}', follow_redirects=False)
+        assert response.status_code == 308
+        assert response.headers['location'] == '/browse'
     old = str(S.AgriculturalYield)
     xml = f'<urlset xmlns="{NS}"><url><loc>{old}</loc></url><url><loc>https://universalevidence.com/about.html</loc></url></urlset>'
     urls = {x.text for x in ET.fromstring(refresh(xml)).iter(f'{{{NS}}}loc')}
     assert old not in urls
+    assert not any('/browse/indicators' in u for u in urls)
     assert not any('/vocab/indicators/' in u for u in urls)
     assert 'https://universalevidence.com/about.html' in urls
     page = client.get('/vocab/states/AgriculturalProductivity', headers={'accept':'text/html'})
