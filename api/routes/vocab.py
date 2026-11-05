@@ -774,20 +774,6 @@ def _html_response(config: ResourceConfig, graph: Graph, subject: URIRef, term: 
         if not relations_html:
             relations_html = '<p class="empty-relations">No broader or narrower concepts are recorded.</p>'
 
-    if config.name == "states":
-        indicator_graph = _load_graph(VOCABULARIES["indicators"])
-        if indicator_graph is not None:
-            measures = set(graph.objects(subject, URIRef(str(UE) + "measuredBy")))
-            measures.update(indicator_graph.subjects(URIRef(str(UE) + "measures"), subject))
-            items = []
-            for measure in sorted(measures, key=lambda x: _relation_label(indicator_graph, str(x)).casefold()):
-                measure_label = _relation_label(indicator_graph, str(measure))
-                description = _literal(indicator_graph, measure, (SKOS.definition,)) or ""
-                items.append('<li><strong>' + escape(measure_label) + '</strong>' +
-                             ('<p>' + escape(description) + '</p>' if description else '') + '</li>')
-            if items:
-                relations_html += _relation_section("indicators-title", "Measures", "\n".join(items))
-
     source_details_html = _source_details(graph, subject, label) if config.name == "sources" else ""
     copyable_type = COPYABLE_TERM_TYPES.get(config.name)
     supports_copy = copyable_type is not None and (

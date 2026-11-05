@@ -9,7 +9,7 @@ not render HTML concept pages. Existing states-namespace identifiers return 308
 redirects. `/vocab/indicator-migrations` publishes the complete `dcterms:isReplacedBy`
 mapping, also recorded in `api/resources/indicator-migrations.json`.
 Indicators are omitted from Browse; old indicator directory URLs redirect to
-Browse home. General State pages display measures inline. Indicator identifiers are excluded from the HTML
+Browse home. State and Intervention pages do not display indicator listings. Indicator identifiers are excluded from the HTML
 sitemap; State and Intervention pages remain unchanged in identity.
 
 Historical production Fuseki graphs and checksummed result assets are immutable
@@ -27,5 +27,5 @@ Two pre-existing measuredBy targets are outside the 879 declared indicators:
 preserves them; it does not invent definitions or change their classifications.
 
 Verification covers all 879 old redirects, all 879 new RDF resources, scheme/type
-separation, redirects from all nine former directory pages, sitemap exclusions, state measures, and
+separation, redirects from all nine former directory pages, sitemap exclusions, state pages without indicator listings, and
 historical result normalization without changing numerical values or State IDs.

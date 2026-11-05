@@ -62,7 +62,7 @@ def test_machine_representations_and_mapping_download():
     assert client.get('/vocab/states/MissingIndicator').status_code == 404
 
 
-def test_browse_sitemap_and_state_measures():
+def test_browse_sitemap_and_state_pages_exclude_indicators():
     assert '/browse/indicators' not in client.get('/browse').text
     for page in range(1, 10):
         response = client.get(f'/browse/indicators?page={page}', follow_redirects=False)
@@ -76,7 +76,8 @@ def test_browse_sitemap_and_state_measures():
     assert not any('/vocab/indicators/' in u for u in urls)
     assert 'https://universalevidence.com/about.html' in urls
     page = client.get('/vocab/states/AgriculturalProductivity', headers={'accept':'text/html'})
-    assert page.status_code == 200 and 'Agricultural yield' in page.text
+    assert page.status_code == 200 and 'indicators-title' not in page.text
+    assert '<h2>Measures</h2>' not in page.text
 
 
 def test_historical_graph_adapter_preserves_measurements_and_states():
