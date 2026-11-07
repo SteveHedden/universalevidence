@@ -97,20 +97,13 @@ systemctl enable universalevidence
 
 ## Updating the app
 
-**Code-only updates**, after reviewing and recording the release and rollback image:
-
-```bash
-cd /root/universalevidence
-git pull --ff-only
-docker compose build api
-docker compose up -d --no-deps api
-docker compose ps -a
-curl --fail http://127.0.0.1:8000/health
-```
-
-The image bakes in the source code. A restart alone does not update it. Verify the running image contains the expected release. `--no-deps` prevents a code-only API update from recreating Fuseki or rerunning the loader. Do not use this path when loader inputs or vocabulary versions change.
-
-**Frontend updates:** run `npm ci` and `VITE_API_BASE_URL=/api npm run build` in `site/`. Back up the current index, publish new assets first, then replace `index.html` atomically on the same filesystem. Retain old hashed assets and license notices. Check the served index and its referenced assets. A frontend update does not require a database restart.
+For existing production installations, code/API/static releases use only the
+[guarded release entry point](RELEASE_BUILD.md#guarded-release-entry-point).
+Prepare exact source/image/runtime/static manifests, validate with `deploy/release.py`,
+and activate only under the separately authorized release procedure. The former
+in-place `git pull` / generic Compose build/update path is retired. The installation
+commands above are for a newly provisioned host, not updates to an existing release.
+GitHub Actions deployment is deliberately disabled pending operator integration.
 
 **Taxonomy or crosswalk updates** (after pushing taxonomy changes and uploading
 crosswalk/mirror changes to R2):
