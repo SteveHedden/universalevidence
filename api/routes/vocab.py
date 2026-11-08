@@ -820,10 +820,10 @@ def _html_response(config: ResourceConfig, graph: Graph, subject: URIRef, term: 
         query = urlencode({axis: canonical_uri, f"{axis}_label": label})
         search_html = f'<a class="search-topic" href="/explore.html?{escape(query, quote=True)}" target="_blank" rel="noopener noreferrer">Search evidence for this topic <span aria-hidden="true">→</span></a>'
     directory = f"/browse/{config.name}" if config.name in {"states", "interventions"} else "/browse"
-    content = f"""<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/browse">Browse</a><span aria-hidden="true">/</span><a href="{directory}">{escape(vocabulary_label)}</a></nav>
-<article class="term-card"><header class="term-heading"><span class="vocabulary-badge">{escape(vocabulary_label)}</span><h1>{escape(label)}</h1></header>
-<div class="term-body">{definition_html}{search_html}{relations_html}{source_details_html}</div>
-<details class="technical-details"><summary>Concept URI &amp; technical details</summary><div class="uri-block"><div class="uri-heading"><span class="uri-label">Canonical URI</span>{copy_button_html}</div><code id="canonical-uri">{escape(canonical_uri)}</code>{copy_status_html}</div></details></article>"""
+    content = f"""<div data-nosnippet style="display:contents"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/browse">Browse</a><span aria-hidden="true">/</span><a href="{directory}">{escape(vocabulary_label)}</a></nav></div>
+<article class="term-card"><header class="term-heading"><span class="vocabulary-badge" data-nosnippet>{escape(vocabulary_label)}</span><h1>{escape(label)}</h1></header>
+<div class="term-body">{definition_html}<div data-nosnippet style="display:contents">{search_html}{relations_html}{source_details_html}</div></div>
+<div data-nosnippet style="display:contents"><details class="technical-details"><summary>Concept URI &amp; technical details</summary><div class="uri-block"><div class="uri-heading"><span class="uri-label">Canonical URI</span>{copy_button_html}</div><code id="canonical-uri">{escape(canonical_uri)}</code>{copy_status_html}</div></details></div></article>"""
     body = concept_page(f"{label} — {vocabulary_label} — Universal Evidence", description_meta, canonical_uri, content, copy_script_html)
     return Response(
         content=body,

@@ -5,6 +5,49 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from api.routes import vocab as v
 
+class SnippetText(HTMLParser):
+    def __init__(self, html):
+        super().__init__()
+        self.stack = []
+        self.text = []
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        if tag not in {'meta', 'link', 'img', 'br', 'input', 'hr'}:
+            excluded = tag in {'script', 'style'} or (
+                tag in {'div', 'span', 'section'} and 'data-nosnippet' in dict(attrs))
+            self.stack.append((tag, excluded))
+
+    def handle_endtag(self, tag):
+        if self.stack and self.stack[-1][0] == tag:
+            self.stack.pop()
+
+    def handle_data(self, text):
+        if not any(excluded for _, excluded in self.stack):
+            self.text.append(text)
+
+def test_concept_snippet_prefers_definition(client):
+    html = client.get('/vocab/states/Root', headers={'accept': 'text/html'}).text
+    eligible = ' '.join(SnippetText(html).text)
+    assert 'Real definition' in eligible
+    assert 'Narrower concepts' not in eligible
+    assert 'Canonical URI' not in eligible
+    assert 'Know what’s been done' not in eligible
+    assert 'meta name="description" content="Real definition"' in html
+
+@pytest.mark.parametrize('slug', ['malaria', 'stunting', 'bednets'])
+def test_pilot_snippet_prefers_definition(slug):
+    from pathlib import Path
+    html = (Path(v.__file__).parents[1] / 'concept_pilots' / f'{slug}.html').read_text()
+    eligible = ' '.join(SnippetText(html).text)
+    assert 'Browse' not in eligible
+    assert 'Narrower' not in eligible
+    assert 'Selected evidence' not in eligible
+    assert 'Search evidence' not in eligible
+    import re
+    definition = re.search(r'<p class="definition">(.*?)</p>', html).group(1)
+    assert definition in eligible
+
 class Links(HTMLParser):
     def __init__(self, text):
         super().__init__(); self.links=[]; self.feed(text)
